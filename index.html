@@ -3,53 +3,53 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Baptiste Duval | Portfolio V2</title>
+    <title>Baptiste Duval | Portfolio Réseaux & Télécoms</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&family=Fira+Code:wght@300;500&display=swap" rel="stylesheet">
     
     <style>
-        :root {
-            --neon-cyan: #00f2ff;
-        }
+        :root { --neon-cyan: #00f2ff; }
         body { 
             font-family: 'Fira+Code', monospace; 
             background-color: #020617;
             margin: 0;
             color: #e2e8f0;
+            overflow-x: hidden;
         }
         
-        /* Fond interactif */
+        /* Fond interactif Particles.js */
         #particles-js {
             position: fixed;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
-            z-index: 1; /* Derrière le contenu */
-            pointer-events: all; /* Important pour l'interaction */
+            z-index: 1;
+            pointer-events: all;
         }
 
+        /* Container de contenu qui laisse passer les clics vers le fond */
         .main-content {
             position: relative;
-            z-index: 10; /* Devant les particules */
-            pointer-events: none; /* Laisse passer la souris vers le fond */
+            z-index: 10;
+            pointer-events: none;
         }
 
-        /* Réactive la souris pour les éléments cliquables uniquement */
-        nav, section, a, button, .card {
-            pointer-events: auto;
-        }
+        /* Réactivation des clics pour les éléments interactifs */
+        nav, section, a, button, .card { pointer-events: auto; }
 
         .glass-header {
-            background: rgba(15, 23, 42, 0.8);
-            backdrop-filter: blur(10px);
+            background: rgba(15, 23, 42, 0.85);
+            backdrop-filter: blur(12px);
             border-bottom: 1px solid rgba(0, 242, 255, 0.2);
         }
 
-        .neon-shadow {
-            text-shadow: 0 0 10px rgba(0, 242, 255, 0.7);
-        }
+        .neon-shadow { text-shadow: 0 0 10px rgba(0, 242, 255, 0.7); }
+        
+        h1, h2, h3, .nav-font { font-family: 'Orbitron', sans-serif; }
+
+        .card { transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1); }
     </style>
 </head>
 <body>
@@ -58,71 +58,145 @@
 
     <nav class="glass-header fixed top-0 w-full z-[100]">
         <div class="max-w-7xl mx-auto px-6 h-20 flex items-center justify-between">
-            <div class="font-bold tracking-widest text-cyan-400 neon-shadow italic font-['Orbitron']">
-                BAPTISTE_DUVAL.SYS
+            <div class="flex items-center space-x-3">
+                <div class="w-8 h-8 border border-cyan-500 flex items-center justify-center rotate-45">
+                    <span class="rotate-[-45deg] font-bold text-cyan-400 text-xs">BD</span>
+                </div>
+                <span class="text-sm font-bold tracking-[0.3em] text-cyan-400 neon-shadow nav-font">BAPTISTE_DUVAL.SYS</span>
             </div>
-            <div class="hidden md:flex space-x-8 text-[10px] uppercase font-bold tracking-[0.3em]">
-                <a href="index.html" class="text-cyan-400 border-b border-cyan-400">Accueil</a>
-                <a href="competences.html" class="hover:text-cyan-400 transition">Compétences</a>
-                <a href="projets.html" class="hover:text-cyan-400 transition">Projets</a>
-                <a href="CV_DUVALBaptiste.pdf" target="_blank" class="text-white border border-white/20 px-4 py-2 hover:bg-white hover:text-black transition">CV_PDF</a>
+            <div class="hidden md:flex space-x-8 text-[10px] uppercase font-bold tracking-[0.2em]">
+                <a href="index.html" class="text-cyan-400 border-b border-cyan-400 pb-1">01_Accueil</a>
+                <a href="competences.html" class="hover:text-cyan-400 transition">02_Compétences</a>
+                <a href="projets.html" class="hover:text-cyan-400 transition">03_Projets</a>
+                <a href="CV_DUVALBaptiste.pdf" target="_blank" class="border border-white/20 px-4 py-2 hover:bg-cyan-500 hover:text-black hover:border-cyan-500 transition">CV_DATA</a>
             </div>
         </div>
     </nav>
 
-    <div class="main-content">
-        <section class="min-h-screen flex flex-col justify-center items-center px-6">
-            <div class="text-center">
-                <h1 class="text-6xl md:text-8xl font-black mb-4 font-['Orbitron'] tracking-tighter">
-                    CYBER <span class="text-cyan-400 italic">SYSTEM</span>
-                </h1>
-                <p class="text-slate-400 max-w-xl mx-auto mb-12">
-                    Expertise en Réseaux & Télécoms. Monitoring, Sécurité et Infrastructure de nouvelle génération.
-                </p>
-                
-                <div class="grid md:grid-cols-2 gap-8 max-w-4xl mx-auto">
-                    <div class="card bg-slate-900/80 border border-cyan-500/30 p-4 rounded-xl overflow-hidden group">
-                        <div class="h-48 rounded-lg mb-4 overflow-hidden">
-                            <img src="static/image/mach_gestion.png" alt="Infrastructure" class="w-full h-full object-cover group-hover:scale-110 transition duration-500">
-                        </div>
-                        <h3 class="text-cyan-400 font-bold uppercase mb-2">Dernière SAE</h3>
-                        <p class="text-xs text-slate-400">Administration et gestion d'infrastructures virtualisées.</p>
-                    </div>
-
-                    <div class="card bg-slate-900/80 border border-cyan-500/30 p-4 rounded-xl overflow-hidden group">
-                        <div class="h-48 rounded-lg mb-4 overflow-hidden">
-                            <img src="static/image/users_gestion.png" alt="Users" class="w-full h-full object-cover group-hover:scale-110 transition duration-500">
-                        </div>
-                        <h3 class="text-cyan-400 font-bold uppercase mb-2">Scripting Automatisé</h3>
-                        <p class="text-xs text-slate-400">Développement de rapports de sauvegarde quotidiens.</p>
-                    </div>
-                </div>
+    <div class="main-content pt-32">
+        
+        <section id="accueil" class="min-h-[60vh] flex flex-col justify-center items-center px-6 text-center">
+            <div class="inline-block px-4 py-1 border border-cyan-500/30 text-cyan-400 text-[10px] tracking-[0.4em] mb-8 animate-pulse">
+                STATUS: SYSTEM_READY
+            </div>
+            <h1 class="text-5xl md:text-8xl font-black mb-6 tracking-tighter">
+                CYBER <span class="text-cyan-400 italic neon-shadow">ARCHITECT</span>
+            </h1>
+            <p class="text-slate-400 max-w-2xl mx-auto mb-12 text-sm md:text-base leading-relaxed">
+                Étudiant en BUT Réseaux & Télécommunications. <br>
+                Expertise en conception d'infrastructures, déploiement ToIP et automatisation système.
+            </p>
+            <div class="flex space-x-6">
+                <a href="#piliers" class="bg-cyan-500 text-black px-8 py-3 font-bold text-xs uppercase tracking-widest hover:shadow-[0_0_20px_#00f2ff] transition">Voir Compétences</a>
+                <a href="https://github.com/baptiste-duval" class="border border-white/20 px-8 py-3 font-bold text-xs uppercase tracking-widest hover:bg-white/5 transition">GitHub</a>
             </div>
         </section>
+
+        <section id="piliers" class="max-w-7xl mx-auto py-24 px-6">
+            <div class="flex items-center space-x-4 mb-16">
+                <div class="h-[2px] w-12 bg-cyan-500 shadow-[0_0_10px_#00f2ff]"></div>
+                <h2 class="text-2xl font-bold tracking-tighter uppercase neon-shadow">Piliers de Compétences</h2>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-5 gap-6">
+                
+                <div class="card bg-slate-950/60 border border-red-500/20 p-6 rounded-xl hover:border-red-500/60 hover:bg-red-500/5 group">
+                    <div class="flex justify-between items-start mb-6">
+                        <i class="fas fa-server text-red-500 text-xl"></i>
+                        <span class="text-[9px] font-bold bg-red-500/20 text-red-400 px-2 py-1 rounded">NIVEAU_03</span>
+                    </div>
+                    <h3 class="text-white text-sm font-bold mb-1 uppercase tracking-wider">Administrer</h3>
+                    <p class="text-[10px] text-red-400 mb-4 italic">Concevoir un réseau</p>
+                    <div class="space-y-2 border-t border-white/5 pt-4">
+                        <p class="text-[10px] text-slate-400"><i class="fas fa-chevron-right text-red-500 mr-2"></i>Architecture Complexe</p>
+                        <p class="text-[10px] text-slate-400"><i class="fas fa-chevron-right text-red-500 mr-2"></i>Services d'Infrastructure</p>
+                    </div>
+                </div>
+
+                <div class="card bg-slate-950/60 border border-orange-500/20 p-6 rounded-xl hover:border-orange-500/60 hover:bg-orange-500/5 group">
+                    <div class="flex justify-between items-start mb-6">
+                        <i class="fas fa-network-wired text-orange-500 text-xl"></i>
+                        <span class="text-[9px] font-bold bg-orange-500/20 text-orange-400 px-2 py-1 rounded">NIVEAU_03</span>
+                    </div>
+                    <h3 class="text-white text-sm font-bold mb-1 uppercase tracking-wider">Connecter</h3>
+                    <p class="text-[10px] text-orange-400 mb-4 italic">Déployer des solutions ToIP</p>
+                    <div class="space-y-2 border-t border-white/5 pt-4">
+                        <p class="text-[10px] text-slate-400"><i class="fas fa-chevron-right text-orange-500 mr-2"></i>Switchs & Routeurs</p>
+                        <p class="text-[10px] text-slate-400"><i class="fas fa-chevron-right text-orange-500 mr-2"></i>Convergence IP</p>
+                    </div>
+                </div>
+
+                <div class="card bg-slate-950/60 border border-yellow-500/20 p-6 rounded-xl hover:border-yellow-500/60 hover:bg-yellow-500/5 group">
+                    <div class="flex justify-between items-start mb-6">
+                        <i class="fas fa-code text-yellow-500 text-xl"></i>
+                        <span class="text-[9px] font-bold bg-yellow-500/20 text-yellow-400 px-2 py-1 rounded">NIVEAU_03</span>
+                    </div>
+                    <h3 class="text-white text-sm font-bold mb-1 uppercase tracking-wider">Programmer</h3>
+                    <p class="text-[10px] text-yellow-400 mb-4 italic">Piloter des projets R&T</p>
+                    <div class="space-y-2 border-t border-white/5 pt-4">
+                        <p class="text-[10px] text-slate-400"><i class="fas fa-chevron-right text-yellow-500 mr-2"></i>Automation Python</p>
+                        <p class="text-[10px] text-slate-400"><i class="fas fa-chevron-right text-yellow-500 mr-2"></i>Développement Bash</p>
+                    </div>
+                </div>
+
+                <div class="card bg-slate-950/60 border border-green-500/20 p-6 rounded-xl hover:border-green-500/60 hover:bg-green-500/5 group">
+                    <div class="flex justify-between items-start mb-6">
+                        <i class="fas fa-shield-alt text-green-500 text-xl"></i>
+                        <span class="text-[9px] font-bold bg-green-500/20 text-green-400 px-2 py-1 rounded">NIVEAU_02</span>
+                    </div>
+                    <h3 class="text-white text-sm font-bold mb-1 uppercase tracking-wider">Sécuriser</h3>
+                    <p class="text-[10px] text-green-400 mb-4 italic">Mettre en œuvre un SI</p>
+                    <div class="space-y-2 border-t border-white/5 pt-4">
+                        <p class="text-[10px] text-slate-400"><i class="fas fa-chevron-right text-green-500 mr-2"></i>Firewalling & VPN</p>
+                        <p class="text-[10px] text-slate-400"><i class="fas fa-chevron-right text-green-500 mr-2"></i>Audit de sécurité</p>
+                    </div>
+                </div>
+
+                <div class="card bg-slate-950/60 border border-blue-500/20 p-6 rounded-xl hover:border-blue-500/60 hover:bg-blue-500/5 group">
+                    <div class="flex justify-between items-start mb-6">
+                        <i class="fas fa-eye text-blue-500 text-xl"></i>
+                        <span class="text-[9px] font-bold bg-blue-500/20 text-blue-400 px-2 py-1 rounded">NIVEAU_02</span>
+                    </div>
+                    <h3 class="text-white text-sm font-bold mb-1 uppercase tracking-wider">Surveiller</h3>
+                    <p class="text-[10px] text-blue-400 mb-4 italic">Gérer les incidents</p>
+                    <div class="space-y-2 border-t border-white/5 pt-4">
+                        <p class="text-[10px] text-slate-400"><i class="fas fa-chevron-right text-blue-500 mr-2"></i>Supervision Zabbix</p>
+                        <p class="text-[10px] text-slate-400"><i class="fas fa-chevron-right text-blue-500 mr-2"></i>Analyse de flux</p>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+        <footer class="py-12 border-t border-white/5 text-center px-6">
+            <p class="text-[10px] text-slate-500 uppercase tracking-widest">
+                Conçu par Baptiste Duval // v.2.0.26
+            </p>
+        </footer>
     </div>
 
     <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
     <script>
         particlesJS("particles-js", {
             "particles": {
-                "number": { "value": 120, "density": { "enable": true, "value_area": 800 } },
+                "number": { "value": 130, "density": { "enable": true, "value_area": 800 } },
                 "color": { "value": "#00f2ff" },
                 "shape": { "type": "circle" },
-                "opacity": { "value": 0.5, "random": true },
-                "size": { "value": 3, "random": true },
-                "line_linked": { "enable": true, "distance": 150, "color": "#00f2ff", "opacity": 0.2, "width": 1 },
-                "move": { "enable": true, "speed": 2, "out_mode": "out" }
+                "opacity": { "value": 0.4, "random": true },
+                "size": { "value": 2, "random": true },
+                "line_linked": { "enable": true, "distance": 150, "color": "#00f2ff", "opacity": 0.15, "width": 1 },
+                "move": { "enable": true, "speed": 1.5, "direction": "none", "out_mode": "out" }
             },
             "interactivity": {
                 "detect_on": "window",
                 "events": {
-                    "onhover": { "enable": true, "mode": "grab" }, /* Aimant au passage de la souris */
-                    "onclick": { "enable": true, "mode": "repulse" }, /* Repousse au clic */
+                    "onhover": { "enable": true, "mode": "grab" },
+                    "onclick": { "enable": true, "mode": "push" },
                     "resize": true
                 },
                 "modes": {
-                    "grab": { "distance": 200, "line_linked": { "opacity": 1 } },
-                    "repulse": { "distance": 400, "duration": 0.4 }
+                    "grab": { "distance": 220, "line_linked": { "opacity": 1 } },
+                    "push": { "particles_nb": 4 }
                 }
             },
             "retina_detect": true
