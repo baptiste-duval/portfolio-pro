@@ -15,7 +15,7 @@
         .neon-shadow { text-shadow: 0 0 10px rgba(0, 242, 255, 0.7); }
         .layout-container { position: relative; z-index: 10; display: flex; margin-top: 80px; min-height: calc(100vh - 80px); }
         
-        /* Sidebar Style Ascenseur */
+        /* Sidebar */
         .sidebar { width: 350px; border-right: 1px solid rgba(0, 242, 255, 0.2); background: rgba(15, 23, 42, 0.8); height: calc(100vh - 80px); position: sticky; top: 80px; overflow-y: auto; pointer-events: auto; }
         .main-content { flex: 1; padding: 40px; pointer-events: auto; overflow-y: auto; }
 
@@ -24,11 +24,21 @@
         summary:hover { background: rgba(0, 242, 255, 0.1); color: #00f2ff; }
         
         .sub-menu summary { padding: 10px 40px; font-size: 0.75rem; color: #94a3b8; border-bottom: none; }
-        .project-link { display: block; padding: 8px 60px; font-size: 0.7rem; color: #64748b; transition: 0.2s; text-decoration: none; }
+        .project-link { display: block; padding: 8px 60px; font-size: 0.7rem; color: #64748b; transition: 0.2s; cursor: pointer; text-decoration: none; }
         .project-link:hover { color: #00f2ff; background: rgba(0, 242, 255, 0.05); }
 
         .info-box { background: rgba(255, 255, 255, 0.03); border: 1px solid rgba(255, 255, 255, 0.1); border-left: 4px solid #00f2ff; padding: 20px; border-radius: 4px; }
-        .project-card { background: rgba(15, 23, 42, 0.6); border: 1px solid rgba(255, 255, 255, 0.1); padding: 25px; border-radius: 12px; margin-bottom: 40px; }
+        
+        /* Gestion de l'affichage dynamique */
+        .project-section { display: none; }
+        .project-section.active { display: block; animation: fadeIn 0.5s ease; }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .project-card { background: rgba(15, 23, 42, 0.6); border: 1px solid rgba(255, 255, 255, 0.1); padding: 25px; border-radius: 12px; margin-bottom: 30px; }
     </style>
 </head>
 <body>
@@ -59,12 +69,11 @@
                 <summary>BUT RT - ANNEE 1 <i class="fas fa-caret-down ml-2 opacity-50"></i></summary>
                 <details open class="sub-menu">
                     <summary>Semestre 1</summary>
-                    <a href="#mooc-anssi" class="project-link">SAE 1.1 - MOOC ANSSI</a>
-                    <a href="#sae12" class="project-link">SAE 1.2 - Réseaux Informatiques</a>
+                    <a onclick="showProject('s1-projets')" class="project-link">Voir les SAE du S1</a>
                 </details>
                 <details class="sub-menu">
                     <summary>Semestre 2</summary>
-                    <a href="#mysql" class="project-link">Base de données MySQL</a>
+                    <a onclick="showProject('s2-projets')" class="project-link">Voir les SAE du S2</a>
                 </details>
             </details>
 
@@ -72,11 +81,11 @@
                 <summary>BUT RT - ANNEE 2 <i class="fas fa-caret-down ml-2 opacity-50"></i></summary>
                 <details class="sub-menu">
                     <summary>Semestre 3</summary>
-                    <a href="#web-sensors" class="project-link">Serveur Web & Capteurs</a>
+                    <a onclick="showProject('s3-projets')" class="project-link">Voir les SAE du S3</a>
                 </details>
                 <details class="sub-menu">
                     <summary>Semestre 4</summary>
-                    <a href="#enterprise-network" class="project-link">Réseau d'Entreprise</a>
+                    <a onclick="showProject('s4-projets')" class="project-link">Voir les SAE du S4</a>
                 </details>
             </details>
 
@@ -84,80 +93,64 @@
                 <summary>BUT RT - ANNEE 3 <i class="fas fa-caret-down ml-2 opacity-50"></i></summary>
                 <details class="sub-menu">
                     <summary>Semestre 5 & 6</summary>
-                    <a href="#active-directory" class="project-link">Infrastructure Windows AD</a>
-                    <a href="#cyber-audit" class="project-link">Audit de Sécurité</a>
+                    <a onclick="showProject('s56-projets')" class="project-link">Voir les SAE du S5 & S6</a>
                 </details>
             </details>
         </aside>
 
         <main class="main-content">
             <div class="max-w-4xl mx-auto">
-                <section class="mb-16">
+                
+                <section id="intro" class="mb-16">
                     <h1 class="text-4xl font-bold font-['Orbitron'] mb-6 neon-shadow">B.U.T. Réseaux et Télécommunications</h1>
                     <div class="info-box">
                         <p class="text-slate-300 text-sm leading-relaxed">
-                            Le Bachelor Universitaire de Technologie (B.U.T.) R&T est un cursus d'excellence formant des experts capables de concevoir, administrer et sécuriser des infrastructures critiques. Ma formation met l'accent sur la convergence IP, la cybersécurité et l'automatisation.
+                            Veuillez sélectionner un semestre dans le menu de gauche pour explorer mes réalisations techniques.
                         </p>
                     </div>
                 </section>
 
-                <h2 class="text-xl font-['Orbitron'] mb-8 text-cyan-400 uppercase tracking-widest border-b border-cyan-500/20 pb-2">Détails des Projets</h2>
-
-                <article id="mooc-anssi" class="project-card scroll-mt-24">
-                    <div class="flex flex-wrap items-center justify-between mb-6 gap-4">
-                        <div>
-                            <span class="text-xs font-bold text-cyan-500 uppercase tracking-widest">BUT1 - Semestre 1</span>
-                            <h3 class="text-2xl font-bold text-white mt-1">SAE 1.1 : Sensibilisation au risque numérique</h3>
-                        </div>
-                        <div class="flex gap-2">
+                <div id="s1-projets" class="project-section">
+                    <h2 class="text-xl font-['Orbitron'] mb-8 text-cyan-400 uppercase tracking-widest border-b border-cyan-500/20 pb-2">Semestre 1 - Fondamentaux</h2>
+                    
+                    <article class="project-card">
+                        <div class="flex justify-between items-start mb-4">
+                            <h3 class="text-2xl font-bold text-white">SAE 1.1 : Sensibilisation au risque numérique</h3>
                             <span class="px-3 py-1 bg-cyan-500/10 border border-cyan-500/20 text-[10px] text-cyan-400 uppercase">Certifié ANSSI</span>
                         </div>
-                    </div>
-                    <div class="text-slate-300 text-sm space-y-4 mb-6">
-                        <p>Dans ce projet, j'ai endossé le rôle de RSSI pour sensibiliser les collaborateurs aux menaces cyber. Ce travail a été validé par l'obtention du MOOC SecNumAcadémie de l'ANSSI.</p>
-                    </div>
-                    <div class="mt-4 border border-white/5 rounded-lg overflow-hidden">
-                        <iframe src="static/image/Mooc-Duval.pdf" class="w-full h-[400px] border-none"></iframe>
-                    </div>
-                </article>
-
-                <article id="sae12" class="project-card scroll-mt-24">
-                    <div class="flex flex-wrap items-center justify-between mb-6 gap-4">
-                        <div>
-                            <span class="text-xs font-bold text-cyan-500 uppercase tracking-widest">BUT1 - Semestre 1</span>
-                            <h3 class="text-2xl font-bold text-white mt-1">SAE 1.2 : S'initier aux réseaux informatiques</h3>
-                        </div>
-                        <div class="flex gap-2">
-                            <span class="px-3 py-1 bg-white/5 border border-white/10 text-[10px] text-slate-400 uppercase">Cisco</span>
-                            <span class="px-3 py-1 bg-white/5 border border-white/10 text-[10px] text-slate-400 uppercase">GNS3</span>
-                        </div>
-                    </div>
-                    
-                    <div class="text-slate-300 text-sm space-y-4 mb-8">
-                        <p>
-                            Ce projet visait à concevoir de A à Z une architecture réseau pour une entreprise fictive. J'ai réalisé l'analyse des besoins, le schéma logique et la mise en service des équipements.
+                        <p class="text-slate-300 text-sm mb-6 leading-relaxed">
+                            Rôle de RSSI pour sensibiliser le personnel aux cyberattaques. Obtention du MOOC de l'ANSSI (SecNumAcadémie) et certification Cisco NetAcad.
                         </p>
-                        <ul class="list-disc pl-5 space-y-2 text-slate-400">
-                            <li><strong>Conception :</strong> Planification du plan d'adressage IPv4 et segmentation par VLANs.</li>
-                            <li><strong>Implémentation :</strong> Configuration des commutateurs et routeurs (Routage statique, NAT, DHCP).</li>
-                            <li><strong>Validation :</strong> Analyse des flux avec Wireshark et tests de connectivité (Ping/Traceroute).</li>
-                        </ul>
-                    </div>
-                    
-                    
+                        <iframe src="static/image/Mooc-Duval.pdf" class="w-full h-[450px] border-none rounded-lg bg-black/20"></iframe>
+                    </article>
 
-                    <div class="mt-6 border border-white/5 rounded-lg overflow-hidden bg-black/40">
-                        <div class="p-3 bg-white/5 flex justify-between items-center">
-                            <span class="text-[10px] text-slate-500 font-mono italic">Document : Rapport_SAE12.pdf</span>
-                            <a href="static/image/Rapport_SAE12.pdf" target="_blank" class="text-cyan-400 text-[10px] font-bold hover:underline">LIRE LE RAPPORT <i class="fas fa-file-pdf ml-1"></i></a>
+                    <article class="project-card mt-8">
+                        <div class="flex justify-between items-start mb-4">
+                            <h3 class="text-2xl font-bold text-white">SAE 1.2 : S'initier aux réseaux informatiques</h3>
+                            <div class="flex gap-2">
+                                <span class="px-3 py-1 bg-white/5 border border-white/10 text-[10px] text-slate-400 uppercase">GNS3</span>
+                                <span class="px-3 py-1 bg-white/5 border border-white/10 text-[10px] text-slate-400 uppercase">Cisco</span>
+                            </div>
                         </div>
-                        <iframe src="static/image/Rapport_SAE12.pdf" class="w-full h-[500px] border-none"></iframe>
-                    </div>
-                </article>
-
-                <div id="mysql" class="project-card opacity-40">
-                    <h3 class="text-xl font-bold text-white">Projets futurs...</h3>
+                        <div class="text-slate-300 text-sm space-y-4 mb-6">
+                            <p>Mise en œuvre complète d'un réseau : planification d'adressage IPv4, segmentation VLAN, et configuration de services (DNS, DHCP, NAT).</p>
+                        </div>
+                        
+                        <iframe src="static/image/Rapport_SAE12.pdf" class="w-full h-[500px] border-none rounded-lg bg-black/20 mt-4"></iframe>
+                    </article>
                 </div>
+
+                <div id="s2-projets" class="project-section">
+                    <h2 class="text-xl font-['Orbitron'] mb-8 text-cyan-400 uppercase tracking-widest border-b border-cyan-500/20 pb-2">Semestre 2</h2>
+                    <article class="project-card">
+                        <h3 class="text-2xl font-bold text-white mb-4">Base de données MySQL</h3>
+                        <p class="text-slate-400 italic">Détails de la SAE 2.01 à venir...</p>
+                    </article>
+                </div>
+
+                <div id="s3-projets" class="project-section"><p class="italic text-slate-500">Projets du S3 en attente...</p></div>
+                <div id="s4-projets" class="project-section"><p class="italic text-slate-500">Projets du S4 en attente...</p></div>
+                <div id="s56-projets" class="project-section"><p class="italic text-slate-500">Projets de l'alternance (S5/S6) en attente...</p></div>
 
             </div>
         </main>
@@ -175,6 +168,19 @@
                 "move": { "enable": true, "speed": 0.5 }
             }
         });
+
+        function showProject(sectionId) {
+            document.getElementById('intro').style.display = 'none';
+            const sections = document.querySelectorAll('.project-section');
+            sections.forEach(section => {
+                section.classList.remove('active');
+            });
+            const target = document.getElementById(sectionId);
+            if(target) {
+                target.classList.add('active');
+                document.querySelector('.main-content').scrollTop = 0;
+            }
+        }
     </script>
 </body>
 </html>
