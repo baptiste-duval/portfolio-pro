@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Baptiste Duval | Portfolio Réseaux & Télécoms</title>
+    <title>Baptiste Duval | Portfolio R&T</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&family=Fira+Code:wght@300;500&display=swap" rel="stylesheet">
@@ -18,7 +18,6 @@
             overflow-x: hidden;
         }
         
-        /* Fond interactif Particles.js */
         #particles-js {
             position: fixed;
             top: 0;
@@ -26,18 +25,25 @@
             width: 100%;
             height: 100%;
             z-index: 1;
-            pointer-events: all;
         }
 
-        /* Container de contenu qui laisse passer les clics vers le fond */
         .main-content {
             position: relative;
             z-index: 10;
-            pointer-events: none;
         }
 
-        /* Réactivation des clics pour les éléments interactifs */
-        nav, section, a, button, .card { pointer-events: auto; }
+        /* NAVIGATION & BOUTONS : On veut l'interaction souris */
+        nav, a, button { pointer-events: auto; }
+
+        /* CARTES : On bloque l'interaction avec le fond (Particles) */
+        /* Mais on réactive le pointeur pour le contenu interne si besoin */
+        .card-skill { 
+            pointer-events: auto; 
+            position: relative;
+            z-index: 20;
+            background: rgba(15, 23, 42, 0.9); /* Plus opaque pour bloquer visuellement */
+            transition: all 0.4s ease;
+        }
 
         .glass-header {
             background: rgba(15, 23, 42, 0.85);
@@ -46,10 +52,14 @@
         }
 
         .neon-shadow { text-shadow: 0 0 10px rgba(0, 242, 255, 0.7); }
-        
         h1, h2, h3, .nav-font { font-family: 'Orbitron', sans-serif; }
 
-        .card { transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1); }
+        /* Effets de lueurs spécifiques au survol */
+        .hover-red:hover { box-shadow: 0 0 20px rgba(239, 68, 68, 0.4); border-color: rgba(239, 68, 68, 0.6); }
+        .hover-orange:hover { box-shadow: 0 0 20px rgba(249, 115, 22, 0.4); border-color: rgba(249, 115, 22, 0.6); }
+        .hover-yellow:hover { box-shadow: 0 0 20px rgba(234, 179, 8, 0.4); border-color: rgba(234, 179, 8, 0.6); }
+        .hover-green:hover { box-shadow: 0 0 20px rgba(34, 197, 94, 0.4); border-color: rgba(34, 197, 94, 0.6); }
+        .hover-blue:hover { box-shadow: 0 0 20px rgba(59, 130, 246, 0.4); border-color: rgba(59, 130, 246, 0.6); }
     </style>
 </head>
 <body>
@@ -62,45 +72,31 @@
                 <div class="w-8 h-8 border border-cyan-500 flex items-center justify-center rotate-45">
                     <span class="rotate-[-45deg] font-bold text-cyan-400 text-xs">BD</span>
                 </div>
-                <span class="text-sm font-bold tracking-[0.3em] text-cyan-400 neon-shadow nav-font">BAPTISTE_DUVAL.SYS</span>
+                <span class="text-sm font-bold tracking-[0.2em] text-cyan-400 neon-shadow nav-font">BAPTISTE_DUVAL.SYS</span>
             </div>
-            <div class="hidden md:flex space-x-8 text-[10px] uppercase font-bold tracking-[0.2em]">
-                <a href="index.html" class="text-cyan-400 border-b border-cyan-400 pb-1">01_Accueil</a>
-                <a href="competences.html" class="hover:text-cyan-400 transition">02_Compétences</a>
-                <a href="projets.html" class="hover:text-cyan-400 transition">03_Projets</a>
-                <a href="CV_DUVALBaptiste.pdf" target="_blank" class="border border-white/20 px-4 py-2 hover:bg-cyan-500 hover:text-black hover:border-cyan-500 transition">CV_DATA</a>
+            <div class="hidden md:flex space-x-8 text-[10px] uppercase font-bold">
+                <a href="index.html" class="text-cyan-400 border-b border-cyan-400 pb-1">ACCUEIL</a>
+                <a href="projets.html" class="hover:text-cyan-400 transition">PROJETS</a>
+                <a href="CV_DUVALBaptiste.pdf" target="_blank" class="border border-white/20 px-4 py-2 hover:bg-cyan-500 hover:text-black transition">CV_DATA</a>
             </div>
         </div>
     </nav>
 
-    <div class="main-content pt-32">
+    <div class="main-content pt-40">
         
-        <section id="accueil" class="min-h-[60vh] flex flex-col justify-center items-center px-6 text-center">
-            <div class="inline-block px-4 py-1 border border-cyan-500/30 text-cyan-400 text-[10px] tracking-[0.4em] mb-8 animate-pulse">
-                STATUS: SYSTEM_READY
-            </div>
-            <h1 class="text-5xl md:text-8xl font-black mb-6 tracking-tighter">
-                CYBER <span class="text-cyan-400 italic neon-shadow">ARCHITECT</span>
+        <header class="text-center px-6 mb-24">
+            <h1 class="text-5xl md:text-7xl font-black mb-6 uppercase tracking-tighter">
+                PORTFOLIO <span class="text-cyan-400 italic neon-shadow">COMPÉTENCES</span>
             </h1>
-            <p class="text-slate-400 max-w-2xl mx-auto mb-12 text-sm md:text-base leading-relaxed">
-                Étudiant en BUT Réseaux & Télécommunications. <br>
-                Expertise en conception d'infrastructures, déploiement ToIP et automatisation système.
+            <p class="text-slate-400 max-w-2xl mx-auto text-sm leading-relaxed">
+                Parcours B.U.T. Réseaux et Télécommunications — Spécialité Cybersécurité.
             </p>
-            <div class="flex space-x-6">
-                <a href="#piliers" class="bg-cyan-500 text-black px-8 py-3 font-bold text-xs uppercase tracking-widest hover:shadow-[0_0_20px_#00f2ff] transition">Voir Compétences</a>
-                <a href="https://github.com/baptiste-duval" class="border border-white/20 px-8 py-3 font-bold text-xs uppercase tracking-widest hover:bg-white/5 transition">GitHub</a>
-            </div>
-        </section>
+        </header>
 
-        <section id="piliers" class="max-w-7xl mx-auto py-24 px-6">
-            <div class="flex items-center space-x-4 mb-16">
-                <div class="h-[2px] w-12 bg-cyan-500 shadow-[0_0_10px_#00f2ff]"></div>
-                <h2 class="text-2xl font-bold tracking-tighter uppercase neon-shadow">Piliers de Compétences</h2>
-            </div>
-
+        <section id="piliers" class="max-w-7xl mx-auto py-12 px-6">
             <div class="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-5 gap-6">
                 
-                <div class="card bg-slate-950/60 border border-red-500/20 p-6 rounded-xl hover:border-red-500/60 hover:bg-red-500/5 group">
+                <div class="card-skill hover-red border border-red-500/20 p-6 rounded-xl">
                     <div class="flex justify-between items-start mb-6">
                         <i class="fas fa-server text-red-500 text-xl"></i>
                         <span class="text-[9px] font-bold bg-red-500/20 text-red-400 px-2 py-1 rounded">NIVEAU_03</span>
@@ -108,25 +104,25 @@
                     <h3 class="text-white text-sm font-bold mb-1 uppercase tracking-wider">Administrer</h3>
                     <p class="text-[10px] text-red-400 mb-4 italic">Concevoir un réseau</p>
                     <div class="space-y-2 border-t border-white/5 pt-4">
-                        <p class="text-[10px] text-slate-400"><i class="fas fa-chevron-right text-red-500 mr-2"></i>Architecture Complexe</p>
+                        <p class="text-[10px] text-slate-400"><i class="fas fa-chevron-right text-red-500 mr-2"></i>Architecture Switch/Routeur</p>
                         <p class="text-[10px] text-slate-400"><i class="fas fa-chevron-right text-red-500 mr-2"></i>Services d'Infrastructure</p>
                     </div>
                 </div>
 
-                <div class="card bg-slate-950/60 border border-orange-500/20 p-6 rounded-xl hover:border-orange-500/60 hover:bg-orange-500/5 group">
+                <div class="card-skill hover-orange border border-orange-500/20 p-6 rounded-xl">
                     <div class="flex justify-between items-start mb-6">
                         <i class="fas fa-network-wired text-orange-500 text-xl"></i>
                         <span class="text-[9px] font-bold bg-orange-500/20 text-orange-400 px-2 py-1 rounded">NIVEAU_03</span>
                     </div>
                     <h3 class="text-white text-sm font-bold mb-1 uppercase tracking-wider">Connecter</h3>
-                    <p class="text-[10px] text-orange-400 mb-4 italic">Déployer des solutions ToIP</p>
+                    <p class="text-[10px] text-orange-400 mb-4 italic">Déployer ToIP / IP</p>
                     <div class="space-y-2 border-t border-white/5 pt-4">
-                        <p class="text-[10px] text-slate-400"><i class="fas fa-chevron-right text-orange-500 mr-2"></i>Switchs & Routeurs</p>
-                        <p class="text-[10px] text-slate-400"><i class="fas fa-chevron-right text-orange-500 mr-2"></i>Convergence IP</p>
+                        <p class="text-[10px] text-slate-400"><i class="fas fa-chevron-right text-orange-500 mr-2"></i>Configuration VoIP</p>
+                        <p class="text-[10px] text-slate-400"><i class="fas fa-chevron-right text-orange-500 mr-2"></i>VLANs & Trunking</p>
                     </div>
                 </div>
 
-                <div class="card bg-slate-950/60 border border-yellow-500/20 p-6 rounded-xl hover:border-yellow-500/60 hover:bg-yellow-500/5 group">
+                <div class="card-skill hover-yellow border border-yellow-500/20 p-6 rounded-xl">
                     <div class="flex justify-between items-start mb-6">
                         <i class="fas fa-code text-yellow-500 text-xl"></i>
                         <span class="text-[9px] font-bold bg-yellow-500/20 text-yellow-400 px-2 py-1 rounded">NIVEAU_03</span>
@@ -135,11 +131,11 @@
                     <p class="text-[10px] text-yellow-400 mb-4 italic">Piloter des projets R&T</p>
                     <div class="space-y-2 border-t border-white/5 pt-4">
                         <p class="text-[10px] text-slate-400"><i class="fas fa-chevron-right text-yellow-500 mr-2"></i>Automation Python</p>
-                        <p class="text-[10px] text-slate-400"><i class="fas fa-chevron-right text-yellow-500 mr-2"></i>Développement Bash</p>
+                        <p class="text-[10px] text-slate-400"><i class="fas fa-chevron-right text-yellow-500 mr-2"></i>Scripting Bash/JS</p>
                     </div>
                 </div>
 
-                <div class="card bg-slate-950/60 border border-green-500/20 p-6 rounded-xl hover:border-green-500/60 hover:bg-green-500/5 group">
+                <div class="card-skill hover-green border border-green-500/20 p-6 rounded-xl">
                     <div class="flex justify-between items-start mb-6">
                         <i class="fas fa-shield-alt text-green-500 text-xl"></i>
                         <span class="text-[9px] font-bold bg-green-500/20 text-green-400 px-2 py-1 rounded">NIVEAU_02</span>
@@ -148,11 +144,11 @@
                     <p class="text-[10px] text-green-400 mb-4 italic">Mettre en œuvre un SI</p>
                     <div class="space-y-2 border-t border-white/5 pt-4">
                         <p class="text-[10px] text-slate-400"><i class="fas fa-chevron-right text-green-500 mr-2"></i>Firewalling & VPN</p>
-                        <p class="text-[10px] text-slate-400"><i class="fas fa-chevron-right text-green-500 mr-2"></i>Audit de sécurité</p>
+                        <p class="text-[10px] text-slate-400"><i class="fas fa-chevron-right text-green-500 mr-2"></i>Audit & Remédiation</p>
                     </div>
                 </div>
 
-                <div class="card bg-slate-950/60 border border-blue-500/20 p-6 rounded-xl hover:border-blue-500/60 hover:bg-blue-500/5 group">
+                <div class="card-skill hover-blue border border-blue-500/20 p-6 rounded-xl">
                     <div class="flex justify-between items-start mb-6">
                         <i class="fas fa-eye text-blue-500 text-xl"></i>
                         <span class="text-[9px] font-bold bg-blue-500/20 text-blue-400 px-2 py-1 rounded">NIVEAU_02</span>
@@ -161,31 +157,26 @@
                     <p class="text-[10px] text-blue-400 mb-4 italic">Gérer les incidents</p>
                     <div class="space-y-2 border-t border-white/5 pt-4">
                         <p class="text-[10px] text-slate-400"><i class="fas fa-chevron-right text-blue-500 mr-2"></i>Supervision Zabbix</p>
-                        <p class="text-[10px] text-slate-400"><i class="fas fa-chevron-right text-blue-500 mr-2"></i>Analyse de flux</p>
+                        <p class="text-[10px] text-slate-400"><i class="fas fa-chevron-right text-blue-500 mr-2"></i>Analyse de logs</p>
                     </div>
                 </div>
 
             </div>
         </section>
 
-        <footer class="py-12 border-t border-white/5 text-center px-6">
-            <p class="text-[10px] text-slate-500 uppercase tracking-widest">
-                Conçu par Baptiste Duval // v.2.0.26
-            </p>
-        </footer>
     </div>
 
     <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
     <script>
         particlesJS("particles-js", {
             "particles": {
-                "number": { "value": 130, "density": { "enable": true, "value_area": 800 } },
+                "number": { "value": 100, "density": { "enable": true, "value_area": 800 } },
                 "color": { "value": "#00f2ff" },
                 "shape": { "type": "circle" },
-                "opacity": { "value": 0.4, "random": true },
-                "size": { "value": 2, "random": true },
-                "line_linked": { "enable": true, "distance": 150, "color": "#00f2ff", "opacity": 0.15, "width": 1 },
-                "move": { "enable": true, "speed": 1.5, "direction": "none", "out_mode": "out" }
+                "opacity": { "value": 0.4 },
+                "size": { "value": 2 },
+                "line_linked": { "enable": true, "distance": 150, "color": "#00f2ff", "opacity": 0.1, "width": 1 },
+                "move": { "enable": true, "speed": 1.5, "out_mode": "out" }
             },
             "interactivity": {
                 "detect_on": "window",
@@ -195,11 +186,9 @@
                     "resize": true
                 },
                 "modes": {
-                    "grab": { "distance": 220, "line_linked": { "opacity": 1 } },
-                    "push": { "particles_nb": 4 }
+                    "grab": { "distance": 250, "line_linked": { "opacity": 1 } }
                 }
-            },
-            "retina_detect": true
+            }
         });
     </script>
 </body>
