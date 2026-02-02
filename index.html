@@ -3,133 +3,148 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Baptiste Duval | Portfolio System</title>
+    <title>Baptiste Duval | Digital Portfolio</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@300;500;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&family=Fira+Code:wght@300;500&display=swap" rel="stylesheet">
     
     <style>
-        body { font-family: 'Fira+Code', monospace; }
+        :root {
+            --neon-cyan: #00f2ff;
+            --neon-purple: #bc13fe;
+        }
+        body { 
+            font-family: 'Fira+Code', monospace; 
+            background-color: #050505;
+            margin: 0;
+            overflow-x: hidden;
+        }
+        h1, h2, .nav-link { font-family: 'Orbitron', sans-serif; }
+
         #particles-js {
             position: fixed;
             width: 100%;
             height: 100%;
-            background-color: #020617; /* Bleu nuit très sombre */
-            z-index: -1;
+            z-index: 0;
         }
-        .neon-border { box-shadow: 0 0 15px rgba(34, 211, 238, 0.3); }
-        .sidebar-item:hover { background: rgba(34, 211, 238, 0.1); border-left: 4px solid #22d3ee; }
-        .glass { background: rgba(15, 23, 42, 0.8); backdrop-filter: blur(10px); }
+
+        .glass-nav {
+            background: rgba(0, 0, 0, 0.7);
+            backdrop-filter: blur(15px);
+            border-bottom: 1px solid rgba(0, 242, 255, 0.2);
+        }
+
+        .neon-text {
+            color: var(--neon-cyan);
+            text-shadow: 0 0 10px rgba(0, 242, 255, 0.7);
+        }
+
+        .btn-neon {
+            border: 1px solid var(--neon-cyan);
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .btn-neon:hover {
+            background: var(--neon-cyan);
+            color: #000;
+            box-shadow: 0 0 20px var(--neon-cyan);
+        }
+
+        .main-container {
+            position: relative;
+            z-index: 10;
+        }
     </style>
 </head>
-<body class="text-slate-200 overflow-x-hidden">
+<body class="text-slate-300">
 
     <div id="particles-js"></div>
 
-    <div class="flex min-h-screen">
-        
-        <aside class="w-72 border-r border-cyan-900/50 glass flex flex-col sticky top-0 h-screen hidden md:flex">
-            <div class="p-8 text-center">
-                <div class="relative inline-block group">
-                    <div class="absolute -inset-1 bg-cyan-500 rounded-full blur opacity-25 group-hover:opacity-50 transition"></div>
-                    <img src="https://via.placeholder.com/150" alt="Avatar" class="relative w-32 h-32 rounded-full border-2 border-cyan-400 object-cover">
+    <nav class="glass-nav fixed top-0 w-full z-50">
+        <div class="max-w-7xl mx-auto px-6 h-20 flex items-center justify-between">
+            <div class="flex items-center space-x-3">
+                <div class="w-10 h-10 border-2 border-cyan-500 rounded-lg flex items-center justify-center rotate-45 group-hover:rotate-90 transition">
+                    <span class="rotate-[-45deg] font-bold text-cyan-400">B</span>
                 </div>
-                <h2 class="mt-4 font-bold text-cyan-400 tracking-tighter text-lg uppercase">ID: BAPTISTE_DUVAL</h2>
-                <div class="text-[10px] text-cyan-600 mt-1 font-mono">STATUS: <span class="text-green-500 animate-pulse">SYSTEM_READY</span></div>
+                <span class="text-xl font-bold tracking-[0.2em] neon-text uppercase">Baptiste_Duval</span>
             </div>
-
-            <nav class="flex-1 px-4 space-y-2 text-sm uppercase tracking-widest mt-10">
-                <p class="text-[10px] text-slate-500 px-4 mb-4">NAVIGATION</p>
-                <a href="index.html" class="sidebar-item flex items-center p-3 text-cyan-400 bg-cyan-400/10 border-l-4 border-cyan-400">
-                    <i class="fas fa-home w-8"></i> ACCUEIL
-                </a>
-                <div class="group">
-                    <button class="sidebar-item w-full flex items-center p-3 hover:text-cyan-400 transition">
-                        <i class="fas fa-microchip w-8"></i> COMPÉTENCES <i class="fas fa-chevron-down ml-auto text-[10px]"></i>
-                    </button>
-                    <div class="pl-12 space-y-2 mt-2 text-[12px] hidden group-hover:block">
-                        <a href="#" class="block hover:text-cyan-400">L INFRASTRUCTURES</a>
-                        <a href="#" class="block hover:text-cyan-400">L CYBERSÉCURITÉ</a>
-                    </div>
-                </div>
-                <a href="projets.html" class="sidebar-item flex items-center p-3 hover:text-cyan-400 transition">
-                    <i class="fas fa-project-diagram w-8"></i> PROJETS
-                </a>
-            </nav>
-
-            <div class="p-6 border-t border-cyan-900/30 text-[10px] text-cyan-800">
-                V.2.0.1 // 2026-BD
-            </div>
-        </aside>
-
-        <main class="flex-1 relative">
             
-            <div class="h-20 border-b border-cyan-900/30 glass sticky top-0 z-10 flex items-center justify-between px-10">
-                <div class="flex space-x-4">
-                    <div class="px-4 py-1 border border-cyan-500/50 text-cyan-400 text-xs rounded-full shadow-[0_0_10px_rgba(34,211,238,0.2)]">
-                        <i class="fas fa-terminal mr-2"></i> PORTFOLIO_V2
-                    </div>
-                </div>
-                <div class="flex space-x-6 text-xs font-bold uppercase tracking-widest">
-                    <a href="CV_DUVALBaptiste.pdf" class="hover:text-cyan-400 transition flex items-center">
-                        <i class="fas fa-file-pdf mr-2 text-red-500"></i> TELECHARGER_CV
-                    </a>
+            <div class="hidden md:flex items-center space-x-10 text-xs uppercase tracking-widest font-bold">
+                <a href="#accueil" class="hover:text-cyan-400 transition nav-link">01. Accueil</a>
+                <a href="#competences" class="hover:text-cyan-400 transition nav-link">02. Compétences</a>
+                <a href="#projets" class="hover:text-cyan-400 transition nav-link">03. Projets</a>
+                <a href="CV_DUVALBaptiste.pdf" class="btn-neon px-5 py-2 rounded-sm text-cyan-400">Download_CV</a>
+            </div>
+        </div>
+    </nav>
+
+    <div class="main-container pt-32">
+        <section id="accueil" class="min-h-[80vh] flex flex-col justify-center items-center text-center px-4">
+            <div class="inline-block px-3 py-1 border border-purple-500/50 text-purple-400 text-[10px] uppercase tracking-[0.3em] mb-6 animate-pulse">
+                System Status: Online
+            </div>
+            <h1 class="text-5xl md:text-8xl font-black text-white mb-6 tracking-tighter">
+                ARCHITECTE <br> <span class="neon-text italic">RESEAUX</span>
+            </h1>
+            <p class="max-w-2xl text-slate-400 text-lg mb-10 font-light">
+                Spécialisé dans la cybersécurité et l'administration de systèmes critiques. 
+                Actuellement en mission sur le cursus BUT RT.
+            </p>
+            <div class="flex space-x-6">
+                <a href="#projets" class="btn-neon px-10 py-4 uppercase text-sm font-bold">Explorer la base</a>
+                <div class="flex items-center space-x-4">
+                    <a href="https://github.com/baptiste-duval" class="hover:text-white transition text-2xl"><i class="fab fa-github"></i></a>
+                    <a href="#" class="hover:text-white transition text-2xl"><i class="fab fa-linkedin"></i></a>
                 </div>
             </div>
+        </section>
 
-            <div class="max-w-4xl mx-auto py-16 px-6">
-                
-                <div class="border-l-4 border-cyan-500 bg-cyan-950/20 p-8 mb-12 rounded-r-xl glass neon-border">
-                    <h1 class="text-4xl font-black italic uppercase tracking-tighter text-cyan-400 mb-2">BIENVENUE</h1>
-                    <p class="text-slate-400 font-light tracking-wide">
-                        Expertise en Ingénierie Réseaux, Systèmes & Cybersécurité — Baptiste Duval
-                    </p>
-                </div>
-
-                <div class="bg-white text-slate-900 p-10 rounded-2xl shadow-2xl relative overflow-hidden mb-12">
-                    <div class="absolute top-0 right-0 p-4 opacity-10">
-                        <i class="fas fa-user-tie text-8xl"></i>
-                    </div>
-                    <h2 class="text-2xl font-bold mb-6 border-b-2 border-slate-100 pb-2 italic uppercase">Profil Professionnel</h2>
-                    <p class="leading-relaxed text-slate-700">
-                        Bienvenue sur mon portail de compétences. Je suis Baptiste Duval, étudiant passionné en 
-                        <span class="font-bold text-cyan-600 underline">Réseaux & Télécommunications</span>. 
-                        À travers ce parcours, vous découvrirez ma capacité à concevoir des infrastructures complexes, 
-                        à sécuriser des flux et à automatiser des processus critiques.
-                    </p>
-                </div>
-
-                <div class="grid md:grid-cols-3 gap-6">
-                    <div class="glass border border-cyan-900/50 p-6 rounded-xl hover:border-cyan-400 transition group text-center">
-                        <i class="fas fa-server text-3xl text-cyan-400 mb-4 group-hover:scale-110 transition"></i>
-                        <h3 class="font-bold text-sm uppercase tracking-widest">Infrastructures</h3>
-                    </div>
-                    <div class="glass border border-cyan-900/50 p-6 rounded-xl hover:border-cyan-400 transition group text-center">
-                        <i class="fas fa-network-wired text-3xl text-cyan-400 mb-4 group-hover:scale-110 transition"></i>
-                        <h3 class="font-bold text-sm uppercase tracking-widest">Ingénierie Réseaux</h3>
-                    </div>
-                    <div class="glass border border-cyan-900/50 p-6 rounded-xl hover:border-cyan-400 transition group text-center">
-                        <i class="fas fa-code text-3xl text-cyan-400 mb-4 group-hover:scale-110 transition"></i>
-                        <h3 class="font-bold text-sm uppercase tracking-widest">Automation</h3>
-                    </div>
-                </div>
-
+        <section class="max-w-6xl mx-auto py-20 px-6 grid grid-cols-1 md:grid-cols-3 gap-8">
+            <div class="p-8 border border-white/5 bg-white/5 rounded-2xl hover:bg-white/10 transition">
+                <i class="fas fa-shield-virus text-purple-500 text-3xl mb-4"></i>
+                <h3 class="text-white font-bold mb-2">Sécurité</h3>
+                <p class="text-sm text-slate-500 font-mono">Audits, Firewalling & Pentest.</p>
             </div>
-        </main>
+            <div class="p-8 border border-white/5 bg-white/5 rounded-2xl hover:bg-white/10 transition">
+                <i class="fas fa-terminal text-cyan-500 text-3xl mb-4"></i>
+                <h3 class="text-white font-bold mb-2">Automatisation</h3>
+                <p class="text-sm text-slate-500 font-mono">Python, Bash & JS Scripts.</p>
+            </div>
+            <div class="p-8 border border-white/5 bg-white/5 rounded-2xl hover:bg-white/10 transition">
+                <i class="fas fa-database text-blue-500 text-3xl mb-4"></i>
+                <h3 class="text-white font-bold mb-2">Infrastructure</h3>
+                <p class="text-sm text-slate-500 font-mono">Virtualisation & Stockage.</p>
+            </div>
+        </section>
     </div>
 
     <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
     <script>
         particlesJS("particles-js", {
             "particles": {
-                "number": { "value": 80 },
-                "color": { "value": "#22d3ee" },
+                "number": { "value": 100, "density": { "enable": true, "value_area": 800 } },
+                "color": { "value": ["#00f2ff", "#bc13fe"] },
                 "shape": { "type": "circle" },
-                "opacity": { "value": 0.5 },
-                "size": { "value": 3 },
-                "line_linked": { "enable": true, "distance": 150, "color": "#22d3ee", "opacity": 0.2, "width": 1 },
-                "move": { "enable": true, "speed": 2 }
-            }
+                "opacity": { "value": 0.5, "random": true },
+                "size": { "value": 2, "random": true },
+                "line_linked": { "enable": true, "distance": 150, "color": "#00f2ff", "opacity": 0.2, "width": 1 },
+                "move": { "enable": true, "speed": 3, "direction": "none", "random": false, "straight": false, "out_mode": "out", "bounce": false }
+            },
+            "interactivity": {
+                "detect_on": "canvas",
+                "events": {
+                    "onhover": { "enable": true, "mode": "grab" }, // Les lignes s'accrochent à la souris
+                    "onclick": { "enable": true, "mode": "push" }, // Ajoute des points au clic
+                    "resize": true
+                },
+                "modes": {
+                    "grab": { "distance": 200, "line_linked": { "opacity": 0.8 } },
+                    "push": { "particles_nb": 4 }
+                }
+            },
+            "retina_detect": true
         });
     </script>
 </body>
