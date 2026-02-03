@@ -69,6 +69,7 @@
                     <summary>Semestre 1</summary>
                     <a onclick="goToProject('s1-projets', 'sae11')" class="project-link">SAE 1.1 - Risque Numérique</a>
                     <a onclick="goToProject('s1-projets', 'sae12')" class="project-link">SAE 1.2 - Réseaux</a>
+                    <a onclick="goToProject('s1-projets', 'sae13')" class="project-link">SAE 1.3 - Transmission</a>
                 </details>
                 <details class="sub-menu">
                     <summary>Semestre 2</summary>
@@ -80,11 +81,11 @@
                 <summary>BUT RT - ANNEE 2 <i class="fas fa-caret-down ml-2 opacity-50"></i></summary>
                 <details class="sub-menu">
                     <summary>Semestre 3</summary>
-                    <a onclick="goToProject('s3-projets', 'sae31')" class="project-link">SAE 3.1 - Services</a>
+                    <a onclick="goToProject('s3-projets', 'sae31')" class="project-link">Projets S3</a>
                 </details>
                 <details class="sub-menu">
                     <summary>Semestre 4</summary>
-                    <a onclick="goToProject('s4-projets', 'sae41')" class="project-link">SAE 4.1 - Architecture</a>
+                    <a onclick="goToProject('s4-projets', 'sae41')" class="project-link">Projets S4</a>
                 </details>
             </details>
 
@@ -92,7 +93,7 @@
                 <summary>BUT RT - ANNEE 3 <i class="fas fa-caret-down ml-2 opacity-50"></i></summary>
                 <details class="sub-menu">
                     <summary>Semestre 5 & 6</summary>
-                    <a onclick="goToProject('s56-projets', 'sae51')" class="project-link">Alternance Cybersécurité</a>
+                    <a onclick="goToProject('s56-projets', 'sae51')" class="project-link">Alternance</a>
                 </details>
             </details>
         </aside>
@@ -101,10 +102,10 @@
             <div class="max-w-4xl mx-auto">
                 
                 <section id="intro" class="mb-16">
-                    <h1 class="text-4xl font-bold font-['Orbitron'] mb-6 neon-shadow">B.U.T. Réseaux et Télécommunications</h1>
+                    <h1 class="text-4xl font-bold font-['Orbitron'] mb-6 neon-shadow">Bachelor R&T : Mes Réalisations</h1>
                     <div class="p-6 bg-cyan-500/5 border-l-4 border-cyan-400">
                         <p class="text-slate-300 text-sm leading-relaxed">
-                            Cette page présente mon évolution technique à travers les projets du Bachelor R&T. Chaque semestre représente une montée en compétences, de l'initiation aux réseaux jusqu'à la spécialisation en Cybersécurité en alternance. Sélectionnez un projet à gauche pour accéder à la documentation complète.
+                            Veuillez sélectionner une SAE dans le menu de gauche. Les projets sont classés par semestre pour retracer mon apprentissage des fondamentaux vers la spécialisation en réseaux et télécoms.
                         </p>
                     </div>
                 </section>
@@ -115,8 +116,7 @@
                     <article id="sae11" class="project-card">
                         <h3 class="text-2xl font-bold text-white mb-4">SAE 1.1 : Sensibilisation au risque numérique</h3>
                         <div class="text-slate-300 text-sm space-y-4 mb-6 leading-relaxed">
-                            <p>Dans ce projet, j'ai agi en tant que Responsable de la Sécurité des Systèmes d'Information (RSSI) pour sensibiliser les employés aux dangers du numérique. L'objectif était de réduire les cyberattaques causées par des erreurs humaines grâce à une éducation ciblée sur les bonnes pratiques. Pour valider mes connaissances, j'ai obtenu l'attestation de réussite du <strong>MOOC SecNumAcadémie de l'ANSSI</strong>, qui certifie ma maîtrise de l'hygiène informatique.</p>
-                            <p>J'ai également validé le module "Introduction à la cybersécurité" sur <strong>Cisco Netacad</strong>, me permettant de mieux comprendre les vulnérabilités techniques. Mon travail s'est conclu par la création d'un support pédagogique expliquant les risques comme le phishing ou les mots de passe faibles, ainsi que les contre-mesures à adopter. Ce projet a été essentiel pour apprendre à communiquer sur la sécurité auprès de profils non-techniques.</p>
+                            <p>En tant que Responsable de la Sécurité des Systèmes d'Information (RSSI), j'ai élaboré une stratégie de sensibilisation pour protéger les entreprises contre les négligences humaines. Pour ce faire, j'ai validé le <strong>MOOC SecNumAcadémie de l'ANSSI</strong> ainsi que la certification "Introduction à la cybersécurité" de <strong>Cisco Netacad</strong>. Mon travail a abouti à un support pédagogique présentant les menaces majeures comme le phishing et les contre-mesures associées. Ce projet souligne ma capacité à vulgariser la sécurité informatique pour tout type de personnel.</p>
                         </div>
                         <iframe src="static/image/Mooc-Duval.pdf" class="w-full h-[450px] border border-white/10 rounded-lg"></iframe>
                     </article>
@@ -124,11 +124,22 @@
                     <article id="sae12" class="project-card">
                         <h3 class="text-2xl font-bold text-white mb-4">SAE 1.2 : S'initier aux réseaux informatiques</h3>
                         <div class="text-slate-300 text-sm space-y-4 mb-6 leading-relaxed">
-                            <p>Ce projet consistait à concevoir et déployer une infrastructure réseau complète pour une organisation, en partant de zéro. J'ai commencé par réaliser les schémas logiques sous <strong>Draw.io</strong>, en élaborant un plan d'adressage IPv4 rigoureux pour segmenter le réseau via des <strong>VLANs</strong> (Admin et Clients). La configuration technique a été effectuée sur des équipements Cisco et simulée sous <strong>GNS3</strong>, incluant le routage inter-VLAN et le NAT pour l'accès internet.</p>
-                            <p>En complément du réseau, j'ai installé et configuré un serveur web <strong>Apache</strong> sur Linux pour héberger une plateforme vitrine, ainsi que des services <strong>DNS et DHCP</strong> pour la gestion automatique des hôtes. Pour garantir la fiabilité de l'installation, j'ai réalisé des captures de trames avec <strong>Wireshark</strong> afin d'analyser les flux et corriger les éventuelles anomalies. Cette SAE a été ma première immersion concrète dans l'administration d'un réseau stable et sécurisé.</p>
+                            <p>Ce projet visait à concevoir une infrastructure réseau stable incluant des services serveurs et une segmentation <strong>VLAN</strong>. J'ai utilisé <strong>Draw.io</strong> pour le plan d'adressage IPv4 et <strong>GNS3</strong> pour simuler la topologie incluant routeurs et commutateurs Cisco. En plus de la configuration réseau (NAT, routage), j'ai déployé un serveur <strong>Apache</strong> sous Linux avec des services DNS et DHCP fonctionnels. La validation s'est faite par analyse de trames via <strong>Wireshark</strong>, garantissant la conformité au cahier des charges.</p>
                         </div>
                         
                         <iframe src="static/image/Rapport_SAE12.pdf" class="w-full h-[500px] border border-white/10 rounded-lg mt-4"></iframe>
+                    </article>
+
+                    <article id="sae13" class="project-card">
+                        <h3 class="text-2xl font-bold text-white mb-4">SAE 1.3 : Découvrir un système de transmission</h3>
+                        <div class="text-slate-300 text-sm space-y-4 mb-6 leading-relaxed">
+                            <p>L'objectif de cette SAE était de caractériser physiquement les supports de transmission comme les câbles Ethernet et coaxiaux. À l'aide de simulations sous <strong>Matlab/Scilab</strong>, j'ai étudié des paramètres critiques tels que l'atténuation et le retard de propagation des signaux. J'ai notamment travaillé sur les nombres complexes pour analyser l'impédance et le coefficient de réflexion des lignes de transmission. Ce travail technique permet de comprendre les limites physiques qui régissent le débit et la qualité des communications réseaux.</p>
+                        </div>
+                        
+                        <div class="mt-6 p-4 bg-black/40 border border-white/10 rounded-lg">
+                            <p class="text-xs text-slate-500 mb-4 italic">Compte-rendu technique de transmission (TP Scilab/Matlab)</p>
+                            <iframe src="static/image/TP1-SAE-NP.pdf" class="w-full h-[450px] border-none"></iframe>
+                        </div>
                     </article>
                 </div>
 
@@ -137,14 +148,14 @@
                     <article id="sae21" class="project-card">
                         <h3 class="text-2xl font-bold text-white mb-4">SAE 2.1 : Bases de données MySQL</h3>
                         <p class="text-slate-300 text-sm leading-relaxed">
-                            Ce projet porte sur la structuration et la manipulation de données complexes pour un système d'information. J'ai conçu un modèle conceptuel de données (MCD) avant de l'implémenter sous MySQL, en veillant à l'intégrité référentielle entre les tables. L'objectif était de permettre une extraction efficace d'informations via des requêtes SQL avancées pour la génération de rapports d'activité automatiques.
+                            Modélisation et administration d'une base de données relationnelle pour la gestion d'un parc informatique.
                         </p>
                     </article>
                 </div>
 
-                <div id="s3-projets" class="project-section"><h2 class="text-xl font-['Orbitron'] text-cyan-400">Semestre 3</h2><article id="sae31" class="project-card"><p>Documentation S3 en attente...</p></article></div>
-                <div id="s4-projets" class="project-section"><h2 class="text-xl font-['Orbitron'] text-cyan-400">Semestre 4</h2><article id="sae41" class="project-card"><p>Documentation S4 en attente...</p></article></div>
-                <div id="s56-projets" class="project-section"><h2 class="text-xl font-['Orbitron'] text-cyan-400">Semestre 5 & 6</h2><article id="sae51" class="project-card"><p>Documentation Alternance Cybersécurité en attente...</p></article></div>
+                <div id="s3-projets" class="project-section"><div class="project-card"><p>Contenu S3 à venir...</p></div></div>
+                <div id="s4-projets" class="project-section"><div class="project-card"><p>Contenu S4 à venir...</p></div></div>
+                <div id="s56-projets" class="project-section"><div class="project-card"><p>Contenu Alternance à venir...</p></div></div>
 
             </div>
         </main>
@@ -163,30 +174,24 @@
             }
         });
 
-        // NOUVELLE FONCTION : Affiche la section ET descend vers le projet
         function goToProject(sectionId, projectId) {
-            // 1. Cacher l'intro
             document.getElementById('intro').style.display = 'none';
-            
-            // 2. Cacher toutes les sections
             const sections = document.querySelectorAll('.project-section');
             sections.forEach(section => {
                 section.classList.remove('active');
             });
 
-            // 3. Afficher la section demandée
             const targetSection = document.getElementById(sectionId);
             if(targetSection) {
                 targetSection.classList.add('active');
             }
 
-            // 4. Défilement automatique vers le projet spécifique
             setTimeout(() => {
                 const targetProject = document.getElementById(projectId);
                 if(targetProject) {
                     targetProject.scrollIntoView({ behavior: 'smooth' });
                 }
-            }, 100); // Petit délai pour laisser le temps à la section de s'afficher
+            }, 100);
         }
     </script>
 </body>
