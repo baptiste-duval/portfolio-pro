@@ -41,22 +41,21 @@
 <body>
 
     <nav class="glass-header fixed top-0 w-full z-[100]">
-        <div class="max-w-7xl mx-auto px-6 h-20 flex items-center justify-between">
-            <div class="flex items-center space-x-3">
-                <div class="w-8 h-8 border border-cyan-500 flex items-center justify-center rotate-45">
-                    <span class="rotate-[-45deg] font-bold text-cyan-400 text-xs">BD</span>
+        <div class="max-w-7xl mx-auto px-6">
+            <div class="h-16 flex items-center justify-between border-b border-white/5">
+                <div class="flex items-center space-x-3">
+                    <div class="w-6 h-6 border border-cyan-500 flex items-center justify-center rotate-45">
+                        <span class="rotate-[-45deg] font-bold text-cyan-400 text-[10px]">BD</span>
+                    </div>
+                    <span class="text-[10px] font-bold tracking-[0.2em] text-cyan-400 neon-shadow italic">CREIL-SOCIETY.SYS</span>
                 </div>
-                <span class="text-sm font-bold tracking-[0.2em] text-cyan-400 neon-shadow italic">BAPTISTE_DUVAL.SYS</span>
+                <div class="flex space-x-6 text-[9px] uppercase font-bold tracking-widest">
+                    <a href="index.html" class="hover:text-cyan-400 transition">01_Accueil</a>
+                    <a href="projets.html" class="text-cyan-400">02_Retour_Projets</a>
+                </div>
             </div>
-            <div class="flex space-x-8 text-[10px] uppercase font-bold tracking-widest">
-                <a href="projets.html" class="hover:text-cyan-400 transition"><i class="fas fa-arrow-left mr-2"></i> Retour</a>
-            </div>
-        </div>
-    </nav>
-
-    <div class="layout-container">
-        <aside class="sidebar">
-            <h2 class="text-[10px] mb-6">Navigation Projet</h2>
+            <div class="h-10 flex items-center justify-center space-x-8 overflow-x-auto no-scrollbar">
+                <h2 class="text-[10px] mb-6">Navigation Projet</h2>
             <a href="#intro" class="sidebar-link">01. Introduction</a>
             <a href="#architecture" class="sidebar-link">02. Architecture Réseau</a>
             <a href="#cisco" class="sidebar-link">03. Configuration Cisco</a>
@@ -66,7 +65,10 @@
             <a href="#windows" class="sidebar-link">07. Windows Server AD</a>
             <a href="#arduino" class="sidebar-link">08. IoT & Programmation</a>
             <a href="#conclusion" class="sidebar-link">09. Conclusion</a>
-        </aside>
+            </div>
+        </div>
+    </nav>
+
 
         <main class="main-content">
             
