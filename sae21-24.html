@@ -41,33 +41,42 @@
 <body>
 
     <nav class="glass-header fixed top-0 w-full z-[100]">
-        <div class="max-w-7xl mx-auto px-6">
-            <div class="h-16 flex items-center justify-between border-b border-white/5">
-                <div class="flex items-center space-x-3">
-                    <div class="w-6 h-6 border border-cyan-500 flex items-center justify-center rotate-45">
-                        <span class="rotate-[-45deg] font-bold text-cyan-400 text-[10px]">BD</span>
-                    </div>
-                    <span class="text-[10px] font-bold tracking-[0.2em] text-cyan-400 neon-shadow italic">CREIL-SOCIETY.SYS</span>
-                </div>
-                <div class="flex space-x-6 text-[9px] uppercase font-bold tracking-widest">
-                    <a href="index.html" class="hover:text-cyan-400 transition">01_Accueil</a>
-                    <a href="projets.html" class="text-cyan-400">02_Retour_Projets</a>
-                </div>
+    <div class="max-w-7xl mx-auto px-6 h-20 flex items-center justify-between">
+        <div class="flex items-center space-x-3">
+            <div class="w-8 h-8 border border-cyan-500 flex items-center justify-center rotate-45 shadow-[0_0_10px_rgba(0,242,255,0.5)]">
+                <span class="rotate-[-45deg] font-bold text-cyan-400 text-xs">BD</span>
             </div>
-            <div class="h-10 flex items-center justify-center space-x-8 overflow-x-auto no-scrollbar">
-                <a href="#intro" class="sidebar-link">01. Introduction</a>
-                <a href="#architecture" class="sidebar-link">02. Architecture Réseau</a>
-                <a href="#cisco" class="sidebar-link">03. Configuration Cisco</a>
-                <a href="#securite" class="sidebar-link">04. Sécurité & ACL</a>
-                <a href="#wifi" class="sidebar-link">05. Infrastructure WiFi</a>
-                <a href="#docker" class="sidebar-link">06. Docker & BDD</a>
-                <a href="#windows" class="sidebar-link">07. Windows Server AD</a>
-                <a href="#arduino" class="sidebar-link">08. IoT & Programmation</a>
-                <a href="#conclusion" class="sidebar-link">09. Conclusion</a>
-            </div>
+            <span class="text-sm font-bold tracking-[0.2em] text-cyan-400 neon-shadow italic">BAPTISTE_DUVAL.SYS</span>
         </div>
-    </nav>
 
+        <div class="flex items-center">
+            <a href="projets.html" class="group relative px-6 py-2 flex items-center justify-center overflow-hidden rounded-full border border-cyan-500/50 bg-cyan-500/10 transition-all duration-300 hover:bg-cyan-500 hover:shadow-[0_0_20px_rgba(0,242,255,0.6)]">
+                <div class="absolute inset-0 flex h-full w-full justify-center [transform:skew(-12deg)_translateX(-100%)] group-hover:duration-1000 group-hover:[transform:skew(-12deg)_translateX(100%)]">
+                    <div class="relative h-full w-8 bg-white/20"></div>
+                </div>
+                
+                <span class="relative flex items-center text-[11px] uppercase font-bold tracking-[0.2em] text-cyan-400 group-hover:text-white transition-colors">
+                    <i class="fas fa-chevron-left mr-2 group-hover:-translate-x-1 transition-transform"></i>
+                    02_Retour_Projets
+                </span>
+            </a>
+        </div>
+    </div>
+</nav>
+
+    <div class="layout-container">
+        <aside class="sidebar">
+            <h2 class="text-[10px] mb-6">Navigation Projet</h2>
+            <a href="#intro" class="sidebar-link">01. Introduction</a>
+            <a href="#architecture" class="sidebar-link">02. Architecture Réseau</a>
+            <a href="#cisco" class="sidebar-link">03. Configuration Cisco</a>
+            <a href="#securite" class="sidebar-link">04. Sécurité & ACL</a>
+            <a href="#wifi" class="sidebar-link">05. Infrastructure WiFi</a>
+            <a href="#docker" class="sidebar-link">06. Docker & BDD</a>
+            <a href="#windows" class="sidebar-link">07. Windows Server AD</a>
+            <a href="#arduino" class="sidebar-link">08. IoT & Programmation</a>
+            <a href="#conclusion" class="sidebar-link">09. Conclusion</a>
+        </aside>
 
         <main class="main-content">
             
@@ -179,7 +188,7 @@
                     Des <strong>GPO (Group Policy Objects)</strong> ont été mises en place pour mapper automatiquement des lecteurs réseaux selon le profil de l'utilisateur et pour restreindre l'accès au panneau de configuration sur les postes clients.
                 </p>
                 <div class="screenshot-container">
-                    <img src="static/image/ad.png" alt="Windows Server Active Directory">
+                    <img src="static/image/windows.png" alt="Windows Server Active Directory">
                     <div class="caption">Console Utilisateurs et Ordinateurs Active Directory de la Creil-Society</div>
                 </div>
             </section>
