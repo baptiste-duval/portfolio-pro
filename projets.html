@@ -70,6 +70,7 @@
                     <a onclick="goToProject('s1-projets', 'sae11')" class="project-link">SAE 1.1 - Risque Numérique</a>
                     <a onclick="goToProject('s1-projets', 'sae12')" class="project-link">SAE 1.2 - Réseaux</a>
                     <a onclick="goToProject('s1-projets', 'sae13')" class="project-link">SAE 1.3 - Transmission</a>
+                    <a onclick="goToProject('s1-projets', 'sae14')" class="project-link">SAE 1.4 - Portfolio Web</a>
                 </details>
                 <details class="sub-menu">
                     <summary>Semestre 2</summary>
@@ -79,22 +80,12 @@
 
             <details>
                 <summary>BUT RT - ANNEE 2 <i class="fas fa-caret-down ml-2 opacity-50"></i></summary>
-                <details class="sub-menu">
-                    <summary>Semestre 3</summary>
-                    <a onclick="goToProject('s3-projets', 'sae31')" class="project-link">Projets S3</a>
-                </details>
-                <details class="sub-menu">
-                    <summary>Semestre 4</summary>
-                    <a onclick="goToProject('s4-projets', 'sae41')" class="project-link">Projets S4</a>
-                </details>
+                <div class="p-4 text-[10px] text-slate-500 uppercase italic">Accès restreint - Semestres 3 & 4</div>
             </details>
 
             <details>
                 <summary>BUT RT - ANNEE 3 <i class="fas fa-caret-down ml-2 opacity-50"></i></summary>
-                <details class="sub-menu">
-                    <summary>Semestre 5 & 6</summary>
-                    <a onclick="goToProject('s56-projets', 'sae51')" class="project-link">Alternance</a>
-                </details>
+                <div class="p-4 text-[10px] text-slate-500 uppercase italic">Accès restreint - Semestres 5 & 6</div>
             </details>
         </aside>
 
@@ -102,10 +93,10 @@
             <div class="max-w-4xl mx-auto">
                 
                 <section id="intro" class="mb-16">
-                    <h1 class="text-4xl font-bold font-['Orbitron'] mb-6 neon-shadow">Bachelor R&T : Mes Réalisations</h1>
+                    <h1 class="text-4xl font-bold font-['Orbitron'] mb-6 neon-shadow uppercase">Cursus Académique</h1>
                     <div class="p-6 bg-cyan-500/5 border-l-4 border-cyan-400">
                         <p class="text-slate-300 text-sm leading-relaxed">
-                            Veuillez sélectionner une SAE dans le menu de gauche. Les projets sont classés par semestre pour retracer mon apprentissage des fondamentaux vers la spécialisation en réseaux et télécoms.
+                            Retrouvez ici l'ensemble de mes travaux réalisés en Bachelor R&T. Chaque projet (SAE) valide un bloc de compétences spécifique, allant de l'infrastructure réseau à la sécurité informatique, en passant par le développement d'outils professionnels.
                         </p>
                     </div>
                 </section>
@@ -114,34 +105,45 @@
                     <h2 class="text-xl font-['Orbitron'] mb-10 text-cyan-400 uppercase tracking-widest border-b border-cyan-500/20 pb-2">Semestre 1 - Fondamentaux</h2>
                     
                     <article id="sae11" class="project-card">
-                        <h3 class="text-2xl font-bold text-white mb-4">SAE 1.1 : Sensibilisation au risque numérique</h3>
-                        <div class="text-slate-300 text-sm space-y-4 mb-6 leading-relaxed">
-                            <p>En tant que Responsable de la Sécurité des Systèmes d'Information (RSSI), j'ai élaboré une stratégie de sensibilisation pour protéger les entreprises contre les négligences humaines. Pour ce faire, j'ai validé le <strong>MOOC SecNumAcadémie de l'ANSSI</strong> ainsi que la certification "Introduction à la cybersécurité" de <strong>Cisco Netacad</strong>. Mon travail a abouti à un support pédagogique présentant les menaces majeures comme le phishing et les contre-mesures associées. Ce projet souligne ma capacité à vulgariser la sécurité informatique pour tout type de personnel.</p>
-                        </div>
+                        <h3 class="text-2xl font-bold text-white mb-4 italic">SAE 1.1 : Sensibilisation au risque numérique</h3>
+                        <p class="text-slate-300 text-sm mb-6 leading-relaxed">
+                            Dans le rôle d'un RSSI, j'ai élaboré une stratégie de sensibilisation pour protéger les collaborateurs contre les cybermenaces liées à l'erreur humaine. Pour asseoir ce projet, j'ai suivi et validé le <strong>MOOC de l'ANSSI</strong> ainsi que le module "Introduction à la cybersécurité" de <strong>Cisco Netacad</strong>. Le rendu final consistait en un diaporama pédagogique présentant les bonnes pratiques indispensables. Ce travail a renforcé ma capacité à vulgariser des concepts de sécurité critiques pour tout type de personnel.
+                        </p>
                         <iframe src="static/image/Mooc-Duval.pdf" class="w-full h-[450px] border border-white/10 rounded-lg"></iframe>
                     </article>
 
                     <article id="sae12" class="project-card">
-                        <h3 class="text-2xl font-bold text-white mb-4">SAE 1.2 : S'initier aux réseaux informatiques</h3>
-                        <div class="text-slate-300 text-sm space-y-4 mb-6 leading-relaxed">
-                            <p>Ce projet visait à concevoir une infrastructure réseau stable incluant des services serveurs et une segmentation <strong>VLAN</strong>. J'ai utilisé <strong>Draw.io</strong> pour le plan d'adressage IPv4 et <strong>GNS3</strong> pour simuler la topologie incluant routeurs et commutateurs Cisco. En plus de la configuration réseau (NAT, routage), j'ai déployé un serveur <strong>Apache</strong> sous Linux avec des services DNS et DHCP fonctionnels. La validation s'est faite par analyse de trames via <strong>Wireshark</strong>, garantissant la conformité au cahier des charges.</p>
-                        </div>
-                        
-                        <iframe src="static/image/Rapport_SAE12.pdf" class="w-full h-[500px] border border-white/10 rounded-lg mt-4"></iframe>
+                        <h3 class="text-2xl font-bold text-white mb-4 italic">SAE 1.2 : S'initier aux réseaux informatiques</h3>
+                        <p class="text-slate-300 text-sm mb-6 leading-relaxed">
+                            Ce projet visait à concevoir et déployer une infrastructure réseau complète, de la topologie logique sous <strong>Draw.io</strong> à la configuration réelle d'équipements Cisco. J'ai mis en place une segmentation par <strong>VLANs</strong>, configuré le routage inter-VLAN et le <strong>NAT</strong> pour assurer la connectivité. En complément, j'ai administré des services serveurs essentiels tels que le <strong>DNS</strong>, le <strong>DHCP</strong> et un serveur web <strong>Apache</strong>. La validation finale a été effectuée par une analyse de trames avec <strong>Wireshark</strong>.
+                        </p>
+                        <iframe src="static/image/Rapport_SAE12.pdf" class="w-full h-[450px] border border-white/10 rounded-lg"></iframe>
                     </article>
 
                     <article id="sae13" class="project-card">
-                        <h3 class="text-2xl font-bold text-white mb-4">SAE 1.3 : Découvrir un système de transmission</h3>
-                        <div class="text-slate-300 text-sm space-y-4 mb-6 leading-relaxed">
-                            <p>L'objectif de cette SAE était de caractériser physiquement les supports de transmission comme les câbles Ethernet et coaxiaux. À l'aide de simulations sous <strong>Matlab/Scilab</strong>, j'ai étudié des paramètres critiques tels que l'atténuation et le retard de propagation des signaux. J'ai notamment travaillé sur les nombres complexes pour analyser l'impédance et le coefficient de réflexion des lignes de transmission. Ce travail technique permet de comprendre les limites physiques qui régissent le débit et la qualité des communications réseaux.</p>
+                        <h3 class="text-2xl font-bold text-white mb-4 italic">SAE 1.3 : Découvrir un système de transmission</h3>
+                        <p class="text-slate-300 text-sm mb-6 leading-relaxed">
+                            Cette SAE m'a permis d'étudier les caractéristiques physiques des supports de transmission, comme l'atténuation et le retard de propagation des signaux. À l'aide de simulations sous <strong>Matlab et Scilab</strong>, j'ai analysé le comportement des ondes et la qualité des liaisons cuivre et coaxiales. J'ai notamment utilisé les nombres complexes pour calculer l'impédance et le coefficient de réflexion des lignes. Ce travail rigoureux est fondamental pour comprendre les limites techniques qui régissent le débit des réseaux modernes.
+                        </p>
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                            <iframe src="static/image/TP1-SAE-NP.pdf" class="w-full h-[350px] border border-white/10 rounded-lg"></iframe>
+                            <iframe src="static/image/TP3-NP.pdf" class="w-full h-[350px] border border-white/10 rounded-lg"></iframe>
                         </div>
-                        
-                        <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mt-8">
-                            <div class="space-y-3">
-                                <span class="text-[10px] text-cyan-500 font-bold uppercase">TP1 : Fonctions & Signaux</span>
-                                <iframe src="static/image/TP1-SAE-NP.pdf" class="w-full h-[400px] border border-white/10 rounded-lg"></iframe>
+                    </article>
+
+                    <article id="sae14" class="project-card">
+                        <h3 class="text-2xl font-bold text-white mb-4 italic">SAE 1.4 : Se présenter sur Internet</h3>
+                        <p class="text-slate-300 text-sm mb-6 leading-relaxed">
+                            Ce projet consistait à concevoir et déployer mon identité numérique professionnelle à travers la création de ce site web personnel. En utilisant un template <strong>Bootstrap</strong> adapté en <strong>HTML/CSS</strong>, j'ai veillé à ce que l'interface soit <strong>responsive</strong> et respecte les standards du W3C. Le site intègre mon CV numérique ainsi qu'un portfolio détaillant mes compétences R&T. L'ensemble du projet est hébergé de manière professionnelle sur <strong>GitHub Pages</strong>, utilisant les commandes Git pour le versioning et le déploiement continu.
+                        </p>
+                        <div class="p-6 bg-cyan-500/10 border border-cyan-500/30 rounded-lg flex justify-between items-center">
+                            <div>
+                                <h4 class="text-cyan-400 font-bold">Dépôt GitHub & Fichiers sources</h4>
+                                <p class="text-xs text-slate-400">Accédez au code source et à la documentation du projet.</p>
                             </div>
-                            
+                            <a href="https://drive.google.com/drive/folders/1UHTykaae_LM6SGDBo1YG5gK9dVXAuSzh?usp=sharing" target="_blank" class="px-4 py-2 bg-cyan-500 hover:bg-cyan-600 text-white text-xs font-bold rounded transition">
+                                <i class="fab fa-google-drive mr-2"></i> VOIR SUR DRIVE
+                            </a>
                         </div>
                     </article>
                 </div>
@@ -149,17 +151,10 @@
                 <div id="s2-projets" class="project-section">
                     <h2 class="text-xl font-['Orbitron'] mb-10 text-cyan-400 uppercase tracking-widest border-b border-cyan-500/20 pb-2">Semestre 2</h2>
                     <article id="sae21" class="project-card">
-                        <h3 class="text-2xl font-bold text-white mb-4">SAE 2.1 : Bases de données MySQL</h3>
-                        <p class="text-slate-300 text-sm leading-relaxed">
-                            Modélisation et administration d'une base de données relationnelle pour la gestion d'un parc informatique.
-                        </p>
+                        <h3 class="text-2xl font-bold text-white mb-4 italic">SAE 2.1 : Bases de données MySQL</h3>
+                        <p class="text-slate-300 text-sm">Modélisation de données et requêtes SQL complexes pour la gestion d'inventaire réseau.</p>
                     </article>
                 </div>
-
-                <div id="s3-projets" class="project-section"><div class="project-card"><p>Contenu S3 à venir...</p></div></div>
-                <div id="s4-projets" class="project-section"><div class="project-card"><p>Contenu S4 à venir...</p></div></div>
-                <div id="s56-projets" class="project-section"><div class="project-card"><p>Contenu Alternance à venir...</p></div></div>
-
             </div>
         </main>
     </div>
@@ -180,20 +175,12 @@
         function goToProject(sectionId, projectId) {
             document.getElementById('intro').style.display = 'none';
             const sections = document.querySelectorAll('.project-section');
-            sections.forEach(section => {
-                section.classList.remove('active');
-            });
-
+            sections.forEach(section => { section.classList.remove('active'); });
             const targetSection = document.getElementById(sectionId);
-            if(targetSection) {
-                targetSection.classList.add('active');
-            }
-
+            if(targetSection) { targetSection.classList.add('active'); }
             setTimeout(() => {
                 const targetProject = document.getElementById(projectId);
-                if(targetProject) {
-                    targetProject.scrollIntoView({ behavior: 'smooth' });
-                }
+                if(targetProject) { targetProject.scrollIntoView({ behavior: 'smooth' }); }
             }, 100);
         }
     </script>
