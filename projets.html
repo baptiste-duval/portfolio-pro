@@ -80,9 +80,13 @@
                 </details>
             </details>
 
-            <details>
+            <details open>
                 <summary>BUT RT - ANNEE 2 <i class="fas fa-caret-down ml-2 opacity-50"></i></summary>
-                <div class="p-4 text-[10px] text-slate-500 uppercase italic">Accès restreint - Semestres 3 & 4</div>
+                <details open class="sub-menu">
+                    <summary>Semestre 3</summary>
+                    <a onclick="goToProject('s3-projets', 'sae301')" class="project-link">SAE 3.01 - Transmission Radio</a>
+                </details>
+                <div class="p-4 text-[10px] text-slate-500 uppercase italic">Accès restreint - Semestre 4</div>
             </details>
 
             <details>
@@ -196,6 +200,18 @@
                                 <i class="fas fa-file-code mr-2"></i> VOIR LE SUJET SAE 2.3
                             </a>
                         </div>
+                    </article>
+                </div>
+
+                <div id="s3-projets" class="project-section">
+                    <h2 class="text-xl font-['Orbitron'] mb-10 text-cyan-400 uppercase tracking-widest border-b border-cyan-500/20 pb-2">Semestre 3 - Spécialisation</h2>
+                    
+                    <article id="sae301" class="project-card">
+                        <h3 class="text-2xl font-bold text-white mb-4 italic">SAE 3.01 : Mise en œuvre d'un système de transmission</h3>
+                        <p class="text-slate-300 text-sm mb-6 leading-relaxed">
+                            Ce projet visait à concevoir un système de transmission sans fil complet. [cite_start]J'ai utilisé l'émetteur/récepteur <strong>ADALM-Pluto</strong> piloté par <strong>GNU Radio</strong> pour manipuler des signaux radiofréquences[cite: 1, 4]. [cite_start]Le travail a inclus l'analyse de spectres réels (GSM, LTE) avec le logiciel <strong>MCS Spectrum Analyzer</strong> et l'antenne HyperLOG 7060[cite: 8, 48]. [cite_start]L'aboutissement a été la transmission réussie d'un flux vidéo via le protocole <strong>UDP</strong> entre deux stations radio[cite: 10, 68].
+                        </p>
+                        <iframe src="static/image/Rapport final-SAE301-Duval-Nicolas.pdf" class="w-full h-[450px] border border-white/10 rounded-lg"></iframe>
                     </article>
                 </div>
             </div>
