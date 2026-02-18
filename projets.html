@@ -548,48 +548,62 @@
                         </div>
                     </article>
 
-                    <article id="sae401" class="project-card">
-                        <div class="flex flex-col md:flex-row justify-between items-start mb-6 gap-4">
-                            <div>
-                                <h3 class="text-2xl font-bold text-white italic">SAE 4.01 : Stage - Administrateur Systèmes et Réseaux</h3>
-                                <p class="text-cyan-400 font-bold text-xs uppercase tracking-widest mt-1">Centre Hospitalier d'Arras (GHAT)</p>
-                            </div>
-                            <span class="tech-badge">AVRIL - MAI 2025</span>
-                        </div>
+                    <article id="sae401" class="project-card border-l-4 border-cyan-500">
+    <div class="flex flex-col md:flex-row justify-between items-start mb-4 gap-2">
+        <div>
+            <h3 class="text-xl font-bold text-white italic">SAE 4.01 : Stage - Admin Systèmes & Réseaux</h3>
+            <p class="text-cyan-400 font-bold text-[10px] uppercase tracking-[0.2em]">Centre Hospitalier d'Arras (GHAT)</p>
+        </div>
+        <span class="text-[9px] bg-cyan-500/20 text-cyan-400 px-2 py-1 rounded border border-cyan-500/30">AVRIL - MAI 2025</span>
+    </div>
 
-                        <p class="text-slate-300 text-sm mb-6 leading-relaxed">
-                            Ce stage de 8 semaines au sein du Pôle Réseau du Groupe Hospitalier Artois-Ternois m'a permis d'appréhender la gestion d'un Système d'Information critique. Ma mission principale était d'assurer la continuité des services numériques pour le personnel soignant tout en menant des projets d'automatisation et de supervision.
-                        </p>
+    <p class="text-slate-400 text-[11px] mb-6 leading-relaxed">
+        Immersion au sein d'un SI hospitalier critique. Ma mission : garantir la continuité des soins via l'administration du parc et l'automatisation des processus métier.
+    </p>
 
-                        <div class="space-y-6">
-                            <div class="bg-black/30 p-4 rounded-lg border border-white/5">
-                                <h4 class="text-cyan-400 font-bold text-xs uppercase mb-3"><i class="fas fa-code mr-2"></i> Projet 1 : Automatisation Active Directory (PowerShell)</h4>
-                                <p class="text-[11px] text-slate-400 leading-relaxed">
-                                    Développement de scripts pour automatiser la création et la suppression massive d'utilisateurs à partir de fichiers CSV. Le script gère l'attribution des droits, les unités d'organisation (OU) et génère des logs de vérification (Regex) pour éviter toute erreur de matricule.
-                                </p>
-                            </div>
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+        
+        <a href="stage-ad.html" class="group relative bg-black/40 p-3 rounded border border-white/5 hover:border-cyan-500 hover:bg-cyan-500/5 transition-all duration-300">
+            <h4 class="text-cyan-400 font-bold text-[9px] uppercase mb-2 flex items-center">
+                <i class="fas fa-terminal mr-2"></i> Automatisation AD
+            </h4>
+            <p class="text-[10px] text-slate-500 leading-tight">Développement de scripts <strong>PowerShell</strong> pour le cycle de vie des comptes (création/nettoyage) avec contrôle Regex.</p>
+            
+            <div class="absolute -top-8 left-1/2 -translate-x-1/2 bg-cyan-500 text-black text-[8px] font-bold px-2 py-1 rounded opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none whitespace-nowrap">
+                CLIQUER POUR AVOIR PLUS DE DÉTAILS
+            </div>
+        </a>
 
-                            <div class="bg-black/30 p-4 rounded-lg border border-white/5">
-                                <h4 class="text-cyan-400 font-bold text-xs uppercase mb-3"><i class="fas fa-eye mr-2"></i> Projet 2 : Supervision des Logs avec Graylog</h4>
-                                <p class="text-[11px] text-slate-400 leading-relaxed">
-                                    Mise en place d'une solution de centralisation de logs sur Debian 12. Installation de Winlogbeat sur les serveurs Windows pour remonter les événements critiques vers un serveur Graylog, permettant une détection proactive d'anomalies (ex: tentatives de connexion échouées).
-                                </p>
-                            </div>
+        <a href="stage-graylog.html" class="group relative bg-black/40 p-3 rounded border border-white/5 hover:border-cyan-500 hover:bg-cyan-500/5 transition-all duration-300">
+            <h4 class="text-cyan-400 font-bold text-[9px] uppercase mb-2 flex items-center">
+                <i class="fas fa-search mr-2"></i> Supervision Logs
+            </h4>
+            <p class="text-[10px] text-slate-500 leading-tight">Déploiement de <strong>Graylog</strong> sur Debian 12 pour centraliser et analyser les événements serveurs en temps réel.</p>
+            
+            <div class="absolute -top-8 left-1/2 -translate-x-1/2 bg-cyan-500 text-black text-[8px] font-bold px-2 py-1 rounded opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none whitespace-nowrap">
+                CLIQUER POUR AVOIR PLUS DE DÉTAILS
+            </div>
+        </a>
 
-                            <div class="bg-black/30 p-4 rounded-lg border border-white/5">
-                                <h4 class="text-cyan-400 font-bold text-xs uppercase mb-3"><i class="fas fa-database mr-2"></i> Projet 3 : Gestionnaire de Logs CDR</h4>
-                                <p class="text-[11px] text-slate-400 leading-relaxed">
-                                    Conception d'un outil de traitement des données d'appels téléphoniques (Call Detail Records). Développement d'un backend en Python/MySQL pour stocker et trier les informations d'appels du groupe hospitalier à des fins statistiques.
-                                </p>
-                            </div>
-                        </div>
+        <a href="stage-cdr.html" class="group relative bg-black/40 p-3 rounded border border-white/5 hover:border-cyan-500 hover:bg-cyan-500/5 transition-all duration-300">
+            <h4 class="text-cyan-400 font-bold text-[9px] uppercase mb-2 flex items-center">
+                <i class="fas fa-phone-alt mr-2"></i> Gestion CDR
+            </h4>
+            <p class="text-[10px] text-slate-500 leading-tight">Création d'un outil de traitement des logs d'appels téléphoniques via <strong>Python</strong> et <strong>MySQL/MariaDB</strong>.</p>
+            
+            <div class="absolute -top-8 left-1/2 -translate-x-1/2 bg-cyan-500 text-black text-[8px] font-bold px-2 py-1 rounded opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none whitespace-nowrap">
+                CLIQUER POUR AVOIR PLUS DE DÉTAILS
+            </div>
+        </a>
 
-                        <div class="mt-8 flex flex-wrap gap-4">
-                            <button onclick="openModal('static/image/Rapport_Stage_Duval_Baptiste.pdf')" class="px-6 py-2 bg-cyan-500 text-white text-[10px] font-bold rounded hover:bg-cyan-600 transition-all uppercase tracking-widest">
-                                <i class="fas fa-file-pdf mr-2"></i> Consulter le Rapport de Stage
-                            </button>
-                        </div>
-                    </article>
+    </div>
+
+    <div class="mt-6 pt-4 border-t border-white/5 flex justify-end">
+        <button onclick="openModal('static/image/Rapport_Stage_Duval_Baptiste.pdf')" class="text-[9px] font-bold text-cyan-500 hover:text-cyan-300 transition-all uppercase tracking-widest flex items-center">
+            Consulter le rapport complet <i class="fas fa-arrow-right ml-2"></i>
+        </button>
+    </div>
+</article>
 
                     
                 </div>
