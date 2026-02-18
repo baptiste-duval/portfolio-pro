@@ -326,19 +326,46 @@
     </div>
 
     <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
-        <div class="p-4 bg-white/5 border border-white/10 rounded-lg">
+    <div class="p-4 bg-white/5 border border-white/10 rounded-lg flex flex-col justify-between">
+        <div>
             <h5 class="text-[10px] font-bold text-cyan-400 mb-2 uppercase text-center">TP1 : Reconnaissance</h5>
             <p class="text-[9px] text-slate-500 mb-3">Scan de la cible 172.31.25.248, découverte des ports SSH (22) et HTTP (1337), et décodage de secrets en Base64.</p>
         </div>
-        <div class="p-4 bg-white/5 border border-white/10 rounded-lg">
+        <button onclick="openModal('static/image/R3.CYBER.04-TP1.pdf')" class="w-full py-2 bg-cyan-500/10 border border-cyan-500/30 text-cyan-400 text-[8px] font-bold uppercase rounded hover:bg-cyan-500 hover:text-white transition-all">
+            <i class="fas fa-file-pdf mr-1"></i> Voir le rapport
+        </button>
+    </div>
+
+    <div class="p-4 bg-white/5 border border-white/10 rounded-lg flex flex-col justify-between">
+        <div>
             <h5 class="text-[10px] font-bold text-cyan-400 mb-2 uppercase text-center">TP2 : Exploitation</h5>
             <p class="text-[9px] text-slate-500 mb-3">Analyse de la cible 172.31.25.222. Exploitation de vulnérabilités FTP et prise de contrôle via Meterpreter.</p>
         </div>
-        <div class="p-4 bg-white/5 border border-white/10 rounded-lg">
+        <button onclick="openModal('static/image/R3.CYBER.04-TP2.pdf')" class="w-full py-2 bg-cyan-500/10 border border-cyan-500/30 text-cyan-400 text-[8px] font-bold uppercase rounded hover:bg-cyan-500 hover:text-white transition-all">
+            <i class="fas fa-file-pdf mr-1"></i> Voir le rapport
+        </button>
+    </div>
+
+    <div class="p-4 bg-white/5 border border-white/10 rounded-lg flex flex-col justify-between">
+        <div>
             <h5 class="text-[10px] font-bold text-cyan-400 mb-2 uppercase text-center">TP3 : Sécurité Web</h5>
             <p class="text-[9px] text-slate-500 mb-3">Audit de l'application OWASP Juice Shop. Challenges de hacking web : injection admin, exfiltration de DB et détournement de token.</p>
         </div>
+        <button onclick="openModal('static/image/R3.CYBER.04-TP3.pdf')" class="w-full py-2 bg-cyan-500/10 border border-cyan-500/30 text-cyan-400 text-[8px] font-bold uppercase rounded hover:bg-cyan-500 hover:text-white transition-all">
+            <i class="fas fa-file-pdf mr-1"></i> Voir le rapport
+        </button>
     </div>
+</div>
+
+<div id="pdfModal" class="fixed inset-0 z-[150] hidden bg-black/90 flex items-center justify-center p-4">
+    <div class="relative w-full max-w-5xl h-[90vh] bg-slate-900 rounded-xl border border-cyan-500/30 flex flex-col">
+        <div class="p-4 border-b border-white/10 flex justify-between items-center">
+            <span class="text-cyan-400 font-bold text-xs uppercase tracking-widest">Visionneuse de Rapport</span>
+            <button onclick="closeModal()" class="text-slate-400 hover:text-white text-2xl">&times;</button>
+        </div>
+        <iframe id="pdfFrame" src="" class="flex-1 w-full rounded-b-xl"></iframe>
+    </div>
+</div>
 </article>
 
                 </div>
