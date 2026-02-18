@@ -15,33 +15,30 @@
         .code-snippet { background: #000; border-left: 3px solid #00f2ff; padding: 1.5rem; border-radius: 8px; color: #00f2ff; font-size: 0.8rem; margin: 1rem 0; }
         strong { color: #00f2ff; font-weight: 500; }
 
-        /* --- CORRECTION AFFICHAGE IMAGES --- */
+        /* --- CORRECTIF CSS POUR LES IMAGES --- */
         .img-container {
             width: 100%;
             display: flex;
             flex-direction: column;
-            background: rgba(0, 0, 0, 0.2);
+            background: rgba(0, 0, 0, 0.4); /* Fond plus sombre pour le contraste */
         }
 
         .img-wrapper {
             width: 100%;
-            overflow: hidden;
-            display: flex;
-            justify-content: center;
-            align-items: flex-start;
+            display: block; /* Important pour le ratio */
         }
 
         .img-wrapper img {
-            max-width: 100%;
-            height: auto; /* Garde le ratio original */
+            width: 100%;      /* Prend toute la largeur du bloc */
+            height: auto;     /* Calcule la hauteur proportionnellement (pas d'écrasement) */
             display: block;
             object-fit: contain;
-            transition: transform 0.3s ease;
             cursor: zoom-in;
+            transition: opacity 0.3s ease;
         }
 
         .img-wrapper img:hover {
-            transform: scale(1.01);
+            opacity: 0.9;
         }
     </style>
 </head>
@@ -76,21 +73,16 @@
             <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
                 <div class="text-slate-400 text-sm space-y-4">
                     <p>
-                        Avant mon intervention, la création des comptes (médecins, stagiaires, personnel administratif) s'effectuait manuellement via l'interface graphique <strong>ADUC</strong> (Active Directory Users and Computers).
+                        Avant mon intervention, la création des comptes s'effectuait manuellement via l'interface graphique <strong>ADUC</strong>. Cette méthode présentait des risques d'erreurs de saisie, des délais de traitement longs et un manque de suivi sur la désactivation des comptes en fin de contrat.
                     </p>
                     <p>
-                        Cette méthode présentait trois risques majeurs :
+                        L'objectif était donc d'industrialiser ce processus pour garantir l'intégrité de l'annuaire hospitalier.
                     </p>
-                    <ul class="list-disc list-inside space-y-2 ml-2">
-                        <li><strong>Erreurs de saisie :</strong> Incohérence dans les matricules ou noms.</li>
-                        <li><strong>Délai de traitement :</strong> Processus chronophage pour le pôle réseau.</li>
-                        <li><strong>Sécurité :</strong> Oubli fréquent de désactivation des comptes lors des fins de contrats.</li>
-                    </ul>
                 </div>
                 <div class="bg-black/20 p-6 rounded-lg border border-white/5 flex items-center justify-center">
                     <div class="text-center">
                         <i class="fas fa-exclamation-triangle text-4xl text-yellow-500 mb-4"></i>
-                        <p class="text-[10px] text-slate-500 uppercase font-bold tracking-widest">Risque identifié : Vulnérabilité du SI</p>
+                        <p class="text-[10px] text-slate-500 uppercase font-bold tracking-widest">Risque identifié : Intégrité des données</p>
                     </div>
                 </div>
             </div>
@@ -102,29 +94,29 @@
             </h2>
             <div class="space-y-6">
                 <p class="text-slate-400 text-sm">
-                    La première étape du script consiste à parser un fichier <strong>CSV</strong> source. Pour garantir que seules des données propres entrent dans l'annuaire, j'ai implémenté une double vérification :
+                    Pour éviter l'importation de données erronées, j'ai intégré une étape de validation stricte via des <strong>Regex</strong>. Cela permet de vérifier que le matricule extrait du CSV respecte le format interne (ex: une lettre suivie de six chiffres).
                 </p>
                 
                 <div class="grid grid-cols-1 lg:grid-cols-2 gap-10">
                     <div class="space-y-4">
-                        <h3 class="text-cyan-400 text-xs font-bold uppercase tracking-widest">Filtrage par Expressions Régulières (Regex)</h3>
-                        <p class="text-[13px] text-slate-400">
-                            Chaque matricule est passé au crible d'une Regex pour vérifier qu'il correspond au standard de l'hôpital (ex: une lettre suivie de six chiffres). Si le format est invalide, le compte n'est pas créé et l'erreur est logguée.
-                        </p>
+                        <h3 class="text-cyan-400 text-xs font-bold uppercase tracking-widest">Contrôle de conformité</h3>
                         <div class="code-snippet">
                             # Validation du format matricule<br>
                             if ($user.Matricule -notmatch "^[A-Z]{1}[0-9]{6}$") { <br>
                             &nbsp;&nbsp;Write-Error "Format Matricule Invalide : $($user.Matricule)"<br>
                             }
                         </div>
+                        <p class="text-[13px] text-slate-400 italic">
+                            Le script génère un log détaillé permettant d'identifier immédiatement quelle ligne du fichier CSV pose problème.
+                        </p>
                     </div>
                     
                     <div class="neon-border rounded-xl overflow-hidden shadow-2xl img-container">
                         <div class="img-wrapper">
-                            <img src="static/image/erreurs.png" alt="Vérification des erreurs" onclick="window.open(this.src)">
+                            <img src="erreurs.png" alt="Vérification des erreurs" onclick="window.open(this.src)">
                         </div>
                         <div class="p-4 glass text-[10px] text-slate-300 italic">
-                            <i class="fas fa-search-plus mr-2"></i> Capture écran : Console affichant le rejet d'entrées malformées (Cliquez pour agrandir).
+                            <i class="fas fa-search-plus mr-2"></i> Capture : Détection et affichage des erreurs de format (Cliquez pour agrandir).
                         </div>
                     </div>
                 </div>
@@ -133,33 +125,33 @@
 
         <section class="mb-12 section-card">
             <h2 class="text-xl font-bold text-white mb-6 uppercase tracking-widest flex items-center gap-3">
-                <span class="text-cyan-500 text-2xl">03.</span> Automatisation de la Sortie (Offboarding)
+                <span class="text-cyan-500 text-2xl">03.</span> Processus de Désactivation (Archives)
             </h2>
             <div class="grid grid-cols-1 lg:grid-cols-2 gap-10">
                 
                 <div class="neon-border rounded-xl overflow-hidden shadow-2xl img-container order-2 lg:order-1">
                     <div class="img-wrapper">
-                        <img src="static/image/desactivation.png" alt="Désactivation utilisateur" onclick="window.open(this.src)">
+                        <img src="desactivation.png" alt="Désactivation utilisateur" onclick="window.open(this.src)">
                     </div>
                     <div class="p-4 glass text-[10px] text-slate-300 italic text-right">
-                        Capture écran : Utilisateur archivé et désactivé (Cliquez pour agrandir) <i class="fas fa-search-plus ml-2"></i>
+                        Capture : Compte désactivé et déplacé dans l'OU Archives (Cliquez pour agrandir) <i class="fas fa-search-plus ml-2"></i>
                     </div>
                 </div>
 
                 <div class="space-y-4 order-1 lg:order-2">
-                    <h3 class="text-cyan-400 text-xs font-bold uppercase tracking-widest text-right">Hygiène de l'Annuaire</h3>
-                    <p class="text-[13px] text-slate-400 text-right">
-                        Le script de nettoyage analyse les dates de fin de contrat. Lorsqu'un utilisateur quitte l'établissement, le processus est automatique :
+                    <h3 class="text-cyan-400 text-xs font-bold uppercase tracking-widest text-right">Hygiène et Sécurité</h3>
+                    <p class="text-[13px] text-slate-400 text-right leading-relaxed">
+                        Le script de nettoyage parcourt l'AD pour identifier les comptes arrivés à expiration. Pour chaque compte expiré, le script effectue les actions suivantes :
                     </p>
                     <ul class="text-[13px] text-slate-400 space-y-3">
                         <li class="flex items-start gap-3 justify-end">
-                            Désactivation immédiate du compte pour couper tout accès au SI. <i class="fas fa-user-lock text-cyan-500 mt-1"></i>
+                            Désactivation du compte utilisateur. <i class="fas fa-user-lock text-cyan-500 mt-1"></i>
                         </li>
                         <li class="flex items-start gap-3 justify-end">
-                            Déplacement vers une <strong>OU spécifique (Archives)</strong> triée par année/mois. <i class="fas fa-folder-open text-cyan-500 mt-1"></i>
+                            Déplacement vers l'Unité d'Organisation <strong>"Archives"</strong>. <i class="fas fa-folder-open text-cyan-500 mt-1"></i>
                         </li>
                         <li class="flex items-start gap-3 justify-end">
-                            Mise à jour de la description AD indiquant la raison et la date de clôture. <i class="fas fa-edit text-cyan-500 mt-1"></i>
+                            Ajout d'une description horodatée sur l'objet AD. <i class="fas fa-edit text-cyan-500 mt-1"></i>
                         </li>
                     </ul>
                 </div>
@@ -172,21 +164,18 @@
             </h2>
             <div class="grid grid-cols-1 md:grid-cols-3 gap-6 text-center">
                 <div class="p-4">
-                    <div class="text-3xl font-bold text-white mb-1">0%</div>
-                    <div class="text-[10px] text-cyan-500 uppercase font-bold">Erreur de saisie</div>
+                    <div class="text-3xl font-bold text-white mb-1">100%</div>
+                    <div class="text-[10px] text-cyan-500 uppercase font-bold">Données fiabilisées</div>
                 </div>
                 <div class="p-4 border-x border-white/5">
-                    <div class="text-3xl font-bold text-white mb-1">-90%</div>
-                    <div class="text-[10px] text-cyan-500 uppercase font-bold">Temps de création</div>
+                    <div class="text-3xl font-bold text-white mb-1">Gain</div>
+                    <div class="text-[10px] text-cyan-500 uppercase font-bold">Productivité accrue</div>
                 </div>
                 <div class="p-4">
-                    <div class="text-3xl font-bold text-white mb-1">100%</div>
-                    <div class="text-[10px] text-cyan-500 uppercase font-bold">Accounts sécurisés</div>
+                    <div class="text-3xl font-bold text-white mb-1">Auto</div>
+                    <div class="text-[10px] text-cyan-500 uppercase font-bold">Processus Offboarding</div>
                 </div>
             </div>
-            <p class="text-slate-400 text-sm mt-8 text-center italic">
-                "Ce projet a permis de stabiliser la base utilisateur du GHAT et de libérer un temps précieux pour les administrateurs systèmes lors des vagues d'arrivées de stagiaires."
-            </p>
         </section>
 
     </main>
