@@ -37,7 +37,7 @@
         }
 
         .project-card { background: rgba(15, 23, 42, 0.6); border: 1px solid rgba(255, 255, 255, 0.1); padding: 25px; border-radius: 12px; margin-bottom: 50px; scroll-margin-top: 100px; }
-        pre { background: rgba(0, 0, 0, 0.3); padding: 15px; border-radius: 8px; font-size: 0.75rem; color: #00f2ff; border: 1px dashed rgba(0, 242, 255, 0.3); }
+        pre { background: rgba(0, 0, 0, 0.3); padding: 15px; border-radius: 8px; font-size: 0.75rem; color: #00f2ff; border: 1px dashed rgba(0, 242, 255, 0.3); overflow-x: auto; }
         .tech-badge { background: rgba(0, 242, 255, 0.1); color: #00f2ff; padding: 2px 8px; border-radius: 4px; font-size: 0.65rem; border: 1px solid rgba(0, 242, 255, 0.3); }
     </style>
 </head>
@@ -76,7 +76,7 @@
                 </details>
                 <details open class="sub-menu">
                     <summary>Semestre 2</summary>
-                    <a href="sae21-24.html" class="project-link">SAE 2.1 & 2.4 - Pépinière</a>
+                    <a onclick="goToProject('s2-projets', 'sae21')" class="project-link">SAE 2.1 & 2.4 - Pépinière</a>
                     <a onclick="goToProject('s2-projets', 'sae22')" class="project-link">SAE 2.2 - Mesures Signaux</a>
                     <a onclick="goToProject('s2-projets', 'sae23')" class="project-link">SAE 2.3 - Portfolio Dynamique</a>
                 </details>
@@ -88,14 +88,8 @@
                     <summary>Semestre 3</summary>
                     <a onclick="goToProject('s3-projets', 'sae301')" class="project-link">SAE 3.01 - Transmission Radio</a>
                     <a onclick="goToProject('s3-projets', 'sae302')" class="project-link">SAE 3.02 - Apps Communicantes</a>
-                    <a onclick="goToProject('s3-projets', 'sae303')" class="project-link">SAE 3.03 - Pépinière Multi-sites</a>
                 </details>
                 <div class="p-4 text-[10px] text-slate-500 uppercase italic">Accès restreint - Semestre 4</div>
-            </details>
-
-            <details>
-                <summary>BUT RT - ANNEE 3 <i class="fas fa-caret-down ml-2 opacity-50"></i></summary>
-                <div class="p-4 text-[10px] text-slate-500 uppercase italic">Accès restreint - Semestres 5 & 6</div>
             </details>
         </aside>
 
@@ -106,7 +100,7 @@
                     <h1 class="text-4xl font-bold font-['Orbitron'] mb-6 neon-shadow uppercase">Cursus Académique</h1>
                     <div class="p-6 bg-cyan-500/5 border-l-4 border-cyan-400">
                         <p class="text-slate-300 text-sm leading-relaxed">
-                            Retrouvez ici l'ensemble de mes travaux réalisés en Bachelor R&T. Chaque projet (SAE) valide un bloc de compétences spécifique, allant de l'infrastructure réseau à la sécurité informatique, en passant par le développement d'outils professionnels.
+                            Retrouvez ici l'ensemble de mes travaux réalisés en Bachelor R&T. Chaque projet (SAE) valide un bloc de compétences spécifique, allant de l'infrastructure réseau à la sécurité informatique[cite: 17, 21, 22].
                         </p>
                     </div>
                 </section>
@@ -119,7 +113,6 @@
                         <p class="text-slate-300 text-sm mb-6 leading-relaxed">
                             Dans le rôle d'un RSSI, j'ai élaboré une stratégie de sensibilisation pour protéger les collaborateurs contre les cybermenaces liées à l'erreur humaine.
                         </p>
-                        <iframe src="static/image/Mooc-Duval.pdf" class="w-full h-[450px] border border-white/10 rounded-lg"></iframe>
                     </article>
 
                     <article id="sae12" class="project-card">
@@ -127,7 +120,6 @@
                         <p class="text-slate-300 text-sm mb-6 leading-relaxed">
                             Ce projet visait à concevoir et déployer une infrastructure réseau complète, de la topologie logique sous <strong>Draw.io</strong> à la configuration réelle d'équipements Cisco.
                         </p>
-                        <iframe src="static/image/Rapport_SAE12.pdf" class="w-full h-[450px] border border-white/10 rounded-lg"></iframe>
                     </article>
 
                     <article id="sae13" class="project-card">
@@ -135,10 +127,6 @@
                         <p class="text-slate-300 text-sm mb-6 leading-relaxed">
                             Etude des caractéristiques physiques des supports de transmission, comme l'atténuation et le retard de propagation des signaux.
                         </p>
-                        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-                            <iframe src="static/image/TP1-SAE-NP.pdf" class="w-full h-[350px] border border-white/10 rounded-lg"></iframe>
-                            <iframe src="static/image/TP3-NP.pdf" class="w-full h-[350px] border border-white/10 rounded-lg"></iframe>
-                        </div>
                     </article>
 
                     <article id="sae14" class="project-card">
@@ -164,11 +152,39 @@
                     <article id="sae21" class="project-card">
                         <h3 class="text-2xl font-bold text-white mb-4 italic">SAE 2.1 & 2.4 : Projet Pépinière (Creil-Society)</h3>
                         <p class="text-slate-300 text-sm mb-6 leading-relaxed">
-                            Déploiement de l'intégralité du système d'information d'une entreprise (VLAN, Routage, Téléphonie IP, Docker).
+                            Déploiement complet d'un Système d'Information pour une entreprise fictive. Ce projet intègre une infrastructure réseau sécurisée, des services web haute disponibilité et de la communication unifiée[cite: 17, 18, 22].
                         </p>
-                        <div class="flex gap-4">
-                            <a href="sae21-24.html" class="px-6 py-2 bg-cyan-500 hover:bg-cyan-600 text-white text-[10px] font-bold rounded transition-all">
-                                <i class="fas fa-eye mr-2"></i> VOIR LA PRÉSENTATION DÉTAILLÉE
+                        
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-6">
+                            <div class="space-y-2">
+                                <h4 class="text-cyan-400 font-bold text-[10px] uppercase">Services Web & BDD</h4>
+                                <p class="text-[10px] text-slate-400">Architecture Docker-Compose incluant Flask, MySQL (Primaire/Replica) et Nginx pour la sécurité SSL/TLS[cite: 17, 21].</p>
+                                <div class="flex flex-wrap gap-2">
+                                    <span class="tech-badge">Docker</span> <span class="tech-badge">Flask</span> <span class="tech-badge">MySQL</span> <span class="tech-badge">Nginx</span>
+                                </div>
+                            </div>
+                            <div class="space-y-2">
+                                <h4 class="text-cyan-400 font-bold text-[10px] uppercase">Réseau & Sécurité</h4>
+                                <p class="text-[10px] text-slate-400">Mise en œuvre d'un portail captif PfSense avec authentification LDAP sur Windows Server et routage inter-VLAN.</p>
+                                <div class="flex flex-wrap gap-2">
+                                    <span class="tech-badge">PfSense</span> <span class="tech-badge">LDAP</span> <span class="tech-badge">Active Directory</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="space-y-2 mb-6">
+                            <h4 class="text-cyan-400 font-bold text-[10px] uppercase">Service Vidéo (Streaming)</h4>
+                            <p class="text-[10px] text-slate-400">Configuration d'un flux vidéo UDP via <strong>FFmpeg</strong> pour la diffusion sur le réseau interne.</p>
+                            <pre>ffmpeg -stream_loop -1 -i CatHuh.mp4 -f mpegts udp://172.31.20.156:5000</pre>
+                        </div>
+
+                        <div class="p-6 bg-cyan-500/10 border border-cyan-500/30 rounded-lg flex justify-between items-center">
+                            <div>
+                                <h4 class="text-cyan-400 font-bold uppercase text-xs">Rapports & Configuration</h4>
+                                <p class="text-[10px] text-slate-400">Accédez au dossier complet incluant les fichiers de configuration et les comptes-rendus[cite: 17, 18, 22].</p>
+                            </div>
+                            <a href="https://drive.google.com/drive/folders/1_W1aRgNGCUdDX7XzbECTuEN2ReQ5UJeP?usp=sharing" target="_blank" class="px-6 py-2 bg-cyan-500 text-white text-[10px] font-bold rounded hover:bg-cyan-600 transition-all">
+                                <i class="fab fa-google-drive mr-2"></i> VOIR SUR DRIVE
                             </a>
                         </div>
                     </article>
@@ -178,15 +194,6 @@
                         <p class="text-slate-300 text-sm mb-6 leading-relaxed">
                             Validation de conformité des équipements via métrologie (spectre, puissance, gain).
                         </p>
-                        <div class="p-6 bg-cyan-500/10 border border-cyan-500/30 rounded-lg flex justify-between items-center">
-                            <div>
-                                <h4 class="text-cyan-400 font-bold uppercase text-xs">Livrable de Présentation</h4>
-                                <p class="text-[10px] text-slate-400">Diaporama technique et analyse de mesures.</p>
-                            </div>
-                            <a href="https://drive.google.com/drive/folders/1x7dzhzyyS2gLV5n0zeuRtVRtZNe9wNWV?usp=sharing" target="_blank" class="px-6 py-2 bg-transparent border border-cyan-500 text-cyan-400 hover:bg-cyan-500 hover:text-white text-[10px] font-bold rounded transition-all">
-                                <i class="fas fa-external-link-alt mr-2"></i> OUVRIR LE DOSSIER DRIVE
-                            </a>
-                        </div>
                     </article>
 
                     <article id="sae23" class="project-card">
@@ -194,15 +201,6 @@
                         <p class="text-slate-300 text-sm mb-6 leading-relaxed">
                             Transformation du portfolio en application web dynamique avec Flask et Docker.
                         </p>
-                        <div class="p-6 bg-cyan-500/10 border border-cyan-500/30 rounded-lg flex justify-between items-center">
-                            <div>
-                                <h4 class="text-cyan-400 font-bold uppercase text-xs">Spécifications du Projet</h4>
-                                <p class="text-[10px] text-slate-400">Architecture Docker, Templates Jinja2 et gestion de base de données.</p>
-                            </div>
-                            <a href="https://drive.google.com/drive/folders/1fRRUFnylDUvc75_NhG9-F7Rsn6NTHjM8?usp=sharing" target="_blank" class="px-6 py-2 bg-cyan-500 text-white text-[10px] font-bold rounded hover:bg-cyan-600 transition-all">
-                                <i class="fas fa-file-code mr-2"></i> VOIR LE SUJET SAE 2.3
-                            </a>
-                        </div>
                     </article>
                 </div>
 
@@ -212,88 +210,21 @@
                     <article id="sae301" class="project-card">
                         <h3 class="text-2xl font-bold text-white mb-4 italic">SAE 3.01 : Mise en œuvre d'un système de transmission</h3>
                         <p class="text-slate-300 text-sm mb-6 leading-relaxed">
-                            Projet de transmission sans fil avec <strong>ADALM-Pluto</strong> et <strong>GNU Radio</strong>. [cite_start]Analyse de spectres GSM/LTE et transmission vidéo en UDP. [cite: 1, 36, 51]
+                            Projet de transmission sans fil avec <strong>ADALM-Pluto</strong> et <strong>GNU Radio</strong>. Analyse de spectres GSM/LTE et transmission vidéo en UDP.
                         </p>
-                        <iframe src="static/image/Rapport final-SAE301-Duval-Nicolas.pdf" class="w-full h-[450px] border border-white/10 rounded-lg"></iframe>
                     </article>
 
                     <article id="sae302" class="project-card">
                         <h3 class="text-2xl font-bold text-white mb-4 italic">SAE 3.02 : Développer des applications communicantes</h3>
                         <p class="text-slate-300 text-sm mb-6 leading-relaxed">
-                            Développement d'une application Client/Serveur en <strong>Python 3</strong> permettant la recherche multi-formats (TXT, HTML, PDF, Excel) via des mots-clés ou expressions régulières (Regex).
+                            Développement d'une application Client/Serveur en Python 3 pour la recherche multi-formats (TXT, HTML, PDF, Excel) via mots-clés ou Regex.
                         </p>
-                        
-                        <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
-                            <div class="space-y-4">
-                                <h4 class="text-cyan-400 font-bold text-xs uppercase">Architecture du projet</h4>
-                                <pre>
-/ton_projet/
-├── serveur/
-│   ├── app.py (Flask)
-│   ├── IHM.py
-│   ├── requirements.txt
-│   └── documents/ (PDF, TXT, XLSX, HTML)
-└── client/
-    └── clientIHM.py (Tkinter)
-                                </pre>
-                            </div>
-                            <div>
-                                <h4 class="text-cyan-400 font-bold text-xs uppercase">Technologies Clés</h4>
-                                <ul class="text-[10px] space-y-2 mt-2">
-                                    <li><i class="fas fa-check text-cyan-500 mr-2"></i> <strong>Backend :</strong> Flask, Pandas, BeautifulSoup</li>
-                                    <li><i class="fas fa-check text-cyan-500 mr-2"></i> <strong>Frontend :</strong> Interface Graphique Tkinter</li>
-                                    <li><i class="fas fa-check text-cyan-500 mr-2"></i> <strong>Parsing :</strong> pdfplumber & Regex engine</li>
-                                    <li><i class="fas fa-check text-cyan-500 mr-2"></i> <strong>Standards :</strong> Respect de la norme PEP 8</li>
-                                </ul>
-                            </div>
-                        </div>
-
-                        <div class="mb-6">
-                            <h4 class="text-cyan-400 font-bold text-xs uppercase mb-2">Aperçu de l'Interface Client</h4>
-                            <img src="static/image/sae32.png" alt="Interface SAE 3.02" class="w-full border border-white/10 rounded-lg shadow-lg">
-                        </div>
-
                         <div class="p-6 bg-cyan-500/10 border border-cyan-500/30 rounded-lg flex justify-between items-center">
                             <div>
-                                <h4 class="text-cyan-400 font-bold uppercase text-xs">Code Source & Documentation</h4>
-                                <p class="text-[10px] text-slate-400">Accès au GitLab de l'université / Drive (Python & Readme English).</p>
+                                <h4 class="text-cyan-400 font-bold uppercase text-xs">Code Source Python</h4>
+                                <p class="text-[10px] text-slate-400">Architecture Flask/Tkinter et moteur de recherche Regex.</p>
                             </div>
                             <a href="https://drive.google.com/drive/folders/1UHTykaae_LM6SGDBo1YG5gK9dVXAuSzh?usp=sharing" target="_blank" class="px-6 py-2 bg-cyan-500 text-white text-[10px] font-bold rounded hover:bg-cyan-600 transition-all">
-                                <i class="fab fa-google-drive mr-2"></i> VOIR LE PROJET COMPLET
-                            </a>
-                        </div>
-                    </article>
-
-                    <article id="sae303" class="project-card">
-                        <h3 class="text-2xl font-bold text-white mb-4 italic">SAE 3.03 : Pépinière Multi-sites</h3>
-                        <p class="text-slate-300 text-sm mb-6 leading-relaxed">
-                            [cite_start]Migration et redéploiement complet de l'informatique d'une entreprise vers une succursale distante[cite: 3, 5]. [cite_start]Ce projet inclut la sécurisation des échanges inter-sites et la mise en place de services distribués[cite: 6, 22].
-                        </p>
-                        
-                        <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-6">
-                            <div class="space-y-2">
-                                <h4 class="text-cyan-400 font-bold text-[10px] uppercase">Réseau & Interconnexion</h4>
-                                [cite_start]<p class="text-[10px] text-slate-400">Routage inter-sites avec Cisco 800, redondance matérielle au siège et priorisation du trafic vidéo[cite: 14, 17, 51].</p>
-                                <div class="flex flex-wrap gap-2">
-                                    <span class="tech-badge">Cisco 800</span> <span class="tech-badge">VLAN 800</span> <span class="tech-badge">Redondance</span> <span class="tech-badge">QoS Video</span>
-                                </div>
-                            </div>
-                            <div class="space-y-2">
-                                <h4 class="text-cyan-400 font-bold text-[10px] uppercase">Services & Sécurité</h4>
-                                [cite_start]<p class="text-[10px] text-slate-400">Active Directory, DNS (maître/réplique), filtrage Proxy et centralisation des logs via Syslog[cite: 9, 10, 12, 23].</p>
-                                <div class="flex flex-wrap gap-2">
-                                    <span class="tech-badge">Active Directory</span> <span class="tech-badge">DNS Replica</span> <span class="tech-badge">Proxy</span> <span class="tech-badge">Syslog</span>
-                                </div>
-                            </div>
-                        </div>
-
-                        
-                        <div class="p-6 bg-cyan-500/10 border border-cyan-500/30 rounded-lg flex justify-between items-center">
-                            <div>
-                                <h4 class="text-cyan-400 font-bold uppercase text-xs">Dossier Technique SAE 3.03</h4>
-                                [cite_start]<p class="text-[10px] text-slate-400">Schémas réseau, plans d'adressage et rapports de mise en production[cite: 38, 39, 45].</p>
-                            </div>
-                            <a href="https://drive.google.com/drive/folders/1_W1aRgNGCUdDX7XzbECTuEN2ReQ5UJeP?usp=sharing" target="_blank" class="px-6 py-2 bg-cyan-500 text-white text-[10px] font-bold rounded hover:bg-cyan-600 transition-all">
                                 <i class="fab fa-google-drive mr-2"></i> VOIR LE PROJET
                             </a>
                         </div>
