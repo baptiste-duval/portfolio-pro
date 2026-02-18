@@ -197,7 +197,8 @@
                 </details>
                 <details open class="sub-menu">
                     <summary>Semestre 4</summary>
-                    <a onclick="goToProject('s4-projets', 'sae401')" class="project-link">SAE 4.CYBER.01 - Sécuriser un SI</a>
+                    <a onclick="goToProject('s4-projets', 'sae.cyber.401')" class="project-link">SAE 4.CYBER.01 - Sécuriser un SI</a>
+                    <a onclick="goToProject('s4-projets', 'sae401')" class="project-link">SAE 4.01 - Stage</a>
                 </details>
             </details>
 
@@ -469,7 +470,7 @@
                         Semestre 4 - Expertise Réseau & Sécurité
                     </h2>
 
-                    <article id="sae401" class="mb-12 group">
+                    <article id="sae.cyber.401" class="mb-12 group">
                         <div class="flex items-center gap-4 mb-8">
                             <div class="h-px flex-1 bg-gradient-to-r from-transparent via-cyan-500/50 to-transparent"></div>
                             <div class="text-center">
@@ -544,6 +545,61 @@
                                     </div>
                                 </div>
                             </div>
+                        </div>
+                    </article>
+
+                    <article id="sae401" class="project-card">
+                        <div class="flex flex-col md:flex-row justify-between items-start mb-6 gap-4">
+                            <div>
+                                <h3 class="text-2xl font-bold text-white italic">SAE 4.01 : Stage - Administrateur Systèmes et Réseaux</h3>
+                                <p class="text-cyan-400 font-bold text-xs uppercase tracking-widest mt-1">Centre Hospitalier d'Arras (GHAT)</p>
+                            </div>
+                            <span class="tech-badge">AVRIL - MAI 2025</span>
+                        </div>
+
+                        <p class="text-slate-300 text-sm mb-6 leading-relaxed">
+                            Ce stage de 8 semaines au sein du Pôle Réseau du Groupe Hospitalier Artois-Ternois m'a permis d'appréhender la gestion d'un Système d'Information critique. Ma mission principale était d'assurer la continuité des services numériques pour le personnel soignant tout en menant des projets d'automatisation et de supervision.
+                        </p>
+
+                        <div class="space-y-6">
+                            <div class="bg-black/30 p-4 rounded-lg border border-white/5">
+                                <h4 class="text-cyan-400 font-bold text-xs uppercase mb-3"><i class="fas fa-code mr-2"></i> Projet 1 : Automatisation Active Directory (PowerShell)</h4>
+                                <p class="text-[11px] text-slate-400 leading-relaxed">
+                                    Développement de scripts pour automatiser la création et la suppression massive d'utilisateurs à partir de fichiers CSV. Le script gère l'attribution des droits, les unités d'organisation (OU) et génère des logs de vérification (Regex) pour éviter toute erreur de matricule.
+                                </p>
+                            </div>
+
+                            <div class="bg-black/30 p-4 rounded-lg border border-white/5">
+                                <h4 class="text-cyan-400 font-bold text-xs uppercase mb-3"><i class="fas fa-eye mr-2"></i> Projet 2 : Supervision des Logs avec Graylog</h4>
+                                <p class="text-[11px] text-slate-400 leading-relaxed">
+                                    Mise en place d'une solution de centralisation de logs sur Debian 12. Installation de Winlogbeat sur les serveurs Windows pour remonter les événements critiques vers un serveur Graylog, permettant une détection proactive d'anomalies (ex: tentatives de connexion échouées).
+                                </p>
+                            </div>
+
+                            <div class="bg-black/30 p-4 rounded-lg border border-white/5">
+                                <h4 class="text-cyan-400 font-bold text-xs uppercase mb-3"><i class="fas fa-database mr-2"></i> Projet 3 : Gestionnaire de Logs CDR</h4>
+                                <p class="text-[11px] text-slate-400 leading-relaxed">
+                                    Conception d'un outil de traitement des données d'appels téléphoniques (Call Detail Records). Développement d'un backend en Python/MySQL pour stocker et trier les informations d'appels du groupe hospitalier à des fins statistiques.
+                                </p>
+                            </div>
+                        </div>
+
+                        <div class="mt-8 flex flex-wrap gap-4">
+                            <button onclick="openModal('static/image/Rapport_Stage_Duval_Baptiste.pdf')" class="px-6 py-2 bg-cyan-500 text-white text-[10px] font-bold rounded hover:bg-cyan-600 transition-all uppercase tracking-widest">
+                                <i class="fas fa-file-pdf mr-2"></i> Consulter le Rapport de Stage
+                            </button>
+                        </div>
+                    </article>
+
+                    <article id="sae4cyber01" class="project-card">
+                        <h3 class="text-2xl font-bold text-white mb-4 italic">SAE 4.CYBER.01 : Sécuriser un Système d’Information</h3>
+                        <p class="text-slate-300 text-sm mb-6 leading-relaxed">
+                            Conception d'une infrastructure multi-sites sécurisée. Ce projet intègre la mise en place de tunnels VPN IPSEC, de firewalls Cisco ASA, ainsi que le durcissement (hardening) des services DNSSEC et HTTPS selon les recommandations de l'ANSSI.
+                        </p>
+                        <div class="flex gap-4">
+                            <button onclick="openModal('static/image/Write Up.pdf')" class="px-6 py-2 bg-transparent border border-cyan-500 text-cyan-400 hover:bg-cyan-500 hover:text-white text-[10px] font-bold rounded transition-all uppercase">
+                                <i class="fas fa-shield-alt mr-2"></i> Voir le Write-Up
+                            </button>
                         </div>
                     </article>
                 </div>
