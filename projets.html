@@ -462,6 +462,18 @@
                     </div>
                 </div>
         </main>
+        <div id="pdfModal" class="fixed inset-0 z-[999] hidden bg-black/90 flex items-center justify-center p-4">
+    <div class="relative w-full max-w-6xl h-[95vh] bg-slate-900 rounded-2xl border border-cyan-500/30 flex flex-col shadow-2xl">
+        <div class="p-4 border-b border-white/10 flex justify-between items-center bg-slate-900 rounded-t-2xl">
+            <div class="flex items-center gap-3">
+                <i class="fas fa-file-pdf text-cyan-400"></i>
+                <span class="text-cyan-400 font-bold text-xs uppercase tracking-widest italic">Visualiseur de Document</span>
+            </div>
+            <button onclick="closeModal()" class="text-slate-400 hover:text-white text-3xl p-2 transition-colors cursor-pointer">&times;</button>
+        </div>
+        <iframe id="pdfFrame" src="" class="flex-1 w-full rounded-b-2xl border-none bg-white"></iframe>
+    </div>
+</div>
     </div>
 
     <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
