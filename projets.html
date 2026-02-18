@@ -617,83 +617,86 @@
                     <h2 class="text-xl font-['Orbitron'] mb-10 text-cyan-400 uppercase tracking-widest border-b border-cyan-500/20 pb-2">Semestre 5 - Fondamentaux</h2
 
                 <article id="sae501" class="project-card">
-                    <h3 class="text-2xl font-bold text-white mb-4 italic">SAE 5.01 : Infrastructure de TP basée sur des conteneurs</h3>
-                    <p class="text-slate-300 text-sm mb-6 leading-relaxed">
-                        Ce projet d'envergure consistait à concevoir et déployer une plateforme de <strong>salles de TP virtuelles</strong> hautement disponible. L'objectif était de fournir aux étudiants des environnements de travail complets (OS graphiques, outils de dev), isolés et accessibles via un simple navigateur, tout en optimisant les ressources serveur par rapport à de la virtualisation classique.
-                    </p>
-                
-                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
-                        <div class="space-y-4">
-                            <h4 class="text-cyan-400 font-bold text-xs uppercase">Architecture & Orchestration</h4>
-                            <p class="text-[10px] text-slate-400 leading-relaxed">
-                                Mise en place d'un cluster <strong>Docker Swarm</strong> pour la gestion du cycle de vie des conteneurs. Utilisation de <strong>noVNC</strong> et d'un serveur <strong>X11vnc</strong> pour déporter l'affichage graphique des conteneurs Ubuntu, Kali et Windows vers le Web. L'infrastructure garantit l'isolation réseau et la persistance des données par volumes.
-                            </p>
-                            <div class="flex flex-wrap gap-2">
-                                <span class="tech-badge">DOCKER SWARM</span>
-                                <span class="tech-badge">KUBERNETES</span>
-                                <span class="tech-badge">NOVNC / WEBSOCKIFY</span>
-                                <span class="tech-badge">REVERSE PROXY</span>
-                                <span class="tech-badge">DEBIAN 12</span>
-                            </div>
-                        </div>
-                        <div class="space-y-4">
-                            <h4 class="text-cyan-400 font-bold text-xs uppercase">Compétences DevOps & Systèmes</h4>
-                            <ul class="text-[10px] space-y-2">
-                                <li><i class="fas fa-box text-cyan-500 mr-2"></i> Industrialisation via Dockerfiles multi-stages</li>
-                                <li><i class="fas fa-network-wired text-cyan-500 mr-2"></i> Segmentation réseau via Docker Overlay Networks</li>
-                                <li><i class="fas fa-code-branch text-cyan-500 mr-2"></i> Intégration continue et gestion de projet sous GitLab</li>
-                                <li><i class="fas fa-user-shield text-cyan-500 mr-2"></i> Gestion des accès et limitation des ressources (Quotas CPU/RAM)</li>
-                            </ul>
-                        </div>
-                    </div>
-                
-                    <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mb-8">
-                        <div class="p-4 bg-white/5 border border-white/10 rounded-lg flex flex-col justify-between">
-                            <div>
-                                <h5 class="text-[10px] font-bold text-cyan-400 mb-2 uppercase text-center">Conteneurisation Graphique</h5>
-                                <p class="text-[9px] text-slate-500 mb-3">Création d'images personnalisées incluant un environnement de bureau léger (XFCE) et les outils nécessaires au TP, optimisées pour le streaming Web.</p>
-                            </div>
-                            <div class="flex gap-2">
-                                <span class="text-[8px] bg-cyan-500/20 text-cyan-300 px-2 py-1 rounded">DOCKERFILE</span>
-                                <span class="text-[8px] bg-cyan-500/20 text-cyan-300 px-2 py-1 rounded">X11VNC</span>
-                            </div>
-                        </div>
-                
-                        <div class="p-4 bg-white/5 border border-white/10 rounded-lg flex flex-col justify-between">
-                            <div>
-                                <h5 class="text-[10px] font-bold text-cyan-400 mb-2 uppercase text-center">Interface de Gestion</h5>
-                                <p class="text-[9px] text-slate-500 mb-3">Développement d'un portail web permettant aux utilisateurs de démarrer, arrêter et accéder à leurs instances en un clic via une API backend.</p>
-                            </div>
-                            <div class="flex gap-2">
-                                <span class="text-[8px] bg-cyan-500/20 text-cyan-300 px-2 py-1 rounded">REACT.JS</span>
-                                <span class="text-[8px] bg-cyan-500/20 text-cyan-300 px-2 py-1 rounded">API REST</span>
-                            </div>
-                        </div>
-                
-                        <div class="p-4 bg-white/5 border border-white/10 rounded-lg flex flex-col justify-between">
-                            <div>
-                                <h5 class="text-[10px] font-bold text-cyan-400 mb-2 uppercase text-center">Monitoring & Sécurité</h5>
-                                <p class="text-[9px] text-slate-500 mb-3">Surveillance des conteneurs en temps réel et isolation stricte pour éviter les sorties de conteneurs ou les attaques latérales entre étudiants.</p>
-                            </div>
-                            <div class="flex gap-2">
-                                <span class="text-[8px] bg-cyan-500/20 text-cyan-300 px-2 py-1 rounded">LOGS</span>
-                                <span class="text-[8px] bg-cyan-500/20 text-cyan-300 px-2 py-1 rounded">ISOLATION</span>
-                            </div>
-                        </div>
-                    </div>
-                
-                    <div class="p-6 bg-cyan-500/10 border border-cyan-500/30 rounded-lg flex flex-col md:flex-row justify-between items-center gap-4">
-                        <div>
-                            <h4 class="text-cyan-400 font-bold">Dossier Technique SAE 5.01</h4>
-                            <p class="text-xs text-slate-400">Accédez au rapport complet, aux schémas d'architecture et aux configurations Docker Swarm.</p>
-                        </div>
-                        <div class="flex gap-3">
-                            <button onclick="openModal('static/pdf/Rapport-SAE501-Czurka-Negrila-Bauchart-Duval.pdf')" class="px-4 py-2 bg-cyan-500 hover:bg-cyan-600 text-white text-xs font-bold rounded transition">
-                                <i class="fas fa-file-pdf mr-2"></i> VOIR LE RAPPORT
-                            </button>
-                        </div>
-                    </div>
-                </article>
+    <h3 class="text-2xl font-bold text-white mb-4 italic">SAE 5.01 : Infrastructure de TP basée sur des conteneurs</h3>
+    <p class="text-slate-300 text-sm mb-6 leading-relaxed">
+        Ce projet d'envergure consistait à concevoir et déployer une plateforme de <strong>salles de TP virtuelles</strong> hautement disponible. L'objectif était de fournir aux étudiants des environnements de travail complets (Ubuntu, Kali, Windows), isolés et accessibles via un simple navigateur, tout en optimisant radicalement les ressources serveur par rapport à de la virtualisation classique (VM).
+    </p>
+
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
+        <div class="space-y-4">
+            <h4 class="text-cyan-400 font-bold text-xs uppercase">Architecture & Orchestration</h4>
+            <p class="text-[10px] text-slate-400 leading-relaxed">
+                Mise en place d'un cluster <strong>Docker Swarm</strong> pour la gestion du cycle de vie des conteneurs. Utilisation de <strong>noVNC</strong> et d'un serveur <strong>X11vnc</strong> pour déporter l'affichage graphique des OS conteneurisés vers le Web via WebSockets. L'infrastructure assure une haute disponibilité et une scalabilité horizontale des environnements de TP.
+            </p>
+            <div class="flex flex-wrap gap-2">
+                <span class="tech-badge">DOCKER SWARM</span>
+                <span class="tech-badge">KUBERNETES</span>
+                <span class="tech-badge">NOVNC / WEBSOCKIFY</span>
+                <span class="tech-badge">REVERSE PROXY</span>
+                <span class="tech-badge">ALPINE / UBUNTU</span>
+            </div>
+        </div>
+        <div class="space-y-4">
+            <h4 class="text-cyan-400 font-bold text-xs uppercase">Expertise DevOps & Systèmes</h4>
+            <ul class="text-[10px] space-y-2">
+                <li><i class="fas fa-box text-cyan-500 mr-2"></i> Industrialisation via Dockerfiles optimisés (multi-stage)</li>
+                <li><i class="fas fa-network-wired text-cyan-500 mr-2"></i> Segmentation réseau via Docker Overlay Networks</li>
+                <li><i class="fas fa-server text-cyan-500 mr-2"></i> Gestion des ressources (Quotas CPU, RAM et I/O)</li>
+                <li><i class="fas fa-terminal text-cyan-500 mr-2"></i> Automatisation des déploiements via Scripts Bash/Python</li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mb-8">
+        <div class="p-4 bg-white/5 border border-white/10 rounded-lg flex flex-col justify-between">
+            <div>
+                <h5 class="text-[10px] font-bold text-cyan-400 mb-2 uppercase text-center">Images "Laboratoire"</h5>
+                <p class="text-[9px] text-slate-500 mb-3">Conception d'images Docker sur-mesure intégrant des environnements de bureau légers (XFCE) et les outils de TP (VS Code, MySQL, outils de Pentest).</p>
+            </div>
+            <div class="flex gap-2">
+                <span class="text-[8px] bg-cyan-500/20 text-cyan-300 px-2 py-1 rounded">DOCKERFILE</span>
+                <span class="text-[8px] bg-cyan-500/20 text-cyan-300 px-2 py-1 rounded">X11VNC</span>
+            </div>
+        </div>
+
+        <div class="p-4 bg-white/5 border border-white/10 rounded-lg flex flex-col justify-between">
+            <div>
+                <h5 class="text-[10px] font-bold text-cyan-400 mb-2 uppercase text-center">Accès Clientless</h5>
+                <p class="text-[9px] text-slate-500 mb-3">Développement du portail utilisateur permettant de piloter ses instances. Accès sécurisé aux machines via le protocole noVNC intégré au navigateur.</p>
+            </div>
+            <div class="flex gap-2">
+                <span class="text-[8px] bg-cyan-500/20 text-cyan-300 px-2 py-1 rounded">HTML5/JS</span>
+                <span class="text-[8px] bg-cyan-500/20 text-cyan-300 px-2 py-1 rounded">WEBSOCKETS</span>
+            </div>
+        </div>
+
+        <div class="p-4 bg-white/5 border border-white/10 rounded-lg flex flex-col justify-between">
+            <div>
+                <h5 class="text-[10px] font-bold text-cyan-400 mb-2 uppercase text-center">Sécurité & Isolation</h5>
+                <p class="text-[9px] text-slate-500 mb-3">Isolation stricte des conteneurs via les Namespaces Linux et mise en place de politiques réseau pour éviter les communications non autorisées.</p>
+            </div>
+            <div class="flex gap-2">
+                <span class="text-[8px] bg-cyan-500/20 text-cyan-300 px-2 py-1 rounded">C-GROUPS</span>
+                <span class="text-[8px] bg-cyan-500/20 text-cyan-300 px-2 py-1 rounded">ISOLEMENT</span>
+            </div>
+        </div>
+    </div>
+
+    <div class="p-6 bg-cyan-500/10 border border-cyan-500/30 rounded-lg flex flex-col md:flex-row justify-between items-center gap-4">
+        <div>
+            <h4 class="text-cyan-400 font-bold">Dossier Technique SAE 5.01</h4>
+            <p class="text-xs text-slate-400">Accédez au rapport complet, aux schémas d'architecture Swarm et aux scripts de configuration.</p>
+        </div>
+        <div class="flex gap-3">
+            <a href="sae501.html" class="px-4 py-2 bg-transparent border border-cyan-500 text-cyan-400 hover:bg-cyan-500 hover:text-white text-xs font-bold rounded transition">
+                <i class="fas fa-external-link-alt mr-2"></i> DÉTAILS TECHNIQUES
+            </a>
+            <button onclick="openModal('static/pdf/Rapport-SAE501-Czurka-Negrila-Bauchart-Duval.pdf')" class="px-4 py-2 bg-cyan-500 hover:bg-cyan-600 text-white text-xs font-bold rounded transition">
+                <i class="fas fa-file-pdf mr-2"></i> VOIR LE RAPPORT
+            </button>
+        </div>
+    </div>
+</article>
 
                 <article id="sae503" class="project-card">
     <h3 class="text-2xl font-bold text-white mb-4 italic">SAE 5.ROM.03 : Déployer et gérer les services ROM</h3>
@@ -767,7 +770,7 @@
             <p class="text-xs text-slate-400">Consultez le tutoriel détaillé, les captures Wireshark et le rapport de déploiement Asterisk.</p>
         </div>
         <div class="flex gap-3">
-            <button onclick="openModal('static/pdf/SAE503_Duval_Bauchart_Negrila.pdf')" class="px-4 py-2 bg-cyan-500 hover:bg-cyan-600 text-white text-xs font-bold rounded transition">
+            <button onclick="openModal('static/image/SAE503_Duval_Bauchart_Negrila.pdf')" class="px-4 py-2 bg-cyan-500 hover:bg-cyan-600 text-white text-xs font-bold rounded transition">
                 <i class="fas fa-file-pdf mr-2"></i> VOIR LE RAPPORT
             </button>
         </div>
