@@ -204,7 +204,8 @@
 
             <details>
                 <summary>BUT RT - ANNEE 3 <i class="fas fa-caret-down ml-2 opacity-50"></i></summary>
-                <div class="p-4 text-[10px] text-slate-500 uppercase italic">Accès restreint - Semestres 5 & 6</div>
+                <div class="p-4 text-[10px] text-slate-500 uppercase italic">Semestre 5</div>
+                <a onclick="goToProject('s5-projets', 'sae501')" class="project-link">SAE 5.01</a>
             </details>
         </aside>
 
@@ -609,6 +610,32 @@
                 </div>
 
             </div>
+
+            <div id="s5-projets" class="project-section">
+                    <h2 class="text-xl font-['Orbitron'] mb-10 text-cyan-400 uppercase tracking-widest border-b border-cyan-500/20 pb-2">Semestre 5 - Fondamentaux</h2
+
+                <article id="sae501" class="project-card">
+                                    <h3 class="text-2xl font-bold text-white mb-4 italic">SAE 5.01 : Infrastructure de TP basée sur des conteneurs</h3>
+                                    <p class="text-slate-300 text-sm mb-6 leading-relaxed">
+                                        Ce projet d'envergure consistait à concevoir une plateforme de <strong>salles de TP virtuelles</strong>. L'infrastructure repose sur l'orchestration de conteneurs <strong>Docker Swarm</strong>, permettant de déployer instantanément des environnements isolés (Ubuntu, Kali, Windows). L'innovation majeure réside dans l'accès aux interfaces graphiques directement via un navigateur web grâce à l'intégration de <strong>noVNC</strong> et <strong>X11vnc</strong>, éliminant ainsi le besoin de clients lourds pour les étudiants.
+                                    </p>
+                                    
+                                    <div class="p-6 bg-cyan-500/10 border border-cyan-500/30 rounded-lg flex flex-col md:flex-row justify-between items-center gap-4">
+                                        <div>
+                                            <h4 class="text-cyan-400 font-bold">Plateforme de TP & Documentation</h4>
+                                            <p class="text-xs text-slate-400">Découvrez l'architecture détaillée, les Dockerfiles et le rapport technique.</p>
+                                        </div>
+                                        <div class="flex gap-3">
+                                            <a href="sae501.html" class="px-4 py-2 bg-transparent border border-cyan-500 text-cyan-400 hover:bg-cyan-500 hover:text-white text-xs font-bold rounded transition">
+                                                <i class="fas fa-external-link-alt mr-2"></i> VOIR LE PROJET
+                                            </a>
+                                            <a href="https://drive.google.com/drive/folders/1UHTykaae_LM6SGDBo1YG5gK9dVXAuSzh?usp=sharing" target="_blank" class="px-4 py-2 bg-cyan-500 hover:bg-cyan-600 text-white text-xs font-bold rounded transition">
+                                                <i class="fab fa-google-drive mr-2"></i> DRIVE
+                                            </a>
+                                        </div>
+                                    </div>
+                                </article>
+                </div>
         </main>
 
         <div id="pdfModal" class="fixed inset-0 z-[999] hidden bg-black/90 flex items-center justify-center p-4">
