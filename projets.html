@@ -386,6 +386,27 @@
             }
         });
 
+        /* Assure-toi d'avoir ces fonctions tout en bas de ton fichier */
+function openModal(pdfPath) {
+    const modal = document.getElementById('pdfModal');
+    const frame = document.getElementById('pdfFrame');
+    if (modal && frame) {
+        frame.src = pdfPath;
+        modal.classList.remove('hidden');
+        document.body.style.overflow = 'hidden'; // Bloque le scroll
+    }
+}
+
+function closeModal() {
+    const modal = document.getElementById('pdfModal');
+    const frame = document.getElementById('pdfFrame');
+    if (modal && frame) {
+        frame.src = "";
+        modal.classList.add('hidden');
+        document.body.style.overflow = 'auto'; // Libère le scroll
+    }
+}
+
         function goToProject(sectionId, projectId) {
             document.getElementById('intro').style.display = 'none';
             const sections = document.querySelectorAll('.project-section');
