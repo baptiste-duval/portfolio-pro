@@ -197,7 +197,7 @@
                 </details>
                 <details open class="sub-menu">
                     <summary>Semestre 4</summary>
-                    <a onclick="goToProject('s4-projets', 'sae4.cyber.01')" class="project-link">SAE 4.CYBER.01 - Sécuriser un SI</a>
+                    <a onclick="goToProject('s4-projets', 'sae401')" class="project-link">SAE 4.CYBER.01 - Sécuriser un SI</a>
                 </details>
             </details>
 
@@ -464,12 +464,12 @@
                     </article>
                 </div>
 
-                <div id="s4-projets" class="project-section active">
+                <div id="s4-projets" class="project-section">
                     <h2 class="text-xl font-['Orbitron'] mb-10 text-cyan-400 uppercase tracking-widest border-b border-cyan-500/20 pb-2">
                         Semestre 4 - Expertise Réseau & Sécurité
                     </h2>
 
-                    <article id="sae4.cyber.01" class="mb-12 group">
+                    <article id="sae401" class="mb-12 group">
                         <div class="flex items-center gap-4 mb-8">
                             <div class="h-px flex-1 bg-gradient-to-r from-transparent via-cyan-500/50 to-transparent"></div>
                             <div class="text-center">
@@ -547,6 +547,7 @@
                         </div>
                     </article>
                 </div>
+
             </div>
         </main>
 
@@ -614,15 +615,22 @@
         }
 
         function goToProject(sectionId, projectId) {
+            // Masque l'intro
             document.getElementById('intro').style.display = 'none';
+
+            // Masque toutes les sections
             const sections = document.querySelectorAll('.project-section');
             sections.forEach(section => {
                 section.classList.remove('active');
             });
+
+            // Affiche la section cible
             const targetSection = document.getElementById(sectionId);
             if (targetSection) {
                 targetSection.classList.add('active');
             }
+
+            // Scroll vers le projet précis
             setTimeout(() => {
                 const targetProject = document.getElementById(projectId);
                 if (targetProject) {
