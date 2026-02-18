@@ -37,8 +37,6 @@
         }
 
         .project-card { background: rgba(15, 23, 42, 0.6); border: 1px solid rgba(255, 255, 255, 0.1); padding: 25px; border-radius: 12px; margin-bottom: 50px; scroll-margin-top: 100px; }
-        pre { background: rgba(0, 0, 0, 0.3); padding: 15px; border-radius: 8px; font-size: 0.75rem; color: #00f2ff; border: 1px dashed rgba(0, 242, 255, 0.3); overflow-x: auto; }
-        .tech-badge { background: rgba(0, 242, 255, 0.1); color: #00f2ff; padding: 2px 8px; border-radius: 4px; font-size: 0.65rem; border: 1px solid rgba(0, 242, 255, 0.3); }
     </style>
 </head>
 <body>
@@ -76,7 +74,7 @@
                 </details>
                 <details open class="sub-menu">
                     <summary>Semestre 2</summary>
-                    <a onclick="goToProject('s2-projets', 'sae21')" class="project-link">SAE 2.1 & 2.4 - Pépinière</a>
+                    <a href="sae21-24.html" class="project-link">SAE 2.1 & 2.4 - Pépinière</a>
                     <a onclick="goToProject('s2-projets', 'sae22')" class="project-link">SAE 2.2 - Mesures Signaux</a>
                     <a onclick="goToProject('s2-projets', 'sae23')" class="project-link">SAE 2.3 - Portfolio Dynamique</a>
                 </details>
@@ -87,9 +85,13 @@
                 <details open class="sub-menu">
                     <summary>Semestre 3</summary>
                     <a onclick="goToProject('s3-projets', 'sae301')" class="project-link">SAE 3.01 - Transmission Radio</a>
-                    <a onclick="goToProject('s3-projets', 'sae302')" class="project-link">SAE 3.02 - Apps Communicantes</a>
                 </details>
                 <div class="p-4 text-[10px] text-slate-500 uppercase italic">Accès restreint - Semestre 4</div>
+            </details>
+
+            <details>
+                <summary>BUT RT - ANNEE 3 <i class="fas fa-caret-down ml-2 opacity-50"></i></summary>
+                <div class="p-4 text-[10px] text-slate-500 uppercase italic">Accès restreint - Semestres 5 & 6</div>
             </details>
         </aside>
 
@@ -100,7 +102,7 @@
                     <h1 class="text-4xl font-bold font-['Orbitron'] mb-6 neon-shadow uppercase">Cursus Académique</h1>
                     <div class="p-6 bg-cyan-500/5 border-l-4 border-cyan-400">
                         <p class="text-slate-300 text-sm leading-relaxed">
-                            Retrouvez ici l'ensemble de mes travaux réalisés en Bachelor R&T. Chaque projet (SAE) valide un bloc de compétences spécifique, allant de l'infrastructure réseau à la sécurité informatique[cite: 17, 21, 22].
+                            Retrouvez ici l'ensemble de mes travaux réalisés en Bachelor R&T. Chaque projet (SAE) valide un bloc de compétences spécifique, allant de l'infrastructure réseau à la sécurité informatique, en passant par le développement d'outils professionnels.
                         </p>
                     </div>
                 </section>
@@ -111,28 +113,34 @@
                     <article id="sae11" class="project-card">
                         <h3 class="text-2xl font-bold text-white mb-4 italic">SAE 1.1 : Sensibilisation au risque numérique</h3>
                         <p class="text-slate-300 text-sm mb-6 leading-relaxed">
-                            Dans le rôle d'un RSSI, j'ai élaboré une stratégie de sensibilisation pour protéger les collaborateurs contre les cybermenaces liées à l'erreur humaine.
+                            Dans le rôle d'un RSSI, j'ai élaboré une stratégie de sensibilisation pour protéger les collaborateurs contre les cybermenaces liées à l'erreur humaine. Pour asseoir ce projet, j'ai suivi et validé le <strong>MOOC de l'ANSSI</strong> ainsi que le module "Introduction à la cybersécurité" de <strong>Cisco Netacad</strong>. Le rendu final consistait en un diaporama pédagogique présentant les bonnes pratiques indispensables. Ce travail a renforcé ma capacité à vulgariser des concepts de sécurité critiques pour tout type de personnel.
                         </p>
+                        <iframe src="static/image/Mooc-Duval.pdf" class="w-full h-[450px] border border-white/10 rounded-lg"></iframe>
                     </article>
 
                     <article id="sae12" class="project-card">
                         <h3 class="text-2xl font-bold text-white mb-4 italic">SAE 1.2 : S'initier aux réseaux informatiques</h3>
                         <p class="text-slate-300 text-sm mb-6 leading-relaxed">
-                            Ce projet visait à concevoir et déployer une infrastructure réseau complète, de la topologie logique sous <strong>Draw.io</strong> à la configuration réelle d'équipements Cisco.
+                            Ce projet visait à concevoir et déployer une infrastructure réseau complète, de la topologie logique sous <strong>Draw.io</strong> à la configuration réelle d'équipements Cisco. J'ai mis en place une segmentation par <strong>VLANs</strong>, configuré le routage inter-VLAN et le <strong>NAT</strong> pour assurer la connectivité. En complément, j'ai administré des services serveurs essentiels tels que le <strong>DNS</strong>, le <strong>DHCP</strong> et un serveur web <strong>Apache</strong>. La validation finale a été effectuée par une analyse de trames avec <strong>Wireshark</strong>.
                         </p>
+                        <iframe src="static/image/Rapport_SAE12.pdf" class="w-full h-[450px] border border-white/10 rounded-lg"></iframe>
                     </article>
 
                     <article id="sae13" class="project-card">
                         <h3 class="text-2xl font-bold text-white mb-4 italic">SAE 1.3 : Découvrir un système de transmission</h3>
                         <p class="text-slate-300 text-sm mb-6 leading-relaxed">
-                            Etude des caractéristiques physiques des supports de transmission, comme l'atténuation et le retard de propagation des signaux.
+                            Cette SAE m'a permis d'étudier les caractéristiques physiques des supports de transmission, comme l'atténuation et le retard de propagation des signaux. À l'aide de simulations sous <strong>Matlab et Scilab</strong>, j'ai analysé le comportement des ondes et la qualité des liaisons cuivre et coaxiales. J'ai notamment utilisé les nombres complexes pour calculer l'impédance et le coefficient de réflexion des lignes. Ce travail rigoureux est fondamental pour comprendre les limites techniques qui régissent le débit des réseaux modernes.
                         </p>
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                            <iframe src="static/image/TP1-SAE-NP.pdf" class="w-full h-[350px] border border-white/10 rounded-lg"></iframe>
+                            <iframe src="static/image/TP3-NP.pdf" class="w-full h-[350px] border border-white/10 rounded-lg"></iframe>
+                        </div>
                     </article>
 
                     <article id="sae14" class="project-card">
                         <h3 class="text-2xl font-bold text-white mb-4 italic">SAE 1.4 : Se présenter sur Internet</h3>
                         <p class="text-slate-300 text-sm mb-6 leading-relaxed">
-                            Conception et déploiement de mon identité numérique professionnelle.
+                            Ce projet consistait à concevoir et déployer mon identité numérique professionnelle à travers la création de ce site web personnel. En utilisant un template <strong>Bootstrap</strong> adapté en <strong>HTML/CSS</strong>, j'ai veillé à ce que l'interface soit <strong>responsive</strong> et respecte les standards du W3C. Le site intègre mon CV numérique ainsi qu'un portfolio détaillant mes compétences R&T. L'ensemble du projet est hébergé de manière professionnelle sur <strong>GitHub Pages</strong>, utilisant les commandes Git pour le versioning et le déploiement continu.
                         </p>
                         <div class="p-6 bg-cyan-500/10 border border-cyan-500/30 rounded-lg flex justify-between items-center">
                             <div>
@@ -152,39 +160,11 @@
                     <article id="sae21" class="project-card">
                         <h3 class="text-2xl font-bold text-white mb-4 italic">SAE 2.1 & 2.4 : Projet Pépinière (Creil-Society)</h3>
                         <p class="text-slate-300 text-sm mb-6 leading-relaxed">
-                            Déploiement complet d'un Système d'Information pour une entreprise fictive. Ce projet intègre une infrastructure réseau sécurisée, des services web haute disponibilité et de la communication unifiée[cite: 17, 18, 22].
+                            Ce projet majeur consistait à déployer l'intégralité du système d'information d'une entreprise : architecture réseau Cisco (VLAN, Routage, NAT, ACL), téléphonie IP (Asterisk), services virtualisés sous Docker et administration Windows Server.
                         </p>
-                        
-                        <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-6">
-                            <div class="space-y-2">
-                                <h4 class="text-cyan-400 font-bold text-[10px] uppercase">Services Web & BDD</h4>
-                                <p class="text-[10px] text-slate-400">Architecture Docker-Compose incluant Flask, MySQL (Primaire/Replica) et Nginx pour la sécurité SSL/TLS[cite: 17, 21].</p>
-                                <div class="flex flex-wrap gap-2">
-                                    <span class="tech-badge">Docker</span> <span class="tech-badge">Flask</span> <span class="tech-badge">MySQL</span> <span class="tech-badge">Nginx</span>
-                                </div>
-                            </div>
-                            <div class="space-y-2">
-                                <h4 class="text-cyan-400 font-bold text-[10px] uppercase">Réseau & Sécurité</h4>
-                                <p class="text-[10px] text-slate-400">Mise en œuvre d'un portail captif PfSense avec authentification LDAP sur Windows Server et routage inter-VLAN.</p>
-                                <div class="flex flex-wrap gap-2">
-                                    <span class="tech-badge">PfSense</span> <span class="tech-badge">LDAP</span> <span class="tech-badge">Active Directory</span>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="space-y-2 mb-6">
-                            <h4 class="text-cyan-400 font-bold text-[10px] uppercase">Service Vidéo (Streaming)</h4>
-                            <p class="text-[10px] text-slate-400">Configuration d'un flux vidéo UDP via <strong>FFmpeg</strong> pour la diffusion sur le réseau interne.</p>
-                            <pre>ffmpeg -stream_loop -1 -i CatHuh.mp4 -f mpegts udp://172.31.20.156:5000</pre>
-                        </div>
-
-                        <div class="p-6 bg-cyan-500/10 border border-cyan-500/30 rounded-lg flex justify-between items-center">
-                            <div>
-                                <h4 class="text-cyan-400 font-bold uppercase text-xs">Rapports & Configuration</h4>
-                                <p class="text-[10px] text-slate-400">Accédez au dossier complet incluant les fichiers de configuration et les comptes-rendus[cite: 17, 18, 22].</p>
-                            </div>
-                            <a href="https://drive.google.com/drive/folders/1_W1aRgNGCUdDX7XzbECTuEN2ReQ5UJeP?usp=sharing" target="_blank" class="px-6 py-2 bg-cyan-500 text-white text-[10px] font-bold rounded hover:bg-cyan-600 transition-all">
-                                <i class="fab fa-google-drive mr-2"></i> VOIR SUR DRIVE
+                        <div class="flex gap-4">
+                            <a href="sae21-24.html" class="px-6 py-2 bg-cyan-500 hover:bg-cyan-600 text-white text-[10px] font-bold rounded transition-all">
+                                <i class="fas fa-eye mr-2"></i> VOIR LA PRÉSENTATION DÉTAILLÉE
                             </a>
                         </div>
                     </article>
@@ -192,15 +172,34 @@
                     <article id="sae22" class="project-card">
                         <h3 class="text-2xl font-bold text-white mb-4 italic">SAE 2.2 : Mesurer et caractériser un signal</h3>
                         <p class="text-slate-300 text-sm mb-6 leading-relaxed">
-                            Validation de conformité des équipements via métrologie (spectre, puissance, gain).
+                            Dans le prolongement de l'étude des supports, cette SAE se concentre sur la validation de conformité des équipements. J'ai appris à mesurer et analyser des signaux réels en utilisant des outils de métrologie pour extraire des paramètres critiques tels que le <strong>spectre</strong>, la <strong>puissance</strong> et le <strong>gain</strong> en décibels. L'objectif est d'attester de la qualité d'une transmission (NRO, NRA) et de diagnostiquer d'éventuelles atténuations. Ce projet allie rigueur mathématique et manipulation d'appareils de mesure professionnels.
                         </p>
+                        <div class="p-6 bg-cyan-500/10 border border-cyan-500/30 rounded-lg flex justify-between items-center">
+                            <div>
+                                <h4 class="text-cyan-400 font-bold uppercase text-xs">Livrable de Présentation</h4>
+                                <p class="text-[10px] text-slate-400">Diaporama technique et analyse de mesures.</p>
+                            </div>
+                            <a href="https://drive.google.com/drive/folders/1x7dzhzyyS2gLV5n0zeuRtVRtZNe9wNWV?usp=sharing" target="_blank" class="px-6 py-2 bg-transparent border border-cyan-500 text-cyan-400 hover:bg-cyan-500 hover:text-white text-[10px] font-bold rounded transition-all">
+                                <i class="fas fa-external-link-alt mr-2"></i> OUVRIR LE DOSSIER DRIVE
+                            </a>
+                        </div>
                     </article>
 
                     <article id="sae23" class="project-card">
                         <h3 class="text-2xl font-bold text-white mb-4 italic">SAE 2.3 : Portfolio Dynamique avec Flask</h3>
                         <p class="text-slate-300 text-sm mb-6 leading-relaxed">
-                            Transformation du portfolio en application web dynamique avec Flask et Docker.
+                            L'objectif de cette SAE est de transformer ce portfolio statique en une <strong>application web dynamique</strong>. En utilisant le framework <strong>Flask</strong> (Python), le site interagit désormais avec une base de données (MySQL/PostgreSQL) pour gérer mes compétences par semestre et par bloc. Le projet inclut un espace sécurisé avec authentification, des formulaires de gestion CRUD et un déploiement orchestré via <strong>Docker</strong> et Docker-Compose pour garantir la portabilité du serveur HTTP et du serveur de données.
                         </p>
+                        
+                        <div class="p-6 bg-cyan-500/10 border border-cyan-500/30 rounded-lg flex justify-between items-center">
+                            <div>
+                                <h4 class="text-cyan-400 font-bold uppercase text-xs">Spécifications du Projet</h4>
+                                <p class="text-[10px] text-slate-400">Architecture Docker, Templates Jinja2 et gestion de base de données.</p>
+                            </div>
+                            <a href="https://drive.google.com/drive/folders/1fRRUFnylDUvc75_NhG9-F7Rsn6NTHjM8?usp=sharing" target="_blank" class="px-6 py-2 bg-cyan-500 text-white text-[10px] font-bold rounded hover:bg-cyan-600 transition-all">
+                                <i class="fas fa-file-code mr-2"></i> VOIR LE SUJET SAE 2.3
+                            </a>
+                        </div>
                     </article>
                 </div>
 
@@ -210,24 +209,9 @@
                     <article id="sae301" class="project-card">
                         <h3 class="text-2xl font-bold text-white mb-4 italic">SAE 3.01 : Mise en œuvre d'un système de transmission</h3>
                         <p class="text-slate-300 text-sm mb-6 leading-relaxed">
-                            Projet de transmission sans fil avec <strong>ADALM-Pluto</strong> et <strong>GNU Radio</strong>. Analyse de spectres GSM/LTE et transmission vidéo en UDP.
+                            Ce projet visait à concevoir un système de transmission sans fil complet. [cite_start]J'ai utilisé l'émetteur/récepteur <strong>ADALM-Pluto</strong> piloté par <strong>GNU Radio</strong> pour manipuler des signaux radiofréquences[cite: 1, 4]. [cite_start]Le travail a inclus l'analyse de spectres réels (GSM, LTE) avec le logiciel <strong>MCS Spectrum Analyzer</strong> et l'antenne HyperLOG 7060[cite: 8, 48]. [cite_start]L'aboutissement a été la transmission réussie d'un flux vidéo via le protocole <strong>UDP</strong> entre deux stations radio[cite: 10, 68].
                         </p>
-                    </article>
-
-                    <article id="sae302" class="project-card">
-                        <h3 class="text-2xl font-bold text-white mb-4 italic">SAE 3.02 : Développer des applications communicantes</h3>
-                        <p class="text-slate-300 text-sm mb-6 leading-relaxed">
-                            Développement d'une application Client/Serveur en Python 3 pour la recherche multi-formats (TXT, HTML, PDF, Excel) via mots-clés ou Regex.
-                        </p>
-                        <div class="p-6 bg-cyan-500/10 border border-cyan-500/30 rounded-lg flex justify-between items-center">
-                            <div>
-                                <h4 class="text-cyan-400 font-bold uppercase text-xs">Code Source Python</h4>
-                                <p class="text-[10px] text-slate-400">Architecture Flask/Tkinter et moteur de recherche Regex.</p>
-                            </div>
-                            <a href="https://drive.google.com/drive/folders/1UHTykaae_LM6SGDBo1YG5gK9dVXAuSzh?usp=sharing" target="_blank" class="px-6 py-2 bg-cyan-500 text-white text-[10px] font-bold rounded hover:bg-cyan-600 transition-all">
-                                <i class="fab fa-google-drive mr-2"></i> VOIR LE PROJET
-                            </a>
-                        </div>
+                        <iframe src="static/image/Rapport final-SAE301-Duval-Nicolas.pdf" class="w-full h-[450px] border border-white/10 rounded-lg"></iframe>
                     </article>
                 </div>
             </div>
