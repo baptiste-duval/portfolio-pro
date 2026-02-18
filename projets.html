@@ -357,13 +357,13 @@
     </div>
 </div>
 
-<div id="pdfModal" class="fixed inset-0 z-[150] hidden bg-black/90 flex items-center justify-center p-4">
-    <div class="relative w-full max-w-5xl h-[90vh] bg-slate-900 rounded-xl border border-cyan-500/30 flex flex-col">
-        <div class="p-4 border-b border-white/10 flex justify-between items-center">
-            <span class="text-cyan-400 font-bold text-xs uppercase tracking-widest">Visionneuse de Rapport</span>
-            <button onclick="closeModal()" class="text-slate-400 hover:text-white text-2xl">&times;</button>
+<div id="pdfModal" class="fixed inset-0 z-[200] hidden bg-black/95 flex items-center justify-center p-4">
+    <div class="relative w-full max-w-5xl h-[90vh] bg-slate-900 rounded-xl border border-cyan-500/30 flex flex-col shadow-2xl">
+        <div class="p-4 border-b border-white/10 flex justify-between items-center bg-slate-900 rounded-t-xl">
+            <span class="text-cyan-400 font-bold text-xs uppercase tracking-widest italic">Explorateur de Documents</span>
+            <button onclick="closeModal()" class="text-slate-400 hover:text-white text-3xl p-2">&times;</button>
         </div>
-        <iframe id="pdfFrame" src="" class="flex-1 w-full rounded-b-xl"></iframe>
+        <iframe id="pdfFrame" src="" class="flex-1 w-full rounded-b-xl border-none"></iframe>
     </div>
 </div>
 </article>
