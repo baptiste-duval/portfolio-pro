@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="fr">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -7,38 +8,143 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&family=Fira+Code:wght@300;500&display=swap" rel="stylesheet">
-    
+
     <style>
-        body { font-family: 'Fira+Code', monospace; background-color: #020617; color: #e2e8f0; margin: 0; overflow-x: hidden; scroll-behavior: smooth; }
-        #particles-js { position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: 1; }
-        .glass-header { background: rgba(15, 23, 42, 0.9); backdrop-filter: blur(12px); border-bottom: 1px solid rgba(0, 242, 255, 0.2); }
-        .neon-shadow { text-shadow: 0 0 10px rgba(0, 242, 255, 0.7); }
-        .layout-container { position: relative; z-index: 10; display: flex; margin-top: 80px; min-height: calc(100vh - 80px); }
-        
-        /* Sidebar */
-        .sidebar { width: 350px; border-right: 1px solid rgba(0, 242, 255, 0.2); background: rgba(15, 23, 42, 0.8); height: calc(100vh - 80px); position: sticky; top: 80px; overflow-y: auto; }
-        .main-content { flex: 1; padding: 40px; }
-
-        details { width: 100%; border-bottom: 1px solid rgba(255,255,255,0.05); }
-        summary { cursor: pointer; padding: 15px 20px; list-style: none; font-family: 'Orbitron', sans-serif; transition: 0.3s; font-size: 0.85rem; color: #00f2ff; }
-        summary:hover { background: rgba(0, 242, 255, 0.1); }
-        
-        .sub-menu summary { padding: 10px 40px; font-size: 0.75rem; color: #94a3b8; }
-        .project-link { display: block; padding: 8px 60px; font-size: 0.7rem; color: #64748b; transition: 0.2s; cursor: pointer; }
-        .project-link:hover { color: #00f2ff; background: rgba(0, 242, 255, 0.05); }
-
-        /* Contenu */
-        .project-section { display: none; }
-        .project-section.active { display: block; animation: fadeIn 0.5s ease; }
-
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(10px); }
-            to { opacity: 1; transform: translateY(0); }
+        body {
+            font-family: 'Fira+Code', monospace;
+            background-color: #020617;
+            color: #e2e8f0;
+            margin: 0;
+            overflow-x: hidden;
+            scroll-behavior: smooth;
         }
 
-        .project-card { background: rgba(15, 23, 42, 0.6); border: 1px solid rgba(255, 255, 255, 0.1); padding: 25px; border-radius: 12px; margin-bottom: 50px; scroll-margin-top: 100px; }
+        #particles-js {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 1;
+        }
+
+        .glass-header {
+            background: rgba(15, 23, 42, 0.9);
+            backdrop-filter: blur(12px);
+            border-bottom: 1px solid rgba(0, 242, 255, 0.2);
+        }
+
+        .neon-shadow {
+            text-shadow: 0 0 10px rgba(0, 242, 255, 0.7);
+        }
+
+        .layout-container {
+            position: relative;
+            z-index: 10;
+            display: flex;
+            margin-top: 80px;
+            min-height: calc(100vh - 80px);
+        }
+
+        /* Sidebar */
+        .sidebar {
+            width: 350px;
+            border-right: 1px solid rgba(0, 242, 255, 0.2);
+            background: rgba(15, 23, 42, 0.8);
+            height: calc(100vh - 80px);
+            position: sticky;
+            top: 80px;
+            overflow-y: auto;
+        }
+
+        .main-content {
+            flex: 1;
+            padding: 40px;
+        }
+
+        details {
+            width: 100%;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        summary {
+            cursor: pointer;
+            padding: 15px 20px;
+            list-style: none;
+            font-family: 'Orbitron', sans-serif;
+            transition: 0.3s;
+            font-size: 0.85rem;
+            color: #00f2ff;
+        }
+
+        summary:hover {
+            background: rgba(0, 242, 255, 0.1);
+        }
+
+        .sub-menu summary {
+            padding: 10px 40px;
+            font-size: 0.75rem;
+            color: #94a3b8;
+        }
+
+        .project-link {
+            display: block;
+            padding: 8px 60px;
+            font-size: 0.7rem;
+            color: #64748b;
+            transition: 0.2s;
+            cursor: pointer;
+        }
+
+        .project-link:hover {
+            color: #00f2ff;
+            background: rgba(0, 242, 255, 0.05);
+        }
+
+        /* Contenu */
+        .project-section {
+            display: none;
+        }
+
+        .project-section.active {
+            display: block;
+            animation: fadeIn 0.5s ease;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(10px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .project-card {
+            background: rgba(15, 23, 42, 0.6);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            padding: 25px;
+            border-radius: 12px;
+            margin-bottom: 50px;
+            scroll-margin-top: 100px;
+        }
+
+        .tech-badge {
+            font-size: 8px;
+            padding: 2px 6px;
+            background: rgba(0, 242, 255, 0.1);
+            border: 1px solid rgba(0, 242, 255, 0.2);
+            border-radius: 4px;
+            color: #00f2ff;
+            text-transform: uppercase;
+            font-weight: bold;
+        }
     </style>
 </head>
+
 <body>
 
     <div id="particles-js"></div>
@@ -62,7 +168,7 @@
     <div class="layout-container">
         <aside class="sidebar">
             <h2 class="text-[10px] font-bold text-cyan-500 uppercase tracking-[0.3em] p-6 border-b border-white/5">Explorateur de Cursus</h2>
-            
+
             <details open>
                 <summary>BUT RT - ANNEE 1 <i class="fas fa-caret-down ml-2 opacity-50"></i></summary>
                 <details open class="sub-menu">
@@ -103,7 +209,7 @@
 
         <main class="main-content">
             <div class="max-w-4xl mx-auto">
-                
+
                 <section id="intro" class="mb-16">
                     <h1 class="text-4xl font-bold font-['Orbitron'] mb-6 neon-shadow uppercase">Cursus Académique</h1>
                     <div class="p-6 bg-cyan-500/5 border-l-4 border-cyan-400">
@@ -115,7 +221,7 @@
 
                 <div id="s1-projets" class="project-section">
                     <h2 class="text-xl font-['Orbitron'] mb-10 text-cyan-400 uppercase tracking-widest border-b border-cyan-500/20 pb-2">Semestre 1 - Fondamentaux</h2>
-                    
+
                     <article id="sae11" class="project-card">
                         <h3 class="text-2xl font-bold text-white mb-4 italic">SAE 1.1 : Sensibilisation au risque numérique</h3>
                         <p class="text-slate-300 text-sm mb-6 leading-relaxed">
@@ -162,7 +268,7 @@
 
                 <div id="s2-projets" class="project-section">
                     <h2 class="text-xl font-['Orbitron'] mb-10 text-cyan-400 uppercase tracking-widest border-b border-cyan-500/20 pb-2">Semestre 2 - Approfondissement</h2>
-                    
+
                     <article id="sae21" class="project-card">
                         <h3 class="text-2xl font-bold text-white mb-4 italic">SAE 2.1 & 2.4 : Projet Pépinière (Creil-Society)</h3>
                         <p class="text-slate-300 text-sm mb-6 leading-relaxed">
@@ -196,7 +302,6 @@
                         <p class="text-slate-300 text-sm mb-6 leading-relaxed">
                             L'objectif de cette SAE est de transformer ce portfolio statique en une <strong>application web dynamique</strong>. En utilisant le framework <strong>Flask</strong> (Python), le site interagit désormais avec une base de données (MySQL/PostgreSQL) pour gérer mes compétences par semestre et par bloc. Le projet inclut un espace sécurisé avec authentification, des formulaires de gestion CRUD et un déploiement orchestré via <strong>Docker</strong> et Docker-Compose pour garantir la portabilité du serveur HTTP et du serveur de données.
                         </p>
-                        
                         <div class="p-6 bg-cyan-500/10 border border-cyan-500/30 rounded-lg flex justify-between items-center">
                             <div>
                                 <h4 class="text-cyan-400 font-bold uppercase text-xs">Spécifications du Projet</h4>
@@ -211,24 +316,24 @@
 
                 <div id="s3-projets" class="project-section">
                     <h2 class="text-xl font-['Orbitron'] mb-10 text-cyan-400 uppercase tracking-widest border-b border-cyan-500/20 pb-2">Semestre 3 - Spécialisation</h2>
-                    
+
                     <article id="sae301" class="project-card">
                         <h3 class="text-2xl font-bold text-white mb-4 italic">SAE 3.01 : Mise en œuvre d'un système de transmission</h3>
                         <p class="text-slate-300 text-sm mb-6 leading-relaxed">
-                            Ce projet visait à concevoir un système de transmission sans fil complet. [cite_start]J'ai utilisé l'émetteur/récepteur <strong>ADALM-Pluto</strong> piloté par <strong>GNU Radio</strong> pour manipuler des signaux radiofréquences[cite: 1, 4]. [cite_start]Le travail a inclus l'analyse de spectres réels (GSM, LTE) avec le logiciel <strong>MCS Spectrum Analyzer</strong> et l'antenne HyperLOG 7060[cite: 8, 48]. [cite_start]L'aboutissement a été la transmission réussie d'un flux vidéo via le protocole <strong>UDP</strong> entre deux stations radio[cite: 10, 68].
+                            Ce projet visait à concevoir un système de transmission sans fil complet. J'ai utilisé l'émetteur/récepteur <strong>ADALM-Pluto</strong> piloté par <strong>GNU Radio</strong> pour manipuler des signaux radiofréquences. Le travail a inclus l'analyse de spectres réels (GSM, LTE) avec le logiciel <strong>MCS Spectrum Analyzer</strong> et l'antenne HyperLOG 7060. L'aboutissement a été la transmission réussie d'un flux vidéo via le protocole <strong>UDP</strong> entre deux stations radio.
                         </p>
                         <iframe src="static/image/Rapport final-SAE301-Duval-Nicolas.pdf" class="w-full h-[450px] border border-white/10 rounded-lg"></iframe>
                     </article>
+
                     <article id="sae302" class="project-card">
                         <h3 class="text-2xl font-bold text-white mb-4 italic">SAE 3.02 : Développer des applications communicantes</h3>
                         <p class="text-slate-300 text-sm mb-6 leading-relaxed">
                             Développement d'une application Client/Serveur en <strong>Python 3</strong> permettant la recherche multi-formats (TXT, HTML, PDF, Excel) via des mots-clés ou expressions régulières (Regex).
                         </p>
-                        
                         <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
                             <div class="space-y-4">
                                 <h4 class="text-cyan-400 font-bold text-xs uppercase">Architecture du projet</h4>
-                                <pre>
+                                <pre class="text-[9px] bg-black/30 p-3 rounded border border-white/5">
 /ton_projet/
 ├── serveur/
 │   ├── app.py (Flask)
@@ -249,12 +354,10 @@
                                 </ul>
                             </div>
                         </div>
-
                         <div class="mb-6">
                             <h4 class="text-cyan-400 font-bold text-xs uppercase mb-2">Aperçu de l'Interface Client</h4>
                             <img src="static/image/sae32.png" alt="Interface SAE 3.02" class="w-full border border-white/10 rounded-lg shadow-lg">
                         </div>
-
                         <div class="p-6 bg-cyan-500/10 border border-cyan-500/30 rounded-lg flex justify-between items-center">
                             <div>
                                 <h4 class="text-cyan-400 font-bold uppercase text-xs">Code Source & Documentation</h4>
@@ -303,7 +406,6 @@
                         <p class="text-slate-300 text-sm mb-6 leading-relaxed">
                             Cette SAE est dédiée à la cybersécurité offensive. À travers trois TP majeurs, j'ai appris à identifier, analyser et exploiter des vulnérabilités système et web dans un environnement contrôlé (Kali Linux).
                         </p>
-                        
                         <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
                             <div class="space-y-4">
                                 <h4 class="text-cyan-400 font-bold text-xs uppercase">Méthodologie & Analyse</h4>
@@ -327,195 +429,210 @@
                                 </ul>
                             </div>
                         </div>
-                    
+
                         <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
-                        <div class="p-4 bg-white/5 border border-white/10 rounded-lg flex flex-col justify-between">
-                            <div>
-                                <h5 class="text-[10px] font-bold text-cyan-400 mb-2 uppercase text-center">TP1 : Reconnaissance</h5>
-                                <p class="text-[9px] text-slate-500 mb-3">Scan de la cible 172.31.25.248, découverte des ports SSH (22) et HTTP (1337), et décodage de secrets en Base64.</p>
+                            <div class="p-4 bg-white/5 border border-white/10 rounded-lg flex flex-col justify-between">
+                                <div>
+                                    <h5 class="text-[10px] font-bold text-cyan-400 mb-2 uppercase text-center">TP1 : Reconnaissance</h5>
+                                    <p class="text-[9px] text-slate-500 mb-3">Scan de la cible 172.31.25.248, découverte des ports SSH (22) et HTTP (1337), et décodage de secrets en Base64.</p>
+                                </div>
+                                <button onclick="openModal('static/image/R3.CYBER.04-TP1.pdf')" class="w-full py-2 bg-cyan-500/10 border border-cyan-500/30 text-cyan-400 text-[8px] font-bold uppercase rounded hover:bg-cyan-500 hover:text-white transition-all">
+                                    <i class="fas fa-file-pdf mr-1"></i> Voir le rapport
+                                </button>
                             </div>
-                            <button onclick="openModal('static/image/R3.CYBER.04-TP1.pdf')" class="w-full py-2 bg-cyan-500/10 border border-cyan-500/30 text-cyan-400 text-[8px] font-bold uppercase rounded hover:bg-cyan-500 hover:text-white transition-all">
-                                <i class="fas fa-file-pdf mr-1"></i> Voir le rapport
-                            </button>
-                        </div>
-                    
-                        <div class="p-4 bg-white/5 border border-white/10 rounded-lg flex flex-col justify-between">
-                            <div>
-                                <h5 class="text-[10px] font-bold text-cyan-400 mb-2 uppercase text-center">TP2 : Exploitation</h5>
-                                <p class="text-[9px] text-slate-500 mb-3">Analyse de la cible 172.31.25.222. Exploitation de vulnérabilités FTP et prise de contrôle via Meterpreter.</p>
+
+                            <div class="p-4 bg-white/5 border border-white/10 rounded-lg flex flex-col justify-between">
+                                <div>
+                                    <h5 class="text-[10px] font-bold text-cyan-400 mb-2 uppercase text-center">TP2 : Exploitation</h5>
+                                    <p class="text-[9px] text-slate-500 mb-3">Analyse de la cible 172.31.25.222. Exploitation de vulnérabilités FTP et prise de contrôle via Meterpreter.</p>
+                                </div>
+                                <button onclick="openModal('static/image/R3.CYBER.04-TP2.pdf')" class="w-full py-2 bg-cyan-500/10 border border-cyan-500/30 text-cyan-400 text-[8px] font-bold uppercase rounded hover:bg-cyan-500 hover:text-white transition-all">
+                                    <i class="fas fa-file-pdf mr-1"></i> Voir le rapport
+                                </button>
                             </div>
-                            <button onclick="openModal('static/image/R3.CYBER.04-TP2.pdf')" class="w-full py-2 bg-cyan-500/10 border border-cyan-500/30 text-cyan-400 text-[8px] font-bold uppercase rounded hover:bg-cyan-500 hover:text-white transition-all">
-                                <i class="fas fa-file-pdf mr-1"></i> Voir le rapport
-                            </button>
-                        </div>
-                    
-                        <div class="p-4 bg-white/5 border border-white/10 rounded-lg flex flex-col justify-between">
-                            <div>
-                                <h5 class="text-[10px] font-bold text-cyan-400 mb-2 uppercase text-center">TP3 : Sécurité Web</h5>
-                                <p class="text-[9px] text-slate-500 mb-3">Audit de l'application OWASP Juice Shop. Challenges de hacking web : injection admin, exfiltration de DB et détournement de token.</p>
+
+                            <div class="p-4 bg-white/5 border border-white/10 rounded-lg flex flex-col justify-between">
+                                <div>
+                                    <h5 class="text-[10px] font-bold text-cyan-400 mb-2 uppercase text-center">TP3 : Sécurité Web</h5>
+                                    <p class="text-[9px] text-slate-500 mb-3">Audit de l'application OWASP Juice Shop. Challenges de hacking web : injection admin, exfiltration de DB et détournement de token.</p>
+                                </div>
+                                <button onclick="openModal('static/image/R3.CYBER.04-TP3.pdf')" class="w-full py-2 bg-cyan-500/10 border border-cyan-500/30 text-cyan-400 text-[8px] font-bold uppercase rounded hover:bg-cyan-500 hover:text-white transition-all">
+                                    <i class="fas fa-file-pdf mr-1"></i> Voir le rapport
+                                </button>
                             </div>
-                            <button onclick="openModal('static/image/R3.CYBER.04-TP3.pdf')" class="w-full py-2 bg-cyan-500/10 border border-cyan-500/30 text-cyan-400 text-[8px] font-bold uppercase rounded hover:bg-cyan-500 hover:text-white transition-all">
-                                <i class="fas fa-file-pdf mr-1"></i> Voir le rapport
-                            </button>
                         </div>
-                    </div>
-                    
-                    <div id="pdfModal" class="fixed inset-0 z-[200] hidden bg-black/95 flex items-center justify-center p-4">
-                        <div class="relative w-full max-w-5xl h-[90vh] bg-slate-900 rounded-xl border border-cyan-500/30 flex flex-col shadow-2xl">
-                            <div class="p-4 border-b border-white/10 flex justify-between items-center bg-slate-900 rounded-t-xl">
-                                <span class="text-cyan-400 font-bold text-xs uppercase tracking-widest italic">Explorateur de Documents</span>
-                                <button onclick="closeModal()" class="text-slate-400 hover:text-white text-3xl p-2">&times;</button>
-                            </div>
-                            <iframe id="pdfFrame" src="" class="flex-1 w-full rounded-b-xl border-none"></iframe>
-                        </div>
-                    </div>
                     </article>
                 </div>
-                
+
                 <div id="s4-projets" class="project-section active">
-                <h2 class="text-xl font-['Orbitron'] mb-10 text-cyan-400 uppercase tracking-widest border-b border-cyan-500/20 pb-2">
-                    Semestre 4 - Expertise Réseau & Sécurité
-                </h2>
-            
-                <article id="sae4.cyber.01" class="mb-12 group">
-                    <div class="flex items-center gap-4 mb-8">
-                        <div class="h-px flex-1 bg-gradient-to-r from-transparent via-cyan-500/50 to-transparent"></div>
-                        <div class="text-center">
-                            <h3 class="text-lg font-bold text-white tracking-tighter uppercase italic">SAE 4.CYBER.01 : Sécuriser un Système d’Information</h3>
-                            <p class="text-[9px] text-cyan-500/60 uppercase tracking-widest">Architecture Multi-sites & Hardening</p>
+                    <h2 class="text-xl font-['Orbitron'] mb-10 text-cyan-400 uppercase tracking-widest border-b border-cyan-500/20 pb-2">
+                        Semestre 4 - Expertise Réseau & Sécurité
+                    </h2>
+
+                    <article id="sae4.cyber.01" class="mb-12 group">
+                        <div class="flex items-center gap-4 mb-8">
+                            <div class="h-px flex-1 bg-gradient-to-r from-transparent via-cyan-500/50 to-transparent"></div>
+                            <div class="text-center">
+                                <h3 class="text-lg font-bold text-white tracking-tighter uppercase italic">SAE 4.CYBER.01 : Sécuriser un Système d’Information</h3>
+                                <p class="text-[9px] text-cyan-500/60 uppercase tracking-widest">Architecture Multi-sites & Hardening</p>
+                            </div>
+                            <div class="h-px flex-1 bg-gradient-to-r from-transparent via-cyan-500/50 to-transparent"></div>
                         </div>
-                        <div class="h-px flex-1 bg-gradient-to-r from-transparent via-cyan-500/50 to-transparent"></div>
-                    </div>
-            
-                    <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
-                        <div class="lg:col-span-2 space-y-6">
-                            <div class="bg-slate-900/40 p-6 rounded-2xl border border-white/5 hover:border-cyan-500/20 transition-all">
-                                <h4 class="text-xs font-bold text-white mb-3 uppercase tracking-wider flex items-center gap-2">
-                                    <i class="fas fa-project-diagram text-cyan-400"></i> Challenge Technique
-                                </h4>
-                                <p class="text-[11px] leading-relaxed text-slate-400 mb-4">
-                                    Conception et déploiement d'une infrastructure sécurisée simulant une entreprise avec un **Siège** et une **Succursale**. L'enjeu majeur était de garantir l'intégrité et la confidentialité des échanges inter-sites tout en segmentant strictement les flux métiers.
-                                </p>
-            
-                                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-                                    <div class="bg-black/20 p-3 rounded-lg border border-white/5">
-                                        <span class="text-[10px] text-cyan-400 font-bold uppercase block mb-1">Infrastructure Réseau</span>
-                                        <ul class="text-[9px] text-slate-300 space-y-1">
-                                            <li>• Tunnel VPN IPSEC / GRE (Chiffrement AES-256)</li>
-                                            <li>• Routage OSPF pour l'interconnexion</li>
-                                            <li>• Segmentation VLAN (Admin, Prod, Service)</li>
-                                        </ul>
+
+                        <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+                            <div class="lg:col-span-2 space-y-6">
+                                <div class="bg-slate-900/40 p-6 rounded-2xl border border-white/5 hover:border-cyan-500/20 transition-all">
+                                    <h4 class="text-xs font-bold text-white mb-3 uppercase tracking-wider flex items-center gap-2">
+                                        <i class="fas fa-project-diagram text-cyan-400"></i> Challenge Technique
+                                    </h4>
+                                    <p class="text-[11px] leading-relaxed text-slate-400 mb-4">
+                                        Conception et déploiement d'une infrastructure sécurisée simulant une entreprise avec un **Siège** et une **Succursale**. L'enjeu majeur était de garantir l'intégrité et la confidentialité des échanges inter-sites tout en segmentant strictement les flux métiers.
+                                    </p>
+
+                                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                                        <div class="bg-black/20 p-3 rounded-lg border border-white/5">
+                                            <span class="text-[10px] text-cyan-400 font-bold uppercase block mb-1">Infrastructure Réseau</span>
+                                            <ul class="text-[9px] text-slate-300 space-y-1">
+                                                <li>• Tunnel VPN IPSEC / GRE (Chiffrement AES-256)</li>
+                                                <li>• Routage OSPF pour l'interconnexion</li>
+                                                <li>• Segmentation VLAN (Admin, Prod, Service)</li>
+                                            </ul>
+                                        </div>
+                                        <div class="bg-black/20 p-3 rounded-lg border border-white/5">
+                                            <span class="text-[10px] text-cyan-400 font-bold uppercase block mb-1">Sécurisation Services</span>
+                                            <ul class="text-[9px] text-slate-300 space-y-1">
+                                                <li>• Firewalls Cisco ASA (ACLs & NAT dynamique)</li>
+                                                <li>• DNSSEC : Authentification des zones DNS</li>
+                                                <li>• HTTPS : Chiffrement des flux Web (TLS)</li>
+                                            </ul>
+                                        </div>
                                     </div>
-                                    <div class="bg-black/20 p-3 rounded-lg border border-white/5">
-                                        <span class="text-[10px] text-cyan-400 font-bold uppercase block mb-1">Sécurisation Services</span>
-                                        <ul class="text-[9px] text-slate-300 space-y-1">
-                                            <li>• Firewalls Cisco ASA (ACLs & NAT dynamique)</li>
-                                            <li>• DNSSEC : Authentification des zones DNS</li>
-                                            <li>• HTTPS : Chiffrement des flux Web (TLS)</li>
-                                        </ul>
+                                </div>
+
+                                <div class="bg-slate-900/40 p-6 rounded-2xl border border-white/5">
+                                    <h4 class="text-xs font-bold text-white mb-3 uppercase tracking-wider flex items-center gap-2">
+                                        <i class="fas fa-user-shield text-cyan-400"></i> Audit & Pentesting
+                                    </h4>
+                                    <p class="text-[11px] leading-relaxed text-slate-400">
+                                        Validation de la posture de sécurité via des tests d'intrusion. Utilisation de <strong>SQLMap</strong> pour tester la résistance des formulaires web et <strong>Nmap</strong> pour vérifier l'étanchéité des Firewalls. Application des recommandations de l'<strong>ANSSI</strong> pour le durcissement (Hardening).
+                                    </p>
+                                </div>
+                            </div>
+
+                            <div class="flex flex-col gap-4">
+                                <div class="flex-1 bg-gradient-to-b from-slate-800/40 to-cyan-900/10 p-6 rounded-2xl border border-cyan-500/20 flex flex-col items-center justify-center text-center">
+                                    <i class="fas fa-file-invoice text-5xl text-cyan-500 mb-4 opacity-20"></i>
+                                    <h4 class="text-white text-xs font-bold uppercase mb-4">Documentation Technique</h4>
+
+                                    <a href="https://drive.google.com/file/d/10tU6ml3NY3VzPKB47SdidFpNQ75g4cPo/view?usp=sharing" target="_blank" class="w-full px-4 py-3 bg-white/5 border border-white/10 text-white text-[10px] font-bold uppercase rounded-lg hover:bg-white/10 transition-all">
+                                        <i class="fab fa-google-drive mr-2 text-cyan-400"></i> Rapport Final
+                                    </a>
+
+                                    <a href="https://drive.google.com/drive/folders/1VpRGYRGEgfXWrLUL6RlL5hfm9AuzF1ie?usp=sharing" target="_blank" class="w-full px-4 py-3 bg-white/5 border border-white/10 text-white text-[10px] font-bold uppercase rounded-lg hover:bg-white/10 transition-all">
+                                        <i class="fab fa-google-drive mr-2 text-cyan-400"></i> Pack Complet (PKT)
+                                    </a>
+
+                                    <div class="mt-6 pt-6 border-t border-white/5 w-full">
+                                        <div class="flex justify-between text-[9px] uppercase font-bold">
+                                            <span class="text-slate-500">Pages :</span>
+                                            <span class="text-cyan-400">42</span>
+                                        </div>
+                                        <div class="flex justify-between text-[9px] uppercase font-bold mt-2">
+                                            <span class="text-slate-500">Format :</span>
+                                            <span class="text-cyan-400">PDF / Packet Tracer</span>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
-            
-                            <div class="bg-slate-900/40 p-6 rounded-2xl border border-white/5">
-                                <h4 class="text-xs font-bold text-white mb-3 uppercase tracking-wider flex items-center gap-2">
-                                    <i class="fas fa-user-shield text-cyan-400"></i> Audit & Pentesting
-                                </h4>
-                                <p class="text-[11px] leading-relaxed text-slate-400">
-                                    Validation de la posture de sécurité via des tests d'intrusion. Utilisation de <strong>SQLMap</strong> pour tester la résistance des formulaires web et <strong>Nmap</strong> pour vérifier l'étanchéité des Firewalls. Application des recommandations de l'<strong>ANSSI</strong> pour le durcissement (Hardening).
-                                </p>
-                            </div>
                         </div>
-            
-                        <div class="flex flex-col gap-4">
-                            <div class="flex-1 bg-gradient-to-b from-slate-800/40 to-cyan-900/10 p-6 rounded-2xl border border-cyan-500/20 flex flex-col items-center justify-center text-center">
-                                <i class="fas fa-file-invoice text-5xl text-cyan-500 mb-4 opacity-20"></i>
-            
-                                <h4 class="text-white text-xs font-bold uppercase mb-4">Documentation Technique</h4>
-            
-                                <a href="https://drive.google.com/file/d/10tU6ml3NY3VzPKB47SdidFpNQ75g4cPo/view?usp=sharing" target="_blank" class="w-full px-4 py-3 bg-white/5 border border-white/10 text-white text-[10px] font-bold uppercase rounded-lg hover:bg-white/10 transition-all">
-                                    <i class="fab fa-google-drive mr-2 text-cyan-400"></i> Rapport Final
-                                </a>
-            
-                                <a href="https://drive.google.com/drive/folders/1VpRGYRGEgfXWrLUL6RlL5hfm9AuzF1ie?usp=sharing" target="_blank" class="w-full px-4 py-3 bg-white/5 border border-white/10 text-white text-[10px] font-bold uppercase rounded-lg hover:bg-white/10 transition-all">
-                                    <i class="fab fa-google-drive mr-2 text-cyan-400"></i> Pack Complet (PKT)
-                                </a>
-            
-                                <div class="mt-6 pt-6 border-t border-white/5 w-full">
-                                    <div class="flex justify-between text-[9px] uppercase font-bold">
-                                        <span class="text-slate-500">Pages :</span>
-                                        <span class="text-cyan-400">42</span>
-                                    </div>
-                                    <div class="flex justify-between text-[9px] uppercase font-bold mt-2">
-                                        <span class="text-slate-500">Format :</span>
-                                        <span class="text-cyan-400">PDF / Packet Tracer</span>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </article>
+                    </article>
+                </div>
             </div>
         </main>
+
         <div id="pdfModal" class="fixed inset-0 z-[999] hidden bg-black/90 flex items-center justify-center p-4">
-    <div class="relative w-full max-w-6xl h-[95vh] bg-slate-900 rounded-2xl border border-cyan-500/30 flex flex-col shadow-2xl">
-        <div class="p-4 border-b border-white/10 flex justify-between items-center bg-slate-900 rounded-t-2xl">
-            <div class="flex items-center gap-3">
-                <i class="fas fa-file-pdf text-cyan-400"></i>
-                <span class="text-cyan-400 font-bold text-xs uppercase tracking-widest italic">Visualiseur de Document</span>
+            <div class="relative w-full max-w-6xl h-[95vh] bg-slate-900 rounded-2xl border border-cyan-500/30 flex flex-col shadow-2xl">
+                <div class="p-4 border-b border-white/10 flex justify-between items-center bg-slate-900 rounded-t-2xl">
+                    <div class="flex items-center gap-3">
+                        <i class="fas fa-file-pdf text-cyan-400"></i>
+                        <span class="text-cyan-400 font-bold text-xs uppercase tracking-widest italic">Visualiseur de Document</span>
+                    </div>
+                    <button onclick="closeModal()" class="text-slate-400 hover:text-white text-3xl p-2 transition-colors cursor-pointer">&times;</button>
+                </div>
+                <iframe id="pdfFrame" src="" class="flex-1 w-full rounded-b-2xl border-none bg-white"></iframe>
             </div>
-            <button onclick="closeModal()" class="text-slate-400 hover:text-white text-3xl p-2 transition-colors cursor-pointer">&times;</button>
         </div>
-        <iframe id="pdfFrame" src="" class="flex-1 w-full rounded-b-2xl border-none bg-white"></iframe>
-    </div>
-</div>
     </div>
 
     <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
     <script>
         particlesJS("particles-js", {
             "particles": {
-                "number": { "value": 40 },
-                "color": { "value": "#00f2ff" },
-                "opacity": { "value": 0.2 },
-                "size": { "value": 1.5 },
-                "line_linked": { "enable": true, "distance": 150, "color": "#00f2ff", "opacity": 0.1 },
-                "move": { "enable": true, "speed": 0.5 }
+                "number": {
+                    "value": 40
+                },
+                "color": {
+                    "value": "#00f2ff"
+                },
+                "opacity": {
+                    "value": 0.2
+                },
+                "size": {
+                    "value": 1.5
+                },
+                "line_linked": {
+                    "enable": true,
+                    "distance": 150,
+                    "color": "#00f2ff",
+                    "opacity": 0.1
+                },
+                "move": {
+                    "enable": true,
+                    "speed": 0.5
+                }
             }
         });
 
-            /* Assure-toi d'avoir ces fonctions tout en bas de ton fichier */
-    function openModal(pdfPath) {
-        const modal = document.getElementById('pdfModal');
-        const frame = document.getElementById('pdfFrame');
-        if (modal && frame) {
-            frame.src = pdfPath;
-            modal.classList.remove('hidden');
-            document.body.style.overflow = 'hidden'; // Bloque le scroll
-        }
-    }
-    
-    function closeModal() {
-        const modal = document.getElementById('pdfModal');
-        const frame = document.getElementById('pdfFrame');
-        if (modal && frame) {
-            frame.src = "";
-            modal.classList.add('hidden');
-            document.body.style.overflow = 'auto'; // Libère le scroll
-        }
-    }
-    
-            function goToProject(sectionId, projectId) {
-                document.getElementById('intro').style.display = 'none';
-                const sections = document.querySelectorAll('.project-section');
-                sections.forEach(section => { section.classList.remove('active'); });
-                const targetSection = document.getElementById(sectionId);
-                if(targetSection) { targetSection.classList.add('active'); }
-                setTimeout(() => {
-                    const targetProject = document.getElementById(projectId);
-                    if(targetProject) { targetProject.scrollIntoView({ behavior: 'smooth' }); }
-                }, 100);
+        function openModal(pdfPath) {
+            const modal = document.getElementById('pdfModal');
+            const frame = document.getElementById('pdfFrame');
+            if (modal && frame) {
+                frame.src = pdfPath;
+                modal.classList.remove('hidden');
+                document.body.style.overflow = 'hidden';
             }
-        </script>
-    </body>
+        }
+
+        function closeModal() {
+            const modal = document.getElementById('pdfModal');
+            const frame = document.getElementById('pdfFrame');
+            if (modal && frame) {
+                frame.src = "";
+                modal.classList.add('hidden');
+                document.body.style.overflow = 'auto';
+            }
+        }
+
+        function goToProject(sectionId, projectId) {
+            document.getElementById('intro').style.display = 'none';
+            const sections = document.querySelectorAll('.project-section');
+            sections.forEach(section => {
+                section.classList.remove('active');
+            });
+            const targetSection = document.getElementById(sectionId);
+            if (targetSection) {
+                targetSection.classList.add('active');
+            }
+            setTimeout(() => {
+                const targetProject = document.getElementById(projectId);
+                if (targetProject) {
+                    targetProject.scrollIntoView({
+                        behavior: 'smooth'
+                    });
+                }
+            }, 100);
+        }
+    </script>
+</body>
+
 </html>
