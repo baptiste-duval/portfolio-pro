@@ -67,16 +67,16 @@
                 <summary>BUT RT - ANNEE 1 <i class="fas fa-caret-down ml-2 opacity-50"></i></summary>
                 <details open class="sub-menu">
                     <summary>Semestre 1</summary>
-                    <a onclick="goToProject('s1-projets', 'sae11')" class="project-link">SAE 1.1 - Risque Numérique</a>
-                    <a onclick="goToProject('s1-projets', 'sae12')" class="project-link">SAE 1.2 - Réseaux</a>
-                    <a onclick="goToProject('s1-projets', 'sae13')" class="project-link">SAE 1.3 - Transmission</a>
-                    <a onclick="goToProject('s1-projets', 'sae14')" class="project-link">SAE 1.4 - Portfolio Web</a>
+                    <a onclick="goToProject('s1-projets', 'sae11')" class="project-link">SAE 1.01 - Risque Numérique</a>
+                    <a onclick="goToProject('s1-projets', 'sae12')" class="project-link">SAE 1.02 - Réseaux</a>
+                    <a onclick="goToProject('s1-projets', 'sae13')" class="project-link">SAE 1.03 - Transmission</a>
+                    <a onclick="goToProject('s1-projets', 'sae14')" class="project-link">SAE 1.04 - Portfolio Web</a>
                 </details>
                 <details open class="sub-menu">
                     <summary>Semestre 2</summary>
-                    <a href="sae21-24.html" class="project-link">SAE 2.1 & 2.4 - Pépinière</a>
-                    <a onclick="goToProject('s2-projets', 'sae22')" class="project-link">SAE 2.2 - Mesures Signaux</a>
-                    <a onclick="goToProject('s2-projets', 'sae23')" class="project-link">SAE 2.3 - Portfolio Dynamique</a>
+                    <a href="sae21-24.html" class="project-link">SAE 2.01 & 2.04 - Pépinière</a>
+                    <a onclick="goToProject('s2-projets', 'sae22')" class="project-link">SAE 2.02 - Mesures Signaux</a>
+                    <a onclick="goToProject('s2-projets', 'sae23')" class="project-link">SAE 2.03 - Portfolio Dynamique</a>
                 </details>
             </details>
 
@@ -89,7 +89,10 @@
                     <a onclick="goToProject('s3-projets', 'sae303')" class="project-link">SAE 3.03 - Pépinière Multi-sites</a>
                     <a onclick="goToProject('s3-projets', 'sae304')" class="project-link">SAE 3.Cyber.04 - Découverte du Pentesting</a>
                 </details>
-                <div class="p-4 text-[10px] text-slate-500 uppercase italic">Accès restreint - Semestre 4</div>
+                <details open class="sub-menu">
+                    <summary>Semestre 4</summary>
+                    <a onclick="goToProject('s4-projets', 'sae41')" class="project-link">SAE 4.01 - Mesures Signaux</a>
+                </details>
             </details>
 
             <details>
@@ -296,79 +299,80 @@
                     </article>
 
                     <article id="sae304" class="project-card">
-    <h3 class="text-2xl font-bold text-white mb-4 italic">SAE 3.Cyber.04 : Découverte du Pentesting</h3>
-    <p class="text-slate-300 text-sm mb-6 leading-relaxed">
-        Cette SAE est dédiée à la cybersécurité offensive. À travers trois TP majeurs, j'ai appris à identifier, analyser et exploiter des vulnérabilités système et web dans un environnement contrôlé (Kali Linux).
-    </p>
-    
-    <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
-        <div class="space-y-4">
-            <h4 class="text-cyan-400 font-bold text-xs uppercase">Méthodologie & Analyse</h4>
-            <p class="text-[10px] text-slate-400 leading-relaxed">
-                Utilisation du score <strong>CVSS</strong> pour prioriser les risques. Analyse de vulnérabilités critiques comme les accès FTP anonymes, les mauvaises configurations Apache ou les failles d'applications Web (OWASP).
-            </p>
-            <div class="flex flex-wrap gap-2">
-                <span class="tech-badge">KALI LINUX</span>
-                <span class="tech-badge">NMAP</span>
-                <span class="tech-badge">METASPLOIT</span>
-                <span class="tech-badge">DOCKER</span>
-                <span class="tech-badge">BURP SUITE</span>
-            </div>
-        </div>
-        <div class="space-y-4">
-            <h4 class="text-cyan-400 font-bold text-xs uppercase">Compétences acquises</h4>
-            <ul class="text-[10px] space-y-2">
-                <li><i class="fas fa-crosshairs text-cyan-500 mr-2"></i> Reconnaissance réseau (Netdiscover, Nmap -sS -A)</li>
-                <li><i class="fas fa-biohazard text-cyan-500 mr-2"></i> Exploitation de failles (MS09-053, Reverse Shell)</li>
-                <li><i class="fas fa-code text-cyan-500 mr-2"></i> Web Hacking (SQL Injection, XXE, JWT Manipulation)</li>
-            </ul>
-        </div>
-    </div>
-
-    <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
-    <div class="p-4 bg-white/5 border border-white/10 rounded-lg flex flex-col justify-between">
-        <div>
-            <h5 class="text-[10px] font-bold text-cyan-400 mb-2 uppercase text-center">TP1 : Reconnaissance</h5>
-            <p class="text-[9px] text-slate-500 mb-3">Scan de la cible 172.31.25.248, découverte des ports SSH (22) et HTTP (1337), et décodage de secrets en Base64.</p>
-        </div>
-        <button onclick="openModal('static/image/R3.CYBER.04-TP1.pdf')" class="w-full py-2 bg-cyan-500/10 border border-cyan-500/30 text-cyan-400 text-[8px] font-bold uppercase rounded hover:bg-cyan-500 hover:text-white transition-all">
-            <i class="fas fa-file-pdf mr-1"></i> Voir le rapport
-        </button>
-    </div>
-
-    <div class="p-4 bg-white/5 border border-white/10 rounded-lg flex flex-col justify-between">
-        <div>
-            <h5 class="text-[10px] font-bold text-cyan-400 mb-2 uppercase text-center">TP2 : Exploitation</h5>
-            <p class="text-[9px] text-slate-500 mb-3">Analyse de la cible 172.31.25.222. Exploitation de vulnérabilités FTP et prise de contrôle via Meterpreter.</p>
-        </div>
-        <button onclick="openModal('static/image/R3.CYBER.04-TP2.pdf')" class="w-full py-2 bg-cyan-500/10 border border-cyan-500/30 text-cyan-400 text-[8px] font-bold uppercase rounded hover:bg-cyan-500 hover:text-white transition-all">
-            <i class="fas fa-file-pdf mr-1"></i> Voir le rapport
-        </button>
-    </div>
-
-    <div class="p-4 bg-white/5 border border-white/10 rounded-lg flex flex-col justify-between">
-        <div>
-            <h5 class="text-[10px] font-bold text-cyan-400 mb-2 uppercase text-center">TP3 : Sécurité Web</h5>
-            <p class="text-[9px] text-slate-500 mb-3">Audit de l'application OWASP Juice Shop. Challenges de hacking web : injection admin, exfiltration de DB et détournement de token.</p>
-        </div>
-        <button onclick="openModal('static/image/R3.CYBER.04-TP3.pdf')" class="w-full py-2 bg-cyan-500/10 border border-cyan-500/30 text-cyan-400 text-[8px] font-bold uppercase rounded hover:bg-cyan-500 hover:text-white transition-all">
-            <i class="fas fa-file-pdf mr-1"></i> Voir le rapport
-        </button>
-    </div>
-</div>
-
-<div id="pdfModal" class="fixed inset-0 z-[200] hidden bg-black/95 flex items-center justify-center p-4">
-    <div class="relative w-full max-w-5xl h-[90vh] bg-slate-900 rounded-xl border border-cyan-500/30 flex flex-col shadow-2xl">
-        <div class="p-4 border-b border-white/10 flex justify-between items-center bg-slate-900 rounded-t-xl">
-            <span class="text-cyan-400 font-bold text-xs uppercase tracking-widest italic">Explorateur de Documents</span>
-            <button onclick="closeModal()" class="text-slate-400 hover:text-white text-3xl p-2">&times;</button>
-        </div>
-        <iframe id="pdfFrame" src="" class="flex-1 w-full rounded-b-xl border-none"></iframe>
-    </div>
-</div>
-</article>
-
+                        <h3 class="text-2xl font-bold text-white mb-4 italic">SAE 3.Cyber.04 : Découverte du Pentesting</h3>
+                        <p class="text-slate-300 text-sm mb-6 leading-relaxed">
+                            Cette SAE est dédiée à la cybersécurité offensive. À travers trois TP majeurs, j'ai appris à identifier, analyser et exploiter des vulnérabilités système et web dans un environnement contrôlé (Kali Linux).
+                        </p>
+                        
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
+                            <div class="space-y-4">
+                                <h4 class="text-cyan-400 font-bold text-xs uppercase">Méthodologie & Analyse</h4>
+                                <p class="text-[10px] text-slate-400 leading-relaxed">
+                                    Utilisation du score <strong>CVSS</strong> pour prioriser les risques. Analyse de vulnérabilités critiques comme les accès FTP anonymes, les mauvaises configurations Apache ou les failles d'applications Web (OWASP).
+                                </p>
+                                <div class="flex flex-wrap gap-2">
+                                    <span class="tech-badge">KALI LINUX</span>
+                                    <span class="tech-badge">NMAP</span>
+                                    <span class="tech-badge">METASPLOIT</span>
+                                    <span class="tech-badge">DOCKER</span>
+                                    <span class="tech-badge">BURP SUITE</span>
+                                </div>
+                            </div>
+                            <div class="space-y-4">
+                                <h4 class="text-cyan-400 font-bold text-xs uppercase">Compétences acquises</h4>
+                                <ul class="text-[10px] space-y-2">
+                                    <li><i class="fas fa-crosshairs text-cyan-500 mr-2"></i> Reconnaissance réseau (Netdiscover, Nmap -sS -A)</li>
+                                    <li><i class="fas fa-biohazard text-cyan-500 mr-2"></i> Exploitation de failles (MS09-053, Reverse Shell)</li>
+                                    <li><i class="fas fa-code text-cyan-500 mr-2"></i> Web Hacking (SQL Injection, XXE, JWT Manipulation)</li>
+                                </ul>
+                            </div>
+                        </div>
+                    
+                        <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                        <div class="p-4 bg-white/5 border border-white/10 rounded-lg flex flex-col justify-between">
+                            <div>
+                                <h5 class="text-[10px] font-bold text-cyan-400 mb-2 uppercase text-center">TP1 : Reconnaissance</h5>
+                                <p class="text-[9px] text-slate-500 mb-3">Scan de la cible 172.31.25.248, découverte des ports SSH (22) et HTTP (1337), et décodage de secrets en Base64.</p>
+                            </div>
+                            <button onclick="openModal('static/image/R3.CYBER.04-TP1.pdf')" class="w-full py-2 bg-cyan-500/10 border border-cyan-500/30 text-cyan-400 text-[8px] font-bold uppercase rounded hover:bg-cyan-500 hover:text-white transition-all">
+                                <i class="fas fa-file-pdf mr-1"></i> Voir le rapport
+                            </button>
+                        </div>
+                    
+                        <div class="p-4 bg-white/5 border border-white/10 rounded-lg flex flex-col justify-between">
+                            <div>
+                                <h5 class="text-[10px] font-bold text-cyan-400 mb-2 uppercase text-center">TP2 : Exploitation</h5>
+                                <p class="text-[9px] text-slate-500 mb-3">Analyse de la cible 172.31.25.222. Exploitation de vulnérabilités FTP et prise de contrôle via Meterpreter.</p>
+                            </div>
+                            <button onclick="openModal('static/image/R3.CYBER.04-TP2.pdf')" class="w-full py-2 bg-cyan-500/10 border border-cyan-500/30 text-cyan-400 text-[8px] font-bold uppercase rounded hover:bg-cyan-500 hover:text-white transition-all">
+                                <i class="fas fa-file-pdf mr-1"></i> Voir le rapport
+                            </button>
+                        </div>
+                    
+                        <div class="p-4 bg-white/5 border border-white/10 rounded-lg flex flex-col justify-between">
+                            <div>
+                                <h5 class="text-[10px] font-bold text-cyan-400 mb-2 uppercase text-center">TP3 : Sécurité Web</h5>
+                                <p class="text-[9px] text-slate-500 mb-3">Audit de l'application OWASP Juice Shop. Challenges de hacking web : injection admin, exfiltration de DB et détournement de token.</p>
+                            </div>
+                            <button onclick="openModal('static/image/R3.CYBER.04-TP3.pdf')" class="w-full py-2 bg-cyan-500/10 border border-cyan-500/30 text-cyan-400 text-[8px] font-bold uppercase rounded hover:bg-cyan-500 hover:text-white transition-all">
+                                <i class="fas fa-file-pdf mr-1"></i> Voir le rapport
+                            </button>
+                        </div>
+                    </div>
+                    
+                    <div id="pdfModal" class="fixed inset-0 z-[200] hidden bg-black/95 flex items-center justify-center p-4">
+                        <div class="relative w-full max-w-5xl h-[90vh] bg-slate-900 rounded-xl border border-cyan-500/30 flex flex-col shadow-2xl">
+                            <div class="p-4 border-b border-white/10 flex justify-between items-center bg-slate-900 rounded-t-xl">
+                                <span class="text-cyan-400 font-bold text-xs uppercase tracking-widest italic">Explorateur de Documents</span>
+                                <button onclick="closeModal()" class="text-slate-400 hover:text-white text-3xl p-2">&times;</button>
+                            </div>
+                            <iframe id="pdfFrame" src="" class="flex-1 w-full rounded-b-xl border-none"></iframe>
+                        </div>
+                    </div>
+                    </article>
                 </div>
+                <div id="s4-projets" class="project-section">
+                    <h2 class="text-xl font-['Orbitron'] mb-10 text-cyan-400 uppercase tracking-widest border-b border-cyan-500/20 pb-2">Semestre  - </h2>
             </div>
         </main>
     </div>
