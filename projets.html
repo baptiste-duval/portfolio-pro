@@ -207,6 +207,7 @@
                 <details open class="sub-menu">
                     <summary>Semestre 5</summary>
                 <a onclick="goToProject('s5-projets', 'sae501')" class="project-link">SAE 5.01 - Infrastructure de TP basée sur des conteneurs</a>
+                    <a onclick="goToProject('s5-projets', 'sae503')" class="project-link">SAE 5.ROM.03 - Déployer et gérer les services ROM</a>
             </details>
         </aside>
 
@@ -693,6 +694,85 @@
                         </div>
                     </div>
                 </article>
+
+                <article id="sae503" class="project-card">
+    <h3 class="text-2xl font-bold text-white mb-4 italic">SAE 5.ROM.03 : Déployer et gérer les services ROM</h3>
+    <p class="text-slate-300 text-sm mb-6 leading-relaxed">
+        Ce projet consiste en la mise en place d'une infrastructure complète de <strong>communications unifiées</strong>. L'objectif était d'intégrer un autocommutateur IP (PABX) <strong>Asterisk</strong> au sein d'une interface web moderne, permettant non seulement la téléphonie classique sur IP, mais aussi la visio-conférence et la messagerie instantanée directement depuis un navigateur via <strong>WebRTC</strong>.
+    </p>
+
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
+        <div class="space-y-4">
+            <h4 class="text-cyan-400 font-bold text-xs uppercase">Infrastructure Voix & Vidéo</h4>
+            <p class="text-[10px] text-slate-400 leading-relaxed">
+                Déploiement d'un serveur <strong>Asterisk</strong> sous Alpine Linux pour la gestion des protocoles <strong>SIP</strong> et <strong>PJSIP</strong>. Configuration du <i>dialplan</i> (extensions.conf) pour l'acheminement des appels entre téléphones physiques Fanvil et clients web. Utilisation de <strong>SIP.js</strong> pour transformer le navigateur en softphone fonctionnel sans plugin additionnel.
+            </p>
+            <div class="flex flex-wrap gap-2">
+                <span class="tech-badge">ASTERISK (PJSIP)</span>
+                <span class="tech-badge">WEBRTC</span>
+                <span class="tech-badge">SIP.JS</span>
+                <span class="tech-badge">ALPINE LINUX</span>
+                <span class="tech-badge">AMI (MANAGER)</span>
+            </div>
+        </div>
+        <div class="space-y-4">
+            <h4 class="text-cyan-400 font-bold text-xs uppercase">Expertise Réseaux & Services</h4>
+            <ul class="text-[10px] space-y-2">
+                <li><i class="fas fa-phone-alt text-cyan-500 mr-2"></i> Configuration de terminaux SIP matériels et logiciels</li>
+                <li><i class="fas fa-exchange-alt text-cyan-500 mr-2"></i> Flux média Temps Réel (RTP/SRTP) et signalisation</li>
+                <li><i class="fas fa-shield-virus text-cyan-500 mr-2"></i> Sécurisation des flux (DTLS/SRTP) pour le WebRTC</li>
+                <li><i class="fas fa-search text-cyan-500 mr-2"></i> Analyse de protocoles avec Wireshark (Traces SIP)</li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mb-8">
+        <div class="p-4 bg-white/5 border border-white/10 rounded-lg flex flex-col justify-between">
+            <div>
+                <h5 class="text-[10px] font-bold text-cyan-400 mb-2 uppercase text-center">Serveur de Com'</h5>
+                <p class="text-[9px] text-slate-500 mb-3">Installation d'Asterisk sur VM légère. Configuration des comptes utilisateurs, des codecs audio/vidéo et gestion de l'interconnexion réseau.</p>
+            </div>
+            <div class="flex gap-2">
+                <span class="text-[8px] bg-cyan-500/20 text-cyan-300 px-2 py-1 rounded">PJSIP.CONF</span>
+                <span class="text-[8px] bg-cyan-500/20 text-cyan-300 px-2 py-1 rounded">DIALPLAN</span>
+            </div>
+        </div>
+
+        <div class="p-4 bg-white/5 border border-white/10 rounded-lg flex flex-col justify-between">
+            <div>
+                <h5 class="text-[10px] font-bold text-cyan-400 mb-2 uppercase text-center">Interface WebRTC</h5>
+                <p class="text-[9px] text-slate-500 mb-3">Développement d'un portail web intégrant la librairie SIP.js pour passer des appels vidéo et envoyer des messages instantanés entre navigateurs.</p>
+            </div>
+            <div class="flex gap-2">
+                <span class="text-[8px] bg-cyan-500/20 text-cyan-300 px-2 py-1 rounded">HTTPS/TLS</span>
+                <span class="text-[8px] bg-cyan-500/20 text-cyan-300 px-2 py-1 rounded">WEBSOCKETS</span>
+            </div>
+        </div>
+
+        <div class="p-4 bg-white/5 border border-white/10 rounded-lg flex flex-col justify-between">
+            <div>
+                <h5 class="text-[10px] font-bold text-cyan-400 mb-2 uppercase text-center">Audit & Sécurité</h5>
+                <p class="text-[9px] text-slate-500 mb-3">Analyse des vulnérabilités, mise en place de certificats SSL pour le contexte sécurisé et test d'interception de flux (MITM).</p>
+            </div>
+            <div class="flex gap-2">
+                <span class="text-[8px] bg-cyan-500/20 text-cyan-300 px-2 py-1 rounded">WIRESHARK</span>
+                <span class="text-[8px] bg-cyan-500/20 text-cyan-300 px-2 py-1 rounded">SSL/TLS</span>
+            </div>
+        </div>
+    </div>
+
+    <div class="p-6 bg-cyan-500/10 border border-cyan-500/30 rounded-lg flex flex-col md:flex-row justify-between items-center gap-4">
+        <div>
+            <h4 class="text-cyan-400 font-bold">Dossier Technique SAE 5.03 (ROM)</h4>
+            <p class="text-xs text-slate-400">Consultez le tutoriel détaillé, les captures Wireshark et le rapport de déploiement Asterisk.</p>
+        </div>
+        <div class="flex gap-3">
+            <button onclick="openModal('static/pdf/SAE503_Duval_Bauchart_Negrila.pdf')" class="px-4 py-2 bg-cyan-500 hover:bg-cyan-600 text-white text-xs font-bold rounded transition">
+                <i class="fas fa-file-pdf mr-2"></i> VOIR LE RAPPORT
+            </button>
+        </div>
+    </div>
+</article>
                 </div>
         </main>
 
