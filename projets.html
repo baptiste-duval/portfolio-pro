@@ -89,6 +89,7 @@
                     <a onclick="goToProject('s3-projets', 'sae301')" class="project-link">SAE 3.01 - Transmission Radio</a>
                     <a onclick="goToProject('s3-projets', 'sae302')" class="project-link">SAE 3.02 - Apps Communicantes</a>
                     <a onclick="goToProject('s3-projets', 'sae303')" class="project-link">SAE 3.03 - Pépinière Multi-sites</a>
+                    <a onclick="goToProject('s3-projets', 'sae34')" class="project-link">SAE 3.Cyber.04 - Pentesting</a>
                 </details>
                 <div class="p-4 text-[10px] text-slate-500 uppercase italic">Accès restreint - Semestre 4</div>
             </details>
@@ -212,7 +213,7 @@
                     <article id="sae301" class="project-card">
                         <h3 class="text-2xl font-bold text-white mb-4 italic">SAE 3.01 : Mise en œuvre d'un système de transmission</h3>
                         <p class="text-slate-300 text-sm mb-6 leading-relaxed">
-                            Projet de transmission sans fil avec <strong>ADALM-Pluto</strong> et <strong>GNU Radio</strong>. [cite_start]Analyse de spectres GSM/LTE et transmission vidéo en UDP. [cite: 1, 36, 51]
+                            Projet de transmission sans fil avec <strong>ADALM-Pluto</strong> et <strong>GNU Radio</strong>. Analyse de spectres GSM/LTE et transmission vidéo en UDP.
                         </p>
                         <iframe src="static/image/Rapport final-SAE301-Duval-Nicolas.pdf" class="w-full h-[450px] border border-white/10 rounded-lg"></iframe>
                     </article>
@@ -256,7 +257,7 @@
                         <div class="p-6 bg-cyan-500/10 border border-cyan-500/30 rounded-lg flex justify-between items-center">
                             <div>
                                 <h4 class="text-cyan-400 font-bold uppercase text-xs">Code Source & Documentation</h4>
-                                <p class="text-[10px] text-slate-400">Accès au GitLab de l'université / Drive (Python & Readme English).</p>
+                                <p class="text-[10px] text-slate-400">Accédez au projet via Drive.</p>
                             </div>
                             <a href="https://drive.google.com/drive/folders/1UHTykaae_LM6SGDBo1YG5gK9dVXAuSzh?usp=sharing" target="_blank" class="px-6 py-2 bg-cyan-500 text-white text-[10px] font-bold rounded hover:bg-cyan-600 transition-all">
                                 <i class="fab fa-google-drive mr-2"></i> VOIR LE PROJET COMPLET
@@ -267,35 +268,62 @@
                     <article id="sae303" class="project-card">
                         <h3 class="text-2xl font-bold text-white mb-4 italic">SAE 3.03 : Pépinière Multi-sites</h3>
                         <p class="text-slate-300 text-sm mb-6 leading-relaxed">
-                            Migration et redéploiement complet de l'informatique d'une entreprise vers une succursale distante. Ce projet inclut la sécurisation des échanges inter-sites et la mise en place de services distribués.
+                            Migration et redéploiement complet de l'informatique d'une entreprise vers une succursale distante.
                         </p>
-                        
-                        <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-6">
-                            <div class="space-y-2">
-                                <h4 class="text-cyan-400 font-bold text-[10px] uppercase">Réseau & Interconnexion</h4>
-                                <p class="text-[10px] text-slate-400">Routage inter-sites avec Cisco 800, redondance matérielle au siège et priorisation du trafic vidéo.</p>
-                                <div class="flex flex-wrap gap-2">
-                                    <span class="tech-badge">Cisco 800</span> <span class="tech-badge">VLAN 800</span> <span class="tech-badge">Redondance</span> <span class="tech-badge">QoS Video</span>
-                                </div>
-                            </div>
-                            <div class="space-y-2">
-                                <h4 class="text-cyan-400 font-bold text-[10px] uppercase">Services & Sécurité</h4>
-                                <p class="text-[10px] text-slate-400">Active Directory, DNS (maître/réplique), filtrage Proxy et centralisation des logs via Syslog.</p>
-                                <div class="flex flex-wrap gap-2">
-                                    <span class="tech-badge">Active Directory</span> <span class="tech-badge">DNS Replica</span> <span class="tech-badge">Proxy</span> <span class="tech-badge">Syslog</span>
-                                </div>
-                            </div>
-                        </div>
-
-                        
                         <div class="p-6 bg-cyan-500/10 border border-cyan-500/30 rounded-lg flex justify-between items-center">
                             <div>
                                 <h4 class="text-cyan-400 font-bold uppercase text-xs">Dossier Technique SAE 3.03</h4>
-                                <p class="text-[10px] text-slate-400">Schémas réseau, plans d'adressage et rapports de mise en production.</p>
+                                <p class="text-[10px] text-slate-400">Schémas réseau et rapports de mise en production.</p>
                             </div>
                             <a href="https://drive.google.com/drive/folders/1_W1aRgNGCUdDX7XzbECTuEN2ReQ5UJeP?usp=sharing" target="_blank" class="px-6 py-2 bg-cyan-500 text-white text-[10px] font-bold rounded hover:bg-cyan-600 transition-all">
                                 <i class="fab fa-google-drive mr-2"></i> VOIR LE PROJET
                             </a>
+                        </div>
+                    </article>
+
+                    <article id="sae34" class="project-card">
+                        <h3 class="text-2xl font-bold text-white mb-4 italic">SAE 3.Cyber.04 : Découverte du Pentesting</h3>
+                        <p class="text-slate-300 text-sm mb-6 leading-relaxed">
+                            Cette SAE est dédiée à la cybersécurité offensive. À travers trois TP majeurs, j'ai appris à identifier, analyser et exploiter des vulnérabilités système et web dans un environnement contrôlé (Kali Linux).
+                        </p>
+                        
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
+                            <div class="space-y-4">
+                                <h4 class="text-cyan-400 font-bold text-xs uppercase">Méthodologie & Analyse</h4>
+                                <p class="text-[10px] text-slate-400 leading-relaxed">
+                                    Utilisation du score <strong>CVSS</strong> pour prioriser les risques. Analyse de vulnérabilités critiques comme les accès FTP anonymes, les mauvaises configurations Apache ou les failles d'applications Web (OWASP).
+                                </p>
+                                <div class="flex flex-wrap gap-2">
+                                    <span class="tech-badge">KALI LINUX</span>
+                                    <span class="tech-badge">NMAP</span>
+                                    <span class="tech-badge">METASPLOIT</span>
+                                    <span class="tech-badge">DOCKER</span>
+                                    <span class="tech-badge">BURP SUITE</span>
+                                </div>
+                            </div>
+                            <div class="space-y-4">
+                                <h4 class="text-cyan-400 font-bold text-xs uppercase">Compétences acquises</h4>
+                                <ul class="text-[10px] space-y-2">
+                                    <li><i class="fas fa-crosshairs text-cyan-500 mr-2"></i> Reconnaissance réseau (Netdiscover, Nmap -sS -A)</li>
+                                    <li><i class="fas fa-biohazard text-cyan-500 mr-2"></i> Exploitation de failles (MS09-053, Reverse Shell)</li>
+                                    <li><i class="fas fa-code text-cyan-500 mr-2"></i> Web Hacking (SQL Injection, XXE, JWT Manipulation)</li>
+                                </ul>
+                            </div>
+                        </div>
+                    
+                        <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                            <div class="p-4 bg-white/5 border border-white/10 rounded-lg">
+                                <h5 class="text-[10px] font-bold text-cyan-400 mb-2 uppercase text-center">TP1 : Reconnaissance</h5>
+                                <p class="text-[9px] text-slate-500 mb-3">Scan de la cible 172.31.25.248, découverte des ports SSH (22) et HTTP (1337), et décodage de secrets en Base64.</p>
+                            </div>
+                            <div class="p-4 bg-white/5 border border-white/10 rounded-lg">
+                                <h5 class="text-[10px] font-bold text-cyan-400 mb-2 uppercase text-center">TP2 : Exploitation</h5>
+                                <p class="text-[9px] text-slate-500 mb-3">Analyse de la cible 172.31.25.222. Exploitation de vulnérabilités FTP et prise de contrôle via Meterpreter.</p>
+                            </div>
+                            <div class="p-4 bg-white/5 border border-white/10 rounded-lg">
+                                <h5 class="text-[10px] font-bold text-cyan-400 mb-2 uppercase text-center">TP3 : Sécurité Web</h5>
+                                <p class="text-[9px] text-slate-500 mb-3">Audit de l'application OWASP Juice Shop. Challenges de hacking web : injection admin, exfiltration de DB et détournement de token.</p>
+                            </div>
                         </div>
                     </article>
                 </div>
