@@ -9,7 +9,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&family=Fira+Code:wght@300;500&display=swap" rel="stylesheet">
     
     <style>
-        :root { --cyan: #00f2ff; --yellow: #f59e0b; --green: #10b981; }
+        :root { --cyan: #00f2ff; --yellow: #f59e0b; --green: #10b981; --red: #ef4444; }
         body { font-family: 'Fira Code', monospace; background-color: #020617; color: #e2e8f0; }
         #particles-js { position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: 1; }
         .main-content { position: relative; z-index: 10; }
@@ -48,6 +48,30 @@
             width: 400px;
         }
         .line-short { width: 2px; height: 30px; background: var(--cyan); }
+
+        /* Styles du Mini-Jeu */
+        #game-board {
+            width: 100%;
+            height: 300px;
+            background: rgba(0, 0, 0, 0.5);
+            border: 1px solid var(--cyan);
+            position: relative;
+            overflow: hidden;
+            border-radius: 8px;
+            cursor: crosshair;
+        }
+        .packet {
+            position: absolute;
+            width: 20px;
+            height: 20px;
+            background: var(--red);
+            border-radius: 4px;
+            box-shadow: 0 0 10px var(--red);
+            animation: fall linear forwards;
+        }
+        @keyframes fall {
+            to { top: 300px; }
+        }
 
         @media (max-width: 768px) {
             .split-line, .split-connectors { width: 100%; flex-direction: column; align-items: center; height: auto; border: none; background: none; }
@@ -103,6 +127,31 @@
                         </div>
                     </div>
                 </div>
+            </div>
+        </section>
+
+        <section class="max-w-5xl mx-auto mb-24">
+            <div class="flex items-center space-x-4 mb-8">
+                <div class="h-[2px] w-12 bg-red-500"></div>
+                <h2 class="text-xl font-bold font-['Orbitron'] uppercase text-white">Projet_Labo : Packet_Defender.exe</h2>
+            </div>
+            
+            <div class="content-box p-6 rounded-2xl border-l-2 border-red-500/50">
+                <p class="text-sm text-slate-400 mb-6 italic">"Un petit projet que j'ai réalisé pour illustrer la protection des flux réseaux contre les intrusions."</p>
+                
+                <div id="game-container" class="relative">
+                    <div class="flex justify-between mb-2 font-mono text-[10px] text-cyan-400">
+                        <span>SCORE: <span id="score-val">0</span></span>
+                        <span>SÉCURITÉ: <span id="health-val">100</span>%</span>
+                    </div>
+                    
+                    <div id="game-board">
+                        <div id="start-overlay" class="absolute inset-0 flex items-center justify-center bg-black/60 z-20">
+                            <button onclick="startGame()" class="px-6 py-2 border border-cyan-500 text-cyan-500 hover:bg-cyan-500 hover:text-black transition uppercase text-xs font-bold">Lancer la défense</button>
+                        </div>
+                    </div>
+                </div>
+                <p class="text-[9px] text-slate-500 mt-4 text-center uppercase tracking-widest font-mono">Cliquer sur les paquets corrompus (rouges) avant qu'ils n'infectent le système.</p>
             </div>
         </section>
 
@@ -186,6 +235,59 @@
                 "move": { "enable": true, "speed": 1 }
             }
         });
+
+        // Logique du Jeu
+        let score = 0;
+        let health = 100;
+        let gameInterval;
+
+        function startGame() {
+            score = 0;
+            health = 100;
+            document.getElementById('score-val').innerText = score;
+            document.getElementById('health-val').innerText = health;
+            document.getElementById('start-overlay').classList.add('hidden');
+            
+            gameInterval = setInterval(createPacket, 1000);
+        }
+
+        function createPacket() {
+            const board = document.getElementById('game-board');
+            const packet = document.createElement('div');
+            packet.className = 'packet';
+            packet.style.left = Math.random() * (board.offsetWidth - 20) + 'px';
+            packet.style.top = '-20px';
+            
+            // Vitesse aléatoire
+            const duration = Math.random() * 2 + 2; 
+            packet.style.animationDuration = duration + 's';
+
+            packet.onclick = function() {
+                score += 10;
+                document.getElementById('score-val').innerText = score;
+                this.remove();
+            };
+
+            board.appendChild(packet);
+
+            // Si le paquet touche le bas
+            setTimeout(() => {
+                if(packet.parentElement) {
+                    health -= 20;
+                    document.getElementById('health-val').innerText = health;
+                    packet.remove();
+                    if(health <= 0) endGame();
+                }
+            }, duration * 1000);
+        }
+
+        function endGame() {
+            clearInterval(gameInterval);
+            alert("Alerte Sécurité : Le système a été compromis. Score final : " + score);
+            document.getElementById('start-overlay').classList.remove('hidden');
+            // Nettoyage des paquets restants
+            document.querySelectorAll('.packet').forEach(p => p.remove());
+        }
     </script>
 </body>
 </html>
