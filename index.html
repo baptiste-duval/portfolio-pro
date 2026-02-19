@@ -11,7 +11,7 @@
     <style>
         :root { --neon-cyan: #00f2ff; }
         body { 
-            font-family: 'Fira+Code', monospace; 
+            font-family: 'Fira Code', monospace; 
             background-color: #020617;
             margin: 0;
             color: #e2e8f0;
@@ -33,7 +33,7 @@
             pointer-events: none;
         }
 
-        nav, header, section, footer, a, button, .card-skill, .content-box, iframe { 
+        nav, header, section, footer, a, button, .card-skill, .content-box, iframe, .tech-badge { 
             pointer-events: auto; 
         }
 
@@ -89,20 +89,40 @@
                 <p class="text-cyan-400 text-sm font-bold tracking-widest">Portfolio d'Ingénierie Réseaux, Systèmes & Cybersécurité</p>
             </div>
 
-            <div class="content-box p-10 rounded-2xl">
-                <h2 class="text-2xl font-bold mb-6 italic uppercase font-['Orbitron'] border-b border-white/10 pb-4 text-white">Profil Professionnel</h2>
-                <div class="text-slate-300 space-y-4 text-sm md:text-base leading-relaxed">
-                    <p>
-                        Je m'appelle <strong>Baptiste Duval</strong>. Actuellement en 3ème année de B.U.T. Réseaux et Télécommunications avec une spécialité en Cybersécurité.
-                    </p>
-                    <p>
-                        J'effectue mon cursus en alternance au sein de l'entreprise IT2i à La Bassée. Ce site a pour vocation de présenter mon parcours académique, mes compétences techniques et mes réalisations majeures.
-                    </p>
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+                <div class="content-box p-10 rounded-2xl">
+                    <h2 class="text-2xl font-bold mb-6 italic uppercase font-['Orbitron'] border-b border-white/10 pb-4 text-white">Profil Professionnel</h2>
+                    <div class="text-slate-300 space-y-4 text-sm md:text-base leading-relaxed">
+                        <p>
+                            Je m'appelle <strong>Baptiste Duval</strong>. Actuellement en 3ème année de B.U.T. Réseaux et Télécommunications avec une spécialité en Cybersécurité.
+                        </p>
+                        <p>
+                            J'effectue mon cursus en alternance au sein de l'entreprise IT2i à La Bassée. Ce site a pour vocation de présenter mon parcours académique, mes compétences techniques et mes réalisations majeures.
+                        </p>
+                    </div>
+                </div>
+
+                <div class="bg-black/50 rounded-2xl p-6 border border-cyan-500/30 font-mono text-xs shadow-2xl backdrop-blur-md h-full flex flex-col justify-center">
+                    <div class="flex gap-2 mb-4">
+                        <div class="w-3 h-3 rounded-full bg-red-500/50"></div>
+                        <div class="w-3 h-3 rounded-full bg-yellow-500/50"></div>
+                        <div class="w-3 h-3 rounded-full bg-green-500/50"></div>
+                        <span class="text-slate-500 ml-2">guest@baptiste-duval: ~</span>
+                    </div>
+                    <div class="space-y-2">
+                        <p><span class="text-green-400">➜</span> <span class="text-cyan-400">status</span> --current</p>
+                        <p class="text-slate-400 pl-4">[OK] Alternant chez IT2i</p>
+                        <p><span class="text-green-400">➜</span> <span class="text-cyan-400">spec</span> --focus</p>
+                        <p class="text-yellow-400 pl-4">> Cybersécurité & Cloud Infra</p>
+                        <p><span class="text-green-400">➜</span> <span class="text-cyan-400">ls</span> certifications/</p>
+                        <p class="text-slate-300 pl-4">CCNA, Stormshield_CSNA, ANSSI</p>
+                        <p><span class="text-green-400">➜</span> <span class="text-slate-400 italic animate-pulse">_</span></p>
+                    </div>
                 </div>
             </div>
         </header>
 
-        <section id="piliers" class="max-w-7xl mx-auto py-12 px-6 mb-24">
+        <section id="piliers" class="max-w-7xl mx-auto py-12 px-6 mb-12">
             <div class="flex items-center space-x-4 mb-12">
                 <div class="h-[2px] w-12 bg-cyan-500 shadow-[0_0_10px_#00f2ff]"></div>
                 <h2 class="text-2xl font-bold tracking-tighter uppercase neon-shadow font-['Orbitron']">Piliers de Compétences</h2>
@@ -155,13 +175,71 @@
                     </div>
                 </div>
             </div>
-            <div class="flex justify-center mt-12">
-    <a href="projets.html" class="group relative px-8 py-3 font-bold text-cyan-400 uppercase tracking-[0.2em] text-xs border border-cyan-500/30 hover:bg-cyan-500 hover:text-black transition-all duration-300">
-        <span class="relative z-10 italic">Accéder à l'historique des projets</span>
-        <div class="absolute inset-0 bg-cyan-500 blur-md opacity-0 group-hover:opacity-20 transition-opacity"></div>
-    </a>
-</div>
         </section>
+
+        <div class="grid grid-cols-2 md:grid-cols-4 gap-8 max-w-5xl mx-auto mb-24 py-10 border-y border-white/5">
+            <div class="text-center">
+                <div class="text-3xl font-bold text-white font-['Orbitron'] tracking-tighter">03</div>
+                <div class="text-[9px] text-cyan-400 uppercase tracking-widest">Années d'expérience</div>
+            </div>
+            <div class="text-center">
+                <div class="text-3xl font-bold text-white font-['Orbitron'] tracking-tighter">15+</div>
+                <div class="text-[9px] text-cyan-400 uppercase tracking-widest">Projets Réalisés</div>
+            </div>
+            <div class="text-center">
+                <div class="text-3xl font-bold text-white font-['Orbitron'] tracking-tighter">02</div>
+                <div class="text-[9px] text-cyan-400 uppercase tracking-widest">Certifications Pro</div>
+            </div>
+            <div class="text-center">
+                <div class="text-3xl font-bold text-white font-['Orbitron'] tracking-tighter">100%</div>
+                <div class="text-[9px] text-cyan-400 uppercase tracking-widest">Passion Tech</div>
+            </div>
+        </div>
+
+        <section class="max-w-7xl mx-auto py-12 px-6 mb-24">
+            <h2 class="text-xl font-bold mb-12 font-['Orbitron'] text-white italic"><i class="fas fa-microchip mr-4 text-cyan-400"></i>Ecosystème Technologique</h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+                <div class="content-box p-6 rounded-xl border-l-2 border-red-500">
+                    <h4 class="text-[10px] text-red-500 font-bold uppercase mb-4 tracking-widest">Infrastructure</h4>
+                    <div class="flex flex-wrap gap-2">
+                        <span class="tech-badge bg-slate-900 px-2 py-1 rounded text-[9px] border border-white/10">Cisco iOS</span>
+                        <span class="tech-badge bg-slate-900 px-2 py-1 rounded text-[9px] border border-white/10">VLAN/OSPF</span>
+                        <span class="tech-badge bg-slate-900 px-2 py-1 rounded text-[9px] border border-white/10">VMware/ESXi</span>
+                    </div>
+                </div>
+                <div class="content-box p-6 rounded-xl border-l-2 border-yellow-500">
+                    <h4 class="text-[10px] text-yellow-500 font-bold uppercase mb-4 tracking-widest">Cloud & DevOps</h4>
+                    <div class="flex flex-wrap gap-2">
+                        <span class="tech-badge bg-slate-900 px-2 py-1 rounded text-[9px] border border-white/10">Docker Swarm</span>
+                        <span class="tech-badge bg-slate-900 px-2 py-1 rounded text-[9px] border border-white/10">Kubernetes</span>
+                        <span class="tech-badge bg-slate-900 px-2 py-1 rounded text-[9px] border border-white/10">Ansible</span>
+                    </div>
+                </div>
+                <div class="content-box p-6 rounded-xl border-l-2 border-green-500">
+                    <h4 class="text-[10px] text-green-500 font-bold uppercase mb-4 tracking-widest">Cyber & Sec</h4>
+                    <div class="flex flex-wrap gap-2">
+                        <span class="tech-badge bg-slate-900 px-2 py-1 rounded text-[9px] border border-white/10">Stormshield</span>
+                        <span class="tech-badge bg-slate-900 px-2 py-1 rounded text-[9px] border border-white/10">Wireshark</span>
+                        <span class="tech-badge bg-slate-900 px-2 py-1 rounded text-[9px] border border-white/10">Kali Linux</span>
+                    </div>
+                </div>
+                <div class="content-box p-6 rounded-xl border-l-2 border-blue-500">
+                    <h4 class="text-[10px] text-blue-500 font-bold uppercase mb-4 tracking-widest">VoIP & Dev</h4>
+                    <div class="flex flex-wrap gap-2">
+                        <span class="tech-badge bg-slate-900 px-2 py-1 rounded text-[9px] border border-white/10">Asterisk</span>
+                        <span class="tech-badge bg-slate-900 px-2 py-1 rounded text-[9px] border border-white/10">Python/Bash</span>
+                        <span class="tech-badge bg-slate-900 px-2 py-1 rounded text-[9px] border border-white/10">WebRTC</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <div class="flex justify-center mb-24">
+            <a href="projets.html" class="group relative px-8 py-3 font-bold text-cyan-400 uppercase tracking-[0.2em] text-xs border border-cyan-500/30 hover:bg-cyan-500 hover:text-black transition-all duration-300">
+                <span class="relative z-10 italic">Accéder à l'historique des projets</span>
+                <div class="absolute inset-0 bg-cyan-500 blur-md opacity-0 group-hover:opacity-20 transition-opacity"></div>
+            </a>
+        </div>
 
         <section id="cv-section" class="max-w-5xl mx-auto py-12 px-6 mb-32">
             <div class="flex items-center space-x-4 mb-8">
