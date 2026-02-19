@@ -9,117 +9,184 @@
     <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&family=Fira+Code:wght@300;500&display=swap" rel="stylesheet">
     
     <style>
-        :root { --neon-cyan: #00f2ff; --neon-yellow: #f59e0b; }
-        body { font-family: 'Fira Code', monospace; background-color: #020617; color: #e2e8f0; }
+        :root { --cyan: #00f2ff; --yellow: #f59e0b; --green: #10b981; }
+        body { font-family: 'Fira Code', monospace; background-color: #020617; color: #e2e8f0; overflow-x: hidden; }
+        
         #particles-js { position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: 1; }
         .main-content { position: relative; z-index: 10; }
-        .glass-header { background: rgba(15, 23, 42, 0.9); backdrop-filter: blur(12px); border-bottom: 1px solid rgba(0, 242, 255, 0.2); }
-        .content-box { background: rgba(15, 23, 42, 0.6); border: 1px solid rgba(255, 255, 255, 0.1); backdrop-filter: blur(10px); }
-        
-        /* Style du Schéma Network */
-        .network-container { position: relative; padding: 40px; border-radius: 20px; background: radial-gradient(circle at center, rgba(0, 242, 255, 0.05) 0%, transparent 70%); }
-        .node { background: #0f172a; border: 2px solid #1e293b; transition: all 0.3s ease; position: relative; z-index: 2; }
-        .node:hover { border-color: var(--neon-cyan); box-shadow: 0 0 20px rgba(0, 242, 255, 0.2); transform: translateY(-5px); }
-        .line { position: absolute; background: linear-gradient(90deg, var(--neon-cyan), transparent); height: 2px; z-index: 1; opacity: 0.3; }
-        
-        /* Animation de flux */
-        .data-flow { position: absolute; width: 6px; height: 6px; background: var(--neon-cyan); border-radius: 50%; filter: blur(2px); animation: flow 3s infinite linear; }
-        @keyframes flow {
-            0% { left: 0; opacity: 0; }
-            50% { opacity: 1; }
-            100% { left: 100%; opacity: 0; }
+
+        /* Conteneur du schéma */
+        .infra-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr;
+            align-items: center;
+            gap: 2rem;
+            position: relative;
+            padding: 60px 20px;
         }
 
-        .master-card { border-left: 4px solid var(--neon-yellow); background: linear-gradient(90deg, rgba(245, 158, 11, 0.1), transparent); }
+        /* Style des "Nodes" (Équipements) */
+        .device-node {
+            background: rgba(15, 23, 42, 0.8);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 16px;
+            padding: 24px;
+            text-align: center;
+            position: relative;
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            z-index: 5;
+            backdrop-filter: blur(10px);
+        }
+
+        .device-node:hover {
+            transform: scale(1.05);
+            border-color: var(--cyan);
+            box-shadow: 0 0 30px rgba(0, 242, 255, 0.15);
+        }
+
+        /* Lignes de connexion SVG animées */
+        .connector-svg {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 2;
+        }
+
+        .path-line {
+            fill: none;
+            stroke: rgba(0, 242, 255, 0.2);
+            stroke-width: 2;
+            stroke-dasharray: 8;
+        }
+
+        .path-active {
+            fill: none;
+            stroke: var(--cyan);
+            stroke-width: 2;
+            stroke-dasharray: 50 150;
+            stroke-dashoffset: 200;
+            animation: flow 4s linear infinite;
+        }
+
+        @keyframes flow {
+            to { stroke-dashoffset: 0; }
+        }
+
+        .glow-cyan { filter: drop-shadow(0 0 8px var(--cyan)); }
+        .glow-yellow { filter: drop-shadow(0 0 8px var(--yellow)); }
+        
+        /* Master Card Styling */
+        .master-box {
+            background: linear-gradient(135deg, rgba(245, 158, 11, 0.05) 0%, rgba(15, 23, 42, 0.5) 100%);
+            border-left: 4px solid var(--yellow);
+        }
     </style>
 </head>
-<body class="overflow-x-hidden">
+<body>
 
     <div id="particles-js"></div>
 
-    <nav class="glass-header fixed top-0 w-full z-[100]">
-        <div class="max-w-7xl mx-auto px-6 h-20 flex items-center justify-between">
-            <div class="flex items-center space-x-3">
-                <a href="index.html" class="flex items-center space-x-3">
-                    <div class="w-8 h-8 border border-cyan-500 flex items-center justify-center rotate-45">
-                        <span class="rotate-[-45deg] font-bold text-cyan-400 text-xs">BD</span>
-                    </div>
-                    <span class="text-sm font-bold tracking-[0.2em] text-cyan-400 italic font-['Orbitron']">BAPTISTE_DUVAL.SYS</span>
-                </a>
-            </div>
-            <a href="index.html" class="text-[10px] uppercase font-bold tracking-widest hover:text-cyan-400 transition border border-white/10 px-4 py-2 rounded-full">
-                <i class="fas fa-power-off mr-2"></i> Retour Terminal
+    <nav class="fixed top-0 w-full z-[100] bg-slate-950/80 backdrop-blur-md border-b border-white/5">
+        <div class="max-w-7xl mx-auto px-6 h-20 flex items-center justify-between font-['Orbitron']">
+            <a href="index.html" class="flex items-center space-x-3 group">
+                <div class="w-8 h-8 border border-cyan-500 flex items-center justify-center rotate-45 group-hover:bg-cyan-500 transition-all">
+                    <span class="rotate-[-45deg] font-bold text-cyan-400 group-hover:text-black text-xs">BD</span>
+                </div>
+                <span class="text-sm font-bold tracking-widest text-cyan-400">BAPTISTE_DUVAL.EXE</span>
             </a>
+            <a href="index.html" class="text-[10px] uppercase tracking-widest hover:text-cyan-400 transition">01_Retour_Terminal</a>
         </div>
     </nav>
 
-    <main class="main-content pt-32 pb-20">
+    <main class="main-content pt-32 px-6">
         
-        <section class="max-w-6xl mx-auto px-6 mb-24">
-            <h2 class="text-xs font-bold text-yellow-500 uppercase tracking-[0.5em] mb-4">Prochaine Étape</h2>
-            <div class="master-card p-10 rounded-r-2xl">
-                <h1 class="text-3xl md:text-5xl font-black uppercase font-['Orbitron'] mb-4">Mastère Professionnel</h1>
-                <p class="text-xl text-white mb-6 font-light">Manager en infrastructures et cybersécurité des SI</p>
-                <div class="flex flex-wrap gap-4 mb-8">
-                    <span class="px-4 py-1 bg-yellow-500/20 border border-yellow-500/50 text-yellow-500 text-[10px] font-bold rounded-full uppercase">Alternance</span>
-                    <span class="px-4 py-1 bg-white/5 border border-white/10 text-white text-[10px] font-bold rounded-full uppercase">Niveau BAC+5</span>
-                    <span class="px-4 py-1 bg-white/5 border border-white/10 text-white text-[10px] font-bold rounded-full uppercase">Expertise SI</span>
+        <section class="max-w-5xl mx-auto mb-24">
+            <div class="master-box p-10 rounded-2xl relative overflow-hidden">
+                <div class="absolute -right-10 -top-10 text-[150px] text-yellow-500/5 rotate-12">
+                    <i class="fas fa-graduation-cap"></i>
                 </div>
-                <p class="max-w-2xl text-slate-400 leading-relaxed">
-                    Mon objectif est de piloter des infrastructures critiques tout en assurant une gouvernance de sécurité robuste. Je recherche un environnement dynamique pour relever les défis de la résilience numérique.
-                </p>
+                <h2 class="text-yellow-500 text-[10px] font-bold tracking-[0.5em] mb-4 uppercase">Horizon Académique</h2>
+                <h1 class="text-3xl md:text-5xl font-black font-['Orbitron'] text-white mb-4 uppercase">Mastère Professionnel</h1>
+                <p class="text-xl text-slate-300 font-medium mb-6 italic">Manager en infrastructures et cybersécurité des SI</p>
+                
+                <div class="flex flex-wrap gap-4 text-[10px] font-bold uppercase tracking-widest">
+                    <div class="bg-yellow-500 text-black px-4 py-1">Alternance désirée</div>
+                    <div class="border border-white/20 text-white px-4 py-1">Expertise Cyber</div>
+                    <div class="border border-white/20 text-white px-4 py-1">Management SI</div>
+                </div>
             </div>
         </section>
 
-        <section class="max-w-7xl mx-auto px-6">
-            <div class="text-center mb-16">
-                <h2 class="text-2xl font-bold font-['Orbitron'] uppercase tracking-widest italic">Homelab_Topology.v2</h2>
-                <div class="h-1 w-20 bg-cyan-500 mx-auto mt-4"></div>
+        <section class="max-w-6xl mx-auto mb-32">
+            <div class="flex items-center justify-between mb-12">
+                <div>
+                    <h2 class="text-2xl font-bold font-['Orbitron'] uppercase text-white tracking-tighter">Architecture_Résidentielle</h2>
+                    <p class="text-cyan-400 text-xs mt-1 uppercase tracking-widest">Homelab Network Topology v2.0</p>
+                </div>
+                <div class="hidden md:block text-right">
+                    <span class="text-[10px] text-slate-500 font-mono">STATUS: OPTIMIZED</span>
+                </div>
             </div>
 
-            <div class="network-container content-box border-white/5">
+            <div class="relative bg-slate-900/40 rounded-3xl border border-white/5 overflow-hidden">
                 
-                <div class="flex flex-col lg:flex-row items-center justify-around gap-12 lg:gap-4 relative">
+                <svg class="connector-svg" preserveAspectRatio="none">
+                    <path class="path-line" d="M 180 250 H 380" />
+                    <path class="path-active" d="M 180 250 H 380" />
                     
-                    <div class="node w-48 p-6 rounded-2xl text-center">
-                        <div class="absolute -top-3 left-1/2 -translate-x-1/2 bg-blue-600 text-[8px] px-2 py-0.5 rounded font-bold uppercase">WAN Interface</div>
-                        <i class="fas fa-globe text-3xl text-blue-400 mb-3"></i>
-                        <h4 class="text-xs font-bold uppercase tracking-widest text-white">Box Internet</h4>
-                        <p class="text-[9px] text-slate-500 mt-1">Passerelle</p>
+                    <path class="path-line" d="M 580 250 Q 680 250 680 150" />
+                    <path class="path-active" d="M 580 250 Q 680 250 680 150" />
+                    
+                    <path class="path-line" d="M 580 250 Q 680 250 680 350" />
+                    <path class="path-active" d="M 580 250 Q 680 250 680 350" />
+                </svg>
+
+                <div class="relative z-10 grid grid-cols-1 md:grid-cols-3 gap-12 md:gap-24 p-12 items-center">
+                    
+                    <div class="device-node">
+                        <div class="w-12 h-12 bg-blue-500/10 rounded-full flex items-center justify-center mx-auto mb-4 border border-blue-500/30">
+                            <i class="fas fa-globe text-blue-400"></i>
+                        </div>
+                        <h4 class="text-sm font-bold uppercase tracking-widest text-white">Box Internet</h4>
+                        <p class="text-[9px] text-slate-500 mt-2 font-mono">Gateway IP / Fiber</p>
                     </div>
 
-                    <i class="fas fa-chevron-right text-slate-700 hidden lg:block"></i>
-
-                    <div class="node w-56 p-6 rounded-2xl text-center border-cyan-500/50 bg-cyan-500/5 shadow-[0_0_30px_rgba(0,242,255,0.1)]">
-                        <i class="fas fa-microchip text-3xl text-cyan-400 mb-3"></i>
-                        <h4 class="text-xs font-bold uppercase tracking-widest text-cyan-400">Switch Core</h4>
-                        <p class="text-[9px] text-slate-400 mt-1">L2/L3 Management</p>
+                    <div class="device-node border-cyan-500/50 shadow-[0_0_40px_rgba(0,242,255,0.1)]">
+                        <div class="w-16 h-16 bg-cyan-500/20 rounded-xl flex items-center justify-center mx-auto mb-4 border border-cyan-500/50 glow-cyan">
+                            <i class="fas fa-microchip text-2xl text-cyan-400"></i>
+                        </div>
+                        <h4 class="text-sm font-bold uppercase tracking-widest text-cyan-400">Core Switch</h4>
+                        <p class="text-[9px] text-slate-400 mt-2 font-mono">L2/L3 Management</p>
+                        <div class="mt-4 flex justify-center gap-1">
+                            <div class="w-1 h-1 bg-green-500 rounded-full animate-pulse"></div>
+                            <div class="w-1 h-1 bg-green-500 rounded-full animate-pulse delay-75"></div>
+                            <div class="w-1 h-1 bg-green-500 rounded-full animate-pulse delay-150"></div>
+                        </div>
                     </div>
 
-                    <div class="hidden lg:block relative h-32 w-1">
-                         <div class="absolute h-full w-[2px] bg-slate-800 left-0"></div>
-                    </div>
-
-                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6 w-full lg:w-auto">
-                        <div class="node p-6 rounded-2xl border-l-4 border-yellow-500">
-                            <div class="flex items-start gap-4">
-                                <i class="fas fa-server text-2xl text-yellow-500"></i>
+                    <div class="flex flex-col gap-12">
+                        <div class="device-node border-l-4 border-yellow-500 text-left">
+                            <div class="flex items-center gap-4">
+                                <i class="fas fa-server text-xl text-yellow-500 glow-yellow"></i>
                                 <div>
-                                    <h4 class="text-xs font-bold uppercase text-white">Stockage & Web</h4>
-                                    <div class="flex flex-wrap gap-2 mt-2">
-                                        <span class="text-[8px] bg-white/5 px-2 py-0.5 rounded text-slate-400">NAS</span>
-                                        <span class="text-[8px] bg-white/5 px-2 py-0.5 rounded text-slate-400">SMB</span>
-                                        <span class="text-[8px] bg-white/5 px-2 py-0.5 rounded text-slate-400">Web Apache</span>
+                                    <h4 class="text-xs font-bold uppercase text-white">Storage NAS</h4>
+                                    <div class="flex flex-wrap gap-1 mt-2">
+                                        <span class="bg-yellow-500/10 text-yellow-500 text-[8px] px-2 py-0.5 rounded border border-yellow-500/20 uppercase font-bold">Web Server</span>
+                                        <span class="bg-yellow-500/10 text-yellow-500 text-[8px] px-2 py-0.5 rounded border border-yellow-500/20 uppercase font-bold">SMB Share</span>
                                     </div>
                                 </div>
                             </div>
                         </div>
-                        <div class="node p-6 rounded-2xl border-l-4 border-green-500">
-                            <div class="flex items-start gap-4">
-                                <i class="fas fa-desktop text-2xl text-green-500"></i>
+
+                        <div class="device-node border-l-4 border-green-500 text-left">
+                            <div class="flex items-center gap-4">
+                                <i class="fas fa-desktop text-xl text-green-500"></i>
                                 <div>
-                                    <h4 class="text-xs font-bold uppercase text-white">Admin PC</h4>
-                                    <p class="text-[9px] text-slate-500 mt-1">Poste de contrôle principal</p>
+                                    <h4 class="text-xs font-bold uppercase text-white">Workstation</h4>
+                                    <p class="text-[9px] text-slate-500 mt-1 uppercase">Admin & Dev Env</p>
                                 </div>
                             </div>
                         </div>
@@ -127,42 +194,42 @@
 
                 </div>
             </div>
-
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-8 mt-12">
-                <div class="content-box p-8 rounded-2xl">
-                    <h3 class="text-xs font-bold text-cyan-400 uppercase mb-4 tracking-widest italic">Protocoles Actifs</h3>
-                    <div class="space-y-2 text-xs text-slate-400">
-                        <div class="flex justify-between border-b border-white/5 pb-2"><span>File Sharing</span> <span class="text-white">SMB / NFS</span></div>
-                        <div class="flex justify-between border-b border-white/5 pb-2"><span>Web Services</span> <span class="text-white">HTTP/HTTPS</span></div>
-                        <div class="flex justify-between"><span>Management</span> <span class="text-white">SSH / SNMP</span></div>
-                    </div>
-                </div>
-                <div class="md:col-span-2 content-box p-8 rounded-2xl relative overflow-hidden">
-                    <div class="absolute top-0 right-0 p-4 opacity-10 text-6xl"><i class="fas fa-user-gear"></i></div>
-                    <h3 class="text-xs font-bold text-cyan-400 uppercase mb-4 tracking-widest italic">Philosophie Homelab</h3>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8 mt-12">
+                <div class="bg-white/5 border border-white/10 p-8 rounded-2xl backdrop-blur-sm">
+                    <h3 class="text-cyan-400 font-['Orbitron'] text-xs font-bold uppercase tracking-widest mb-4">Objectif Technique</h3>
                     <p class="text-sm text-slate-300 leading-relaxed">
-                        Mon infrastructure personnelle est mon principal terrain d'expérimentation. Elle me permet d'appliquer concrètement les principes de <strong>segmentation réseau</strong>, de <strong>redondance de données</strong> et d'auto-hébergement, renforçant ma capacité à résoudre des problèmes complexes en entreprise.
+                        Cette architecture me permet de pratiquer la <strong>segmentation par VLAN</strong>, de sécuriser mes flux de données locaux et d'automatiser le déploiement de mes services Web. C'est une réplique miniature mais fonctionnelle d'un SI d'entreprise.
                     </p>
+                </div>
+                <div class="bg-white/5 border border-white/10 p-8 rounded-2xl backdrop-blur-sm">
+                    <h3 class="text-cyan-400 font-['Orbitron'] text-xs font-bold uppercase tracking-widest mb-4">Services Hébergés</h3>
+                    <div class="grid grid-cols-2 gap-4">
+                        <div class="flex items-center gap-2 text-[10px] text-slate-400"><i class="fas fa-shield-alt text-cyan-500"></i> Firewalling local</div>
+                        <div class="flex items-center gap-2 text-[10px] text-slate-400"><i class="fas fa-database text-cyan-500"></i> RAID Storage</div>
+                        <div class="flex items-center gap-2 text-[10px] text-slate-400"><i class="fas fa-code text-cyan-500"></i> Dev Sandbox</div>
+                        <div class="flex items-center gap-2 text-[10px] text-slate-400"><i class="fas fa-link text-cyan-500"></i> Reverse Proxy</div>
+                    </div>
                 </div>
             </div>
         </section>
 
     </main>
 
-    <footer class="bg-slate-950/80 border-t border-cyan-500/20 pt-16 pb-8 px-6 mt-20 text-center">
-        <p class="text-[9px] text-slate-600 uppercase tracking-[0.4em]">&copy; 2026 BAPTISTE DUVAL // MASTER & INFRASTRUCTURE</p>
+    <footer class="py-12 border-t border-white/5 text-center">
+        <p class="text-[9px] text-slate-600 uppercase tracking-[0.4em] font-mono">BAPTISTE DUVAL // INFRASTRUCTURE & FUTUR // 2026</p>
     </footer>
 
     <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
     <script>
         particlesJS("particles-js", {
             "particles": {
-                "number": { "value": 50, "density": { "enable": true, "value_area": 800 } },
+                "number": { "value": 40, "density": { "enable": true, "value_area": 800 } },
                 "color": { "value": "#00f2ff" },
-                "opacity": { "value": 0.15 },
-                "size": { "value": 2 },
-                "line_linked": { "enable": true, "distance": 150, "color": "#00f2ff", "opacity": 0.05, "width": 1 },
-                "move": { "enable": true, "speed": 0.8 }
+                "opacity": { "value": 0.2 },
+                "size": { "value": 1 },
+                "line_linked": { "enable": true, "distance": 150, "color": "#00f2ff", "opacity": 0.1, "width": 1 },
+                "move": { "enable": true, "speed": 1 }
             }
         });
     </script>
