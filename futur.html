@@ -73,6 +73,15 @@
             to { top: 300px; }
         }
 
+        /* NOUVEAUX STYLES : TERMINAL */
+        .terminal-container { background: #010409; border: 1px solid #30363d; border-radius: 8px; overflow: hidden; }
+        .terminal-header { background: #161b22; padding: 10px 15px; display: flex; align-items: center; gap: 8px; border-bottom: 1px solid #30363d; }
+        .t-dot { width: 12px; height: 12px; border-radius: 50%; }
+        .terminal-body { padding: 15px; height: 300px; overflow-y: auto; font-size: 13px; color: #d0d7de; }
+        .terminal-input-area { display: flex; align-items: center; gap: 8px; padding: 0 15px 15px 15px; background: #010409; }
+        .t-input { background: transparent; border: none; outline: none; color: var(--green); width: 100%; }
+        .t-prompt { color: var(--green); font-weight: bold; }
+
         @media (max-width: 768px) {
             .split-line, .split-connectors { width: 100%; flex-direction: column; align-items: center; height: auto; border: none; background: none; }
             .split-line { display: none; }
@@ -126,6 +135,30 @@
                             <i class="fas fa-shield-virus mr-2 text-cyan-400"></i> Gestion de crise & Pentesting
                         </div>
                     </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="max-w-5xl mx-auto mb-24">
+            <div class="flex items-center space-x-4 mb-8">
+                <div class="h-[2px] w-12 bg-green-500"></div>
+                <h2 class="text-xl font-bold font-['Orbitron'] uppercase text-white">Baptiste_Shell.sh</h2>
+            </div>
+            
+            <div class="terminal-container">
+                <div class="terminal-header">
+                    <div class="t-dot bg-[#ff5f56]"></div>
+                    <div class="t-dot bg-[#ffbd2e]"></div>
+                    <div class="t-dot bg-[#27c93f]"></div>
+                    <span class="ml-2 text-[10px] text-slate-500 font-mono italic">bash — 80x24</span>
+                </div>
+                <div class="terminal-body" id="term-body">
+                    <div class="mb-2 text-cyan-400">Authentification réussie... Bienvenue Baptiste.</div>
+                    <div class="mb-2 text-slate-500 italic">Tapez 'help' pour la liste des commandes.</div>
+                </div>
+                <div class="terminal-input-area">
+                    <span class="t-prompt">baptiste@sys:~$</span>
+                    <input type="text" id="term-input" class="t-input" autofocus autocomplete="off">
                 </div>
             </div>
         </section>
@@ -233,6 +266,46 @@
                 "size": { "value": 1 },
                 "line_linked": { "enable": true, "distance": 150, "color": "#00f2ff", "opacity": 0.1 },
                 "move": { "enable": true, "speed": 1 }
+            }
+        });
+
+        // LOGIQUE DU TERMINAL
+        const tInput = document.getElementById('term-input');
+        const tBody = document.getElementById('term-body');
+        
+        const commands = {
+            'help': 'Commandes: ls, status, scan, whoami, clear',
+            'ls': 'Documents/  Projets/  Config_Infra.yml  Scripts/',
+            'status': 'Services System: [UP] <br>Firewall: [ACTIVE] <br>VLAN Segmentation: [OK]',
+            'whoami': 'Baptiste Duval. Administrateur du système et futur expert Cyber.',
+            'scan': 'Balayage du réseau local en cours... <br>192.168.1.1 -> [OK] <br>192.168.1.10 -> [SECURE] <br>Menaces détectées: 0',
+            'clear': 'CLEAR'
+        };
+
+        tInput.addEventListener('keydown', (e) => {
+            if (e.key === 'Enter') {
+                const cmd = tInput.value.toLowerCase().trim();
+                const line = document.createElement('div');
+                line.innerHTML = `<span class="t-prompt">baptiste@sys:~$</span> ${cmd}`;
+                tBody.appendChild(line);
+
+                if (commands[cmd]) {
+                    if (commands[cmd] === 'CLEAR') { tBody.innerHTML = ''; }
+                    else {
+                        const response = document.createElement('div');
+                        response.className = 'text-slate-400 mb-2 ml-2';
+                        response.innerHTML = commands[cmd];
+                        tBody.appendChild(response);
+                    }
+                } else if (cmd !== '') {
+                    const error = document.createElement('div');
+                    error.className = 'text-red-500 mb-2 ml-2';
+                    error.innerText = `bash: commande non trouvée: ${cmd}`;
+                    tBody.appendChild(error);
+                }
+                
+                tInput.value = '';
+                tBody.scrollTop = tBody.scrollHeight;
             }
         });
 
