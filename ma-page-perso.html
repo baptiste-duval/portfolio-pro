@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard Privé | Baptiste Duval</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&family=Fira+Code:wght@300;500&display=swap" rel="stylesheet">
+    <style>
+        body { font-family: 'Fira Code', monospace; background-color: #020617; color: #e2e8f0; }
+        .glass-card { background: rgba(255, 255, 255, 0.03); border: 1px solid rgba(255, 255, 255, 0.1); backdrop-filter: blur(10px); transition: all 0.3s ease; }
+        .glass-card:hover { border-color: #00f2ff; transform: translateY(-2px); box-shadow: 0 10px 20px -10px rgba(0, 242, 255, 0.3); }
+    </style>
+</head>
+<body class="min-h-screen">
+
+    <nav class="border-b border-white/10 px-8 py-4 flex justify-between items-center bg-slate-900/50">
+        <div class="flex items-center gap-4">
+            <div class="w-10 h-10 bg-cyan-500/20 border border-cyan-500 flex items-center justify-center rounded">
+                <i class="fas fa-terminal text-cyan-400 text-sm"></i>
+            </div>
+            <h1 class="font-['Orbitron'] text-sm font-bold tracking-tighter uppercase">Admin_Dashboard.exe</h1>
+        </div>
+        <button onclick="logout()" class="text-[10px] uppercase font-bold text-red-500 hover:text-red-400 transition">
+            <i class="fas fa-power-off mr-2"></i> Déconnexion
+        </button>
+    </nav>
+
+    <main class="max-w-6xl mx-auto p-8">
+        <header class="mb-12">
+            <h2 class="text-2xl font-bold font-['Orbitron'] text-white mb-2">Accès Rapide</h2>
+            <p class="text-slate-500 text-sm italic">// Gestionnaire de flux et d'infrastructures</p>
+        </header>
+
+        <div id="links-container" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            <div id="loader" class="text-cyan-400 animate-pulse text-xs uppercase tracking-widest">Initialisation du flux...</div>
+        </div>
+    </main>
+
+    <script>
+        const SUPABASE_URL = "https://xtdurfmmkuyrbpignxnm.supabase.co";
+        const SUPABASE_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Inh0ZHVyZm1ta3V5cmJwaWdueG5tIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzAyODM1MjYsImV4cCI6MjA4NTg1OTUyNn0.N3cX1vc3MOoitSUyQ__P4p_ZcLN4porG94DN38Vejmc";
+        const _supabase = supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
+
+        // 1. Sécurité : Vérifier si l'utilisateur est connecté
+        async function checkUser() {
+            const { data: { session } } = await _supabase.auth.getSession();
+            if (!session) {
+                window.location.href = "prive.html"; // Redirection si pas connecté
+            } else {
+                fetchLinks();
+            }
+        }
+
+        // 2. Récupérer les données de la table
+        async function fetchLinks() {
+            const { data: links, error } = await _supabase
+                .from('links')
+                .select('*')
+                .order('category', { ascending: true });
+
+            if (error) {
+                console.error('Erreur:', error);
+                document.getElementById('links-container').innerHTML = `<p class="text-red-500 font-bold">Erreur de chargement de la base : ${error.message}</p>`;
+                return;
+            }
+
+            renderLinks(links);
+        }
+
+        // 3. Afficher les liens
+        function renderLinks(links) {
+            const container = document.getElementById('links-container');
+            container.innerHTML = ''; // On vide le loader
+
+            if (links.length === 0) {
+                container.innerHTML = '<p class="text-slate-500 italic text-sm">Aucun lien disponible dans la table "links".</p>';
+                return;
+            }
+
+            links.forEach(link => {
+                const card = `
+                    <a href="${link.url}" target="_blank" class="glass-card p-6 rounded-xl flex flex-col justify-between group">
+                        <div>
+                            <span class="text-[9px] font-bold text-cyan-400/60 uppercase tracking-widest mb-1 block">${link.category || 'Général'}</span>
+                            <h3 class="text-white font-bold text-lg mb-2 group-hover:text-cyan-400 transition-colors">${link.label}</h3>
+                        </div>
+                        <div class="flex items-center justify-between mt-4">
+                            <span class="text-[10px] text-slate-500 font-mono truncate max-w-[80%]">${link.url}</span>
+                            <i class="fas fa-external-link-alt text-xs text-slate-500 group-hover:text-cyan-400 transition"></i>
+                        </div>
+                    </a>
+                `;
+                container.innerHTML += card;
+            });
+        }
+
+        // 4. Déconnexion
+        async function logout() {
+            await _supabase.auth.signOut();
+            window.location.href = "prive.html";
+        }
+
+        window.onload = checkUser;
+    </script>
+</body>
+</html>
