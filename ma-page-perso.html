@@ -43,13 +43,21 @@
     </main>
 
     <script>
-        const SUPABASE_URL = "https://xtdurfmmkuyrbpignxnm.supabase.co";
+       const SUPABASE_URL = "https://xtdurfmmkuyrbpignxnm.supabase.co";
         const SUPABASE_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Inh0ZHVyZm1ta3V5cmJwaWdueG5tIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzAyODM1MjYsImV4cCI6MjA4NTg1OTUyNn0.N3cX1vc3MOoitSUyQ__P4p_ZcLN4porG94DN38Vejmc";
-        const UNSPLASH_KEY = "t3bBCBXt-C7y2DE9owhXkMJGlhTVMJBFCRxTXFCBSrU"; // Remplace par ta clé Unsplash
+        const UNSPLASH_KEY = "TA_CLE_UNSPLASH_ICI"; 
         const _supabase = supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
-
+        
         let allLinks = [];
-
+        
+        // 1. Initialisation
+        async function init() {
+            const { data: { session } } = await _supabase.auth.getSession();
+            if (!session) window.location.href = "prive.html";
+            else fetchLinks();
+        }
+        
+        // 2. Récupération des données
         async function fetchLinks() {
             const { data, error } = await _supabase.from('links').select('*').order('created_at', { ascending: false });
             if (!error) {
@@ -57,9 +65,9 @@
                 updateUI();
             }
         }
-
+        
+        // 3. Mise à jour des filtres et de la grille
         function updateUI() {
-            // Boutons de filtres
             const filterBar = document.getElementById('filter-bar');
             const cats = [...new Set(allLinks.map(l => l.category))];
             filterBar.innerHTML = `<button onclick="filterLinks('ALL')" id="btn-ALL" class="filter-btn active-filter">TOUT (${allLinks.length})</button>`;
@@ -69,58 +77,60 @@
             });
             renderLinks(allLinks);
         }
-
-        function renderLinks(list) {
+        
+        // 4. RENDU AUTOMATIQUE (C'est ici que la magie opère)
+        async function renderLinks(list) {
             const container = document.getElementById('links-container');
-            container.innerHTML = list.map(link => `
-                <div class="glass-card flex flex-col">
-                    <div class="h-44 w-full bg-slate-800">
-                        <img src="${link.image_url || 'https://via.placeholder.com/400x300?text=Scan+Error'}" class="w-full h-full object-cover opacity-80 hover:opacity-100 transition duration-500">
-                    </div>
-                    <div class="p-5">
-                        <div class="flex justify-between items-start mb-2">
-                            <span class="text-[8px] font-bold text-cyan-400 border border-cyan-400/30 px-2 py-0.5 rounded uppercase">${link.category}</span>
-                            <button onclick="deleteLink(${link.id})" class="text-slate-600 hover:text-red-500 transition"><i class="fas fa-trash-alt"></i></button>
+            container.innerHTML = '';
+        
+            for (const link of list) {
+                // Si l'image est vide dans la BDD, on génère une URL de recherche dynamique
+                // On utilise Source Unsplash qui est plus rapide pour l'affichage direct
+                const autoImage = link.image_url || `https://source.unsplash.com/featured/?${encodeURIComponent(link.label)}`;
+        
+                container.innerHTML += `
+                    <div class="glass-card flex flex-col">
+                        <div class="h-44 w-full bg-slate-800">
+                            <img src="${autoImage}" 
+                                 alt="${link.label}"
+                                 onerror="this.src='https://via.placeholder.com/400x300?text=Image+Not+Found'"
+                                 class="w-full h-full object-cover opacity-80 hover:opacity-100 transition duration-500">
                         </div>
-                        <h3 class="text-white font-bold text-md mb-4">${link.label}</h3>
-                        <a href="${link.url}" target="_blank" class="block w-full py-2 bg-white/5 border border-white/10 text-center text-[9px] font-bold uppercase tracking-widest hover:bg-cyan-500 hover:text-black transition rounded">Connexion Directe</a>
+                        <div class="p-5">
+                            <div class="flex justify-between items-start mb-2">
+                                <span class="text-[8px] font-bold text-cyan-400 border border-cyan-400/30 px-2 py-0.5 rounded uppercase">${link.category}</span>
+                                <button onclick="deleteLink(${link.id})" class="text-slate-600 hover:text-red-500 transition"><i class="fas fa-trash-alt"></i></button>
+                            </div>
+                            <h3 class="text-white font-bold text-md mb-4">${link.label}</h3>
+                            <a href="${link.url}" target="_blank" class="block w-full py-2 bg-white/5 border border-white/10 text-center text-[9px] font-bold uppercase tracking-widest hover:bg-cyan-500 hover:text-black transition rounded">Connexion Directe</a>
+                        </div>
                     </div>
-                </div>
-            `).join('');
+                `;
+            }
         }
-
+        
+        // 5. Ajout manuel via formulaire
         const form = document.getElementById('add-link-form');
         form.addEventListener('submit', async (e) => {
             e.preventDefault();
             const btn = document.getElementById('submit-btn');
-            const label = document.getElementById('label').value;
-            
-            btn.innerText = "Scanning Web...";
+            btn.innerText = "Injection...";
             btn.disabled = true;
-
-            // Recherche d'image automatique
-            let imageUrl = "";
-            try {
-                const res = await fetch(`https://api.unsplash.com/search/photos?query=${encodeURIComponent(label)}&per_page=1&client_id=${UNSPLASH_KEY}`);
-                const data = await res.json();
-                if (data.results.length > 0) imageUrl = data.results[0].urls.regular;
-            } catch (err) { console.error("Unsplash error"); }
-
-            const { error } = await _supabase.from('links').insert([{
-                label: label,
-                url: document.getElementById('url').value,
-                category: document.getElementById('category').value.toUpperCase(),
-                image_url: imageUrl
-            }]);
-
+        
+            const label = document.getElementById('label').value;
+            const url = document.getElementById('url').value;
+            const category = document.getElementById('category').value.toUpperCase();
+        
+            // On insère sans image_url, le renderLinks s'occupera de la trouver
+            const { error } = await _supabase.from('links').insert([{ label, url, category }]);
+        
             if (!error) {
                 form.reset();
                 fetchLinks();
             }
-            btn.innerText = "Injecter + Image";
+            btn.innerText = "Injecter dans la BDD";
             btn.disabled = false;
         });
-
         async function deleteLink(id) {
             if(confirm("Supprimer l'entrée ?")) {
                 await _supabase.from('links').delete().eq('id', id);
