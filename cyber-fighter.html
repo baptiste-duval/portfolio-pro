@@ -31,140 +31,151 @@
 
     <script>
         let scene, camera, renderer, gun;
-        let bullets = [];
-        let targets = [];
-        let obstacles = [];
-        let moveForward = false, moveBackward = false, moveLeft = false, moveRight = false;
-        let velocity = new THREE.Vector3();
-        let direction = new THREE.Vector3();
-        
-        // Configuration des touches
-        const keyMap = { 'KeyW': 'fwd', 'KeyS': 'bkwd', 'KeyA': 'left', 'KeyD': 'right', 
-                         'ArrowUp': 'fwd', 'ArrowDown': 'bkwd', 'ArrowLeft': 'left', 'ArrowRight': 'right' };
-        
-        init();
-        animate();
-        
-        function init() {
-            scene = new THREE.Scene();
-            scene.background = new THREE.Color(0x020617);
-            scene.fog = new THREE.FogExp2(0x020617, 0.05);
-        
-            camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
-            camera.position.set(0, 1.6, 5); 
-        
-            // Lumières
-            const ambientLight = new THREE.AmbientLight(0x404040, 0.5);
-            scene.add(ambientLight);
-            const sun = new THREE.DirectionalLight(0x00f2ff, 1);
-            sun.position.set(10, 10, 10);
-            scene.add(sun);
-        
-            // Sol
-            const grid = new THREE.GridHelper(200, 50, 0x00f2ff, 0x050505);
-            scene.add(grid);
-        
-            // L'ARME
-            const gunGeo = new THREE.BoxGeometry(0.1, 0.15, 0.5);
-            const gunMat = new THREE.MeshPhongMaterial({ color: 0x111111, emissive: 0x00f2ff });
-            gun = new THREE.Mesh(gunGeo, gunMat);
-            scene.add(gun);
-        
-            // CRÉATION D'OBJETS MOBILES (OBSTACLES)
-            for(let i=0; i<15; i++) {
-                const obsGeo = new THREE.BoxGeometry(2, 4, 2);
-                const obsMat = new THREE.MeshPhongMaterial({ color: 0x001111, wireframe: false, emissive: 0x00f2ff, emissiveIntensity: 0.1 });
-                const obs = new THREE.Mesh(obsGeo, obsMat);
-                obs.position.set((Math.random()-0.5)*60, 2, (Math.random()-0.5)*60);
-                obs.userData.speed = Math.random() * 0.05 + 0.02;
-                scene.add(obs);
-                obstacles.push(obs);
+let bullets = [];
+let targets = [];
+let obstacles = [];
+let velocity = new THREE.Vector3();
+let moveState = { fwd: false, bkwd: false, left: false, right: false };
+
+const keyMap = { 
+    'KeyW': 'fwd', 'KeyS': 'bkwd', 'KeyA': 'left', 'KeyD': 'right', 
+    'KeyZ': 'fwd', // Pour les claviers AZERTY
+    'ArrowUp': 'fwd', 'ArrowDown': 'bkwd', 'ArrowLeft': 'left', 'ArrowRight': 'right' 
+};
+
+init();
+animate();
+
+function init() {
+    scene = new THREE.Scene();
+    scene.background = new THREE.Color(0x010409);
+    scene.fog = new THREE.FogExp2(0x010409, 0.04);
+
+    camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
+    camera.position.set(0, 1.6, 5); // Taille humaine fixe
+    camera.rotation.order = 'YXZ'; // Important pour éviter les bugs de rotation
+
+    // Lumières
+    scene.add(new THREE.AmbientLight(0x404040, 0.8));
+    const hemiLight = new THREE.HemisphereLight(0x00f2ff, 0xff0055, 0.5);
+    scene.add(hemiLight);
+
+    // Sol Techno
+    const grid = new THREE.GridHelper(200, 40, 0x00f2ff, 0x020617);
+    scene.add(grid);
+
+    // L'ARME
+    const gunGeo = new THREE.BoxGeometry(0.12, 0.18, 0.6);
+    const gunMat = new THREE.MeshPhongMaterial({ color: 0x111111, emissive: 0x00f2ff, emissiveIntensity: 0.5 });
+    gun = new THREE.Mesh(gunGeo, gunMat);
+    scene.add(gun);
+
+    // ENNEMIS LUMINEUX
+    for(let i=0; i<12; i++) createTarget();
+
+    renderer = new THREE.WebGLRenderer({ antialias: true });
+    renderer.setSize(window.innerWidth, window.innerHeight);
+    document.body.appendChild(renderer.domElement);
+
+    // CONTRÔLES SOURIS (Axe Y Corrigé)
+    document.body.onclick = () => { document.body.requestPointerLock(); };
+    document.addEventListener('mousemove', (e) => {
+        if (document.pointerLockElement) {
+            camera.rotation.y -= e.movementX * 0.002;
+            camera.rotation.x -= e.movementY * 0.002; // Standard : Souris Haut = Regarde Haut
+            camera.rotation.x = Math.max(-Math.PI/2, Math.min(Math.PI/2, camera.rotation.x));
+        }
+    });
+
+    // CONTRÔLES CLAVIER
+    document.addEventListener('keydown', (e) => { if(keyMap[e.code]) moveState[keyMap[e.code]] = true; });
+    document.addEventListener('keyup', (e) => { if(keyMap[e.code]) moveState[keyMap[e.code]] = false; });
+
+    window.onmousedown = () => { if(document.pointerLockElement) shoot(); };
+}
+
+function createTarget() {
+    // Sphère rouge brillante
+    const tGeo = new THREE.SphereGeometry(0.7, 16, 16);
+    const tMat = new THREE.MeshStandardMaterial({ 
+        color: 0xff0000, 
+        emissive: 0xff0000, 
+        emissiveIntensity: 2,
+        roughness: 0
+    });
+    const t = new THREE.Mesh(tGeo, tMat);
+    
+    // Position aléatoire au sol
+    t.position.set((Math.random()-0.5)*60, 1.2, (Math.random()-0.5)*60);
+    
+    // Petite lumière attachée à la cible pour qu'on la voit de loin
+    const light = new THREE.PointLight(0xff0000, 1, 5);
+    t.add(light);
+    
+    scene.add(t);
+    targets.push(t);
+}
+
+function shoot() {
+    const b = new THREE.Mesh(
+        new THREE.CylinderGeometry(0.02, 0.02, 0.8), 
+        new THREE.MeshBasicMaterial({color: 0x00f2ff})
+    );
+    b.rotation.copy(camera.rotation);
+    b.rotation.x += Math.PI/2;
+    b.position.copy(camera.position);
+    
+    const dir = new THREE.Vector3(0, 0, -1).applyQuaternion(camera.quaternion);
+    b.userData.velocity = dir.multiplyScalar(1.5);
+    scene.add(b);
+    bullets.push(b);
+}
+
+function animate() {
+    requestAnimationFrame(animate);
+
+    // LOGIQUE DE MOUVEMENT (CORRIGÉE)
+    const speed = 0.15;
+    const dirZ = new THREE.Vector3(0, 0, -1).applyQuaternion(camera.quaternion);
+    const dirX = new THREE.Vector3(1, 0, 0).applyQuaternion(camera.quaternion);
+    
+    // On annule la composante Y pour ne pas s'envoler
+    dirZ.y = 0; dirZ.normalize();
+    dirX.y = 0; dirX.normalize();
+
+    if (moveState.fwd) camera.position.addScaledVector(dirZ, speed);
+    if (moveState.bkwd) camera.position.addScaledVector(dirZ, -speed);
+    if (moveState.left) camera.position.addScaledVector(dirX, -speed);
+    if (moveState.right) camera.position.addScaledVector(dirX, speed);
+
+    // Garder le joueur au sol (Y = 1.6)
+    camera.position.y = 1.6;
+
+    // Animation des cibles (elles flottent et brillent)
+    targets.forEach(t => {
+        t.position.y = 1.2 + Math.sin(Date.now() * 0.003) * 0.3;
+        t.material.emissiveIntensity = 1 + Math.sin(Date.now() * 0.005);
+    });
+
+    // Arme
+    gun.position.copy(camera.position);
+    gun.quaternion.copy(camera.quaternion);
+    gun.translateX(0.35); gun.translateY(-0.25); gun.translateZ(-0.6);
+
+    // Projectiles
+    bullets.forEach((b, i) => {
+        b.position.add(b.userData.velocity);
+        targets.forEach((t, ti) => {
+            if(b.position.distanceTo(t.position) < 1.2) {
+                scene.remove(t); targets.splice(ti, 1); createTarget();
+                scene.remove(b); bullets.splice(i, 1);
             }
-        
-            // ENNEMIS
-            for(let i=0; i<8; i++) createTarget();
-        
-            renderer = new THREE.WebGLRenderer({ antialias: true });
-            renderer.setSize(window.innerWidth, window.innerHeight);
-            document.body.appendChild(renderer.domElement);
-        
-            // CONTRÔLES SOURIS (CORRIGÉ : Axe Y inversé supprimé)
-            document.body.onclick = () => { document.body.requestPointerLock(); };
-            document.addEventListener('mousemove', (e) => {
-                if (document.pointerLockElement) {
-                    camera.rotation.y -= e.movementX * 0.002;
-                    // ICI : On a changé le signe (+ au lieu de -) pour rétablir la direction naturelle
-                    camera.rotation.x -= e.movementY * 0.002; 
-                    camera.rotation.x = Math.max(-Math.PI/2, Math.min(Math.PI/2, camera.rotation.x));
-                }
-            });
-        
-            // CONTRÔLES CLAVIER
-            const onKey = (val) => (e) => { if(keyMap[e.code]) moveState[keyMap[e.code]] = val; };
-            const moveState = { fwd: false, bkwd: false, left: false, right: false };
-            document.addEventListener('keydown', (e) => { if(keyMap[e.code]) moveState[keyMap[e.code]] = true; });
-            document.addEventListener('keyup', (e) => { if(keyMap[e.code]) moveState[keyMap[e.code]] = false; });
-            window.moveState = moveState; // Rendre accessible pour animate
-        
-            window.onmousedown = () => { if(document.pointerLockElement) shoot(); };
-        }
-        
-        function shoot() {
-            const b = new THREE.Mesh(new THREE.SphereGeometry(0.1), new THREE.MeshBasicMaterial({color: 0x00f2ff}));
-            b.position.copy(camera.position);
-            const dir = new THREE.Vector3(0, 0, -1).applyQuaternion(camera.quaternion);
-            b.userData.velocity = dir.multiplyScalar(1.2);
-            scene.add(b);
-            bullets.push(b);
-        }
-        
-        function createTarget() {
-            const t = new THREE.Mesh(new THREE.OctahedronGeometry(0.6), new THREE.MeshPhongMaterial({color: 0xff0055, wireframe: true}));
-            t.position.set((Math.random()-0.5)*50, 1.5, (Math.random()-0.5)*50);
-            scene.add(t);
-            targets.push(t);
-        }
-        
-        function animate() {
-            requestAnimationFrame(animate);
-            const state = window.moveState;
-        
-            // LOGIQUE DE DÉPLACEMENT
-            direction.z = Number(state.fwd) - Number(state.bkwd);
-            direction.x = Number(state.right) - Number(state.left);
-            direction.normalize();
-        
-            if (state.fwd || state.bkwd) velocity.z -= direction.z * 0.02;
-            if (state.left || state.right) velocity.x -= direction.x * 0.02;
-        
-            camera.translateX(-velocity.x);
-            camera.translateZ(-velocity.z);
-            velocity.multiplyScalar(0.9); // Friction (ralentissement)
-        
-            // ANIMATION DES OBSTACLES
-            obstacles.forEach(obs => {
-                obs.position.z += obs.userData.speed;
-                if(obs.position.z > 40) obs.position.z = -40; // Loop
-                obs.rotation.y += 0.01;
-            });
-        
-            // Arme
-            gun.position.copy(camera.position);
-            gun.quaternion.copy(camera.quaternion);
-            gun.translateX(0.3); gun.translateY(-0.2); gun.translateZ(-0.5);
-        
-            // Bullets & Collisions
-            bullets.forEach((b, i) => {
-                b.position.add(b.userData.velocity);
-                targets.forEach((t, ti) => {
-                    if(b.position.distanceTo(t.position) < 1) {
-                        scene.remove(t); targets.splice(ti, 1); createTarget();
-                    }
-                });
-            });
-        
-            renderer.render(scene, camera);
-        }
+        });
+        if(b.position.distanceTo(camera.position) > 100) { scene.remove(b); bullets.splice(i, 1); }
+    });
+
+    renderer.render(scene, camera);
+}
     </script>
 </body>
 </html>
