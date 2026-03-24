@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <title>Mini Packet Tracer Clone</title>
+    <style>
+        body { font-family: sans-serif; margin: 0; overflow: hidden; background: #f0f2f5; }
+        #toolbar { height: 50px; background: #333; color: white; display: flex; align-items: center; padding: 0 20px; gap: 10px; }
+        canvas { background: white; cursor: crosshair; display: block; }
+        .btn { padding: 5px 15px; cursor: pointer; background: #444; border: 1px solid #666; color: white; border-radius: 4px; }
+        .btn:hover { background: #555; }
+    </style>
+</head>
+<body>
+
+<div id="toolbar">
+    <strong>Outils :</strong>
+    <button class="btn" onclick="setMode('node')">Ajouter PC</button>
+    <button class="btn" onclick="setMode('link')">Relier (Câble)</button>
+    <span id="status">Mode : Sélection</span>
+</div>
+
+<canvas id="networkCanvas"></canvas>
+
+<script>
+    const canvas = document.getElementById('networkCanvas');
+    const ctx = canvas.getContext('2d');
+    const statusTxt = document.getElementById('status');
+    
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight - 50;
+
+    let nodes = [];
+    let links = [];
+    let mode = 'select'; // select, node, link
+    let selectedNode = null;
+
+    // Classe pour représenter un équipement
+    class Node {
+        constructor(x, y, label) {
+            this.x = x;
+            this.y = y;
+            this.label = label;
+            this.radius = 20;
+        }
+        draw() {
+            ctx.beginPath();
+            ctx.arc(this.x, this.y, this.radius, 0, Math.PI * 2);
+            ctx.fillStyle = "#0078d4";
+            ctx.fill();
+            ctx.fillStyle = "black";
+            ctx.fillText(this.label, this.x - 15, this.y + 35);
+        }
+    }
+
+    function setMode(newMode) {
+        mode = newMode;
+        statusTxt.innerText = "Mode : " + (mode === 'node' ? "Ajout de PC" : "Liaison");
+    }
+
+    canvas.addEventListener('mousedown', (e) => {
+        const rect = canvas.getBoundingClientRect();
+        const mouseX = e.clientX - rect.left;
+        const mouseY = e.clientY - rect.top;
+
+        if (mode === 'node') {
+            nodes.push(new Node(mouseX, mouseY, "PC-" + (nodes.length + 1)));
+            render();
+        } 
+        else if (mode === 'link') {
+            const clickedNode = nodes.find(n => Math.hypot(n.x - mouseX, n.y - mouseY) < n.radius);
+            if (clickedNode) {
+                if (!selectedNode) {
+                    selectedNode = clickedNode;
+                } else if (selectedNode !== clickedNode) {
+                    links.push({ start: selectedNode, end: clickedNode });
+                    selectedNode = null;
+                    render();
+                }
+            }
+        }
+    });
+
+    function render() {
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+        
+        // Dessiner les câbles
+        ctx.strokeStyle = "#666";
+        ctx.lineWidth = 2;
+        links.forEach(l => {
+            ctx.beginPath();
+            ctx.moveTo(l.start.x, l.start.y);
+            ctx.lineTo(l.end.x, l.end.y);
+            ctx.stroke();
+        });
+
+        // Dessiner les nœuds
+        nodes.forEach(n => n.draw());
+    }
+
+    render();
+</script>
+</body>
+</html>
