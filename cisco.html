@@ -2,99 +2,147 @@
 <html lang="fr">
 <head>
     <meta charset="UTF-8">
-    <title>Mini Packet Tracer Clone</title>
+    <title>Squelette Cisco Config</title>
     <style>
-        body { font-family: sans-serif; margin: 0; overflow: hidden; background: #f0f2f5; }
-        #toolbar { height: 50px; background: #333; color: white; display: flex; align-items: center; padding: 0 20px; gap: 10px; }
-        canvas { background: white; cursor: crosshair; display: block; }
-        .btn { padding: 5px 15px; cursor: pointer; background: #444; border: 1px solid #666; color: white; border-radius: 4px; }
-        .btn:hover { background: #555; }
+        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; margin: 0; background: #2c3e50; color: white; }
+        #toolbar { height: 60px; background: #1a252f; display: flex; align-items: center; padding: 0 20px; gap: 15px; border-bottom: 2px solid #34495e; }
+        canvas { background: #ecf0f1; display: block; cursor: crosshair; }
+        .btn { padding: 8px 15px; cursor: pointer; background: #3498db; border: none; color: white; border-radius: 4px; font-weight: bold; }
+        .btn:hover { background: #2980b9; }
+        
+        /* Fenêtre de configuration */
+        #config-panel { 
+            position: fixed; top: 80px; right: 20px; width: 300px; background: #34495e; 
+            padding: 20px; border-radius: 8px; box-shadow: 0 4px 15px rgba(0,0,0,0.5); 
+            display: none; border: 1px solid #7f8c8d;
+        }
+        input { width: 100%; padding: 8px; margin: 10px 0; border-radius: 4px; border: none; }
+        .log { background: #000; color: #0f0; font-family: monospace; padding: 10px; height: 100px; overflow-y: auto; font-size: 12px; margin-top: 10px; }
     </style>
 </head>
 <body>
 
 <div id="toolbar">
-    <strong>Outils :</strong>
-    <button class="btn" onclick="setMode('node')">Ajouter PC</button>
+    <button class="btn" onclick="setMode('node')">+ Ajouter Équipement</button>
     <button class="btn" onclick="setMode('link')">Relier (Câble)</button>
-    <span id="status">Mode : Sélection</span>
+    <div id="status">Mode : Sélection</div>
 </div>
 
 <canvas id="networkCanvas"></canvas>
 
+<div id="config-panel" id="configPanel">
+    <h3 id="deviceTitle">Configuration</h3>
+    <label>Adresse IP :</label>
+    <input type="text" id="ipInput" placeholder="ex: 192.168.1.1">
+    <label>Ping vers IP :</label>
+    <input type="text" id="pingInput" placeholder="ex: 192.168.1.2">
+    <button class="btn" style="width:100%" onclick="executePing()">Lancer PING</button>
+    <div class="log" id="consoleLog">Terminal prêt...</div>
+    <button class="btn" style="margin-top:10px; background:#e74c3c" onclick="closeConfig()">Fermer</button>
+</div>
+
 <script>
     const canvas = document.getElementById('networkCanvas');
     const ctx = canvas.getContext('2d');
-    const statusTxt = document.getElementById('status');
-    
     canvas.width = window.innerWidth;
-    canvas.height = window.innerHeight - 50;
+    canvas.height = window.innerHeight - 60;
 
     let nodes = [];
     let links = [];
-    let mode = 'select'; // select, node, link
-    let selectedNode = null;
+    let mode = 'select';
+    let selectedNodeForLink = null;
+    let activeNode = null;
 
-    // Classe pour représenter un équipement
-    class Node {
-        constructor(x, y, label) {
+    class Device {
+        constructor(x, y, name) {
             this.x = x;
             this.y = y;
-            this.label = label;
-            this.radius = 20;
+            this.name = name;
+            this.ip = "";
+            this.radius = 25;
         }
         draw() {
             ctx.beginPath();
             ctx.arc(this.x, this.y, this.radius, 0, Math.PI * 2);
-            ctx.fillStyle = "#0078d4";
+            ctx.fillStyle = activeNode === this ? "#e67e22" : "#3498db";
             ctx.fill();
-            ctx.fillStyle = "black";
-            ctx.fillText(this.label, this.x - 15, this.y + 35);
+            ctx.fillStyle = "#2c3e50";
+            ctx.textAlign = "center";
+            ctx.fillText(this.name, this.x, this.y + 40);
+            ctx.fillText(this.ip || "No IP", this.x, this.y + 55);
         }
     }
 
-    function setMode(newMode) {
-        mode = newMode;
-        statusTxt.innerText = "Mode : " + (mode === 'node' ? "Ajout de PC" : "Liaison");
-    }
+    function setMode(m) { mode = m; document.getElementById('status').innerText = "Mode : " + m; }
 
     canvas.addEventListener('mousedown', (e) => {
-        const rect = canvas.getBoundingClientRect();
-        const mouseX = e.clientX - rect.left;
-        const mouseY = e.clientY - rect.top;
+        const x = e.clientX;
+        const y = e.clientY - 60;
+        const clickedNode = nodes.find(n => Math.hypot(n.x - x, n.y - y) < n.radius);
 
-        if (mode === 'node') {
-            nodes.push(new Node(mouseX, mouseY, "PC-" + (nodes.length + 1)));
-            render();
+        if (mode === 'node' && !clickedNode) {
+            nodes.push(new Device(x, y, "Router-" + (nodes.length + 1)));
         } 
-        else if (mode === 'link') {
-            const clickedNode = nodes.find(n => Math.hypot(n.x - mouseX, n.y - mouseY) < n.radius);
-            if (clickedNode) {
-                if (!selectedNode) {
-                    selectedNode = clickedNode;
-                } else if (selectedNode !== clickedNode) {
-                    links.push({ start: selectedNode, end: clickedNode });
-                    selectedNode = null;
-                    render();
+        else if (clickedNode) {
+            if (mode === 'link') {
+                if (!selectedNodeForLink) {
+                    selectedNodeForLink = clickedNode;
+                } else if (selectedNodeForLink !== clickedNode) {
+                    links.push({ a: selectedNodeForLink, b: clickedNode });
+                    selectedNodeForLink = null;
                 }
+            } else {
+                openConfig(clickedNode);
             }
         }
+        render();
     });
+
+    function openConfig(node) {
+        activeNode = node;
+        document.getElementById('config-panel').style.display = 'block';
+        document.getElementById('deviceTitle').innerText = node.name;
+        document.getElementById('ipInput').value = node.ip;
+        document.getElementById('consoleLog').innerText = "Connecté à " + node.name;
+        render();
+    }
+
+    function closeConfig() {
+        if (activeNode) activeNode.ip = document.getElementById('ipInput').value;
+        document.getElementById('config-panel').style.display = 'none';
+        activeNode = null;
+        render();
+    }
+
+    function executePing() {
+        const targetIp = document.getElementById('pingInput').value;
+        const log = document.getElementById('consoleLog');
+        log.innerText += `\nEnvoi de paquets vers ${targetIp}...`;
+        
+        // Simulation de la logique réseau
+        setTimeout(() => {
+            const targetNode = nodes.find(n => n.ip === targetIp);
+            // Vérification si relié (simplifiée)
+            const isConnected = links.some(l => 
+                (l.a === activeNode && l.b === targetNode) || 
+                (l.b === activeNode && l.a === targetNode)
+            );
+
+            if (targetNode && isConnected) {
+                log.innerText += `\nRéponse de ${targetIp}: octets=32 temps=1ms`;
+            } else {
+                log.innerText += `\nDélai d'attente de la demande dépassé.`;
+            }
+            log.scrollTop = log.scrollHeight;
+        }, 1000);
+    }
 
     function render() {
         ctx.clearRect(0, 0, canvas.width, canvas.height);
-        
-        // Dessiner les câbles
-        ctx.strokeStyle = "#666";
-        ctx.lineWidth = 2;
         links.forEach(l => {
-            ctx.beginPath();
-            ctx.moveTo(l.start.x, l.start.y);
-            ctx.lineTo(l.end.x, l.end.y);
-            ctx.stroke();
+            ctx.beginPath(); ctx.moveTo(l.a.x, l.a.y); ctx.lineTo(l.b.x, l.b.y);
+            ctx.strokeStyle = "#7f8c8d"; ctx.lineWidth = 3; ctx.stroke();
         });
-
-        // Dessiner les nœuds
         nodes.forEach(n => n.draw());
     }
 
