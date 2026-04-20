@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Baptiste Duval | Apprentissages Critiques</title>
+    <title>Baptiste Duval | AC Log</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&family=Fira+Code:wght@300;500&display=swap" rel="stylesheet">
@@ -13,29 +13,18 @@
         body { 
             font-family: 'Fira Code', monospace; 
             background-color: #020617;
-            margin: 0;
             color: #e2e8f0;
             overflow-x: hidden;
         }
         
         #particles-js {
             position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
+            top: 0; left: 0; width: 100%; height: 100%;
             z-index: 1;
         }
 
-        .main-content {
-            position: relative;
-            z-index: 10;
-            pointer-events: none;
-        }
-
-        nav, section, a, button, .ac-card, .ac-content { 
-            pointer-events: auto; 
-        }
+        .main-content { position: relative; z-index: 10; pointer-events: none; }
+        nav, section, a, button, .parent-card, .child-ac { pointer-events: auto; }
 
         .glass-header {
             background: rgba(15, 23, 42, 0.9);
@@ -46,42 +35,53 @@
         .neon-shadow { text-shadow: 0 0 10px rgba(0, 242, 255, 0.7); }
         h1, h2, h3, .nav-font { font-family: 'Orbitron', sans-serif; }
 
-        /* Style Accordéon */
-        .ac-card {
+        /* --- ACCORDÉON PARENT (Les 5 Blocs) --- */
+        .parent-card {
             background: rgba(15, 23, 42, 0.8);
             border: 1px solid rgba(255, 255, 255, 0.05);
-            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-            backdrop-filter: blur(10px);
+            margin-bottom: 1.5rem;
+            transition: all 0.3s ease;
         }
 
-        .ac-card:hover {
-            border-color: rgba(0, 242, 255, 0.5);
-            box-shadow: 0 0 20px rgba(0, 242, 255, 0.1);
-        }
-
-        .ac-content {
+        .parent-content {
             max-height: 0;
             overflow: hidden;
-            transition: max-height 0.5s ease-out, padding 0.3s ease;
+            transition: max-height 0.5s cubic-bezier(0, 1, 0, 1);
             background: rgba(0, 0, 0, 0.2);
         }
 
-        .ac-card.active .ac-content {
-            max-height: 2000px; /* Grande valeur pour permettre le contenu */
-            padding: 2rem;
-            border-top: 1px solid rgba(255, 255, 255, 0.05);
+        .parent-card.active .parent-content {
+            max-height: 5000px; /* Large pour contenir les sous-menus */
+            transition: max-height 1s ease-in-out;
+            padding: 1.5rem;
         }
 
-        .ac-card.active .chevron-icon {
-            transform: rotate(180deg);
-            color: #00f2ff;
+        /* --- ACCORDÉON ENFANT (Les AC à l'intérieur) --- */
+        .child-ac {
+            background: rgba(255, 255, 255, 0.03);
+            border-left: 3px solid transparent;
+            margin-bottom: 0.75rem;
+            transition: all 0.2s ease;
         }
 
-        .tech-badge {
-            background: rgba(15, 23, 42, 0.5);
-            border: 1px solid rgba(0, 242, 255, 0.2);
-            color: #00f2ff;
+        .child-ac:hover { background: rgba(255, 255, 255, 0.06); }
+
+        .child-content {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.4s ease-out;
+            font-size: 0.85rem;
+            color: #94a3b8;
         }
+
+        .child-ac.active { border-left-color: var(--neon-cyan); background: rgba(0, 242, 255, 0.05); }
+        .child-ac.active .child-content {
+            max-height: 800px;
+            padding: 1rem;
+        }
+
+        .chevron-main, .chevron-child { transition: transform 0.3s ease; }
+        .active .chevron-main, .active .chevron-child { transform: rotate(180deg); }
     </style>
 </head>
 <body>
@@ -94,175 +94,108 @@
                 <div class="w-8 h-8 border border-cyan-500 flex items-center justify-center rotate-45">
                     <span class="rotate-[-45deg] font-bold text-cyan-400 text-xs">BD</span>
                 </div>
-                <span class="text-sm font-bold tracking-[0.2em] text-cyan-400 neon-shadow nav-font italic uppercase">Apprentissages_Critiques.log</span>
+                <span class="text-sm font-bold tracking-[0.2em] text-cyan-400 neon-shadow nav-font italic uppercase">LOG_DES_COMPETENCES.SYS</span>
             </div>
-            <div class="hidden md:flex space-x-8 text-[10px] uppercase font-bold tracking-widest text-white">
-                <a href="index.html" class="hover:text-cyan-400 transition">01_Accueil</a>
-                <a href="#" class="text-cyan-400 border-b border-cyan-400 pb-1">02_AC_Détails</a>
-                <a href="index.html#cv-section" class="hover:text-cyan-400 transition">03_CV</a>
-            </div>
+            <a href="index.html" class="text-[10px] text-white hover:text-cyan-400 transition uppercase tracking-widest font-bold"> <i class="fas fa-home mr-2"></i> Retour</a>
         </div>
     </nav>
 
     <div class="main-content pt-40 pb-20">
         
-        <header class="max-w-5xl mx-auto px-6 mb-16">
-            <div class="border-l-4 border-cyan-500 pl-8 py-4 mb-8 bg-cyan-500/5">
-                <h1 class="text-4xl font-black uppercase tracking-tighter mb-2 font-['Orbitron']">Portfolio de Compétences</h1>
-                <p class="text-cyan-400 text-sm font-bold tracking-widest">Détail des Apprentissages Critiques (AC) - BUT R&T</p>
-            </div>
+        <header class="max-w-4xl mx-auto px-6 mb-12 text-center">
+            <h1 class="text-3xl font-black uppercase tracking-[0.3em] mb-4 font-['Orbitron'] neon-shadow">Analyse des AC</h1>
+            <p class="text-slate-500 text-xs uppercase tracking-widest">Cliquez sur une compétence pour voir les apprentissages critiques</p>
         </header>
 
-        <section class="max-w-5xl mx-auto px-6 space-y-6">
+        <section class="max-w-4xl mx-auto px-6">
 
-            <div class="ac-card rounded-xl overflow-hidden cursor-pointer" onclick="toggleAC(this)">
-                <div class="p-6 flex items-center justify-between">
-                    <div class="flex items-center space-x-6">
-                        <i class="fas fa-server text-red-500 text-2xl w-8"></i>
-                        <div>
-                            <h3 class="text-xl font-bold font-['Orbitron'] tracking-wide">01_ADMINISTRER</h3>
-                            <p class="text-[10px] text-red-400 uppercase tracking-widest italic">Administrer les réseaux et les systèmes</p>
-                        </div>
+            <div class="parent-card rounded-lg overflow-hidden">
+                <div class="p-5 flex items-center justify-between cursor-pointer hover:bg-white/5 transition" onclick="toggleParent(this)">
+                    <div class="flex items-center space-x-4">
+                        <i class="fas fa-server text-red-500"></i>
+                        <h2 class="font-['Orbitron'] text-sm tracking-widest uppercase">01_ADMINISTRER</h2>
                     </div>
-                    <i class="fas fa-chevron-down chevron-icon transition-transform duration-300 text-slate-500"></i>
+                    <i class="fas fa-chevron-down chevron-main text-xs text-slate-600"></i>
                 </div>
-                <div class="ac-content">
-                    <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
-                        <div>
-                            <h4 class="text-cyan-400 font-bold mb-4 text-sm uppercase">Description</h4>
-                            <p class="text-slate-300 text-sm leading-relaxed">
-                                Concevoir et gérer des infrastructures systèmes et réseaux complexes. Mise en place de services annuaires, de virtualisation et de serveurs d'entreprise.
-                            </p>
+                
+                <div class="parent-content">
+                    <div class="child-ac rounded p-4 cursor-pointer" onclick="toggleChild(event, this)">
+                        <div class="flex justify-between items-center">
+                            <span class="text-xs font-bold text-cyan-400">AC34.01ROM | Administrer infrastructures</span>
+                            <i class="fas fa-plus chevron-child text-[10px]"></i>
                         </div>
-                        <div class="space-y-4">
-                            <div class="bg-white/5 p-4 rounded-lg border border-white/5">
-                                <span class="text-[10px] font-bold text-red-500 block mb-2 uppercase">AC Appliqués :</span>
-                                <ul class="text-xs text-slate-400 space-y-2">
-                                    <li><i class="fas fa-check text-green-500 mr-2"></i> AC34.01ROM | Administrer infrastructures réseaux</li>
-                                    <li><i class="fas fa-check text-green-500 mr-2"></i> AC34.02ROM | Déployer fonctions virtualisées</li>
-                                </ul>
+                        <div class="child-content">
+                            <p class="mb-4">Ici, tu expliques ce que tu as fait pour valider cet AC.</p>
+                            <div class="border-l border-cyan-500/30 pl-4 italic">
+                                "Pendant mon alternance chez IT2i, j'ai supervisé le parc réseau via Zabbix..."
                             </div>
                         </div>
                     </div>
-                </div>
-            </div>
 
-            <div class="ac-card rounded-xl overflow-hidden cursor-pointer" onclick="toggleAC(this)">
-                <div class="p-6 flex items-center justify-between">
-                    <div class="flex items-center space-x-6">
-                        <i class="fas fa-network-wired text-orange-500 text-2xl w-8"></i>
-                        <div>
-                            <h3 class="text-xl font-bold font-['Orbitron'] tracking-wide">02_CONNECTER</h3>
-                            <p class="text-[10px] text-orange-400 uppercase tracking-widest italic">Connecter les entreprises et les usagers</p>
+                    <div class="child-ac rounded p-4 cursor-pointer" onclick="toggleChild(event, this)">
+                        <div class="flex justify-between items-center">
+                            <span class="text-xs font-bold text-cyan-400">AC34.02ROM | Déploiement virtualisé</span>
+                            <i class="fas fa-plus chevron-child text-[10px]"></i>
                         </div>
-                    </div>
-                    <i class="fas fa-chevron-down chevron-icon transition-transform duration-300 text-slate-500"></i>
-                </div>
-                <div class="ac-content">
-                    <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
-                        <div>
-                            <h4 class="text-cyan-400 font-bold mb-4 text-sm uppercase">Description</h4>
-                            <p class="text-slate-300 text-sm leading-relaxed">
-                                Déploiement de solutions de communication unifiée (VoIP/ToIP) et optimisation des interconnexions WAN/LAN pour assurer la continuité des services.
-                            </p>
-                        </div>
-                        <div class="bg-white/5 p-4 rounded-lg border border-white/5">
-                            <span class="text-[10px] font-bold text-orange-500 block mb-2 uppercase">AC Appliqués :</span>
-                            <ul class="text-xs text-slate-400 space-y-2">
-                                <li><i class="fas fa-check text-green-500 mr-2"></i> AC35.01ROM | Administrer services multimédias</li>
-                                <li><i class="fas fa-check text-green-500 mr-2"></i> AC12.03 | Configurer équipements de terminaison</li>
-                            </ul>
+                        <div class="child-content">
+                            Explication détaillée de la virtualisation, Docker, ou VMware que tu as utilisé.
                         </div>
                     </div>
                 </div>
             </div>
 
-            <div class="ac-card rounded-xl overflow-hidden cursor-pointer" onclick="toggleAC(this)">
-                <div class="p-6 flex items-center justify-between">
-                    <div class="flex items-center space-x-6">
-                        <i class="fas fa-code text-yellow-500 text-2xl w-8"></i>
-                        <div>
-                            <h3 class="text-xl font-bold font-['Orbitron'] tracking-wide">03_PROGRAMMER</h3>
-                            <p class="text-[10px] text-yellow-400 uppercase tracking-widest italic">Créer des outils et applications métiers</p>
+            <div class="parent-card rounded-lg overflow-hidden">
+                <div class="p-5 flex items-center justify-between cursor-pointer hover:bg-white/5 transition" onclick="toggleParent(this)">
+                    <div class="flex items-center space-x-4">
+                        <i class="fas fa-network-wired text-orange-500"></i>
+                        <h2 class="font-['Orbitron'] text-sm tracking-widest uppercase">02_CONNECTER</h2>
+                    </div>
+                    <i class="fas fa-chevron-down chevron-main text-xs text-slate-600"></i>
+                </div>
+                <div class="parent-content">
+                    <div class="child-ac rounded p-4 cursor-pointer" onclick="toggleChild(event, this)">
+                        <div class="flex justify-between items-center">
+                            <span class="text-xs font-bold text-orange-400">AC35.01ROM | Services Multimédias</span>
+                            <i class="fas fa-plus chevron-child text-[10px]"></i>
+                        </div>
+                        <div class="child-content">
+                            Détail sur la configuration de serveurs VoIP/SIP ou WebRTC.
                         </div>
                     </div>
-                    <i class="fas fa-chevron-down chevron-icon transition-transform duration-300 text-slate-500"></i>
-                </div>
-                <div class="ac-content">
-                    <p class="text-slate-300 text-sm">Développement de scripts d'automatisation (Python, Bash) pour la gestion d'infrastructures Cloud et réseaux.</p>
                 </div>
             </div>
 
-            <div class="ac-card rounded-xl overflow-hidden cursor-pointer" onclick="toggleAC(this)">
-                <div class="p-6 flex items-center justify-between">
-                    <div class="flex items-center space-x-6">
-                        <i class="fas fa-shield-alt text-green-500 text-2xl w-8"></i>
-                        <div>
-                            <h3 class="text-xl font-bold font-['Orbitron'] tracking-wide">04_SÉCURISER</h3>
-                            <p class="text-[10px] text-green-400 uppercase tracking-widest italic">Mettre en œuvre la cybersécurité</p>
-                        </div>
-                    </div>
-                    <i class="fas fa-chevron-down chevron-icon transition-transform duration-300 text-slate-500"></i>
-                </div>
-                <div class="ac-content">
-                    <p class="text-slate-300 text-sm">Application des bonnes pratiques de l'ANSSI, audit de vulnérabilité et sécurisation des flux via Firewalling (Stormshield/Pfsense).</p>
-                </div>
-            </div>
-
-            <div class="ac-card rounded-xl overflow-hidden cursor-pointer" onclick="toggleAC(this)">
-                <div class="p-6 flex items-center justify-between">
-                    <div class="flex items-center space-x-6">
-                        <i class="fas fa-eye text-blue-500 text-2xl w-8"></i>
-                        <div>
-                            <h3 class="text-xl font-bold font-['Orbitron'] tracking-wide">05_SURVEILLER</h3>
-                            <p class="text-[10px] text-blue-400 uppercase tracking-widest italic">Assurer la disponibilité des services</p>
-                        </div>
-                    </div>
-                    <i class="fas fa-chevron-down chevron-icon transition-transform duration-300 text-slate-500"></i>
-                </div>
-                <div class="ac-content">
-                    <p class="text-slate-300 text-sm">Supervision temps réel (Zabbix/Grafana), analyse de logs et intervention post-incident pour garantir un SLA optimal.</p>
-                </div>
-            </div>
-
-        </section>
-
-        <div class="flex justify-center mt-20">
-            <a href="index.html" class="text-[10px] font-bold text-slate-500 hover:text-cyan-400 transition uppercase tracking-[0.4em]">
-                <i class="fas fa-arrow-left mr-2"></i> Retour au terminal principal
-            </a>
-        </div>
-
+            </section>
     </div>
 
     <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
     <script>
-        // Gestion de l'accordéon
-        function toggleAC(element) {
-            // Optionnel : ferme les autres avant d'ouvrir celui-ci
-            /*
-            document.querySelectorAll('.ac-card').forEach(card => {
-                if(card !== element) card.classList.remove('active');
-            });
-            */
-            element.classList.toggle('active');
+        function toggleParent(element) {
+            element.parentElement.classList.toggle('active');
         }
 
-        // Configuration Particules (identique)
+        function toggleChild(event, element) {
+            event.stopPropagation(); // Empêche de fermer le parent en cliquant sur l'enfant
+            element.classList.toggle('active');
+            
+            // Change l'icône plus/moins
+            const icon = element.querySelector('.chevron-child');
+            if(element.classList.contains('active')) {
+                icon.classList.replace('fa-plus', 'fa-minus');
+            } else {
+                icon.classList.replace('fa-minus', 'fa-plus');
+            }
+        }
+
         particlesJS("particles-js", {
             "particles": {
-                "number": { "value": 80, "density": { "enable": true, "value_area": 800 } },
+                "number": { "value": 60, "density": { "enable": true, "value_area": 800 } },
                 "color": { "value": "#00f2ff" },
-                "shape": { "type": "circle" },
-                "opacity": { "value": 0.2 },
-                "size": { "value": 2, "random": true },
-                "line_linked": { "enable": true, "distance": 150, "color": "#00f2ff", "opacity": 0.1, "width": 1 },
-                "move": { "enable": true, "speed": 1, "direction": "none", "out_mode": "out" }
-            },
-            "interactivity": {
-                "events": { "onhover": { "enable": true, "mode": "grab" } }
-            },
-            "retina_detect": true
+                "opacity": { "value": 0.1 },
+                "size": { "value": 2 },
+                "line_linked": { "enable": true, "distance": 150, "color": "#00f2ff", "opacity": 0.05, "width": 1 },
+                "move": { "enable": true, "speed": 1 }
+            }
         });
     </script>
 </body>
