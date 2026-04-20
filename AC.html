@@ -11,41 +11,41 @@
     <style>
         :root { --neon-cyan: #00f2ff; }
         body { 
-    font-family: 'Fira Code', monospace; 
-    background-color: #020617;
-    color: #e2e8f0;
-    overflow-x: hidden;
-}
+            font-family: 'Fira Code', monospace; 
+            background-color: #020617;
+            color: #e2e8f0;
+            overflow-x: hidden;
+        }
         
-        /* 2. Les particules doivent être tout au fond et ne pas intercepter les clics */
         #particles-js {
             position: fixed;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
-            z-index: 0; /* Baissé à 0 */
-            pointer-events: none; /* TRÈS IMPORTANT : la souris passe à travers */
+            z-index: -1; /* Corrigé : Passe tout au fond */
+            pointer-events: none;
         }
 
         .main-content { 
             position: relative; 
-            z-index: 10; 
-            pointer-events: auto; /* Remis en auto par défaut */
+            z-index: 10; /* Corrigé : Priorité sur le fond */
+            pointer-events: auto;
         }
+        
         nav, section, a, button, .parent-card, .child-ac { pointer-events: auto; }
 
         .glass-header {
             background: rgba(15, 23, 42, 0.9);
             backdrop-filter: blur(12px);
             border-bottom: 1px solid rgba(0, 242, 255, 0.2);
-            z-index: 100; /* Toujours au-dessus */
+            z-index: 100;
         }
 
         .neon-shadow { text-shadow: 0 0 10px rgba(0, 242, 255, 0.7); }
         h1, h2, h3, .nav-font { font-family: 'Orbitron', sans-serif; }
 
-        /* --- ACCORDÉON PARENT (Les 5 Blocs) --- */
+        /* --- ACCORDÉON PARENT --- */
         .parent-card {
             background: rgba(15, 23, 42, 0.8);
             border: 1px solid rgba(255, 255, 255, 0.05);
@@ -61,12 +61,12 @@
         }
 
         .parent-card.active .parent-content {
-            max-height: 5000px; /* Large pour contenir les sous-menus */
+            max-height: 5000px;
             transition: max-height 1s ease-in-out;
             padding: 1.5rem;
         }
 
-        /* --- ACCORDÉON ENFANT (Les AC à l'intérieur) --- */
+        /* --- ACCORDÉON ENFANT --- */
         .child-ac {
             background: rgba(255, 255, 255, 0.03);
             border-left: 3px solid transparent;
@@ -218,7 +218,6 @@
                     <i class="fas fa-chevron-down chevron-main text-xs text-slate-600"></i>
                 </div>
                 <div class="parent-content">
-                    <div class="parent-content">
                     <div class="child-ac rounded p-4 cursor-pointer" onclick="toggleChild(event, this)">
                         <div class="flex justify-between items-center">
                             <span class="text-xs font-bold text-cyan-400">AC32.01 | Déployer un système de communication pour l’entreprise</span>
@@ -347,8 +346,7 @@
                 </div>
             </div>
 
-
-            </section>
+        </section>
     </div>
 
     <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
@@ -358,10 +356,9 @@
         }
 
         function toggleChild(event, element) {
-            event.stopPropagation(); // Empêche de fermer le parent en cliquant sur l'enfant
+            event.stopPropagation();
             element.classList.toggle('active');
             
-            // Change l'icône plus/moins
             const icon = element.querySelector('.chevron-child');
             if(element.classList.contains('active')) {
                 icon.classList.replace('fa-plus', 'fa-minus');
