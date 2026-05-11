@@ -22,7 +22,6 @@
             color: #e2e8f0;
             overflow-x: hidden;
         }
-
         #particles-js {
             position: fixed;
             inset: 0;
@@ -1853,57 +1852,384 @@
                 </div>
             
             </div>
+            <!-- ===================================================== -->
+            <!-- 04_PILOTER -->
+            <!-- ===================================================== -->
+            
             <div class="parent-card rounded-lg overflow-hidden">
-                <div class="p-5 flex items-center justify-between cursor-pointer hover:bg-white/5 transition" onclick="toggleParent(this)">
+            
+                <div class="p-5 flex items-center justify-between cursor-pointer hover:bg-white/5 transition"
+                    onclick="toggleParent(this)">
+            
                     <div class="flex items-center space-x-4">
+            
                         <i class="fas fa-shield-alt text-green-500"></i>
-                        <h2 class="font-['Orbitron'] text-sm tracking-widest uppercase text-white">04_PILOTER</h2>
+            
+                        <div>
+                            <h2 class="font-['Orbitron'] text-sm tracking-widest uppercase text-white">
+                                04_PILOTER
+                            </h2>
+            
+                            <p class="text-[10px] text-slate-500 uppercase tracking-[0.2em] mt-1">
+                                Administrer un système d’information sécurisé
+                            </p>
+                        </div>
+            
                     </div>
+            
                     <i class="fas fa-chevron-down chevron-main text-xs text-slate-600"></i>
                 </div>
+            
                 <div class="parent-content">
-
-                    <div class="child-ac rounded p-4 cursor-pointer" onclick="toggleChild(event, this)">
-                        <div class="flex justify-between items-center">
-                            <span class="text-xs font-bold text-green-400">AC34.01Cyber | Participer activement à une analyse de risque pour définir une politique de sécurité pour une petite structure</span>
-                            <i class="fas fa-plus chevron-child text-[10px]"></i>
-                        </div>
-                        <div class="child-content">
-                            <p class="mb-4">Ici, tu expliques ce que tu as fait pour valider cet AC.</p>
-                        </div>
+            
+                    <!-- INTRO -->
+            
+                    <div class="admin-intro">
+            
+                        <h3>Présentation de la compétence</h3>
+            
+                        <p>
+                            Cette compétence regroupe les projets liés
+                            à la cybersécurité,
+                            à la sécurisation des infrastructures réseau,
+                            à l’administration système
+                            ainsi qu’à la supervision et l’analyse des communications.
+                        </p>
+            
+                        <p>
+                            Elle a principalement été développée grâce
+                            à la SAE5.Cyber.03,
+                            aux différents TP de sécurité réseau,
+                            à la supervision avec Zabbix et Nagios,
+                            ainsi qu’au projet de téléphonie IP basé sur Asterisk,
+                            WebRTC et Flask. 
+                        </p>
+            
                     </div>
-
-                    <div class="child-ac rounded p-4 cursor-pointer" onclick="toggleChild(event, this)">
-                        <div class="flex justify-between items-center">
-                            <span class="text-xs font-bold text-green-400">AC34.02Cyber | Mettre en œuvre des outils avancés de sécurisation d’une infrastructure du réseau</span>
-                            <i class="fas fa-plus chevron-child text-[10px]"></i>
+            
+                    <!-- ===================================================== -->
+                    <!-- AC34.01 -->
+                    <!-- ===================================================== -->
+            
+                    <div class="ac-block">
+            
+                        <div class="ac-top">
+            
+                            <div>
+                                <span class="ac-id">AC34.01Cyber</span>
+            
+                                <h3 class="ac-title">
+                                    Participer activement à une analyse de risque
+                                </h3>
+                            </div>
+            
                         </div>
-                        <div class="child-content">
-                            <p class="mb-4">Ici, tu expliques ce que tu as fait pour valider cet AC.</p>
+            
+                        <p class="ac-intro-text">
+                            Les différents projets réalisés m’ont permis
+                            d’identifier des risques liés
+                            à la sécurité des systèmes,
+                            aux communications réseau
+                            et à l’exposition des services.
+                        </p>
+            
+                        <div class="ac-grid">
+            
+                            <div class="ac-card">
+            
+                                <h4>Projet Téléphonie IP</h4>
+            
+                                <p>
+                                    Dans la SAE503,
+                                    nous avons étudié les risques
+                                    liés aux communications SIP,
+                                    aux échanges WebRTC
+                                    ainsi qu’aux attaques réseau
+                                    de type interception ou Man-In-The-Middle.
+                                </p>
+            
+                                <p>
+                                    Nous avons également analysé
+                                    les besoins en chiffrement HTTPS,
+                                    DTLS et SRTP
+                                    afin de sécuriser les communications vocales. 
+                                </p>
+            
+                            </div>
+            
+                            <div class="ac-card">
+            
+                                <h4>Supervision & Sécurité</h4>
+            
+                                <p>
+                                    Les TP réalisés avec Zabbix,
+                                    Nagios et Wireshark
+                                    m’ont permis d’apprendre
+                                    à détecter des anomalies réseau,
+                                    surveiller les services
+                                    et analyser les échanges réseau.
+                                </p>
+            
+                            </div>
+            
+                            <div class="ac-card">
+            
+                                <h4>Compétences développées</h4>
+            
+                                <div class="ac-skills">
+                                    <span>Analyse de risque</span>
+                                    <span>Wireshark</span>
+                                    <span>Cybersécurité</span>
+                                    <span>Audit</span>
+                                </div>
+            
+                            </div>
+            
                         </div>
+            
                     </div>
-
-                    <div class="child-ac rounded p-4 cursor-pointer" onclick="toggleChild(event, this)">
-                        <div class="flex justify-between items-center">
-                            <span class="text-xs font-bold text-green-400">AC34.03Cyber | Sécuriser les systèmes d’exploitation</span>
-                            <i class="fas fa-plus chevron-child text-[10px]"></i>
+            
+                    <!-- ===================================================== -->
+                    <!-- AC34.02 -->
+                    <!-- ===================================================== -->
+            
+                    <div class="ac-block">
+            
+                        <div class="ac-top">
+            
+                            <div>
+                                <span class="ac-id">AC34.02Cyber</span>
+            
+                                <h3 class="ac-title">
+                                    Mettre en œuvre des outils avancés de sécurisation
+                                </h3>
+                            </div>
+            
                         </div>
-                        <div class="child-content">
-                            <p class="mb-4">Ici, tu expliques ce que tu as fait pour valider cet AC.</p>
+            
+                        <p class="ac-intro-text">
+                            Les projets réalisés m’ont permis
+                            de mettre en place plusieurs mécanismes
+                            de sécurisation réseau et système.
+                        </p>
+            
+                        <div class="ac-grid">
+            
+                            <div class="ac-card">
+            
+                                <h4>Sécurisation des communications</h4>
+            
+                                <p>
+                                    Dans le projet Asterisk,
+                                    nous avons étudié l’utilisation
+                                    du chiffrement TLS,
+                                    DTLS,
+                                    SRTP
+                                    ainsi que les connexions sécurisées WSS
+                                    pour protéger les communications WebRTC. 
+                                </p>
+            
+                            </div>
+            
+                            <div class="ac-card">
+            
+                                <h4>Firewall & VLAN</h4>
+            
+                                <p>
+                                    Grâce aux TP pfSense et Fortigate,
+                                    j’ai appris à configurer
+                                    des règles de pare-feu,
+                                    segmenter les réseaux avec des VLANs
+                                    et contrôler les accès utilisateurs.
+                                </p>
+            
+                            </div>
+            
+                            <div class="ac-card">
+            
+                                <h4>Compétences développées</h4>
+            
+                                <div class="ac-skills">
+                                    <span>pfSense</span>
+                                    <span>Fortigate</span>
+                                    <span>TLS</span>
+                                    <span>SRTP</span>
+                                    <span>WSS</span>
+                                </div>
+            
+                            </div>
+            
                         </div>
+            
                     </div>
-
-                    <div class="child-ac rounded p-4 cursor-pointer" onclick="toggleChild(event, this)">
-                        <div class="flex justify-between items-center">
-                            <span class="text-xs font-bold text-green-400">AC34.04Cyber | Proposer une architecture sécurisée de système d’information pour une petite structure</span>
-                            <i class="fas fa-plus chevron-child text-[10px]"></i>
+            
+                    <!-- ===================================================== -->
+                    <!-- AC34.03 -->
+                    <!-- ===================================================== -->
+            
+                    <div class="ac-block">
+            
+                        <div class="ac-top">
+            
+                            <div>
+                                <span class="ac-id">AC34.03Cyber</span>
+            
+                                <h3 class="ac-title">
+                                    Sécuriser les systèmes d’exploitation
+                                </h3>
+                            </div>
+            
                         </div>
-                        <div class="child-content">
-                            <p class="mb-4">Ici, tu expliques ce que tu as fait pour valider cet AC.</p>
+            
+                        <p class="ac-intro-text">
+                            Les différents projets réalisés m’ont appris
+                            à administrer et sécuriser
+                            plusieurs systèmes Linux.
+                        </p>
+            
+                        <div class="ac-grid">
+            
+                            <div class="ac-card">
+            
+                                <h4>Serveurs Linux</h4>
+            
+                                <p>
+                                    Dans la SAE503,
+                                    nous avons utilisé plusieurs machines Linux
+                                    pour héberger les services Asterisk,
+                                    TFTP,
+                                    Flask,
+                                    Nginx
+                                    et MariaDB. 
+                                </p>
+            
+                                <p>
+                                    Cela m’a permis de travailler
+                                    sur les services réseau,
+                                    les droits d’accès,
+                                    SSH
+                                    et la sécurisation des applications.
+                                </p>
+            
+                            </div>
+            
+                            <div class="ac-card">
+            
+                                <h4>Docker & Virtualisation</h4>
+            
+                                <p>
+                                    Grâce à la SAE5.01,
+                                    j’ai également appris
+                                    à isoler des services
+                                    dans des conteneurs Docker
+                                    afin de limiter les risques
+                                    et améliorer la sécurité des infrastructures.
+                                </p>
+            
+                            </div>
+            
+                            <div class="ac-card">
+            
+                                <h4>Compétences développées</h4>
+            
+                                <div class="ac-skills">
+                                    <span>Linux</span>
+                                    <span>SSH</span>
+                                    <span>Docker</span>
+                                    <span>Nginx</span>
+                                    <span>MariaDB</span>
+                                </div>
+            
+                            </div>
+            
                         </div>
+            
                     </div>
-
+            
+                    <!-- ===================================================== -->
+                    <!-- AC34.04 -->
+                    <!-- ===================================================== -->
+            
+                    <div class="ac-block">
+            
+                        <div class="ac-top">
+            
+                            <div>
+                                <span class="ac-id">AC34.04Cyber</span>
+            
+                                <h3 class="ac-title">
+                                    Proposer une architecture sécurisée de SI
+                                </h3>
+                            </div>
+            
+                        </div>
+            
+                        <p class="ac-intro-text">
+                            Les projets réalisés m’ont permis
+                            de concevoir des architectures réseau
+                            intégrant des mécanismes de sécurité,
+                            de supervision
+                            et de segmentation.
+                        </p>
+            
+                        <div class="ac-grid">
+            
+                            <div class="ac-card">
+            
+                                <h4>Architecture du projet SAE503</h4>
+            
+                                <p>
+                                    Le projet reposait sur plusieurs serveurs :
+                                    un serveur Asterisk,
+                                    un serveur web Flask/Nginx,
+                                    un serveur TFTP
+                                    ainsi que plusieurs téléphones SIP physiques. 
+                                </p>
+            
+                                <p>
+                                    Cette architecture permettait
+                                    de séparer les différents services
+                                    afin de mieux sécuriser l’infrastructure.
+                                </p>
+            
+                            </div>
+            
+                            <div class="ac-card">
+            
+                                <h4>Infrastructure sécurisée</h4>
+            
+                                <p>
+                                    Grâce aux projets Docker,
+                                    aux TP réseaux
+                                    et à la supervision,
+                                    j’ai appris à concevoir
+                                    des infrastructures évolutives,
+                                    supervisées
+                                    et sécurisées.
+                                </p>
+            
+                            </div>
+            
+                            <div class="ac-card">
+            
+                                <h4>Compétences développées</h4>
+            
+                                <div class="ac-skills">
+                                    <span>Architecture réseau</span>
+                                    <span>Segmentation</span>
+                                    <span>Supervision</span>
+                                    <span>Sécurité</span>
+                                    <span>Asterisk</span>
+                                </div>
+            
+                            </div>
+            
+                        </div>
+            
+                    </div>
+            
                 </div>
+            
             </div>
 
             <div class="parent-card rounded-lg overflow-hidden">
