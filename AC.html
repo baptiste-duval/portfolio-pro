@@ -192,197 +192,449 @@
 
         <section class="max-w-4xl mx-auto px-6">
 
+            <!-- ===================================================== -->
+            <!-- 01_ADMINISTRER -->
+            <!-- ===================================================== -->
+            
             <div class="parent-card rounded-lg overflow-hidden">
-                <div class="p-5 flex items-center justify-between cursor-pointer hover:bg-white/5 transition" onclick="toggleParent(this)">
+            
+                <div class="p-5 flex items-center justify-between cursor-pointer hover:bg-white/5 transition"
+                     onclick="toggleParent(this)">
+            
                     <div class="flex items-center space-x-4">
                         <i class="fas fa-server text-red-500"></i>
-                        <h2 class="font-['Orbitron'] text-sm tracking-widest uppercase">01_ADMINISTRER</h2>
+            
+                        <div>
+                            <h2 class="font-['Orbitron'] text-sm tracking-widest uppercase text-white">
+                                01_ADMINISTRER
+                            </h2>
+            
+                            <p class="text-[10px] text-slate-500 uppercase tracking-[0.2em] mt-1">
+                                Administrer les réseaux et l’Internet
+                            </p>
+                        </div>
                     </div>
+            
                     <i class="fas fa-chevron-down chevron-main text-xs text-slate-600"></i>
                 </div>
             
                 <div class="parent-content">
             
-                    <div class="mb-8 p-5 rounded-lg border border-cyan-500/20 bg-cyan-500/5">
-                        <h3 class="text-cyan-400 font-bold uppercase tracking-widest text-sm mb-3">
-                            Administrer les réseaux et l’Internet
-                        </h3>
-                        <p class="text-sm text-slate-300 leading-7">
-                            Cette compétence regroupe les travaux liés à la conception, au déploiement,
-                            à la sécurisation et à la supervision d’infrastructures réseau.
-                            Les TP R5.01, R5.02 ainsi que la SAE5.01 m’ont permis de travailler
-                            sur des cas concrets : portail captif, Wi-Fi sécurisé, supervision,
-                            conteneurisation et administration d’équipements.
+                    <!-- INTRO -->
+                    <div class="admin-intro">
+                        <h3>Présentation de la compétence</h3>
+            
+                        <p>
+                            Cette compétence regroupe l’ensemble des projets réalisés autour
+                            de l’administration système et réseau, de la sécurisation des infrastructures,
+                            de la supervision ainsi que de la gestion de projets techniques.
+                        </p>
+            
+                        <p>
+                            Les principaux travaux ayant contribué à cette compétence sont :
+                            le TP portail captif avec pfSense, les projets de supervision SNMP,
+                            Zabbix et Nagios ainsi que la SAE5.01 portant sur une plateforme
+                            de TP basée sur des conteneurs Docker. :contentReference[oaicite:0]{index=0}
                         </p>
                     </div>
             
+                    <!-- ===================================================== -->
                     <!-- AC31.01 -->
+                    <!-- ===================================================== -->
+            
                     <div class="ac-block">
-                        <div class="ac-header">
-                            <span>AC31.01</span>
-                            <h3>Concevoir un projet de réseau informatique</h3>
+            
+                        <div class="ac-top">
+                            <div>
+                                <span class="ac-id">AC31.01</span>
+            
+                                <h3 class="ac-title">
+                                    Concevoir un projet de réseau informatique
+                                </h3>
+                            </div>
+            
+                            <a href="projets.html" class="ac-link">
+                                Voir la SAE5.01
+                                <i class="fas fa-arrow-right"></i>
+                            </a>
                         </div>
             
-                        <p>
-                            J’ai conçu plusieurs infrastructures réseau en tenant compte des besoins
-                            de sécurité, de supervision et de disponibilité. Dans le TP R5.01,
-                            j’ai mis en place un portail captif avec pfSense relié à un serveur Windows.
-                            L’objectif était de contrôler l’accès au réseau grâce à une authentification
-                            web centralisée.
+                        <p class="ac-intro-text">
+                            À travers les différents TP et la SAE5.01,
+                            j’ai participé à la conception d’infrastructures réseau
+                            et systèmes sécurisées répondant à des problématiques
+                            réelles d’entreprise : authentification, supervision,
+                            isolation des services et sécurisation des accès.
                         </p>
             
-                        <p>
-                            Dans le TP R5.02, j’ai travaillé sur la supervision avec SNMP, Zabbix
-                            et Nagios afin de surveiller des serveurs Linux, Windows et un switch Cisco.
-                            Ces travaux m’ont permis de comprendre comment anticiper les pannes
-                            et suivre l’état d’une infrastructure.
-                        </p>
+                        <div class="ac-grid">
             
-                        <div class="ac-skills">
-                            <span>Sécurité réseau</span>
-                            <span>Supervision</span>
-                            <span>pfSense</span>
-                            <span>Zabbix</span>
-                            <span>Nagios</span>
+                            <div class="ac-card">
+                                <h4>TP Portail Captif pfSense</h4>
+            
+                                <p>
+                                    Dans le TP R5.01, j’ai mis en place un portail captif
+                                    avec pfSense relié à un serveur Windows Active Directory.
+                                    L’objectif était de contrôler l’accès au réseau grâce
+                                    à une authentification centralisée des utilisateurs.
+                                </p>
+            
+                                <p>
+                                    Ce projet m’a permis de travailler sur les VLAN,
+                                    la sécurité réseau, le WLAN ainsi que l’authentification
+                                    RADIUS.
+                                </p>
+                            </div>
+            
+                            <div class="ac-card">
+                                <h4>Supervision réseau</h4>
+            
+                                <p>
+                                    Dans le TP R5.02, j’ai travaillé sur la supervision
+                                    d’équipements Linux, Windows et Cisco grâce à SNMP,
+                                    Zabbix et Nagios.
+                                </p>
+            
+                                <p>
+                                    J’ai appris à surveiller l’état des services,
+                                    récupérer des informations système,
+                                    gérer les alertes et analyser l’activité
+                                    d’une infrastructure réseau.
+                                </p>
+                            </div>
+            
+                            <div class="ac-card">
+                                <h4>SAE5.01</h4>
+            
+                                <p>
+                                    La SAE5.01 consistait à créer une plateforme
+                                    permettant de déployer des environnements de TP
+                                    conteneurisés accessibles depuis un navigateur web. :contentReference[oaicite:1]{index=1}
+                                </p>
+            
+                                <p>
+                                    Nous avons utilisé Docker, Flask, MySQL et noVNC
+                                    afin de créer une infrastructure sécurisée,
+                                    supervisée et facilement administrable.
+                                </p>
+                            </div>
+            
+                            <div class="ac-card">
+                                <h4>Compétences développées</h4>
+            
+                                <div class="ac-skills">
+                                    <span>Docker</span>
+                                    <span>pfSense</span>
+                                    <span>Zabbix</span>
+                                    <span>Nagios</span>
+                                    <span>SNMP</span>
+                                    <span>Linux</span>
+                                    <span>Réseau</span>
+                                    <span>Sécurité</span>
+                                </div>
+                            </div>
+            
                         </div>
             
-                        <a href="projets.html" class="ac-button">
-                            Voir la SAE5.01 <i class="fas fa-arrow-right"></i>
-                        </a>
                     </div>
             
+                    <!-- ===================================================== -->
                     <!-- AC31.02 -->
+                    <!-- ===================================================== -->
+            
                     <div class="ac-block">
-                        <div class="ac-header">
-                            <span>AC31.02</span>
-                            <h3>Réaliser la documentation technique</h3>
+            
+                        <div class="ac-top">
+                            <div>
+                                <span class="ac-id">AC31.02</span>
+            
+                                <h3 class="ac-title">
+                                    Réaliser la documentation technique du projet
+                                </h3>
+                            </div>
+            
+                            <a href="projets.html" class="ac-link">
+                                Rapport SAE5.01
+                                <i class="fas fa-arrow-right"></i>
+                            </a>
                         </div>
             
-                        <p>
-                            Pour chaque projet, j’ai réalisé un compte rendu technique expliquant
-                            l’infrastructure mise en place, les équipements utilisés, les services
-                            configurés et les tests effectués.
+                        <p class="ac-intro-text">
+                            Lors des différents projets réalisés,
+                            j’ai participé à la rédaction de documentations techniques
+                            détaillées afin d’expliquer les infrastructures mises en place,
+                            les configurations réalisées et les procédures d’administration.
                         </p>
             
-                        <p>
-                            Cette documentation permet de garder une trace claire du travail réalisé
-                            et de rendre l’infrastructure compréhensible et reproductible par une autre personne.
-                        </p>
+                        <div class="ac-grid">
             
-                        <div class="ac-skills">
-                            <span>Documentation</span>
-                            <span>Schémas réseau</span>
-                            <span>Procédures</span>
-                            <span>Tests</span>
+                            <div class="ac-card">
+                                <h4>Rapport technique</h4>
+            
+                                <p>
+                                    Dans la SAE5.01, nous avons rédigé un rapport complet
+                                    présentant l’architecture générale,
+                                    les technologies utilisées,
+                                    les mécanismes de sécurité,
+                                    le fonctionnement de la plateforme
+                                    ainsi que les procédures de maintenance. :contentReference[oaicite:2]{index=2}
+                                </p>
+                            </div>
+            
+                            <div class="ac-card">
+                                <h4>Documentation des infrastructures</h4>
+            
+                                <p>
+                                    Les TP réalisés avec pfSense, Fortigate,
+                                    Zabbix et Nagios nécessitaient également
+                                    des schémas réseau, des procédures de configuration
+                                    et des comptes rendus techniques détaillés.
+                                </p>
+                            </div>
+            
+                            <div class="ac-card">
+                                <h4>Compétences développées</h4>
+            
+                                <div class="ac-skills">
+                                    <span>Documentation</span>
+                                    <span>Architecture</span>
+                                    <span>Schémas réseau</span>
+                                    <span>Maintenance</span>
+                                </div>
+                            </div>
+            
                         </div>
+            
                     </div>
             
+                    <!-- ===================================================== -->
                     <!-- AC31.03 -->
+                    <!-- ===================================================== -->
+            
                     <div class="ac-block">
-                        <div class="ac-header">
-                            <span>AC31.03</span>
-                            <h3>Réaliser une maquette de démonstration</h3>
+            
+                        <div class="ac-top">
+                            <div>
+                                <span class="ac-id">AC31.03</span>
+            
+                                <h3 class="ac-title">
+                                    Réaliser une maquette de démonstration du projet
+                                </h3>
+                            </div>
+            
+                            <a href="projets.html" class="ac-link">
+                                Démonstration SAE5.01
+                                <i class="fas fa-arrow-right"></i>
+                            </a>
                         </div>
             
-                        <p>
-                            J’ai réalisé des maquettes fonctionnelles pour tester les solutions avant
-                            de les présenter. Par exemple, le portail captif pfSense a été testé avec
-                            un client, un serveur Windows et des utilisateurs déclarés dans le domaine.
+                        <p class="ac-intro-text">
+                            Plusieurs maquettes fonctionnelles ont été réalisées
+                            afin de démontrer le fonctionnement des infrastructures
+                            et des services développés.
                         </p>
             
-                        <p>
-                            J’ai aussi mis en place des environnements de supervision avec Zabbix et Nagios
-                            afin de vérifier la remontée d’informations, les alertes et l’état des services.
-                        </p>
+                        <div class="ac-grid">
             
-                        <div class="ac-skills">
-                            <span>Virtualisation</span>
-                            <span>Tests fonctionnels</span>
-                            <span>Démonstration</span>
-                            <span>Validation</span>
+                            <div class="ac-card">
+                                <h4>Infrastructure virtuelle</h4>
+            
+                                <p>
+                                    Pour le portail captif pfSense,
+                                    j’ai mis en place une infrastructure virtuelle
+                                    composée d’un serveur Windows,
+                                    d’un client et d’un pare-feu pfSense
+                                    afin de tester l’authentification des utilisateurs.
+                                </p>
+                            </div>
+            
+                            <div class="ac-card">
+                                <h4>Plateforme Docker</h4>
+            
+                                <p>
+                                    Dans la SAE5.01, nous avons développé
+                                    une plateforme web permettant de créer
+                                    et contrôler des machines Ubuntu ou Kali Linux
+                                    directement depuis un navigateur web grâce à noVNC. :contentReference[oaicite:3]{index=3}
+                                </p>
+                            </div>
+            
+                            <div class="ac-card">
+                                <h4>Compétences développées</h4>
+            
+                                <div class="ac-skills">
+                                    <span>Virtualisation</span>
+                                    <span>Docker</span>
+                                    <span>Flask</span>
+                                    <span>Tests</span>
+                                    <span>Déploiement</span>
+                                </div>
+                            </div>
+            
                         </div>
+            
                     </div>
             
+                    <!-- ===================================================== -->
                     <!-- AC31.04 -->
+                    <!-- ===================================================== -->
+            
                     <div class="ac-block">
-                        <div class="ac-header">
-                            <span>AC31.04</span>
-                            <h3>Défendre et argumenter un projet</h3>
+            
+                        <div class="ac-top">
+                            <div>
+                                <span class="ac-id">AC31.04</span>
+            
+                                <h3 class="ac-title">
+                                    Défendre / argumenter un projet
+                                </h3>
+                            </div>
                         </div>
             
-                        <p>
-                            Les projets m’ont appris à justifier mes choix techniques.
-                            J’ai dû expliquer pourquoi utiliser pfSense pour un portail captif,
-                            Fortigate pour le Wi-Fi sécurisé, ou encore Zabbix et Nagios pour
-                            la supervision d’une infrastructure.
+                        <p class="ac-intro-text">
+                            Les projets réalisés m’ont amené à présenter
+                            les solutions développées et à justifier
+                            les choix techniques effectués.
                         </p>
             
-                        <p>
-                            Cela m’a permis de développer ma capacité à présenter une solution,
-                            expliquer son intérêt et montrer qu’elle répond bien au besoin initial.
-                        </p>
+                        <div class="ac-grid">
             
-                        <div class="ac-skills">
-                            <span>Argumentation</span>
-                            <span>Choix techniques</span>
-                            <span>Présentation orale</span>
+                            <div class="ac-card">
+                                <h4>Présentation de la SAE5.01</h4>
+            
+                                <p>
+                                    Lors de la présentation finale,
+                                    nous avons expliqué le fonctionnement
+                                    de la plateforme Docker,
+                                    l’architecture choisie
+                                    ainsi que les mécanismes de sécurité intégrés.
+                                </p>
+            
+                                <p>
+                                    Nous avons également justifié
+                                    l’utilisation de Docker, Flask,
+                                    MySQL et Portainer dans le projet. :contentReference[oaicite:4]{index=4}
+                                </p>
+                            </div>
+            
+                            <div class="ac-card">
+                                <h4>Compétences développées</h4>
+            
+                                <div class="ac-skills">
+                                    <span>Présentation</span>
+                                    <span>Argumentation</span>
+                                    <span>Choix techniques</span>
+                                    <span>Communication</span>
+                                </div>
+                            </div>
+            
                         </div>
+            
                     </div>
             
+                    <!-- ===================================================== -->
                     <!-- AC31.05 -->
+                    <!-- ===================================================== -->
+            
                     <div class="ac-block">
-                        <div class="ac-header">
-                            <span>AC31.05</span>
-                            <h3>Communiquer avec les acteurs du projet</h3>
+            
+                        <div class="ac-top">
+                            <div>
+                                <span class="ac-id">AC31.05</span>
+            
+                                <h3 class="ac-title">
+                                    Communiquer avec les acteurs du projet
+                                </h3>
+                            </div>
                         </div>
             
-                        <p>
-                            Les travaux réalisés en groupe nécessitaient une bonne communication.
-                            Nous devions nous répartir les tâches, partager nos avancées,
-                            expliquer les problèmes rencontrés et vérifier ensemble le bon fonctionnement
-                            de l’infrastructure.
+                        <p class="ac-intro-text">
+                            Les projets ont été réalisés en groupe,
+                            ce qui nécessitait une communication régulière
+                            et une bonne coordination entre les membres.
                         </p>
             
-                        <p>
-                            Cette organisation m’a permis de progresser dans le travail en équipe
-                            et dans la transmission d’informations techniques.
-                        </p>
+                        <div class="ac-grid">
             
-                        <div class="ac-skills">
-                            <span>Travail d’équipe</span>
-                            <span>Communication</span>
-                            <span>Coordination</span>
+                            <div class="ac-card">
+                                <h4>Travail en équipe</h4>
+            
+                                <p>
+                                    La SAE5.01 a été réalisée avec Florentin Czurka,
+                                    Michel Bauchart et Roman Negrila. :contentReference[oaicite:5]{index=5}
+                                </p>
+            
+                                <p>
+                                    Nous avons réparti les tâches entre le développement,
+                                    l’interface web, la gestion Docker,
+                                    la supervision et la documentation technique.
+                                </p>
+                            </div>
+            
+                            <div class="ac-card">
+                                <h4>Compétences développées</h4>
+            
+                                <div class="ac-skills">
+                                    <span>Travail d’équipe</span>
+                                    <span>Communication</span>
+                                    <span>Collaboration</span>
+                                </div>
+                            </div>
+            
                         </div>
+            
                     </div>
             
+                    <!-- ===================================================== -->
                     <!-- AC31.06 -->
+                    <!-- ===================================================== -->
+            
                     <div class="ac-block">
-                        <div class="ac-header">
-                            <span>AC31.06</span>
-                            <h3>Gérer le projet et respecter les délais</h3>
+            
+                        <div class="ac-top">
+                            <div>
+                                <span class="ac-id">AC31.06</span>
+            
+                                <h3 class="ac-title">
+                                    Gérer le projet et respecter les délais
+                                </h3>
+                            </div>
                         </div>
             
-                        <p>
-                            Pour les TP et la SAE5.01, j’ai suivi une démarche progressive :
-                            analyse du besoin, préparation de l’infrastructure, configuration,
-                            tests, correction des erreurs puis rédaction du compte rendu.
+                        <p class="ac-intro-text">
+                            Les différents projets réalisés nécessitaient
+                            une organisation rigoureuse afin de respecter
+                            les délais et livrer une solution fonctionnelle.
                         </p>
             
-                        <p>
-                            Cette méthode m’a permis de mieux organiser mon travail et de livrer
-                            une solution fonctionnelle dans les délais demandés.
-                        </p>
+                        <div class="ac-grid">
             
-                        <div class="ac-skills">
-                            <span>Gestion de projet</span>
-                            <span>Organisation</span>
-                            <span>Méthodologie</span>
-                            <span>Délais</span>
+                            <div class="ac-card">
+                                <h4>Organisation du projet</h4>
+            
+                                <p>
+                                    La SAE5.01 a été réalisée en plusieurs étapes :
+                                    conception de l’architecture,
+                                    développement du backend Flask,
+                                    création des images Docker,
+                                    sécurisation des accès,
+                                    supervision puis rédaction de la documentation. :contentReference[oaicite:6]{index=6}
+                                </p>
+                            </div>
+            
+                            <div class="ac-card">
+                                <h4>Compétences développées</h4>
+            
+                                <div class="ac-skills">
+                                    <span>Gestion de projet</span>
+                                    <span>Organisation</span>
+                                    <span>Planification</span>
+                                    <span>Déploiement</span>
+                                </div>
+                            </div>
+            
                         </div>
             
-                        <a href="projets.html" class="ac-button">
-                            Voir le projet détaillé <i class="fas fa-arrow-right"></i>
-                        </a>
                     </div>
             
                 </div>
