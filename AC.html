@@ -9,31 +9,46 @@
     <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&family=Fira+Code:wght@300;500&display=swap" rel="stylesheet">
     
     <style>
-        :root { --neon-cyan: #00f2ff; }
-        body { 
-            font-family: 'Fira Code', monospace; 
-            background-color: #020617;
+        :root {
+            --neon-cyan: #00f2ff;
+            --bg-dark: #020617;
+            --card-dark: rgba(15, 23, 42, 0.82);
+            --text-soft: #cbd5e1;
+        }
+
+        body {
+            font-family: 'Fira Code', monospace;
+            background-color: var(--bg-dark);
             color: #e2e8f0;
             overflow-x: hidden;
         }
-        
+
         #particles-js {
             position: fixed;
-            top: 0;
-            left: 0;
+            inset: 0;
             width: 100%;
             height: 100%;
-            z-index: -1; /* Corrigé : Passe tout au fond */
+            z-index: -1;
             pointer-events: none;
         }
 
-        .main-content { 
-            position: relative; 
-            z-index: 10; /* Corrigé : Priorité sur le fond */
+        .main-content {
+            position: relative;
+            z-index: 10;
             pointer-events: auto;
         }
-        
-        nav, section, a, button, .parent-card, .child-ac { pointer-events: auto; }
+
+        nav, section, a, button, .parent-card, .child-ac {
+            pointer-events: auto;
+        }
+
+        h1, h2, h3, .nav-font {
+            font-family: 'Orbitron', sans-serif;
+        }
+
+        .neon-shadow {
+            text-shadow: 0 0 10px rgba(0, 242, 255, 0.7);
+        }
 
         .glass-header {
             background: rgba(15, 23, 42, 0.9);
@@ -42,112 +57,196 @@
             z-index: 100;
         }
 
-        .neon-shadow { text-shadow: 0 0 10px rgba(0, 242, 255, 0.7); }
-        h1, h2, h3, .nav-font { font-family: 'Orbitron', sans-serif; }
-
-        /* --- ACCORDÉON PARENT --- */
+        /* ACCORDÉON PARENT */
         .parent-card {
-            background: rgba(15, 23, 42, 0.8);
-            border: 1px solid rgba(255, 255, 255, 0.05);
+            background: var(--card-dark);
+            border: 1px solid rgba(255, 255, 255, 0.06);
             margin-bottom: 1.5rem;
-            transition: all 0.3s ease;
+            transition: 0.3s ease;
+            box-shadow: 0 0 25px rgba(0, 242, 255, 0.03);
+        }
+
+        .parent-card:hover {
+            border-color: rgba(0, 242, 255, 0.22);
         }
 
         .parent-content {
             max-height: 0;
             overflow: hidden;
+            background: rgba(0, 0, 0, 0.22);
             transition: max-height 0.5s cubic-bezier(0, 1, 0, 1);
-            background: rgba(0, 0, 0, 0.2);
         }
 
-        .ac-block {
+        .parent-card.active .parent-content {
+            max-height: 20000px;
             padding: 1.5rem;
-            margin-bottom: 1.5rem;
-            border: 1px solid rgba(0, 242, 255, 0.15);
-            background: rgba(15, 23, 42, 0.65);
-            border-radius: 0.75rem;
+            transition: max-height 1s ease-in-out;
         }
-        
-        .ac-header {
-            display: flex;
-            flex-direction: column;
-            gap: 0.35rem;
+
+        /* INTRO ADMIN */
+        .admin-intro {
+            border: 1px solid rgba(0, 242, 255, 0.18);
+            background: linear-gradient(
+                135deg,
+                rgba(0, 242, 255, 0.08),
+                rgba(15, 23, 42, 0.75)
+            );
+            border-radius: 1rem;
+            padding: 1.5rem;
+            margin-bottom: 2rem;
+        }
+
+        .admin-intro h3 {
+            color: var(--neon-cyan);
+            font-size: 1rem;
+            text-transform: uppercase;
+            letter-spacing: 0.18em;
             margin-bottom: 1rem;
         }
-        
-        .ac-header span {
-            color: #00f2ff;
-            font-size: 0.75rem;
-            font-weight: bold;
-            letter-spacing: 0.15em;
-        }
-        
-        .ac-header h3 {
-            font-family: 'Orbitron', sans-serif;
-            font-size: 1rem;
-            color: white;
-            text-transform: uppercase;
-        }
-        
-        .ac-block p {
+
+        .admin-intro p {
+            color: var(--text-soft);
             font-size: 0.85rem;
             line-height: 1.8;
-            color: #cbd5e1;
+            margin-bottom: 0.8rem;
+        }
+
+        /* BLOCS AC */
+        .ac-block {
+            position: relative;
+            padding: 1.5rem;
+            margin-bottom: 1.5rem;
+            border: 1px solid rgba(0, 242, 255, 0.16);
+            background: rgba(15, 23, 42, 0.72);
+            border-radius: 1rem;
+            overflow: hidden;
+        }
+
+        .ac-block::before {
+            content: "";
+            position: absolute;
+            left: 0;
+            top: 0;
+            width: 4px;
+            height: 100%;
+            background: var(--neon-cyan);
+            box-shadow: 0 0 18px rgba(0, 242, 255, 0.8);
+        }
+
+        .ac-top {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            gap: 1rem;
+            flex-wrap: wrap;
+            margin-bottom: 1.2rem;
+        }
+
+        .ac-id {
+            display: inline-block;
+            color: #020617;
+            background: var(--neon-cyan);
+            font-size: 0.65rem;
+            font-weight: 900;
+            padding: 0.35rem 0.6rem;
+            border-radius: 999px;
+            letter-spacing: 0.12em;
+        }
+
+        .ac-title {
+            margin-top: 0.8rem;
+            color: white;
+            font-size: 1rem;
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+        }
+
+        .ac-intro-text,
+        .ac-block p {
+            color: var(--text-soft);
+            font-size: 0.85rem;
+            line-height: 1.8;
             margin-bottom: 1rem;
         }
-        
+
+        .ac-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+            gap: 1rem;
+        }
+
+        .ac-card {
+            background: rgba(2, 6, 23, 0.72);
+            border: 1px solid rgba(255, 255, 255, 0.07);
+            border-radius: 0.9rem;
+            padding: 1.2rem;
+            transition: 0.3s ease;
+        }
+
+        .ac-card:hover {
+            transform: translateY(-3px);
+            border-color: rgba(0, 242, 255, 0.35);
+            box-shadow: 0 0 20px rgba(0, 242, 255, 0.08);
+        }
+
+        .ac-card h4 {
+            color: var(--neon-cyan);
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 0.16em;
+            margin-bottom: 0.8rem;
+            font-family: 'Orbitron', sans-serif;
+        }
+
         .ac-skills {
             display: flex;
             flex-wrap: wrap;
-            gap: 0.5rem;
-            margin-top: 1rem;
+            gap: 0.45rem;
+            margin-top: 0.8rem;
         }
-        
+
         .ac-skills span {
-            font-size: 0.65rem;
-            color: #00f2ff;
+            font-size: 0.62rem;
+            color: var(--neon-cyan);
             border: 1px solid rgba(0, 242, 255, 0.25);
             padding: 0.35rem 0.6rem;
             border-radius: 999px;
             background: rgba(0, 242, 255, 0.06);
         }
-        
+
+        .ac-link,
         .ac-button {
             display: inline-flex;
             align-items: center;
             gap: 0.5rem;
-            margin-top: 1.2rem;
-            padding: 0.7rem 1rem;
-            border: 1px solid rgba(0, 242, 255, 0.4);
-            color: #00f2ff;
-            font-size: 0.7rem;
+            color: var(--neon-cyan);
+            border: 1px solid rgba(0, 242, 255, 0.35);
+            border-radius: 0.7rem;
+            padding: 0.7rem 0.9rem;
+            font-size: 0.68rem;
             font-weight: bold;
             text-transform: uppercase;
             letter-spacing: 0.12em;
-            border-radius: 0.5rem;
             transition: 0.3s;
         }
-        
+
+        .ac-link:hover,
         .ac-button:hover {
             background: rgba(0, 242, 255, 0.1);
-            box-shadow: 0 0 15px rgba(0, 242, 255, 0.25);
+            box-shadow: 0 0 18px rgba(0, 242, 255, 0.25);
         }
 
-        .parent-card.active .parent-content {
-            max-height: 5000px;
-            transition: max-height 1s ease-in-out;
-            padding: 1.5rem;
-        }
-
-        /* --- ACCORDÉON ENFANT --- */
+        /* ACCORDÉON ENFANT */
         .child-ac {
             background: rgba(255, 255, 255, 0.03);
             border-left: 3px solid transparent;
             margin-bottom: 0.75rem;
-            transition: all 0.2s ease;
+            transition: 0.2s ease;
         }
 
-        .child-ac:hover { background: rgba(255, 255, 255, 0.06); }
+        .child-ac:hover {
+            background: rgba(255, 255, 255, 0.06);
+        }
 
         .child-content {
             max-height: 0;
@@ -157,14 +256,46 @@
             color: #94a3b8;
         }
 
-        .child-ac.active { border-left-color: var(--neon-cyan); background: rgba(0, 242, 255, 0.05); }
+        .child-ac.active {
+            border-left-color: var(--neon-cyan);
+            background: rgba(0, 242, 255, 0.05);
+        }
+
         .child-ac.active .child-content {
             max-height: 800px;
             padding: 1rem;
         }
 
-        .chevron-main, .chevron-child { transition: transform 0.3s ease; }
-        .active .chevron-main, .active .chevron-child { transform: rotate(180deg); }
+        .chevron-main,
+        .chevron-child {
+            transition: transform 0.3s ease;
+        }
+
+        .active .chevron-main,
+        .active .chevron-child {
+            transform: rotate(180deg);
+        }
+
+        @media (max-width: 640px) {
+            .parent-card.active .parent-content {
+                padding: 1rem;
+            }
+
+            .ac-block,
+            .admin-intro {
+                padding: 1rem;
+            }
+
+            .ac-title {
+                font-size: 0.85rem;
+            }
+
+            .ac-link,
+            .ac-button {
+                width: 100%;
+                justify-content: center;
+            }
+        }
     </style>
 </head>
 <body>
@@ -195,436 +326,323 @@
             <!-- ===================================================== -->
             <!-- 01_ADMINISTRER -->
             <!-- ===================================================== -->
-            
+
             <div class="parent-card rounded-lg overflow-hidden">
-            
-                <div class="p-5 flex items-center justify-between cursor-pointer hover:bg-white/5 transition"
-                     onclick="toggleParent(this)">
-            
+
+                <div class="p-5 flex items-center justify-between cursor-pointer hover:bg-white/5 transition" onclick="toggleParent(this)">
                     <div class="flex items-center space-x-4">
                         <i class="fas fa-server text-red-500"></i>
-            
+
                         <div>
                             <h2 class="font-['Orbitron'] text-sm tracking-widest uppercase text-white">
                                 01_ADMINISTRER
                             </h2>
-            
                             <p class="text-[10px] text-slate-500 uppercase tracking-[0.2em] mt-1">
                                 Administrer les réseaux et l’Internet
                             </p>
                         </div>
                     </div>
-            
+
                     <i class="fas fa-chevron-down chevron-main text-xs text-slate-600"></i>
                 </div>
-            
+
                 <div class="parent-content">
-            
-                    <!-- INTRO -->
+
                     <div class="admin-intro">
                         <h3>Présentation de la compétence</h3>
-            
+
                         <p>
-                            Cette compétence regroupe l’ensemble des projets réalisés autour
-                            de l’administration système et réseau, de la sécurisation des infrastructures,
-                            de la supervision ainsi que de la gestion de projets techniques.
+                            Cette compétence concerne la conception, la mise en place, la sécurisation
+                            et la supervision d’infrastructures réseau et système.
                         </p>
-            
+
                         <p>
-                            Les principaux travaux ayant contribué à cette compétence sont :
-                            le TP portail captif avec pfSense, les projets de supervision SNMP,
-                            Zabbix et Nagios ainsi que la SAE5.01 portant sur une plateforme
-                            de TP basée sur des conteneurs Docker. :contentReference[oaicite:0]{index=0}
+                            Elle a été travaillée principalement grâce aux TP autour de pfSense,
+                            SNMP, Zabbix et Nagios, mais surtout grâce à la SAE5.01.
+                            Cette SAE consistait à créer une plateforme de TP basée sur des conteneurs,
+                            avec une interface web, une authentification, une gestion des utilisateurs,
+                            des machines isolées et des outils de supervision.
                         </p>
                     </div>
-            
-                    <!-- ===================================================== -->
-                    <!-- AC31.01 -->
-                    <!-- ===================================================== -->
-            
+
                     <div class="ac-block">
-            
                         <div class="ac-top">
                             <div>
                                 <span class="ac-id">AC31.01</span>
-            
-                                <h3 class="ac-title">
-                                    Concevoir un projet de réseau informatique
-                                </h3>
+                                <h3 class="ac-title">Concevoir un projet de réseau informatique</h3>
                             </div>
-            
+
                             <a href="projets.html" class="ac-link">
                                 Voir la SAE5.01
                                 <i class="fas fa-arrow-right"></i>
                             </a>
                         </div>
-            
+
                         <p class="ac-intro-text">
-                            À travers les différents TP et la SAE5.01,
-                            j’ai participé à la conception d’infrastructures réseau
-                            et systèmes sécurisées répondant à des problématiques
-                            réelles d’entreprise : authentification, supervision,
-                            isolation des services et sécurisation des accès.
+                            Pour cet AC, j’ai appris à concevoir une infrastructure complète en prenant
+                            en compte les besoins techniques, la sécurité, l’administration et la supervision.
                         </p>
-            
+
                         <div class="ac-grid">
-            
-                            <div class="ac-card">
-                                <h4>TP Portail Captif pfSense</h4>
-            
-                                <p>
-                                    Dans le TP R5.01, j’ai mis en place un portail captif
-                                    avec pfSense relié à un serveur Windows Active Directory.
-                                    L’objectif était de contrôler l’accès au réseau grâce
-                                    à une authentification centralisée des utilisateurs.
-                                </p>
-            
-                                <p>
-                                    Ce projet m’a permis de travailler sur les VLAN,
-                                    la sécurité réseau, le WLAN ainsi que l’authentification
-                                    RADIUS.
-                                </p>
-                            </div>
-            
-                            <div class="ac-card">
-                                <h4>Supervision réseau</h4>
-            
-                                <p>
-                                    Dans le TP R5.02, j’ai travaillé sur la supervision
-                                    d’équipements Linux, Windows et Cisco grâce à SNMP,
-                                    Zabbix et Nagios.
-                                </p>
-            
-                                <p>
-                                    J’ai appris à surveiller l’état des services,
-                                    récupérer des informations système,
-                                    gérer les alertes et analyser l’activité
-                                    d’une infrastructure réseau.
-                                </p>
-                            </div>
-            
                             <div class="ac-card">
                                 <h4>SAE5.01</h4>
-            
                                 <p>
-                                    La SAE5.01 consistait à créer une plateforme
-                                    permettant de déployer des environnements de TP
-                                    conteneurisés accessibles depuis un navigateur web. :contentReference[oaicite:1]{index=1}
+                                    Nous avons conçu une plateforme permettant de créer des environnements
+                                    de TP conteneurisés accessibles depuis un navigateur. L’objectif était
+                                    d’avoir une solution simple, sécurisée et administrable.
                                 </p>
-            
                                 <p>
-                                    Nous avons utilisé Docker, Flask, MySQL et noVNC
-                                    afin de créer une infrastructure sécurisée,
-                                    supervisée et facilement administrable.
+                                    L’architecture reposait sur Docker pour les conteneurs, Flask pour le backend,
+                                    MySQL pour les utilisateurs et noVNC pour accéder aux machines.
                                 </p>
                             </div>
-            
+
+                            <div class="ac-card">
+                                <h4>TP réseau</h4>
+                                <p>
+                                    Avec pfSense, j’ai travaillé sur un portail captif relié à un serveur Windows.
+                                    Avec Zabbix, Nagios et SNMP, j’ai appris à superviser des machines Linux,
+                                    Windows et des équipements réseau.
+                                </p>
+                            </div>
+
                             <div class="ac-card">
                                 <h4>Compétences développées</h4>
-            
                                 <div class="ac-skills">
+                                    <span>Architecture réseau</span>
                                     <span>Docker</span>
                                     <span>pfSense</span>
-                                    <span>Zabbix</span>
-                                    <span>Nagios</span>
-                                    <span>SNMP</span>
-                                    <span>Linux</span>
-                                    <span>Réseau</span>
+                                    <span>Supervision</span>
                                     <span>Sécurité</span>
                                 </div>
                             </div>
-            
                         </div>
-            
                     </div>
-            
-                    <!-- ===================================================== -->
-                    <!-- AC31.02 -->
-                    <!-- ===================================================== -->
-            
+
                     <div class="ac-block">
-            
                         <div class="ac-top">
                             <div>
                                 <span class="ac-id">AC31.02</span>
-            
-                                <h3 class="ac-title">
-                                    Réaliser la documentation technique du projet
-                                </h3>
+                                <h3 class="ac-title">Réaliser la documentation technique du projet</h3>
                             </div>
-            
+
                             <a href="projets.html" class="ac-link">
-                                Rapport SAE5.01
+                                Voir le rapport
                                 <i class="fas fa-arrow-right"></i>
                             </a>
                         </div>
-            
+
                         <p class="ac-intro-text">
-                            Lors des différents projets réalisés,
-                            j’ai participé à la rédaction de documentations techniques
-                            détaillées afin d’expliquer les infrastructures mises en place,
-                            les configurations réalisées et les procédures d’administration.
+                            La SAE5.01 m’a permis de travailler la documentation technique, car le projet
+                            devait être compréhensible, réutilisable et maintenable par d’autres personnes.
                         </p>
-            
+
                         <div class="ac-grid">
-            
                             <div class="ac-card">
-                                <h4>Rapport technique</h4>
-            
+                                <h4>Rapport SAE5.01</h4>
                                 <p>
-                                    Dans la SAE5.01, nous avons rédigé un rapport complet
-                                    présentant l’architecture générale,
-                                    les technologies utilisées,
-                                    les mécanismes de sécurité,
-                                    le fonctionnement de la plateforme
-                                    ainsi que les procédures de maintenance. :contentReference[oaicite:2]{index=2}
+                                    Nous avons rédigé un rapport présentant l’introduction du projet,
+                                    les objectifs, les choix techniques, l’architecture générale,
+                                    la sécurité, la maintenance, l’interface utilisateur et la base de données.
                                 </p>
                             </div>
-            
+
                             <div class="ac-card">
-                                <h4>Documentation des infrastructures</h4>
-            
+                                <h4>But de la documentation</h4>
                                 <p>
-                                    Les TP réalisés avec pfSense, Fortigate,
-                                    Zabbix et Nagios nécessitaient également
-                                    des schémas réseau, des procédures de configuration
-                                    et des comptes rendus techniques détaillés.
+                                    Cette documentation permet d’expliquer comment la plateforme fonctionne,
+                                    comment les machines sont créées, comment les utilisateurs sont gérés
+                                    et comment l’administrateur peut suivre l’activité.
                                 </p>
                             </div>
-            
+
                             <div class="ac-card">
                                 <h4>Compétences développées</h4>
-            
                                 <div class="ac-skills">
-                                    <span>Documentation</span>
+                                    <span>Rédaction technique</span>
+                                    <span>Procédures</span>
                                     <span>Architecture</span>
-                                    <span>Schémas réseau</span>
                                     <span>Maintenance</span>
                                 </div>
                             </div>
-            
                         </div>
-            
                     </div>
-            
-                    <!-- ===================================================== -->
-                    <!-- AC31.03 -->
-                    <!-- ===================================================== -->
-            
+
                     <div class="ac-block">
-            
                         <div class="ac-top">
                             <div>
                                 <span class="ac-id">AC31.03</span>
-            
-                                <h3 class="ac-title">
-                                    Réaliser une maquette de démonstration du projet
-                                </h3>
+                                <h3 class="ac-title">Réaliser une maquette de démonstration du projet</h3>
                             </div>
-            
+
                             <a href="projets.html" class="ac-link">
-                                Démonstration SAE5.01
+                                Voir la démonstration
                                 <i class="fas fa-arrow-right"></i>
                             </a>
                         </div>
-            
+
                         <p class="ac-intro-text">
-                            Plusieurs maquettes fonctionnelles ont été réalisées
-                            afin de démontrer le fonctionnement des infrastructures
-                            et des services développés.
+                            La SAE5.01 répond directement à cet AC, car nous avons réalisé une plateforme
+                            fonctionnelle et démontrable.
                         </p>
-            
+
                         <div class="ac-grid">
-            
                             <div class="ac-card">
-                                <h4>Infrastructure virtuelle</h4>
-            
+                                <h4>Plateforme fonctionnelle</h4>
                                 <p>
-                                    Pour le portail captif pfSense,
-                                    j’ai mis en place une infrastructure virtuelle
-                                    composée d’un serveur Windows,
-                                    d’un client et d’un pare-feu pfSense
-                                    afin de tester l’authentification des utilisateurs.
+                                    L’utilisateur peut se connecter, créer une machine Ubuntu ou Kali,
+                                    la démarrer, l’arrêter, la redémarrer ou la supprimer.
+                                    Il peut ensuite accéder au bureau directement depuis le navigateur.
                                 </p>
                             </div>
-            
+
                             <div class="ac-card">
-                                <h4>Plateforme Docker</h4>
-            
+                                <h4>Interface administrateur</h4>
                                 <p>
-                                    Dans la SAE5.01, nous avons développé
-                                    une plateforme web permettant de créer
-                                    et contrôler des machines Ubuntu ou Kali Linux
-                                    directement depuis un navigateur web grâce à noVNC. :contentReference[oaicite:3]{index=3}
+                                    L’administrateur dispose d’une interface différente permettant de gérer
+                                    les utilisateurs, consulter les logs, voir les statistiques du serveur
+                                    et superviser les machines existantes.
                                 </p>
                             </div>
-            
+
                             <div class="ac-card">
                                 <h4>Compétences développées</h4>
-            
                                 <div class="ac-skills">
-                                    <span>Virtualisation</span>
+                                    <span>Maquette</span>
                                     <span>Docker</span>
-                                    <span>Flask</span>
+                                    <span>noVNC</span>
                                     <span>Tests</span>
-                                    <span>Déploiement</span>
+                                    <span>Interface web</span>
                                 </div>
                             </div>
-            
                         </div>
-            
                     </div>
-            
-                    <!-- ===================================================== -->
-                    <!-- AC31.04 -->
-                    <!-- ===================================================== -->
-            
+
                     <div class="ac-block">
-            
                         <div class="ac-top">
                             <div>
                                 <span class="ac-id">AC31.04</span>
-            
-                                <h3 class="ac-title">
-                                    Défendre / argumenter un projet
-                                </h3>
+                                <h3 class="ac-title">Défendre et argumenter un projet</h3>
                             </div>
                         </div>
-            
+
                         <p class="ac-intro-text">
-                            Les projets réalisés m’ont amené à présenter
-                            les solutions développées et à justifier
-                            les choix techniques effectués.
+                            Pour la SAE5.01, il ne suffisait pas de réaliser la plateforme :
+                            il fallait aussi être capable d’expliquer les choix techniques et de montrer
+                            l’intérêt de la solution.
                         </p>
-            
+
                         <div class="ac-grid">
-            
                             <div class="ac-card">
-                                <h4>Présentation de la SAE5.01</h4>
-            
+                                <h4>Choix techniques</h4>
                                 <p>
-                                    Lors de la présentation finale,
-                                    nous avons expliqué le fonctionnement
-                                    de la plateforme Docker,
-                                    l’architecture choisie
-                                    ainsi que les mécanismes de sécurité intégrés.
-                                </p>
-            
-                                <p>
-                                    Nous avons également justifié
-                                    l’utilisation de Docker, Flask,
-                                    MySQL et Portainer dans le projet. :contentReference[oaicite:4]{index=4}
+                                    Nous avons justifié l’utilisation de Docker pour l’isolation,
+                                    Flask pour le backend, MySQL pour la gestion des comptes,
+                                    noVNC pour l’accès graphique et Portainer pour la supervision.
                                 </p>
                             </div>
-            
+
+                            <div class="ac-card">
+                                <h4>Présentation du projet</h4>
+                                <p>
+                                    La présentation nous a permis d’expliquer le fonctionnement de la plateforme,
+                                    les problèmes rencontrés, les solutions mises en place et l’intérêt
+                                    pédagogique d’un environnement de TP automatisé.
+                                </p>
+                            </div>
+
                             <div class="ac-card">
                                 <h4>Compétences développées</h4>
-            
                                 <div class="ac-skills">
-                                    <span>Présentation</span>
                                     <span>Argumentation</span>
+                                    <span>Présentation orale</span>
                                     <span>Choix techniques</span>
-                                    <span>Communication</span>
+                                    <span>Démonstration</span>
                                 </div>
                             </div>
-            
                         </div>
-            
                     </div>
-            
-                    <!-- ===================================================== -->
-                    <!-- AC31.05 -->
-                    <!-- ===================================================== -->
-            
+
                     <div class="ac-block">
-            
                         <div class="ac-top">
                             <div>
                                 <span class="ac-id">AC31.05</span>
-            
-                                <h3 class="ac-title">
-                                    Communiquer avec les acteurs du projet
-                                </h3>
+                                <h3 class="ac-title">Communiquer avec les acteurs du projet</h3>
                             </div>
                         </div>
-            
+
                         <p class="ac-intro-text">
-                            Les projets ont été réalisés en groupe,
-                            ce qui nécessitait une communication régulière
-                            et une bonne coordination entre les membres.
+                            La SAE5.01 était un projet de groupe. La communication était donc essentielle
+                            pour répartir les tâches, suivre l’avancement et résoudre les problèmes techniques.
                         </p>
-            
+
                         <div class="ac-grid">
-            
                             <div class="ac-card">
-                                <h4>Travail en équipe</h4>
-            
+                                <h4>Travail en groupe</h4>
                                 <p>
-                                    La SAE5.01 a été réalisée avec Florentin Czurka,
-                                    Michel Bauchart et Roman Negrila. :contentReference[oaicite:5]{index=5}
-                                </p>
-            
-                                <p>
-                                    Nous avons réparti les tâches entre le développement,
-                                    l’interface web, la gestion Docker,
-                                    la supervision et la documentation technique.
+                                    Le projet a été réalisé avec Florentin Czurka, Michel Bauchart
+                                    et Roman Negrila. Nous devions nous organiser pour avancer sur
+                                    le backend, l’interface, Docker, la base de données, la sécurité
+                                    et la documentation.
                                 </p>
                             </div>
-            
+
+                            <div class="ac-card">
+                                <h4>Communication technique</h4>
+                                <p>
+                                    Nous avons dû expliquer nos avancées, partager les problèmes rencontrés,
+                                    corriger ensemble les erreurs et vérifier que les différentes parties
+                                    du projet fonctionnaient correctement ensemble.
+                                </p>
+                            </div>
+
                             <div class="ac-card">
                                 <h4>Compétences développées</h4>
-            
                                 <div class="ac-skills">
                                     <span>Travail d’équipe</span>
                                     <span>Communication</span>
+                                    <span>Coordination</span>
                                     <span>Collaboration</span>
                                 </div>
                             </div>
-            
                         </div>
-            
                     </div>
-            
-                    <!-- ===================================================== -->
-                    <!-- AC31.06 -->
-                    <!-- ===================================================== -->
-            
+
                     <div class="ac-block">
-            
                         <div class="ac-top">
                             <div>
                                 <span class="ac-id">AC31.06</span>
-            
-                                <h3 class="ac-title">
-                                    Gérer le projet et respecter les délais
-                                </h3>
+                                <h3 class="ac-title">Gérer le projet et respecter les délais</h3>
                             </div>
                         </div>
-            
+
                         <p class="ac-intro-text">
-                            Les différents projets réalisés nécessitaient
-                            une organisation rigoureuse afin de respecter
-                            les délais et livrer une solution fonctionnelle.
+                            Cette SAE demandait une bonne organisation, car il fallait livrer une plateforme
+                            fonctionnelle, sécurisée, documentée et présentable dans le temps imparti.
                         </p>
-            
+
                         <div class="ac-grid">
-            
                             <div class="ac-card">
-                                <h4>Organisation du projet</h4>
-            
+                                <h4>Étapes du projet</h4>
                                 <p>
-                                    La SAE5.01 a été réalisée en plusieurs étapes :
-                                    conception de l’architecture,
-                                    développement du backend Flask,
-                                    création des images Docker,
-                                    sécurisation des accès,
-                                    supervision puis rédaction de la documentation. :contentReference[oaicite:6]{index=6}
+                                    Nous avons avancé par étapes : définition des objectifs,
+                                    choix techniques, création de l’architecture, développement Flask,
+                                    création des conteneurs Docker, gestion de l’authentification,
+                                    tests, supervision et rédaction du rapport.
                                 </p>
                             </div>
-            
+
+                            <div class="ac-card">
+                                <h4>Respect des délais</h4>
+                                <p>
+                                    Le projet nous a obligés à prioriser les fonctionnalités,
+                                    corriger rapidement les erreurs et préparer une démonstration claire
+                                    de la plateforme finale.
+                                </p>
+                            </div>
+
                             <div class="ac-card">
                                 <h4>Compétences développées</h4>
-            
                                 <div class="ac-skills">
                                     <span>Gestion de projet</span>
                                     <span>Organisation</span>
@@ -632,11 +650,9 @@
                                     <span>Déploiement</span>
                                 </div>
                             </div>
-            
                         </div>
-            
                     </div>
-            
+
                 </div>
             </div>
 
