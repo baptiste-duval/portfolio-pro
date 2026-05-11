@@ -871,78 +871,449 @@
             
             </div>
 
+            <!-- ===================================================== -->
+            <!-- 02_CONNECTER -->
+            <!-- ===================================================== -->
+            
             <div class="parent-card rounded-lg overflow-hidden">
-                <div class="p-5 flex items-center justify-between cursor-pointer hover:bg-white/5 transition" onclick="toggleParent(this)">
+            
+                <div class="p-5 flex items-center justify-between cursor-pointer hover:bg-white/5 transition"
+                    onclick="toggleParent(this)">
+            
                     <div class="flex items-center space-x-4">
+            
                         <i class="fas fa-network-wired text-orange-500"></i>
-                        <h2 class="font-['Orbitron'] text-sm tracking-widest uppercase">02_CONNECTER</h2>
+            
+                        <div>
+                            <h2 class="font-['Orbitron'] text-sm tracking-widest uppercase text-white">
+                                02_CONNECTER
+                            </h2>
+            
+                            <p class="text-[10px] text-slate-500 uppercase tracking-[0.2em] mt-1">
+                                Connecter les entreprises et les usagers
+                            </p>
+                        </div>
+            
                     </div>
+            
                     <i class="fas fa-chevron-down chevron-main text-xs text-slate-600"></i>
                 </div>
+            
                 <div class="parent-content">
-                    <div class="child-ac rounded p-4 cursor-pointer" onclick="toggleChild(event, this)">
-                        <div class="flex justify-between items-center">
-                            <span class="text-xs font-bold text-cyan-400">AC32.01 | Déployer un système de communication pour l’entreprise</span>
-                            <i class="fas fa-plus chevron-child text-[10px]"></i>
-                        </div>
-                        <div class="child-content">
-                            <p class="mb-4">Ici, tu expliques ce que tu as fait pour valider cet AC.</p>
-                            <div class="border-l border-cyan-500/30 pl-4 italic">
-                                "Pendant mon alternance chez IT2i, j'ai supervisé le parc réseau via Zabbix..."
-                            </div>
-                        </div>
+            
+                    <!-- INTRO -->
+            
+                    <div class="admin-intro">
+            
+                        <h3>Présentation de la compétence</h3>
+            
+                        <p>
+                            Cette compétence regroupe les projets liés
+                            au déploiement des réseaux,
+                            des infrastructures Wi-Fi,
+                            des systèmes d’authentification
+                            ainsi qu’à la sécurisation des accès utilisateurs.
+                        </p>
+            
+                        <p>
+                            Elle a été développée grâce au projet Wi-Fi Cisco,
+                            au TP portail captif pfSense
+                            ainsi qu’aux différents travaux
+                            autour des VLAN, du DHCP,
+                            des SSID sécurisés
+                            et de l’authentification réseau.
+                        </p>
+            
                     </div>
-
-                    <div class="child-ac rounded p-4 cursor-pointer" onclick="toggleChild(event, this)">
-                        <div class="flex justify-between items-center">
-                            <span class="text-xs font-bold text-cyan-400">AC32.02 |  Déployer un réseau d’accès sans fil pour le réseau d’entreprise en intégrant les enjeux de la sécurité</span>
-                            <i class="fas fa-plus chevron-child text-[10px]"></i>
-                        </div>
-                        <div class="child-content">
-                            <p class="mb-4">Ici, tu expliques ce que tu as fait pour valider cet AC.</p>
-                            <div class="border-l border-cyan-500/30 pl-4 italic">
-                                "Pendant mon alternance chez IT2i, j'ai supervisé le parc réseau via Zabbix..."
+            
+                    <!-- ===================================================== -->
+                    <!-- AC32.01 -->
+                    <!-- ===================================================== -->
+            
+                    <div class="ac-block">
+            
+                        <div class="ac-top">
+            
+                            <div>
+                                <span class="ac-id">AC32.01</span>
+            
+                                <h3 class="ac-title">
+                                    Déployer un système de communication pour l’entreprise
+                                </h3>
                             </div>
+            
                         </div>
-                    </div>
-                    <div class="child-ac rounded p-4 cursor-pointer" onclick="toggleChild(event, this)">
-                        <div class="flex justify-between items-center">
-                            <span class="text-xs font-bold text-cyan-400">AC32.03 |  Déployer un réseau d’accès fixe ou mobile pour un opérateur de télécommunications en intégrant la sécurité</span>
-                            <i class="fas fa-plus chevron-child text-[10px]"></i>
-                        </div>
-                        <div class="child-content">
-                            <p class="mb-4">Ici, tu expliques ce que tu as fait pour valider cet AC.</p>
-                            <div class="border-l border-cyan-500/30 pl-4 italic">
-                                "Pendant mon alternance chez IT2i, j'ai supervisé le parc réseau via Zabbix..."
+            
+                        <p class="ac-intro-text">
+                            Les différents projets réalisés m’ont permis
+                            de mettre en place des infrastructures réseau
+                            permettant la communication entre les utilisateurs,
+                            les équipements et les services.
+                        </p>
+            
+                        <div class="ac-grid">
+            
+                            <div class="ac-card">
+            
+                                <h4>Projet Wi-Fi Cisco</h4>
+            
+                                <p>
+                                    Dans le projet Wi-Fi,
+                                    nous avons déployé une infrastructure
+                                    composée d’un switch PoE
+                                    et de bornes Cisco Catalyst
+                                    afin de permettre
+                                    la communication sans fil
+                                    dans le bâtiment RT.
+                                </p>
+            
+                                <p>
+                                    Nous avons configuré plusieurs SSID,
+                                    des VLANs dédiés
+                                    ainsi que le DHCP
+                                    pour permettre la connexion des utilisateurs.
+                                </p>
+            
                             </div>
-                        </div>
-                    </div>
-
-                    <div class="child-ac rounded p-4 cursor-pointer" onclick="toggleChild(event, this)">
-                        <div class="flex justify-between items-center">
-                            <span class="text-xs font-bold text-cyan-400">AC32.04 | Permettre aux collaborateurs de se connecter de manière sécurisée au système d’information de l’entreprise</span>
-                            <i class="fas fa-plus chevron-child text-[10px]"></i>
-                        </div>
-                        <div class="child-content">
-                            <p class="mb-4">Ici, tu expliques ce que tu as fait pour valider cet AC.</p>
-                            <div class="border-l border-cyan-500/30 pl-4 italic">
-                                "Pendant mon alternance chez IT2i, j'ai supervisé le parc réseau via Zabbix..."
+            
+                            <div class="ac-card">
+            
+                                <h4>Compétences développées</h4>
+            
+                                <div class="ac-skills">
+                                    <span>Wi-Fi</span>
+                                    <span>Cisco</span>
+                                    <span>DHCP</span>
+                                    <span>SSID</span>
+                                    <span>VLAN</span>
+                                </div>
+            
                             </div>
+            
                         </div>
+            
                     </div>
-                    <div class="child-ac rounded p-4 cursor-pointer" onclick="toggleChild(event, this)">
-                        <div class="flex justify-between items-center">
-                            <span class="text-xs font-bold text-cyan-400">AC32.05 | Collaborer en mode projet en français et en anglais</span>
-                            <i class="fas fa-plus chevron-child text-[10px]"></i>
-                        </div>
-                        <div class="child-content">
-                            <p class="mb-4">Ici, tu expliques ce que tu as fait pour valider cet AC.</p>
-                            <div class="border-l border-cyan-500/30 pl-4 italic">
-                                "Pendant mon alternance chez IT2i, j'ai supervisé le parc réseau via Zabbix..."
+            
+                    <!-- ===================================================== -->
+                    <!-- AC32.02 -->
+                    <!-- ===================================================== -->
+            
+                    <div class="ac-block">
+            
+                        <div class="ac-top">
+            
+                            <div>
+                                <span class="ac-id">AC32.02</span>
+            
+                                <h3 class="ac-title">
+                                    Déployer un réseau d’accès sans fil sécurisé
+                                </h3>
                             </div>
+            
                         </div>
+            
+                        <p class="ac-intro-text">
+                            Cette compétence m’a permis
+                            de travailler sur la mise en place
+                            d’un réseau Wi-Fi sécurisé
+                            avec plusieurs niveaux d’authentification.
+                        </p>
+            
+                        <div class="ac-grid">
+            
+                            <div class="ac-card">
+            
+                                <h4>Configuration des SSID</h4>
+            
+                                <p>
+                                    Dans le projet Wi-Fi,
+                                    nous avons créé plusieurs réseaux :
+                                    un réseau IoT en PSK,
+                                    un réseau invité avec portail captif
+                                    ainsi qu’un réseau sécurisé en WPA2-Entreprise.
+                                </p>
+            
+                                <p>
+                                    Chaque SSID était associé
+                                    à un VLAN spécifique
+                                    afin d’isoler les utilisateurs
+                                    et sécuriser les communications.
+                                </p>
+            
+                            </div>
+            
+                            <div class="ac-card">
+            
+                                <h4>Sécurisation</h4>
+            
+                                <p>
+                                    Nous avons utilisé
+                                    l’authentification 802.1X,
+                                    des utilisateurs locaux,
+                                    des VLANs
+                                    ainsi qu’un portail captif
+                                    afin de contrôler l’accès au réseau.
+                                </p>
+            
+                            </div>
+            
+                            <div class="ac-card">
+            
+                                <h4>Compétences développées</h4>
+            
+                                <div class="ac-skills">
+                                    <span>WPA2-Entreprise</span>
+                                    <span>802.1X</span>
+                                    <span>Portail captif</span>
+                                    <span>Sécurité Wi-Fi</span>
+                                </div>
+            
+                            </div>
+            
+                        </div>
+            
                     </div>
+            
+                    <!-- ===================================================== -->
+                    <!-- AC32.03 -->
+                    <!-- ===================================================== -->
+            
+                    <div class="ac-block">
+            
+                        <div class="ac-top">
+            
+                            <div>
+                                <span class="ac-id">AC32.03</span>
+            
+                                <h3 class="ac-title">
+                                    Déployer un réseau d’accès fixe ou mobile
+                                </h3>
+                            </div>
+            
+                        </div>
+            
+                        <p class="ac-intro-text">
+                            Les différents projets réalisés
+                            m’ont permis de comprendre
+                            le fonctionnement des réseaux d’accès,
+                            aussi bien filaires que sans fil.
+                        </p>
+            
+                        <div class="ac-grid">
+            
+                            <div class="ac-card">
+            
+                                <h4>Infrastructure réseau</h4>
+            
+                                <p>
+                                    Dans le projet Wi-Fi,
+                                    nous avons configuré
+                                    des trunks,
+                                    des VLANs
+                                    et des ports switch
+                                    afin de permettre la circulation
+                                    des différents flux réseau.
+                                </p>
+            
+                                <p>
+                                    Les bornes Wi-Fi étaient reliées
+                                    à un switch Cisco PoE
+                                    permettant l’alimentation
+                                    et le transport des VLANs.
+                                </p>
+            
+                            </div>
+            
+                            <div class="ac-card">
+            
+                                <h4>Audit Wi-Fi</h4>
+            
+                                <p>
+                                    Nous avons également réalisé
+                                    un audit du bâtiment RT
+                                    avec Ekahau AI Pro
+                                    afin d’analyser la couverture réseau,
+                                    les interférences
+                                    et le débit du Wi-Fi.
+                                </p>
+            
+                            </div>
+            
+                            <div class="ac-card">
+            
+                                <h4>Compétences développées</h4>
+            
+                                <div class="ac-skills">
+                                    <span>Switch Cisco</span>
+                                    <span>Trunk</span>
+                                    <span>Audit Wi-Fi</span>
+                                    <span>Ekahau</span>
+                                </div>
+            
+                            </div>
+            
+                        </div>
+            
+                    </div>
+            
+                    <!-- ===================================================== -->
+                    <!-- AC32.04 -->
+                    <!-- ===================================================== -->
+            
+                    <div class="ac-block">
+            
+                        <div class="ac-top">
+            
+                            <div>
+                                <span class="ac-id">AC32.04</span>
+            
+                                <h3 class="ac-title">
+                                    Permettre une connexion sécurisée au SI
+                                </h3>
+                            </div>
+            
+                        </div>
+            
+                        <p class="ac-intro-text">
+                            Cette compétence m’a permis
+                            de mettre en place
+                            plusieurs solutions de sécurisation
+                            des accès utilisateurs.
+                        </p>
+            
+                        <div class="ac-grid">
+            
+                            <div class="ac-card">
+            
+                                <h4>Portail captif pfSense</h4>
+            
+                                <p>
+                                    Dans le TP R5.01,
+                                    j’ai configuré un portail captif pfSense
+                                    permettant de contrôler
+                                    l’accès au réseau
+                                    grâce à une authentification utilisateur.
+                                </p>
+            
+                                <p>
+                                    Nous avons également relié pfSense
+                                    à un Active Directory Windows
+                                    afin d’utiliser LDAP
+                                    pour l’authentification centralisée.
+                                </p>
+            
+                            </div>
+            
+                            <div class="ac-card">
+            
+                                <h4>Authentification sécurisée</h4>
+            
+                                <p>
+                                    Le projet Wi-Fi utilisait également
+                                    un SSID sécurisé avec authentification 802.1X
+                                    et gestion des utilisateurs
+                                    grâce à un profil EAP local.
+                                </p>
+            
+                            </div>
+            
+                            <div class="ac-card">
+            
+                                <h4>Compétences développées</h4>
+            
+                                <div class="ac-skills">
+                                    <span>pfSense</span>
+                                    <span>LDAP</span>
+                                    <span>802.1X</span>
+                                    <span>Authentification</span>
+                                    <span>Active Directory</span>
+                                </div>
+            
+                            </div>
+            
+                        </div>
+            
+                    </div>
+            
+                    <!-- ===================================================== -->
+                    <!-- AC32.05 -->
+                    <!-- ===================================================== -->
+            
+                    <div class="ac-block">
+            
+                        <div class="ac-top">
+            
+                            <div>
+                                <span class="ac-id">AC32.05</span>
+            
+                                <h3 class="ac-title">
+                                    Collaborer en mode projet
+                                </h3>
+                            </div>
+            
+                        </div>
+            
+                        <p class="ac-intro-text">
+                            Les différents projets réalisés
+                            nécessitaient un travail collaboratif
+                            et une bonne communication
+                            entre les membres du groupe.
+                        </p>
+            
+                        <div class="ac-grid">
+            
+                            <div class="ac-card">
+            
+                                <h4>Travail en équipe</h4>
+            
+                                <p>
+                                    Le projet Wi-Fi
+                                    ainsi que la SAE5.01
+                                    ont été réalisés en groupe.
+                                </p>
+            
+                                <p>
+                                    Nous avons réparti les tâches
+                                    entre la configuration réseau,
+                                    les tests,
+                                    la documentation
+                                    et les audits techniques.
+                                </p>
+            
+                            </div>
+            
+                            <div class="ac-card">
+            
+                                <h4>Communication technique</h4>
+            
+                                <p>
+                                    Nous avons également présenté
+                                    nos choix techniques,
+                                    rédigé des rapports détaillés
+                                    et expliqué les solutions mises en place.
+                                </p>
+            
+                            </div>
+            
+                            <div class="ac-card">
+            
+                                <h4>Compétences développées</h4>
+            
+                                <div class="ac-skills">
+                                    <span>Travail d’équipe</span>
+                                    <span>Communication</span>
+                                    <span>Gestion de projet</span>
+                                    <span>Collaboration</span>
+                                </div>
+            
+                            </div>
+            
+                        </div>
+            
+                    </div>
+            
                 </div>
+            
             </div>
 
             <div class="parent-card rounded-lg overflow-hidden">
