@@ -119,6 +119,10 @@
 
         <section class="max-w-4xl mx-auto px-6">
 
+            <!-- ========================= -->
+            <!-- 01_ADMINISTRER -->
+            <!-- ========================= -->
+
             <div class="parent-card rounded-lg overflow-hidden">
                 <div class="p-5 flex items-center justify-between cursor-pointer hover:bg-white/5 transition" onclick="toggleParent(this)">
                     <div class="flex items-center space-x-4">
@@ -127,85 +131,234 @@
                     </div>
                     <i class="fas fa-chevron-down chevron-main text-xs text-slate-600"></i>
                 </div>
-                
+
                 <div class="parent-content">
+
+                    <!-- AC31.01 -->
                     <div class="child-ac rounded p-4 cursor-pointer" onclick="toggleChild(event, this)">
                         <div class="flex justify-between items-center">
-                            <span class="text-xs font-bold text-cyan-400">AC31.01 | Concevoir un projet de réseau informatique d’une entreprise en intégrant les problématiques de haute disponibilité, de QoS, de sécurité et de supervision</span>
+                            <span class="text-xs font-bold text-cyan-400">
+                                AC31.01 | Concevoir un projet de réseau informatique d’une entreprise en intégrant les problématiques de haute disponibilité, de QoS, de sécurité et de supervision
+                            </span>
                             <i class="fas fa-plus chevron-child text-[10px]"></i>
                         </div>
+
                         <div class="child-content">
-                            <p class="mb-4">Ici, tu expliques ce que tu as fait pour valider cet AC.</p>
+                            <p class="mb-4">
+                                À travers plusieurs travaux pratiques ainsi que la SAE5.01, j’ai participé à la conception
+                                complète d’infrastructures réseau sécurisées et supervisées. Le principal objectif était
+                                de répondre à des problématiques réelles d’entreprise comme la sécurisation des accès,
+                                l’authentification des utilisateurs, la supervision des équipements et la disponibilité
+                                des services réseau.
+                            </p>
+
+                            <p class="mb-4">
+                                Dans le TP R5.01, j’ai mis en place une infrastructure comprenant un serveur Windows,
+                                un pare-feu pfSense et un portail captif. Cette configuration permettait de contrôler
+                                l’accès au réseau grâce à une authentification centralisée des utilisateurs depuis
+                                l’Active Directory. J’ai également étudié les mécanismes de sécurité liés aux accès réseau,
+                                aux VLAN, au WLAN et à l’authentification RADIUS.
+                            </p>
+
+                            <p class="mb-4">
+                                Dans le TP R5.02, j’ai travaillé sur la supervision des infrastructures grâce aux protocoles
+                                SNMP et aux outils Zabbix et Nagios. J’ai configuré la collecte d’informations réseau,
+                                la surveillance de serveurs Linux et Windows ainsi que la supervision d’équipements Cisco.
+                                Ces travaux m’ont permis de comprendre l’importance de la supervision proactive et de la
+                                détection d’incidents dans une infrastructure informatique.
+                            </p>
+
+                            <p class="mb-4">
+                                Enfin, dans la SAE5.01, j’ai participé à la conception d’une plateforme de TP basée sur
+                                des conteneurs Docker et Kubernetes. Ce projet m’a permis d’aborder des notions avancées
+                                comme l’orchestration, l’isolation des services, la sécurisation des environnements et
+                                l’automatisation du déploiement.
+                            </p>
+
                             <div class="border-l border-cyan-500/30 pl-4 italic">
-                                "Pendant mon alternance chez IT2i, j'ai supervisé le parc réseau via Zabbix..."
+                                Compétences développées : conception d’architecture réseau, sécurisation des infrastructures,
+                                supervision, gestion des accès, virtualisation, orchestration de conteneurs et analyse
+                                des besoins techniques.
                             </div>
                         </div>
                     </div>
 
+                    <!-- AC31.02 -->
                     <div class="child-ac rounded p-4 cursor-pointer" onclick="toggleChild(event, this)">
                         <div class="flex justify-between items-center">
-                            <span class="text-xs font-bold text-cyan-400">AC31.02 | Réaliser la documentation technique de ce projet</span>
+                            <span class="text-xs font-bold text-cyan-400">
+                                AC31.02 | Réaliser la documentation technique de ce projet
+                            </span>
                             <i class="fas fa-plus chevron-child text-[10px]"></i>
                         </div>
+
                         <div class="child-content">
-                            <p class="mb-4">Ici, tu expliques ce que tu as fait pour valider cet AC.</p>
+                            <p class="mb-4">
+                                Lors des différents projets réalisés, j’ai produit de la documentation technique détaillée
+                                afin d’expliquer les infrastructures mises en place, les configurations réalisées ainsi que
+                                les procédures de déploiement et de maintenance.
+                            </p>
+
+                            <p class="mb-4">
+                                Pour les projets utilisant pfSense, Fortigate, Zabbix et Nagios, j’ai rédigé des comptes rendus
+                                techniques contenant les schémas réseau, les configurations des équipements, les règles de sécurité,
+                                les méthodes d’authentification et les résultats des tests effectués.
+                            </p>
+
+                            <p class="mb-4">
+                                Dans la SAE5.01, la documentation avait également pour objectif de faciliter l’administration
+                                future de la plateforme conteneurisée. J’ai donc participé à la rédaction des procédures
+                                de supervision, de sauvegarde, de maintenance et de mise à jour des services.
+                            </p>
+
                             <div class="border-l border-cyan-500/30 pl-4 italic">
-                                "Pendant mon alternance chez IT2i, j'ai supervisé le parc réseau via Zabbix..."
+                                Compétences développées : rédaction technique, structuration de documentation,
+                                vulgarisation technique, production de schémas et procédures d’administration.
                             </div>
                         </div>
                     </div>
 
+                    <!-- AC31.03 -->
                     <div class="child-ac rounded p-4 cursor-pointer" onclick="toggleChild(event, this)">
                         <div class="flex justify-between items-center">
-                            <span class="text-xs font-bold text-cyan-400">AC31.03 | Réaliser une maquette de démonstration du projet</span>
+                            <span class="text-xs font-bold text-cyan-400">
+                                AC31.03 | Réaliser une maquette de démonstration du projet
+                            </span>
                             <i class="fas fa-plus chevron-child text-[10px]"></i>
                         </div>
+
                         <div class="child-content">
-                            <p class="mb-4">Ici, tu expliques ce que tu as fait pour valider cet AC.</p>
+                            <p class="mb-4">
+                                J’ai réalisé plusieurs maquettes techniques permettant de démontrer le fonctionnement
+                                des solutions développées dans un environnement proche des conditions réelles.
+                            </p>
+
+                            <p class="mb-4">
+                                Dans le cadre du portail captif avec pfSense, j’ai créé une infrastructure virtuelle
+                                comprenant un serveur Windows, un client, un pare-feu et un système d’authentification.
+                                Cette maquette permettait de tester le fonctionnement des connexions utilisateurs
+                                et la sécurisation des accès réseau.
+                            </p>
+
+                            <p class="mb-4">
+                                Pour les projets de supervision, j’ai déployé plusieurs machines Linux et Windows afin
+                                de superviser leurs services via SNMP, Zabbix et Nagios. J’ai également testé les alertes,
+                                les remontées d’événements et les notifications d’incidents.
+                            </p>
+
+                            <p class="mb-4">
+                                Dans la SAE5.01, la maquette reposait sur une infrastructure conteneurisée capable
+                                d’héberger différents environnements de TP accessibles via une interface web.
+                            </p>
+
                             <div class="border-l border-cyan-500/30 pl-4 italic">
-                                "Pendant mon alternance chez IT2i, j'ai supervisé le parc réseau via Zabbix..."
+                                Compétences développées : virtualisation, tests techniques, validation d’infrastructure,
+                                déploiement de services et démonstration fonctionnelle.
                             </div>
                         </div>
                     </div>
 
+                    <!-- AC31.04 -->
                     <div class="child-ac rounded p-4 cursor-pointer" onclick="toggleChild(event, this)">
                         <div class="flex justify-between items-center">
-                            <span class="text-xs font-bold text-cyan-400">AC31.04 |  Défendre/argumenter un projet</span>
+                            <span class="text-xs font-bold text-cyan-400">
+                                AC31.04 | Défendre / argumenter un projet
+                            </span>
                             <i class="fas fa-plus chevron-child text-[10px]"></i>
                         </div>
+
                         <div class="child-content">
-                            <p class="mb-4">Ici, tu expliques ce que tu as fait pour valider cet AC.</p>
+                            <p class="mb-4">
+                                Les différents projets réalisés m’ont amené à justifier les choix techniques effectués
+                                en fonction des besoins de sécurité, de supervision et de performance.
+                            </p>
+
+                            <p class="mb-4">
+                                J’ai dû expliquer pourquoi certains outils étaient plus adaptés que d’autres, par exemple
+                                l’utilisation de pfSense pour le portail captif, de Zabbix pour la supervision centralisée
+                                ou encore de Docker/Kubernetes pour la plateforme conteneurisée.
+                            </p>
+
+                            <p class="mb-4">
+                                Durant les présentations orales et les démonstrations, j’ai appris à présenter une
+                                architecture réseau, expliquer les mécanismes de sécurité mis en place et démontrer
+                                les bénéfices des solutions choisies.
+                            </p>
+
                             <div class="border-l border-cyan-500/30 pl-4 italic">
-                                "Pendant mon alternance chez IT2i, j'ai supervisé le parc réseau via Zabbix..."
+                                Compétences développées : communication technique, argumentation,
+                                analyse de solutions et présentation de projet.
                             </div>
                         </div>
                     </div>
 
+                    <!-- AC31.05 -->
                     <div class="child-ac rounded p-4 cursor-pointer" onclick="toggleChild(event, this)">
                         <div class="flex justify-between items-center">
-                            <span class="text-xs font-bold text-cyan-400">AC31.05 | Communiquer avec les acteurs du projet</span>
+                            <span class="text-xs font-bold text-cyan-400">
+                                AC31.05 | Communiquer avec les acteurs du projet
+                            </span>
                             <i class="fas fa-plus chevron-child text-[10px]"></i>
                         </div>
+
                         <div class="child-content">
-                            <p class="mb-4">Ici, tu expliques ce que tu as fait pour valider cet AC.</p>
+                            <p class="mb-4">
+                                Les projets réalisés en groupe nécessitaient une communication constante afin de répartir
+                                les tâches, suivre l’avancement et résoudre les problèmes techniques rencontrés.
+                            </p>
+
+                            <p class="mb-4">
+                                Nous avons collaboré pour mettre en place les infrastructures réseau, configurer
+                                les serveurs, tester les services et corriger les dysfonctionnements.
+                            </p>
+
+                            <p class="mb-4">
+                                Cette organisation m’a permis d’améliorer ma capacité à travailler en équipe,
+                                à transmettre des informations techniques et à coordonner différentes tâches
+                                dans un projet informatique.
+                            </p>
+
                             <div class="border-l border-cyan-500/30 pl-4 italic">
-                                "Pendant mon alternance chez IT2i, j'ai supervisé le parc réseau via Zabbix..."
+                                Compétences développées : travail d’équipe, communication technique,
+                                coordination et collaboration en mode projet.
                             </div>
                         </div>
                     </div>
 
+                    <!-- AC31.06 -->
                     <div class="child-ac rounded p-4 cursor-pointer" onclick="toggleChild(event, this)">
                         <div class="flex justify-between items-center">
-                            <span class="text-xs font-bold text-cyan-400">AC31.06 |  Gérer le projet et les différentes étapes de sa mise en œuvre en respectant les délais</span>
+                            <span class="text-xs font-bold text-cyan-400">
+                                AC31.06 | Gérer le projet et les différentes étapes de sa mise en œuvre en respectant les délais
+                            </span>
                             <i class="fas fa-plus chevron-child text-[10px]"></i>
                         </div>
+
                         <div class="child-content">
-                            <p class="mb-4">Ici, tu expliques ce que tu as fait pour valider cet AC.</p>
+                            <p class="mb-4">
+                                Lors des différents TP et de la SAE5.01, j’ai participé à la planification
+                                et à l’organisation des tâches afin de respecter les délais imposés.
+                            </p>
+
+                            <p class="mb-4">
+                                Les projets ont été réalisés en plusieurs étapes : analyse des besoins,
+                                préparation de l’infrastructure, installation des services, configuration,
+                                sécurisation, phase de tests puis rédaction de la documentation finale.
+                            </p>
+
+                            <p class="mb-4">
+                                La SAE5.01 m’a particulièrement permis de développer des compétences
+                                en gestion de projet grâce à l’utilisation d’outils collaboratifs,
+                                au suivi des tâches et à l’organisation du travail en équipe.
+                            </p>
+
                             <div class="border-l border-cyan-500/30 pl-4 italic">
-                                "Pendant mon alternance chez IT2i, j'ai supervisé le parc réseau via Zabbix..."
+                                Compétences développées : gestion de projet, organisation,
+                                méthodologie de déploiement et respect des délais.
                             </div>
                         </div>
                     </div>
+
                 </div>
             </div>
 
