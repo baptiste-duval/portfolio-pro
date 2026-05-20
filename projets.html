@@ -142,6 +142,54 @@
             text-transform: uppercase;
             font-weight: bold;
         }
+
+        /* PDF Preview Button (remplace les iframes) */
+        .pdf-preview-btn {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 12px;
+            width: 100%;
+            padding: 24px;
+            background: rgba(0, 242, 255, 0.04);
+            border: 1px dashed rgba(0, 242, 255, 0.25);
+            border-radius: 10px;
+            color: #64748b;
+            font-size: 11px;
+            font-family: 'Fira Code', monospace;
+            cursor: pointer;
+            transition: all 0.25s ease;
+            text-align: center;
+        }
+
+        .pdf-preview-btn:hover {
+            background: rgba(0, 242, 255, 0.09);
+            border-color: rgba(0, 242, 255, 0.5);
+            color: #00f2ff;
+        }
+
+        .pdf-preview-btn i {
+            font-size: 28px;
+            color: rgba(0, 242, 255, 0.4);
+            transition: color 0.25s ease;
+        }
+
+        .pdf-preview-btn:hover i {
+            color: #00f2ff;
+        }
+
+        .pdf-preview-btn .pdf-label {
+            display: block;
+            font-size: 9px;
+            color: #334155;
+            margin-top: 4px;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+        }
+
+        .pdf-preview-btn:hover .pdf-label {
+            color: rgba(0, 242, 255, 0.5);
+        }
     </style>
 </head>
 
@@ -204,8 +252,9 @@
                 <summary>BUT RT - ANNEE 3 <i class="fas fa-caret-down ml-2 opacity-50"></i></summary>
                 <details open class="sub-menu">
                     <summary>Semestre 5</summary>
-                <a onclick="goToProject('s5-projets', 'sae501')" class="project-link">SAE 5.01 - Infrastructure de TP basée sur des conteneurs</a>
+                    <a onclick="goToProject('s5-projets', 'sae501')" class="project-link">SAE 5.01 - Infrastructure de TP basée sur des conteneurs</a>
                     <a onclick="goToProject('s5-projets', 'sae503')" class="project-link">SAE 5.ROM.03 - Déployer et gérer les services ROM</a>
+                </details>
             </details>
         </aside>
 
@@ -221,6 +270,7 @@
                     </div>
                 </section>
 
+                <!-- ===== SEMESTRE 1 ===== -->
                 <div id="s1-projets" class="project-section">
                     <h2 class="text-xl font-['Orbitron'] mb-10 text-cyan-400 uppercase tracking-widest border-b border-cyan-500/20 pb-2">Semestre 1 - Fondamentaux</h2>
 
@@ -229,7 +279,13 @@
                         <p class="text-slate-300 text-sm mb-6 leading-relaxed">
                             Dans le rôle d'un RSSI, j'ai élaboré une stratégie de sensibilisation pour protéger les collaborateurs contre les cybermenaces liées à l'erreur humaine. Pour asseoir ce projet, j'ai suivi et validé le <strong>MOOC de l'ANSSI</strong> ainsi que le module "Introduction à la cybersécurité" de <strong>Cisco Netacad</strong>. Le rendu final consistait en un diaporama pédagogique présentant les bonnes pratiques indispensables. Ce travail a renforcé ma capacité à vulgariser des concepts de sécurité critiques pour tout type de personnel.
                         </p>
-                        <iframe src="static/image/Mooc-Duval.pdf" class="w-full h-[450px] border border-white/10 rounded-lg"></iframe>
+                        <button onclick="openModal('static/image/Mooc-Duval.pdf')" class="pdf-preview-btn">
+                            <i class="fas fa-file-pdf"></i>
+                            <div>
+                                <span>Mooc-Duval.pdf</span>
+                                <span class="pdf-label">Cliquer pour ouvrir le document</span>
+                            </div>
+                        </button>
                     </article>
 
                     <article id="sae12" class="project-card">
@@ -254,8 +310,20 @@
                             Cette SAE m'a permis d'étudier les caractéristiques physiques des supports de transmission, comme l'atténuation et le retard de propagation des signaux. À l'aide de simulations sous <strong>Matlab et Scilab</strong>, j'ai analysé le comportement des ondes et la qualité des liaisons cuivre et coaxiales. J'ai notamment utilisé les nombres complexes pour calculer l'impédance et le coefficient de réflexion des lignes. Ce travail rigoureux est fondamental pour comprendre les limites techniques qui régissent le débit des réseaux modernes.
                         </p>
                         <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-                            <iframe src="static/image/TP1-SAE-NP.pdf" class="w-full h-[350px] border border-white/10 rounded-lg"></iframe>
-                            <iframe src="static/image/TP3-NP.pdf" class="w-full h-[350px] border border-white/10 rounded-lg"></iframe>
+                            <button onclick="openModal('static/image/TP1-SAE-NP.pdf')" class="pdf-preview-btn">
+                                <i class="fas fa-file-pdf"></i>
+                                <div>
+                                    <span>TP1-SAE-NP.pdf</span>
+                                    <span class="pdf-label">Cliquer pour ouvrir</span>
+                                </div>
+                            </button>
+                            <button onclick="openModal('static/image/TP3-NP.pdf')" class="pdf-preview-btn">
+                                <i class="fas fa-file-pdf"></i>
+                                <div>
+                                    <span>TP3-NP.pdf</span>
+                                    <span class="pdf-label">Cliquer pour ouvrir</span>
+                                </div>
+                            </button>
                         </div>
                     </article>
 
@@ -276,6 +344,7 @@
                     </article>
                 </div>
 
+                <!-- ===== SEMESTRE 2 ===== -->
                 <div id="s2-projets" class="project-section">
                     <h2 class="text-xl font-['Orbitron'] mb-10 text-cyan-400 uppercase tracking-widest border-b border-cyan-500/20 pb-2">Semestre 2 - Approfondissement</h2>
 
@@ -324,6 +393,7 @@
                     </article>
                 </div>
 
+                <!-- ===== SEMESTRE 3 ===== -->
                 <div id="s3-projets" class="project-section">
                     <h2 class="text-xl font-['Orbitron'] mb-10 text-cyan-400 uppercase tracking-widest border-b border-cyan-500/20 pb-2">Semestre 3 - Spécialisation</h2>
 
@@ -332,15 +402,15 @@
                         <p class="text-slate-300 text-sm mb-6 leading-relaxed">
                             Ce projet visait à concevoir un système de transmission sans fil complet. J'ai utilisé l'émetteur/récepteur <strong>ADALM-Pluto</strong> piloté par <strong>GNU Radio</strong> pour manipuler des signaux radiofréquences. Le travail a inclus l'analyse de spectres réels (GSM, LTE) avec le logiciel <strong>MCS Spectrum Analyzer</strong> et l'antenne HyperLOG 7060. L'aboutissement a été la transmission réussie d'un flux vidéo via le protocole <strong>UDP</strong> entre deux stations radio.
                         </p>
-                            <div class="p-6 bg-cyan-500/10 border border-cyan-500/30 rounded-lg flex justify-between items-center">
-                                <div>
-                                    <h4 class="text-cyan-400 font-bold uppercase text-xs">Rapport Radiofréquences</h4>
-                                    <p class="text-[10px] text-slate-400">Consultez l'analyse de transmission GNU Radio.</p>
-                                </div>
-                                <button onclick="openModal('static/image/Rapport final-SAE301-Duval-Nicolas.pdf')" class="px-6 py-2 bg-cyan-500 hover:bg-cyan-600 text-white text-[10px] font-bold rounded transition-all cursor-pointer">
-                                    <i class="fas fa-file-pdf mr-2"></i> VOIR LE RAPPORT
-                                </button>
+                        <div class="p-6 bg-cyan-500/10 border border-cyan-500/30 rounded-lg flex justify-between items-center">
+                            <div>
+                                <h4 class="text-cyan-400 font-bold uppercase text-xs">Rapport Radiofréquences</h4>
+                                <p class="text-[10px] text-slate-400">Consultez l'analyse de transmission GNU Radio.</p>
                             </div>
+                            <button onclick="openModal('static/image/Rapport final-SAE301-Duval-Nicolas.pdf')" class="px-6 py-2 bg-cyan-500 hover:bg-cyan-600 text-white text-[10px] font-bold rounded transition-all cursor-pointer">
+                                <i class="fas fa-file-pdf mr-2"></i> VOIR LE RAPPORT
+                            </button>
+                        </div>
                     </article>
 
                     <article id="sae302" class="project-card">
@@ -482,6 +552,7 @@
                     </article>
                 </div>
 
+                <!-- ===== SEMESTRE 4 ===== -->
                 <div id="s4-projets" class="project-section">
                     <h2 class="text-xl font-['Orbitron'] mb-10 text-cyan-400 uppercase tracking-widest border-b border-cyan-500/20 pb-2">
                         Semestre 4 - Expertise Réseau & Sécurité
@@ -491,7 +562,7 @@
                         <div class="flex items-center gap-4 mb-8">
                             <div class="h-px flex-1 bg-gradient-to-r from-transparent via-cyan-500/50 to-transparent"></div>
                             <div class="text-center">
-                                <h3 class="text-lg font-bold text-white tracking-tighter uppercase italic">SAE 4.CYBER.01 : Sécuriser un Système d’Information</h3>
+                                <h3 class="text-lg font-bold text-white tracking-tighter uppercase italic">SAE 4.CYBER.01 : Sécuriser un Système d'Information</h3>
                                 <p class="text-[9px] text-cyan-500/60 uppercase tracking-widest">Architecture Multi-sites & Hardening</p>
                             </div>
                             <div class="h-px flex-1 bg-gradient-to-r from-transparent via-cyan-500/50 to-transparent"></div>
@@ -566,234 +637,225 @@
                     </article>
 
                     <article id="sae401" class="project-card border-l-4 border-cyan-500">
-    <div class="flex flex-col md:flex-row justify-between items-start mb-4 gap-2">
-        <div>
-            <h3 class="text-xl font-bold text-white italic">SAE 4.01 : Stage - Admin Systèmes & Réseaux</h3>
-            <p class="text-cyan-400 font-bold text-[10px] uppercase tracking-[0.2em]">Centre Hospitalier d'Arras (GHAT)</p>
-        </div>
-        <span class="text-[9px] bg-cyan-500/20 text-cyan-400 px-2 py-1 rounded border border-cyan-500/30">AVRIL - MAI 2025</span>
-    </div>
+                        <div class="flex flex-col md:flex-row justify-between items-start mb-4 gap-2">
+                            <div>
+                                <h3 class="text-xl font-bold text-white italic">SAE 4.01 : Stage - Admin Systèmes & Réseaux</h3>
+                                <p class="text-cyan-400 font-bold text-[10px] uppercase tracking-[0.2em]">Centre Hospitalier d'Arras (GHAT)</p>
+                            </div>
+                            <span class="text-[9px] bg-cyan-500/20 text-cyan-400 px-2 py-1 rounded border border-cyan-500/30">AVRIL - MAI 2025</span>
+                        </div>
 
-    <p class="text-slate-400 text-[11px] mb-6 leading-relaxed">
-        Immersion au sein d'un SI hospitalier critique. Ma mission : garantir la continuité des soins via l'administration du parc et l'automatisation des processus métier.
-    </p>
+                        <p class="text-slate-400 text-[11px] mb-6 leading-relaxed">
+                            Immersion au sein d'un SI hospitalier critique. Ma mission : garantir la continuité des soins via l'administration du parc et l'automatisation des processus métier.
+                        </p>
 
-    <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
-        
-        <a href="stage-ad.html" class="group relative bg-black/40 p-3 rounded border border-white/5 hover:border-cyan-500 hover:bg-cyan-500/5 transition-all duration-300">
-            <h4 class="text-cyan-400 font-bold text-[9px] uppercase mb-2 flex items-center">
-                <i class="fas fa-terminal mr-2"></i> Automatisation AD
-            </h4>
-            <p class="text-[10px] text-slate-500 leading-tight">Développement de scripts <strong>PowerShell</strong> pour le cycle de vie des comptes (création/nettoyage) avec contrôle Regex.</p>
-            
-            <div class="absolute -top-8 left-1/2 -translate-x-1/2 bg-cyan-500 text-black text-[8px] font-bold px-2 py-1 rounded opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none whitespace-nowrap">
-                CLIQUER POUR AVOIR PLUS DE DÉTAILS
-            </div>
-        </a>
+                        <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                            <a href="stage-ad.html" class="group relative bg-black/40 p-3 rounded border border-white/5 hover:border-cyan-500 hover:bg-cyan-500/5 transition-all duration-300">
+                                <h4 class="text-cyan-400 font-bold text-[9px] uppercase mb-2 flex items-center">
+                                    <i class="fas fa-terminal mr-2"></i> Automatisation AD
+                                </h4>
+                                <p class="text-[10px] text-slate-500 leading-tight">Développement de scripts <strong>PowerShell</strong> pour le cycle de vie des comptes (création/nettoyage) avec contrôle Regex.</p>
+                                <div class="absolute -top-8 left-1/2 -translate-x-1/2 bg-cyan-500 text-black text-[8px] font-bold px-2 py-1 rounded opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none whitespace-nowrap">
+                                    CLIQUER POUR AVOIR PLUS DE DÉTAILS
+                                </div>
+                            </a>
 
-        <a href="stage-graylog.html" class="group relative bg-black/40 p-3 rounded border border-white/5 hover:border-cyan-500 hover:bg-cyan-500/5 transition-all duration-300">
-            <h4 class="text-cyan-400 font-bold text-[9px] uppercase mb-2 flex items-center">
-                <i class="fas fa-search mr-2"></i> Supervision Logs
-            </h4>
-            <p class="text-[10px] text-slate-500 leading-tight">Déploiement de <strong>Graylog</strong> sur Debian 12 pour centraliser et analyser les événements serveurs en temps réel.</p>
-            
-            <div class="absolute -top-8 left-1/2 -translate-x-1/2 bg-cyan-500 text-black text-[8px] font-bold px-2 py-1 rounded opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none whitespace-nowrap">
-                CLIQUER POUR AVOIR PLUS DE DÉTAILS
-            </div>
-        </a>
+                            <a href="stage-graylog.html" class="group relative bg-black/40 p-3 rounded border border-white/5 hover:border-cyan-500 hover:bg-cyan-500/5 transition-all duration-300">
+                                <h4 class="text-cyan-400 font-bold text-[9px] uppercase mb-2 flex items-center">
+                                    <i class="fas fa-search mr-2"></i> Supervision Logs
+                                </h4>
+                                <p class="text-[10px] text-slate-500 leading-tight">Déploiement de <strong>Graylog</strong> sur Debian 12 pour centraliser et analyser les événements serveurs en temps réel.</p>
+                                <div class="absolute -top-8 left-1/2 -translate-x-1/2 bg-cyan-500 text-black text-[8px] font-bold px-2 py-1 rounded opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none whitespace-nowrap">
+                                    CLIQUER POUR AVOIR PLUS DE DÉTAILS
+                                </div>
+                            </a>
 
-        <a href="stage-cdr.html" class="group relative bg-black/40 p-3 rounded border border-white/5 hover:border-cyan-500 hover:bg-cyan-500/5 transition-all duration-300">
-            <h4 class="text-cyan-400 font-bold text-[9px] uppercase mb-2 flex items-center">
-                <i class="fas fa-phone-alt mr-2"></i> Gestion CDR
-            </h4>
-            <p class="text-[10px] text-slate-500 leading-tight">Création d'un outil de traitement des logs d'appels téléphoniques via <strong>Python</strong> et <strong>MySQL/MariaDB</strong>.</p>
-            
-            <div class="absolute -top-8 left-1/2 -translate-x-1/2 bg-cyan-500 text-black text-[8px] font-bold px-2 py-1 rounded opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none whitespace-nowrap">
-                CLIQUER POUR AVOIR PLUS DE DÉTAILS
-            </div>
-        </a>
+                            <a href="stage-cdr.html" class="group relative bg-black/40 p-3 rounded border border-white/5 hover:border-cyan-500 hover:bg-cyan-500/5 transition-all duration-300">
+                                <h4 class="text-cyan-400 font-bold text-[9px] uppercase mb-2 flex items-center">
+                                    <i class="fas fa-phone-alt mr-2"></i> Gestion CDR
+                                </h4>
+                                <p class="text-[10px] text-slate-500 leading-tight">Création d'un outil de traitement des logs d'appels téléphoniques via <strong>Python</strong> et <strong>MySQL/MariaDB</strong>.</p>
+                                <div class="absolute -top-8 left-1/2 -translate-x-1/2 bg-cyan-500 text-black text-[8px] font-bold px-2 py-1 rounded opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none whitespace-nowrap">
+                                    CLIQUER POUR AVOIR PLUS DE DÉTAILS
+                                </div>
+                            </a>
+                        </div>
 
-    </div>
+                        <div class="mt-6 pt-4 border-t border-white/5 flex justify-end">
+                            <button onclick="openModal('static/image/Rapport_Stage_Duval_Baptiste.pdf')" class="text-[9px] font-bold text-cyan-500 hover:text-cyan-300 transition-all uppercase tracking-widest flex items-center">
+                                Consulter le rapport complet <i class="fas fa-arrow-right ml-2"></i>
+                            </button>
+                        </div>
+                    </article>
+                </div>
 
-    <div class="mt-6 pt-4 border-t border-white/5 flex justify-end">
-        <button onclick="openModal('static/image/Rapport_Stage_Duval_Baptiste.pdf')" class="text-[9px] font-bold text-cyan-500 hover:text-cyan-300 transition-all uppercase tracking-widest flex items-center">
-            Consulter le rapport complet <i class="fas fa-arrow-right ml-2"></i>
-        </button>
-    </div>
-</article>
+                <!-- ===== SEMESTRE 5 ===== -->
+                <div id="s5-projets" class="project-section">
+                    <h2 class="text-xl font-['Orbitron'] mb-10 text-cyan-400 uppercase tracking-widest border-b border-cyan-500/20 pb-2">Semestre 5 - Spécialisation & Infrastructures</h2>
 
-                    
+                    <article id="sae501" class="project-card mb-8">
+                        <h3 class="text-2xl font-bold text-white mb-4 italic">SAE 5.01 : Infrastructure de TP basée sur des conteneurs</h3>
+                        <p class="text-slate-300 text-sm mb-6 leading-relaxed">
+                            Ce projet d'envergure consistait à concevoir et déployer une plateforme de <strong>salles de TP virtuelles</strong> hautement disponible. L'objectif était de fournir aux étudiants des environnements de travail complets (Ubuntu, Kali, Windows), isolés et accessibles via un simple navigateur, tout en optimisant radicalement les ressources serveur par rapport à de la virtualisation classique (VM).
+                        </p>
+
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
+                            <div class="space-y-4">
+                                <h4 class="text-cyan-400 font-bold text-xs uppercase">Architecture & Orchestration</h4>
+                                <p class="text-[10px] text-slate-400 leading-relaxed">
+                                    Mise en place d'un cluster <strong>Docker Swarm</strong> pour la gestion du cycle de vie des conteneurs. Utilisation de <strong>noVNC</strong> et d'un serveur <strong>X11vnc</strong> pour déporter l'affichage graphique des OS conteneurisés vers le Web via WebSockets. L'infrastructure assure une haute disponibilité et une scalabilité horizontale des environnements de TP.
+                                </p>
+                                <div class="flex flex-wrap gap-2">
+                                    <span class="tech-badge">DOCKER SWARM</span>
+                                    <span class="tech-badge">KUBERNETES</span>
+                                    <span class="tech-badge">NOVNC / WEBSOCKIFY</span>
+                                    <span class="tech-badge">REVERSE PROXY</span>
+                                    <span class="tech-badge">ALPINE / UBUNTU</span>
+                                </div>
+                            </div>
+                            <div class="space-y-4">
+                                <h4 class="text-cyan-400 font-bold text-xs uppercase">Expertise DevOps & Systèmes</h4>
+                                <ul class="text-[10px] space-y-2">
+                                    <li><i class="fas fa-box text-cyan-500 mr-2"></i> Industrialisation via Dockerfiles optimisés (multi-stage)</li>
+                                    <li><i class="fas fa-network-wired text-cyan-500 mr-2"></i> Segmentation réseau via Docker Overlay Networks</li>
+                                    <li><i class="fas fa-server text-cyan-500 mr-2"></i> Gestion des ressources (Quotas CPU, RAM et I/O)</li>
+                                    <li><i class="fas fa-terminal text-cyan-500 mr-2"></i> Automatisation des déploiements via Scripts Bash/Python</li>
+                                </ul>
+                            </div>
+                        </div>
+
+                        <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mb-8">
+                            <div class="p-4 bg-white/5 border border-white/10 rounded-lg flex flex-col justify-between">
+                                <div>
+                                    <h5 class="text-[10px] font-bold text-cyan-400 mb-2 uppercase text-center">Images "Laboratoire"</h5>
+                                    <p class="text-[9px] text-slate-500 mb-3">Conception d'images Docker sur-mesure intégrant des environnements de bureau légers (XFCE) et les outils de TP (VS Code, MySQL, outils de Pentest).</p>
+                                </div>
+                                <div class="flex gap-2">
+                                    <span class="text-[8px] bg-cyan-500/20 text-cyan-300 px-2 py-1 rounded">DOCKERFILE</span>
+                                    <span class="text-[8px] bg-cyan-500/20 text-cyan-300 px-2 py-1 rounded">X11VNC</span>
+                                </div>
+                            </div>
+                            <div class="p-4 bg-white/5 border border-white/10 rounded-lg flex flex-col justify-between">
+                                <div>
+                                    <h5 class="text-[10px] font-bold text-cyan-400 mb-2 uppercase text-center">Accès Clientless</h5>
+                                    <p class="text-[9px] text-slate-500 mb-3">Développement du portail utilisateur permettant de piloter ses instances. Accès sécurisé aux machines via le protocole noVNC intégré au navigateur.</p>
+                                </div>
+                                <div class="flex gap-2">
+                                    <span class="text-[8px] bg-cyan-500/20 text-cyan-300 px-2 py-1 rounded">HTML5/JS</span>
+                                    <span class="text-[8px] bg-cyan-500/20 text-cyan-300 px-2 py-1 rounded">WEBSOCKETS</span>
+                                </div>
+                            </div>
+                            <div class="p-4 bg-white/5 border border-white/10 rounded-lg flex flex-col justify-between">
+                                <div>
+                                    <h5 class="text-[10px] font-bold text-cyan-400 mb-2 uppercase text-center">Sécurité & Isolation</h5>
+                                    <p class="text-[9px] text-slate-500 mb-3">Isolation stricte des conteneurs via les Namespaces Linux et mise en place de politiques réseau pour éviter les communications non autorisées.</p>
+                                </div>
+                                <div class="flex gap-2">
+                                    <span class="text-[8px] bg-cyan-500/20 text-cyan-300 px-2 py-1 rounded">C-GROUPS</span>
+                                    <span class="text-[8px] bg-cyan-500/20 text-cyan-300 px-2 py-1 rounded">ISOLEMENT</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="p-6 bg-cyan-500/10 border border-cyan-500/30 rounded-lg flex flex-col md:flex-row justify-between items-center gap-4">
+                            <div>
+                                <h4 class="text-cyan-400 font-bold">Dossier Technique SAE 5.01</h4>
+                                <p class="text-xs text-slate-400">Accédez au rapport complet, aux schémas d'architecture Swarm et aux scripts de configuration.</p>
+                            </div>
+                            <div class="flex gap-3">
+                                <button onclick="openModal('static/pdf/Rapport-SAE501-Czurka-Negrila-Bauchart-Duval.pdf')" class="px-4 py-2 bg-cyan-500 hover:bg-cyan-600 text-white text-xs font-bold rounded transition">
+                                    <i class="fas fa-file-pdf mr-2"></i> VOIR LE RAPPORT
+                                </button>
+                            </div>
+                        </div>
+                    </article>
+
+                    <br><br><br><br>
+
+                    <article id="sae503" class="project-card">
+                        <h3 class="text-2xl font-bold text-white mb-4 italic">SAE 5.ROM.03 : Déployer et gérer les services ROM</h3>
+                        <p class="text-slate-300 text-sm mb-6 leading-relaxed">
+                            Ce projet consiste en la mise en place d'une infrastructure complète de <strong>communications unifiées</strong>. L'objectif était d'intégrer un autocommutateur IP (PABX) <strong>Asterisk</strong> au sein d'une interface web moderne, permettant non seulement la téléphonie classique sur IP, mais aussi la visio-conférence et la messagerie instantanée directement depuis un navigateur via <strong>WebRTC</strong>.
+                        </p>
+
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
+                            <div class="space-y-4">
+                                <h4 class="text-cyan-400 font-bold text-xs uppercase">Infrastructure Voix & Vidéo</h4>
+                                <p class="text-[10px] text-slate-400 leading-relaxed">
+                                    Déploiement d'un serveur <strong>Asterisk</strong> sous Alpine Linux pour la gestion des protocoles <strong>SIP</strong> et <strong>PJSIP</strong>. Configuration du <i>dialplan</i> (extensions.conf) pour l'acheminement des appels entre téléphones physiques Fanvil et clients web. Utilisation de <strong>SIP.js</strong> pour transformer le navigateur en softphone fonctionnel sans plugin additionnel.
+                                </p>
+                                <div class="flex flex-wrap gap-2">
+                                    <span class="tech-badge">ASTERISK (PJSIP)</span>
+                                    <span class="tech-badge">WEBRTC</span>
+                                    <span class="tech-badge">SIP.JS</span>
+                                    <span class="tech-badge">ALPINE LINUX</span>
+                                    <span class="tech-badge">AMI (MANAGER)</span>
+                                </div>
+                            </div>
+                            <div class="space-y-4">
+                                <h4 class="text-cyan-400 font-bold text-xs uppercase">Expertise Réseaux & Services</h4>
+                                <ul class="text-[10px] space-y-2">
+                                    <li><i class="fas fa-phone-alt text-cyan-500 mr-2"></i> Configuration de terminaux SIP matériels et logiciels</li>
+                                    <li><i class="fas fa-exchange-alt text-cyan-500 mr-2"></i> Flux média Temps Réel (RTP/SRTP) et signalisation</li>
+                                    <li><i class="fas fa-shield-virus text-cyan-500 mr-2"></i> Sécurisation des flux (DTLS/SRTP) pour le WebRTC</li>
+                                    <li><i class="fas fa-search text-cyan-500 mr-2"></i> Analyse de protocoles avec Wireshark (Traces SIP)</li>
+                                </ul>
+                            </div>
+                        </div>
+
+                        <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mb-8">
+                            <div class="p-4 bg-white/5 border border-white/10 rounded-lg flex flex-col justify-between">
+                                <div>
+                                    <h5 class="text-[10px] font-bold text-cyan-400 mb-2 uppercase text-center">Serveur de Com'</h5>
+                                    <p class="text-[9px] text-slate-500 mb-3">Installation d'Asterisk sur VM légère. Configuration des comptes utilisateurs, des codecs audio/vidéo et gestion de l'interconnexion réseau.</p>
+                                </div>
+                                <div class="flex gap-2">
+                                    <span class="text-[8px] bg-cyan-500/20 text-cyan-300 px-2 py-1 rounded">PJSIP.CONF</span>
+                                    <span class="text-[8px] bg-cyan-500/20 text-cyan-300 px-2 py-1 rounded">DIALPLAN</span>
+                                </div>
+                            </div>
+
+                            <div class="p-4 bg-white/5 border border-white/10 rounded-lg flex flex-col justify-between">
+                                <div>
+                                    <h5 class="text-[10px] font-bold text-cyan-400 mb-2 uppercase text-center">Interface WebRTC</h5>
+                                    <p class="text-[9px] text-slate-500 mb-3">Développement d'un portail web intégrant la librairie SIP.js pour passer des appels vidéo et envoyer des messages instantanés entre navigateurs.</p>
+                                </div>
+                                <div class="flex gap-2">
+                                    <span class="text-[8px] bg-cyan-500/20 text-cyan-300 px-2 py-1 rounded">HTTPS/TLS</span>
+                                    <span class="text-[8px] bg-cyan-500/20 text-cyan-300 px-2 py-1 rounded">WEBSOCKETS</span>
+                                </div>
+                            </div>
+
+                            <div class="p-4 bg-white/5 border border-white/10 rounded-lg flex flex-col justify-between">
+                                <div>
+                                    <h5 class="text-[10px] font-bold text-cyan-400 mb-2 uppercase text-center">Audit & Sécurité</h5>
+                                    <p class="text-[9px] text-slate-500 mb-3">Analyse des vulnérabilités, mise en place de certificats SSL pour le contexte sécurisé et test d'interception de flux (MITM).</p>
+                                </div>
+                                <div class="flex gap-2">
+                                    <span class="text-[8px] bg-cyan-500/20 text-cyan-300 px-2 py-1 rounded">WIRESHARK</span>
+                                    <span class="text-[8px] bg-cyan-500/20 text-cyan-300 px-2 py-1 rounded">SSL/TLS</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="p-6 bg-cyan-500/10 border border-cyan-500/30 rounded-lg flex flex-col md:flex-row justify-between items-center gap-4">
+                            <div>
+                                <h4 class="text-cyan-400 font-bold">Dossier Technique SAE 5.03 (ROM)</h4>
+                                <p class="text-xs text-slate-400">Consultez le tutoriel détaillé, les captures Wireshark et le rapport de déploiement Asterisk.</p>
+                            </div>
+                            <div class="flex gap-3">
+                                <button onclick="openModal('static/image/SAE503_Duval_Bauchart_Negrila.pdf')" class="px-4 py-2 bg-cyan-500 hover:bg-cyan-600 text-white text-xs font-bold rounded transition">
+                                    <i class="fas fa-file-pdf mr-2"></i> VOIR LE RAPPORT
+                                </button>
+                            </div>
+                        </div>
+                    </article>
                 </div>
 
             </div>
-
-            <div id="s5-projets" class="project-section">
-                    <h2 class="text-xl font-['Orbitron'] mb-10 text-cyan-400 uppercase tracking-widest border-b border-cyan-500/20 pb-2">Semestre 5 - Spécialisation & Infrastructures</h2
-
-                <article id="sae501" class="project-card mb-8">
-        <h3 class="text-2xl font-bold text-white mb-4 italic">SAE 5.01 : Infrastructure de TP basée sur des conteneurs</h3>
-        <p class="text-slate-300 text-sm mb-6 leading-relaxed">
-            Ce projet d'envergure consistait à concevoir et déployer une plateforme de <strong>salles de TP virtuelles</strong> hautement disponible. L'objectif était de fournir aux étudiants des environnements de travail complets (Ubuntu, Kali, Windows), isolés et accessibles via un simple navigateur, tout en optimisant radicalement les ressources serveur par rapport à de la virtualisation classique (VM).
-        </p>
-
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
-            <div class="space-y-4">
-                <h4 class="text-cyan-400 font-bold text-xs uppercase">Architecture & Orchestration</h4>
-                <p class="text-[10px] text-slate-400 leading-relaxed">
-                    Mise en place d'un cluster <strong>Docker Swarm</strong> pour la gestion du cycle de vie des conteneurs. Utilisation de <strong>noVNC</strong> et d'un serveur <strong>X11vnc</strong> pour déporter l'affichage graphique des OS conteneurisés vers le Web via WebSockets. L'infrastructure assure une haute disponibilité et une scalabilité horizontale des environnements de TP.
-                </p>
-                <div class="flex flex-wrap gap-2">
-                    <span class="tech-badge">DOCKER SWARM</span>
-                    <span class="tech-badge">KUBERNETES</span>
-                    <span class="tech-badge">NOVNC / WEBSOCKIFY</span>
-                    <span class="tech-badge">REVERSE PROXY</span>
-                    <span class="tech-badge">ALPINE / UBUNTU</span>
-                </div>
-            </div>
-            <div class="space-y-4">
-                <h4 class="text-cyan-400 font-bold text-xs uppercase">Expertise DevOps & Systèmes</h4>
-                <ul class="text-[10px] space-y-2">
-                    <li><i class="fas fa-box text-cyan-500 mr-2"></i> Industrialisation via Dockerfiles optimisés (multi-stage)</li>
-                    <li><i class="fas fa-network-wired text-cyan-500 mr-2"></i> Segmentation réseau via Docker Overlay Networks</li>
-                    <li><i class="fas fa-server text-cyan-500 mr-2"></i> Gestion des ressources (Quotas CPU, RAM et I/O)</li>
-                    <li><i class="fas fa-terminal text-cyan-500 mr-2"></i> Automatisation des déploiements via Scripts Bash/Python</li>
-                </ul>
-            </div>
-        </div>
-
-        <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mb-8">
-            <div class="p-4 bg-white/5 border border-white/10 rounded-lg flex flex-col justify-between">
-                <div>
-                    <h5 class="text-[10px] font-bold text-cyan-400 mb-2 uppercase text-center">Images "Laboratoire"</h5>
-                    <p class="text-[9px] text-slate-500 mb-3">Conception d'images Docker sur-mesure intégrant des environnements de bureau légers (XFCE) et les outils de TP (VS Code, MySQL, outils de Pentest).</p>
-                </div>
-                <div class="flex gap-2">
-                    <span class="text-[8px] bg-cyan-500/20 text-cyan-300 px-2 py-1 rounded">DOCKERFILE</span>
-                    <span class="text-[8px] bg-cyan-500/20 text-cyan-300 px-2 py-1 rounded">X11VNC</span>
-                </div>
-            </div>
-            <div class="p-4 bg-white/5 border border-white/10 rounded-lg flex flex-col justify-between">
-                <div>
-                    <h5 class="text-[10px] font-bold text-cyan-400 mb-2 uppercase text-center">Accès Clientless</h5>
-                    <p class="text-[9px] text-slate-500 mb-3">Développement du portail utilisateur permettant de piloter ses instances. Accès sécurisé aux machines via le protocole noVNC intégré au navigateur.</p>
-                </div>
-                <div class="flex gap-2">
-                    <span class="text-[8px] bg-cyan-500/20 text-cyan-300 px-2 py-1 rounded">HTML5/JS</span>
-                    <span class="text-[8px] bg-cyan-500/20 text-cyan-300 px-2 py-1 rounded">WEBSOCKETS</span>
-                </div>
-            </div>
-            <div class="p-4 bg-white/5 border border-white/10 rounded-lg flex flex-col justify-between">
-                <div>
-                    <h5 class="text-[10px] font-bold text-cyan-400 mb-2 uppercase text-center">Sécurité & Isolation</h5>
-                    <p class="text-[9px] text-slate-500 mb-3">Isolation stricte des conteneurs via les Namespaces Linux et mise en place de politiques réseau pour éviter les communications non autorisées.</p>
-                </div>
-                <div class="flex gap-2">
-                    <span class="text-[8px] bg-cyan-500/20 text-cyan-300 px-2 py-1 rounded">C-GROUPS</span>
-                    <span class="text-[8px] bg-cyan-500/20 text-cyan-300 px-2 py-1 rounded">ISOLEMENT</span>
-                </div>
-            </div>
-        </div>
-
-        <div class="p-6 bg-cyan-500/10 border border-cyan-500/30 rounded-lg flex flex-col md:flex-row justify-between items-center gap-4">
-            <div>
-                <h4 class="text-cyan-400 font-bold">Dossier Technique SAE 5.01</h4>
-                <p class="text-xs text-slate-400">Accédez au rapport complet, aux schémas d'architecture Swarm et aux scripts de configuration.</p>
-            </div>
-            <div class="flex gap-3">
-                <button onclick="openModal('static/pdf/Rapport-SAE501-Czurka-Negrila-Bauchart-Duval.pdf')" class="px-4 py-2 bg-cyan-500 hover:bg-cyan-600 text-white text-xs font-bold rounded transition">
-                    <i class="fas fa-file-pdf mr-2"></i> VOIR LE RAPPORT
-                </button>
-            </div>
-        </div>
-    </article>
-               <br>
-                <br>
-                <br>
-                <br>
-                
-                <article id="sae503" class="project-card">
-    <h3 class="text-2xl font-bold text-white mb-4 italic">SAE 5.ROM.03 : Déployer et gérer les services ROM</h3>
-    <p class="text-slate-300 text-sm mb-6 leading-relaxed">
-        Ce projet consiste en la mise en place d'une infrastructure complète de <strong>communications unifiées</strong>. L'objectif était d'intégrer un autocommutateur IP (PABX) <strong>Asterisk</strong> au sein d'une interface web moderne, permettant non seulement la téléphonie classique sur IP, mais aussi la visio-conférence et la messagerie instantanée directement depuis un navigateur via <strong>WebRTC</strong>.
-    </p>
-
-    <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
-        <div class="space-y-4">
-            <h4 class="text-cyan-400 font-bold text-xs uppercase">Infrastructure Voix & Vidéo</h4>
-            <p class="text-[10px] text-slate-400 leading-relaxed">
-                Déploiement d'un serveur <strong>Asterisk</strong> sous Alpine Linux pour la gestion des protocoles <strong>SIP</strong> et <strong>PJSIP</strong>. Configuration du <i>dialplan</i> (extensions.conf) pour l'acheminement des appels entre téléphones physiques Fanvil et clients web. Utilisation de <strong>SIP.js</strong> pour transformer le navigateur en softphone fonctionnel sans plugin additionnel.
-            </p>
-            <div class="flex flex-wrap gap-2">
-                <span class="tech-badge">ASTERISK (PJSIP)</span>
-                <span class="tech-badge">WEBRTC</span>
-                <span class="tech-badge">SIP.JS</span>
-                <span class="tech-badge">ALPINE LINUX</span>
-                <span class="tech-badge">AMI (MANAGER)</span>
-            </div>
-        </div>
-        <div class="space-y-4">
-            <h4 class="text-cyan-400 font-bold text-xs uppercase">Expertise Réseaux & Services</h4>
-            <ul class="text-[10px] space-y-2">
-                <li><i class="fas fa-phone-alt text-cyan-500 mr-2"></i> Configuration de terminaux SIP matériels et logiciels</li>
-                <li><i class="fas fa-exchange-alt text-cyan-500 mr-2"></i> Flux média Temps Réel (RTP/SRTP) et signalisation</li>
-                <li><i class="fas fa-shield-virus text-cyan-500 mr-2"></i> Sécurisation des flux (DTLS/SRTP) pour le WebRTC</li>
-                <li><i class="fas fa-search text-cyan-500 mr-2"></i> Analyse de protocoles avec Wireshark (Traces SIP)</li>
-            </ul>
-        </div>
-    </div>
-
-    <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mb-8">
-        <div class="p-4 bg-white/5 border border-white/10 rounded-lg flex flex-col justify-between">
-            <div>
-                <h5 class="text-[10px] font-bold text-cyan-400 mb-2 uppercase text-center">Serveur de Com'</h5>
-                <p class="text-[9px] text-slate-500 mb-3">Installation d'Asterisk sur VM légère. Configuration des comptes utilisateurs, des codecs audio/vidéo et gestion de l'interconnexion réseau.</p>
-            </div>
-            <div class="flex gap-2">
-                <span class="text-[8px] bg-cyan-500/20 text-cyan-300 px-2 py-1 rounded">PJSIP.CONF</span>
-                <span class="text-[8px] bg-cyan-500/20 text-cyan-300 px-2 py-1 rounded">DIALPLAN</span>
-            </div>
-        </div>
-
-        <div class="p-4 bg-white/5 border border-white/10 rounded-lg flex flex-col justify-between">
-            <div>
-                <h5 class="text-[10px] font-bold text-cyan-400 mb-2 uppercase text-center">Interface WebRTC</h5>
-                <p class="text-[9px] text-slate-500 mb-3">Développement d'un portail web intégrant la librairie SIP.js pour passer des appels vidéo et envoyer des messages instantanés entre navigateurs.</p>
-            </div>
-            <div class="flex gap-2">
-                <span class="text-[8px] bg-cyan-500/20 text-cyan-300 px-2 py-1 rounded">HTTPS/TLS</span>
-                <span class="text-[8px] bg-cyan-500/20 text-cyan-300 px-2 py-1 rounded">WEBSOCKETS</span>
-            </div>
-        </div>
-
-        <div class="p-4 bg-white/5 border border-white/10 rounded-lg flex flex-col justify-between">
-            <div>
-                <h5 class="text-[10px] font-bold text-cyan-400 mb-2 uppercase text-center">Audit & Sécurité</h5>
-                <p class="text-[9px] text-slate-500 mb-3">Analyse des vulnérabilités, mise en place de certificats SSL pour le contexte sécurisé et test d'interception de flux (MITM).</p>
-            </div>
-            <div class="flex gap-2">
-                <span class="text-[8px] bg-cyan-500/20 text-cyan-300 px-2 py-1 rounded">WIRESHARK</span>
-                <span class="text-[8px] bg-cyan-500/20 text-cyan-300 px-2 py-1 rounded">SSL/TLS</span>
-            </div>
-        </div>
-    </div>
-
-    <div class="p-6 bg-cyan-500/10 border border-cyan-500/30 rounded-lg flex flex-col md:flex-row justify-between items-center gap-4">
-        <div>
-            <h4 class="text-cyan-400 font-bold">Dossier Technique SAE 5.03 (ROM)</h4>
-            <p class="text-xs text-slate-400">Consultez le tutoriel détaillé, les captures Wireshark et le rapport de déploiement Asterisk.</p>
-        </div>
-        <div class="flex gap-3">
-            <button onclick="openModal('static/image/SAE503_Duval_Bauchart_Negrila.pdf')" class="px-4 py-2 bg-cyan-500 hover:bg-cyan-600 text-white text-xs font-bold rounded transition">
-                <i class="fas fa-file-pdf mr-2"></i> VOIR LE RAPPORT
-            </button>
-        </div>
-    </div>
-</article>
-                </div>
-        
-        
         </main>
 
+        <!-- Modal PDF -->
         <div id="pdfModal" class="fixed inset-0 z-[999] hidden bg-black/90 flex items-center justify-center p-4">
             <div class="relative w-full max-w-6xl h-[95vh] bg-slate-900 rounded-2xl border border-cyan-500/30 flex flex-col shadow-2xl">
                 <div class="p-4 border-b border-white/10 flex justify-between items-center bg-slate-900 rounded-t-2xl">
@@ -812,28 +874,17 @@
     <script>
         particlesJS("particles-js", {
             "particles": {
-                "number": {
-                    "value": 40
-                },
-                "color": {
-                    "value": "#00f2ff"
-                },
-                "opacity": {
-                    "value": 0.2
-                },
-                "size": {
-                    "value": 1.5
-                },
+                "number": { "value": 40 },
+                "color": { "value": "#00f2ff" },
+                "opacity": { "value": 0.2 },
+                "size": { "value": 1.5 },
                 "line_linked": {
                     "enable": true,
                     "distance": 150,
                     "color": "#00f2ff",
                     "opacity": 0.1
                 },
-                "move": {
-                    "enable": true,
-                    "speed": 0.5
-                }
+                "move": { "enable": true, "speed": 0.5 }
             }
         });
 
@@ -858,32 +909,19 @@
         }
 
         function goToProject(sectionId, projectId) {
-            // Masque l'intro
             document.getElementById('intro').style.display = 'none';
 
-            // Masque toutes les sections
             const sections = document.querySelectorAll('.project-section');
-            sections.forEach(section => {
-                section.classList.remove('active');
-            });
+            sections.forEach(section => section.classList.remove('active'));
 
-            // Affiche la section cible
             const targetSection = document.getElementById(sectionId);
-            if (targetSection) {
-                targetSection.classList.add('active');
-            }
+            if (targetSection) targetSection.classList.add('active');
 
-            // Scroll vers le projet précis
             setTimeout(() => {
                 const targetProject = document.getElementById(projectId);
-                if (targetProject) {
-                    targetProject.scrollIntoView({
-                        behavior: 'smooth'
-                    });
-                }
+                if (targetProject) targetProject.scrollIntoView({ behavior: 'smooth' });
             }, 100);
         }
     </script>
 </body>
-
 </html>
