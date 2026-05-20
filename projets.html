@@ -237,7 +237,15 @@
                         <p class="text-slate-300 text-sm mb-6 leading-relaxed">
                             Ce projet visait à concevoir et déployer une infrastructure réseau complète, de la topologie logique sous <strong>Draw.io</strong> à la configuration réelle d'équipements Cisco. J'ai mis en place une segmentation par <strong>VLANs</strong>, configuré le routage inter-VLAN et le <strong>NAT</strong> pour assurer la connectivité. En complément, j'ai administré des services serveurs essentiels tels que le <strong>DNS</strong>, le <strong>DHCP</strong> et un serveur web <strong>Apache</strong>. La validation finale a été effectuée par une analyse de trames avec <strong>Wireshark</strong>.
                         </p>
-                        <iframe src="static/image/Rapport_SAE12.pdf" class="w-full h-[450px] border border-white/10 rounded-lg"></iframe>
+                        <div class="p-6 bg-cyan-500/10 border border-cyan-500/30 rounded-lg flex justify-between items-center">
+                            <div>
+                                <h4 class="text-cyan-400 font-bold uppercase text-xs">Rapport d'Architecture Réseau</h4>
+                                <p class="text-[10px] text-slate-400">Consultez le compte rendu complet de configuration et de routage.</p>
+                            </div>
+                            <button onclick="openModal('static/image/Rapport_SAE12.pdf')" class="px-6 py-2 bg-cyan-500 hover:bg-cyan-600 text-white text-[10px] font-bold rounded transition-all cursor-pointer">
+                                <i class="fas fa-file-pdf mr-2"></i> OUVRIR LE RAPPORT
+                            </button>
+                        </div>
                     </article>
 
                     <article id="sae13" class="project-card">
@@ -324,7 +332,15 @@
                         <p class="text-slate-300 text-sm mb-6 leading-relaxed">
                             Ce projet visait à concevoir un système de transmission sans fil complet. J'ai utilisé l'émetteur/récepteur <strong>ADALM-Pluto</strong> piloté par <strong>GNU Radio</strong> pour manipuler des signaux radiofréquences. Le travail a inclus l'analyse de spectres réels (GSM, LTE) avec le logiciel <strong>MCS Spectrum Analyzer</strong> et l'antenne HyperLOG 7060. L'aboutissement a été la transmission réussie d'un flux vidéo via le protocole <strong>UDP</strong> entre deux stations radio.
                         </p>
-                        <iframe src="static/image/Rapport final-SAE301-Duval-Nicolas.pdf" class="w-full h-[450px] border border-white/10 rounded-lg"></iframe>
+                            <div class="p-6 bg-cyan-500/10 border border-cyan-500/30 rounded-lg flex justify-between items-center">
+                                <div>
+                                    <h4 class="text-cyan-400 font-bold uppercase text-xs">Rapport Radiofréquences</h4>
+                                    <p class="text-[10px] text-slate-400">Consultez l'analyse de transmission GNU Radio.</p>
+                                </div>
+                                <button onclick="openModal('static/image/Rapport final-SAE301-Duval-Nicolas.pdf')" class="px-6 py-2 bg-cyan-500 hover:bg-cyan-600 text-white text-[10px] font-bold rounded transition-all cursor-pointer">
+                                    <i class="fas fa-file-pdf mr-2"></i> VOIR LE RAPPORT
+                                </button>
+                            </div>
                     </article>
 
                     <article id="sae302" class="project-card">
