@@ -255,6 +255,11 @@
                     <a onclick="goToProject('s5-projets', 'sae501')" class="project-link">SAE 5.01 - Infrastructure de TP basée sur des conteneurs</a>
                     <a onclick="goToProject('s5-projets', 'sae503')" class="project-link">SAE 5.ROM.03 - Déployer et gérer les services ROM</a>
                 </details>
+                <details open class="sub-menu">
+                    <summary>Semestre 6</summary>
+                    <a onclick="goToProject('s6-projets', 'sae601')" class="project-link">SAE 6.Cyber.01 - Projet SSI (Structuration/Sécurisation du SI)</a>
+                    <a onclick="goToProject('s6-projets', 'veille601')" class="project-link">Veille Technologique - L'IA dans les équipements réseaux</a>
+                </details>
             </details>
         </aside>
 
@@ -846,6 +851,123 @@
                             <div class="flex gap-3">
                                 <button onclick="openModal('static/image/SAE503_Duval_Bauchart_Negrila.pdf')" class="px-4 py-2 bg-cyan-500 hover:bg-cyan-600 text-white text-xs font-bold rounded transition">
                                     <i class="fas fa-file-pdf mr-2"></i> VOIR LE RAPPORT
+                                </button>
+                            </div>
+                        </div>
+                    </article>
+                </div>
+
+                <!-- ===== SEMESTRE 6 ===== -->
+                <div id="s6-projets" class="project-section">
+                    <h2 class="text-xl font-['Orbitron'] mb-10 text-cyan-400 uppercase tracking-widest border-b border-cyan-500/20 pb-2">Semestre 6 - Alternance & Cybersécurité</h2>
+
+                    <article id="sae601" class="project-card mb-8">
+                        <h3 class="text-2xl font-bold text-white mb-4 italic">SAE 6.Cyber.01 : Projet SSI - Structuration/Sécurisation du Système d'Information</h3>
+                        <p class="text-slate-300 text-sm mb-6 leading-relaxed">
+                            Réalisé dans le cadre de mon alternance chez <strong>IT2i</strong>, ce projet consiste à transformer une structure artisanale de 8 personnes en une infrastructure professionnelle pour <strong>80 collaborateurs</strong> répartis sur 6 étages, suite à une levée de fonds de l'entreprise. J'étais chargé de concevoir l'architecture réseau et sécurité complète, ainsi que d'organiser le futur service informatique.
+                        </p>
+
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
+                            <div class="space-y-4">
+                                <h4 class="text-cyan-400 font-bold text-xs uppercase">Infrastructure & Redondance</h4>
+                                <p class="text-[10px] text-slate-400 leading-relaxed">
+                                    Conception d'une architecture réseau entièrement redondée : deux pare-feu de marques différentes, deux routeurs et deux switchs par étage, une entrée FTTH doublée d'un accès 4G de secours. Déploiement Wi-Fi avec deux bornes PoE par étage pour la mobilité des 80 collaborateurs.
+                                </p>
+                                <div class="flex flex-wrap gap-2">
+                                    <span class="tech-badge">Pare-feu double marque</span>
+                                    <span class="tech-badge">Redondance</span>
+                                    <span class="tech-badge">Wi-Fi PoE</span>
+                                    <span class="tech-badge">FTTH / 4G</span>
+                                </div>
+                            </div>
+                            <div class="space-y-4">
+                                <h4 class="text-cyan-400 font-bold text-xs uppercase">Sécurité & Continuité d'activité</h4>
+                                <p class="text-[10px] text-slate-400 leading-relaxed">
+                                    Sécurisation physique de la salle serveur (badge, biométrie, extinction au gaz IEAG, climatisation, onduleur). Mise en place d'une stratégie de sauvegarde double avec <strong>Veeam</strong> (restauration rapide + bande LTO-9 hors-ligne), et centralisation des accès avec <strong>Active Directory</strong> et <strong>KeePass</strong>.
+                                </p>
+                                <div class="flex flex-wrap gap-2">
+                                    <span class="tech-badge">Veeam</span>
+                                    <span class="tech-badge">Active Directory</span>
+                                    <span class="tech-badge">Microsoft 365</span>
+                                    <span class="tech-badge">KeePass</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mb-8">
+                            <div class="p-4 bg-white/5 border border-white/10 rounded-lg flex flex-col justify-between">
+                                <div>
+                                    <h5 class="text-[10px] font-bold text-cyan-400 mb-2 uppercase text-center">Audit du réseau existant</h5>
+                                    <p class="text-[9px] text-slate-500 mb-3">Identification des risques d'une infrastructure artisanale : outils personnels (Gmail, clés USB), parc hétérogène sous Windows 7/11, absence de sauvegarde centralisée.</p>
+                                </div>
+                            </div>
+                            <div class="p-4 bg-white/5 border border-white/10 rounded-lg flex flex-col justify-between">
+                                <div>
+                                    <h5 class="text-[10px] font-bold text-cyan-400 mb-2 uppercase text-center">Organisation du service IT</h5>
+                                    <p class="text-[9px] text-slate-500 mb-3">Répartition des tâches en binôme, mise en place de procédures écrites, d'un journal de bord et d'une maintenance mensuelle planifiée.</p>
+                                </div>
+                            </div>
+                            <div class="p-4 bg-white/5 border border-white/10 rounded-lg flex flex-col justify-between">
+                                <div>
+                                    <h5 class="text-[10px] font-bold text-cyan-400 mb-2 uppercase text-center">Budget & Aménagements</h5>
+                                    <p class="text-[9px] text-slate-500 mb-3">Chiffrage complet du parc informatique, de la sécurité et du réseau (~252 000 € d'investissement, ~13 300 €/an de licences).</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="p-6 bg-cyan-500/10 border border-cyan-500/30 rounded-lg flex flex-col md:flex-row justify-between items-center gap-4">
+                            <div>
+                                <h4 class="text-cyan-400 font-bold">Rapport SSI - Structuration/Sécurisation du SI</h4>
+                                <p class="text-xs text-slate-400">Remis le 22/05/2026 - Rapport d'alternance IT2i.</p>
+                            </div>
+                            <div class="flex gap-3">
+                                <button onclick="openModal('static/pdf/SSI_Structuration_Securisation_Duval.pdf')" class="px-4 py-2 bg-cyan-500 hover:bg-cyan-600 text-white text-xs font-bold rounded transition">
+                                    <i class="fas fa-file-pdf mr-2"></i> VOIR LE RAPPORT
+                                </button>
+                            </div>
+                        </div>
+                    </article>
+
+                    <article id="veille601" class="project-card">
+                        <h3 class="text-2xl font-bold text-white mb-4 italic">Veille Technologique : L'IA dans les équipements réseaux</h3>
+                        <p class="text-slate-300 text-sm mb-6 leading-relaxed">
+                            Réalisée en groupe avec Roman Negrila et Michel Bauchart, cette veille technologique retrace l'évolution de l'intelligence artificielle dans les équipements réseaux, de l'ère des systèmes experts (1988) jusqu'à l'autonomie agentique et au Self-Healing Network de 2026, en passant par l'analyse des offres Cisco, Juniper (Mist AI), NVIDIA et Arista.
+                        </p>
+
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
+                            <div class="space-y-4">
+                                <h4 class="text-cyan-400 font-bold text-xs uppercase">Acteurs industriels & IA On-Box</h4>
+                                <p class="text-[10px] text-slate-400 leading-relaxed">
+                                    Étude comparative des solutions propriétaires : Silicon One G300 et Nexus Hyperfabric de Cisco, l'assistant Marvis de Juniper (Mist AI), Spectrum-X de NVIDIA pour les clusters GPU, et l'agent autonome AVA d'Arista.
+                                </p>
+                                <div class="flex flex-wrap gap-2">
+                                    <span class="tech-badge">Intent-Based Networking</span>
+                                    <span class="tech-badge">AIOps</span>
+                                    <span class="tech-badge">Self-Healing</span>
+                                    <span class="tech-badge">IA Agentique</span>
+                                </div>
+                            </div>
+                            <div class="space-y-4">
+                                <h4 class="text-cyan-400 font-bold text-xs uppercase">Alternatives Open Source</h4>
+                                <p class="text-[10px] text-slate-400 leading-relaxed">
+                                    Analyse de l'architecture Off-Box (Prometheus, OpenTelemetry, Kafka, Isolation Forest, Ansible, NAPALM) et du projet SONiC, ainsi que des enjeux de souveraineté des données face à l'IA Act européen.
+                                </p>
+                                <div class="flex flex-wrap gap-2">
+                                    <span class="tech-badge">SONiC</span>
+                                    <span class="tech-badge">Ansible / NAPALM</span>
+                                    <span class="tech-badge">RGPD / IA Act</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="p-6 bg-cyan-500/10 border border-cyan-500/30 rounded-lg flex flex-col md:flex-row justify-between items-center gap-4">
+                            <div>
+                                <h4 class="text-cyan-400 font-bold">Dossier de Veille Technologique</h4>
+                                <p class="text-xs text-slate-400">Baptiste Duval, Roman Negrila, Michel Bauchart - IUT de Béthune.</p>
+                            </div>
+                            <div class="flex gap-3">
+                                <button onclick="openModal('static/pdf/Veille_Techno_IA_Reseaux.pdf')" class="px-4 py-2 bg-cyan-500 hover:bg-cyan-600 text-white text-xs font-bold rounded transition">
+                                    <i class="fas fa-file-pdf mr-2"></i> VOIR LE DOSSIER
                                 </button>
                             </div>
                         </div>
