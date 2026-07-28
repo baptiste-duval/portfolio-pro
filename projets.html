@@ -32,6 +32,7 @@
             background: rgba(15, 23, 42, 0.9);
             backdrop-filter: blur(12px);
             border-bottom: 1px solid rgba(0, 242, 255, 0.2);
+            transition: opacity 0.2s ease;
         }
 
         .neon-shadow {
@@ -197,7 +198,7 @@
 
     <div id="particles-js"></div>
 
-    <nav class="glass-header fixed top-0 w-full z-[100]">
+    <nav id="mainNav" class="glass-header fixed top-0 w-full z-[100]">
         <div class="max-w-7xl mx-auto px-6 h-20 flex items-center justify-between">
             <div class="flex items-center space-x-3">
                 <div class="w-8 h-8 border border-cyan-500 flex items-center justify-center rotate-45">
@@ -1019,20 +1020,24 @@
         function openModal(pdfPath) {
             const modal = document.getElementById('pdfModal');
             const frame = document.getElementById('pdfFrame');
+            const nav = document.getElementById('mainNav');
             if (modal && frame) {
                 frame.src = pdfPath;
                 modal.classList.remove('hidden');
                 document.body.style.overflow = 'hidden';
+                if (nav) nav.style.display = 'none'; // on masque la navbar pendant la lecture du PDF
             }
         }
 
         function closeModal() {
             const modal = document.getElementById('pdfModal');
             const frame = document.getElementById('pdfFrame');
+            const nav = document.getElementById('mainNav');
             if (modal && frame) {
                 frame.src = "";
                 modal.classList.add('hidden');
                 document.body.style.overflow = 'auto';
+                if (nav) nav.style.display = ''; // on réaffiche la navbar à la fermeture
             }
         }
 
