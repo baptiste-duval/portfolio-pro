@@ -978,17 +978,23 @@
         </main>
 
         <!-- Modal PDF -->
-        <div id="pdfModal" class="fixed inset-0 z-[999] hidden bg-black/90 flex items-center justify-center p-4">
+        <div id="pdfModal" onclick="handleBackdropClick(event)" class="fixed inset-0 z-[999] hidden bg-black/90 flex items-center justify-center p-4">
             <div class="relative w-full max-w-6xl h-[95vh] bg-slate-900 rounded-2xl border border-cyan-500/30 flex flex-col shadow-2xl">
-                <div class="p-4 border-b border-white/10 flex justify-between items-center bg-slate-900 rounded-t-2xl">
+                <div class="p-4 border-b border-white/10 flex justify-between items-center bg-slate-900 rounded-t-2xl relative z-[2]">
                     <div class="flex items-center gap-3">
                         <i class="fas fa-file-pdf text-cyan-400"></i>
                         <span class="text-cyan-400 font-bold text-xs uppercase tracking-widest italic">Visualiseur de Document</span>
                     </div>
-                    <button onclick="closeModal()" class="text-slate-400 hover:text-white text-3xl p-2 transition-colors cursor-pointer">&times;</button>
+                    <button onclick="closeModal()" aria-label="Fermer" class="flex items-center justify-center w-9 h-9 rounded-full bg-white/5 border border-white/10 text-slate-300 hover:text-white hover:bg-cyan-500/20 hover:border-cyan-500/50 text-2xl leading-none transition-colors cursor-pointer">&times;</button>
                 </div>
-                <iframe id="pdfFrame" src="" class="flex-1 w-full rounded-b-2xl border-none bg-white"></iframe>
+                <div class="relative flex-1">
+                    <iframe id="pdfFrame" src="" class="absolute inset-0 w-full h-full rounded-b-2xl border-none bg-white"></iframe>
+                </div>
             </div>
+
+            <button onclick="event.stopPropagation(); closeModal();" aria-label="Fermer le document" class="fixed top-6 right-6 z-[1000] flex items-center justify-center w-11 h-11 rounded-full bg-slate-900 border border-cyan-500/40 text-cyan-400 hover:bg-cyan-500 hover:text-white text-2xl leading-none shadow-lg transition-colors cursor-pointer">
+                &times;
+            </button>
         </div>
     </div>
 
