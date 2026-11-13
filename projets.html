@@ -5,17 +5,18 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="Cursus et projets de Baptiste Duval en B.U.T. Réseaux et Télécommunications : toutes les SAE, semestre par semestre, avec rapports et livrables.">
-    <meta name="theme-color" content="#020617">
+    <meta name="theme-color" content="#030712">
     <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='12' fill='%23020617'/%3E%3Crect x='14' y='14' width='36' height='36' fill='none' stroke='%2300f2ff' stroke-width='3' transform='rotate(45 32 32)'/%3E%3Ctext x='32' y='39' font-family='monospace' font-size='18' font-weight='700' fill='%2300f2ff' text-anchor='middle'%3EBD%3C/text%3E%3C/svg%3E">
     <title>Cursus & Projets | Baptiste Duval</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&family=Fira+Code:wght@300;500&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Chakra+Petch:wght@500;600;700&family=IBM+Plex+Sans:wght@400;500;600&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="site.css">
 
     <style>
         body {
-            font-family: 'Fira Code', monospace;
-            background-color: #020617;
+            font-family: var(--sans);
+            background-color: #030712;
             color: #e2e8f0;
             margin: 0;
             overflow-x: hidden;
@@ -46,8 +47,8 @@
             position: relative;
             z-index: 10;
             display: flex;
-            margin-top: 80px;
-            min-height: calc(100vh - 80px);
+            margin-top: var(--nav-h);
+            min-height: calc(100vh - var(--nav-h));
         }
 
         /* Sidebar */
@@ -55,9 +56,9 @@
             width: 350px;
             border-right: 1px solid rgba(0, 242, 255, 0.2);
             background: rgba(15, 23, 42, 0.8);
-            height: calc(100vh - 80px);
+            height: calc(100vh - var(--nav-h));
             position: sticky;
-            top: 80px;
+            top: var(--nav-h);
             overflow-y: auto;
         }
 
@@ -75,7 +76,7 @@
             cursor: pointer;
             padding: 15px 20px;
             list-style: none;
-            font-family: 'Orbitron', sans-serif;
+            font-family: var(--display);
             transition: 0.3s;
             font-size: 0.85rem;
             color: #00f2ff;
@@ -159,11 +160,11 @@
             .layout-container { flex-direction: column; }
             .sidebar-toggle {
                 display: flex; align-items: center; justify-content: space-between;
-                position: sticky; top: 80px; z-index: 50; width: 100%;
+                position: sticky; top: var(--nav-h); z-index: 50; width: 100%;
                 padding: 14px 20px;
                 background: rgba(15, 23, 42, 0.97);
                 border-bottom: 1px solid rgba(0, 242, 255, 0.25);
-                color: #00f2ff; font-family: 'Orbitron', sans-serif;
+                color: #00f2ff; font-family: var(--display);
                 font-size: 0.75rem; font-weight: 700; letter-spacing: 0.15em; text-transform: uppercase;
             }
             .sidebar-toggle[aria-expanded="true"] .fa-chevron-down { transform: rotate(180deg); }
@@ -192,7 +193,7 @@
         .route-cmd { font-size: 0.8rem; color: #64748b; margin-bottom: 0.75rem; }
         .route-cmd span { color: #22c55e; }
         .route-title {
-            font-family: 'Orbitron', sans-serif; font-weight: 700; text-transform: uppercase;
+            font-family: var(--display); font-weight: 700; text-transform: uppercase;
             font-size: clamp(1.9rem, 5vw, 3rem); line-height: 1.05; letter-spacing: -0.01em;
             color: #fff; text-shadow: 0 0 18px rgba(0, 242, 255, 0.45); margin-bottom: 1.25rem;
         }
@@ -206,7 +207,7 @@
             cursor: pointer; transition: color .2s, border-color .2s, background .2s;
         }
         .chip:hover { color: #e2e8f0; border-color: rgba(0, 242, 255, 0.4); }
-        .chip.is-on { color: #020617; background: #00f2ff; border-color: #00f2ff; font-weight: 700; }
+        .chip.is-on { color: #030712; background: #00f2ff; border-color: #00f2ff; font-weight: 700; }
         .dot { width: 8px; height: 8px; border-radius: 50%; display: inline-block; }
         .dot-reseau { background: var(--c-reseau); } .dot-cyber { background: var(--c-cyber); } .dot-dev { background: var(--c-dev); }
         .dot-telecom { background: var(--c-telecom); } .dot-entreprise { background: var(--c-entreprise); }
@@ -224,11 +225,11 @@
         .hop-num {
             position: absolute; left: 0; top: -4px; width: 36px; height: 36px; border-radius: 50%;
             display: flex; align-items: center; justify-content: center;
-            font-family: 'Orbitron', sans-serif; font-weight: 700; font-size: 0.85rem; color: #00f2ff;
-            background: #020617; border: 2px solid #00f2ff; box-shadow: 0 0 14px rgba(0, 242, 255, 0.45);
+            font-family: var(--display); font-weight: 700; font-size: 0.85rem; color: #00f2ff;
+            background: #030712; border: 2px solid #00f2ff; box-shadow: 0 0 14px rgba(0, 242, 255, 0.45);
         }
-        .hop-name { font-family: 'Orbitron', sans-serif; font-size: 1.05rem; font-weight: 700; color: #fff; text-transform: uppercase; letter-spacing: 0.06em; }
-        .hop-name span { font-family: 'Fira Code', monospace; font-weight: 400; font-size: 0.8rem; color: #94a3b8; text-transform: none; letter-spacing: 0; margin-left: 0.4rem; }
+        .hop-name { font-family: var(--display); font-size: 1.05rem; font-weight: 700; color: #fff; text-transform: uppercase; letter-spacing: 0.06em; }
+        .hop-name span { font-family: var(--mono); font-weight: 400; font-size: 0.8rem; color: #94a3b8; text-transform: none; letter-spacing: 0; margin-left: 0.4rem; }
         .hop-year { margin-left: auto; font-size: 0.7rem; color: #64748b; border: 1px solid rgba(255, 255, 255, 0.1); padding: 2px 8px; border-radius: 4px; }
         .hop-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 0.9rem; }
 
@@ -245,7 +246,7 @@
         .packet[hidden] { display: none; }
         .packet-cyber { --c: var(--c-cyber); } .packet-dev { --c: var(--c-dev); }
         .packet-telecom { --c: var(--c-telecom); } .packet-entreprise { --c: var(--c-entreprise); }
-        .packet-code { font-family: 'Orbitron', sans-serif; font-size: 0.68rem; font-weight: 700; letter-spacing: 0.12em; color: var(--c); text-transform: uppercase; }
+        .packet-code { font-family: var(--display); font-size: 0.68rem; font-weight: 700; letter-spacing: 0.12em; color: var(--c); text-transform: uppercase; }
         .packet-title { font-size: 0.95rem; font-weight: 700; color: #fff; line-height: 1.35; }
         .packet-desc { font-size: 0.78rem; color: #94a3b8; line-height: 1.55; }
         .packet-tags { font-size: 0.7rem; color: #64748b; margin-top: 0.35rem; }
@@ -269,7 +270,7 @@
         }
         .project-card > h3 { font-style: normal; font-size: 1.3rem; line-height: 1.3; }
         .project-card > h3 .sae-code {
-            display: block; font-family: 'Orbitron', sans-serif; font-size: 0.7rem; font-weight: 700;
+            display: block; font-family: var(--display); font-size: 0.7rem; font-weight: 700;
             letter-spacing: 0.16em; color: #00f2ff; text-transform: uppercase; margin-bottom: 0.5rem;
         }
         /* Captures d'écran de la console */
@@ -289,7 +290,7 @@
         .section-nav a:hover { border-color: #00f2ff; }
         .section-nav a.next { text-align: right; grid-column: 2; }
         .section-nav small { display: block; font-size: 0.7rem; color: #64748b; margin-bottom: 0.25rem; }
-        .section-nav strong { font-family: 'Orbitron', sans-serif; font-size: 0.85rem; color: #fff; text-transform: uppercase; letter-spacing: 0.06em; }
+        .section-nav strong { font-family: var(--display); font-size: 0.85rem; color: #fff; text-transform: uppercase; letter-spacing: 0.06em; }
 
         .overview-link { display: block; padding: 14px 20px; font-size: 0.8rem; color: #e2e8f0; text-decoration: none; border-bottom: 1px solid rgba(255, 255, 255, 0.05); }
         .overview-link:hover, .overview-link.current { color: #00f2ff; background: rgba(0, 242, 255, 0.06); }
@@ -310,15 +311,15 @@
         .sidebar::-webkit-scrollbar-thumb { background: rgba(0, 242, 255, 0.3); border-radius: 3px; }
         .sidebar::-webkit-scrollbar-track { background: transparent; }
 
-        .side-title { font-family: 'Orbitron', sans-serif; font-size: 0.7rem; font-weight: 700; letter-spacing: 0.22em; text-transform: uppercase; color: #64748b; padding: 1.4rem 1.25rem 0.9rem; }
+        .side-title { font-family: var(--display); font-size: 0.7rem; font-weight: 700; letter-spacing: 0.22em; text-transform: uppercase; color: #64748b; padding: 1.4rem 1.25rem 0.9rem; }
         .sidebar .overview-link {
             display: flex; align-items: center; gap: 0.75rem; margin: 0 0.75rem 0.5rem; padding: 0.7rem 0.85rem;
             font-size: 0.85rem; color: #e2e8f0; border: 1px solid rgba(255, 255, 255, 0.08); border-radius: 8px; background: rgba(2, 6, 23, 0.4);
         }
         .sidebar .overview-link i { color: #00f2ff; }
         .sidebar .overview-link:hover { border-color: rgba(0, 242, 255, 0.4); background: rgba(0, 242, 255, 0.05); }
-        .sidebar .overview-link.current { color: #020617; background: #00f2ff; border-color: #00f2ff; font-weight: 700; }
-        .sidebar .overview-link.current i { color: #020617; }
+        .sidebar .overview-link.current { color: #030712; background: #00f2ff; border-color: #00f2ff; font-weight: 700; }
+        .sidebar .overview-link.current i { color: #030712; }
 
         .side-year { display: flex; align-items: center; gap: 0.75rem; padding: 1.25rem 1.25rem 0.5rem; font-size: 0.7rem; color: #64748b; letter-spacing: 0.08em; }
         .side-year::after { content: ""; flex: 1; height: 1px; background: rgba(255, 255, 255, 0.08); }
@@ -326,16 +327,16 @@
         .sidebar details.side-sem { border-bottom: none; padding: 0 0.75rem; }
         .sidebar .side-sem > summary {
             display: flex; align-items: center; gap: 0.7rem; padding: 0.55rem 0.5rem; border-radius: 8px;
-            font-family: 'Orbitron', sans-serif; font-size: 0.78rem; font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase; color: #e2e8f0;
+            font-family: var(--display); font-size: 0.78rem; font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase; color: #e2e8f0;
         }
         .sidebar .side-sem > summary::-webkit-details-marker { display: none; }
         .sidebar .side-sem > summary:hover { background: rgba(0, 242, 255, 0.06); }
         .sem-num {
             width: 24px; height: 24px; flex: none; border-radius: 50%; display: flex; align-items: center; justify-content: center;
-            font-size: 0.68rem; color: #00f2ff; border: 1.5px solid #00f2ff; background: #020617;
+            font-size: 0.68rem; color: #00f2ff; border: 1.5px solid #00f2ff; background: #030712;
         }
         .sem-name { flex: 1; }
-        .sem-count { font-family: 'Fira Code', monospace; font-weight: 400; font-size: 0.68rem; color: #64748b; }
+        .sem-count { font-family: var(--mono); font-weight: 400; font-size: 0.68rem; color: #64748b; }
         .sem-chevron { font-size: 0.6rem; color: #64748b; transition: transform 0.2s; }
         .side-sem:not([open]) .sem-chevron { transform: rotate(-90deg); }
 
@@ -373,7 +374,7 @@
             border-radius: 10px;
             color: #64748b;
             font-size: 11px;
-            font-family: 'Fira Code', monospace;
+            font-family: var(--mono);
             cursor: pointer;
             transition: all 0.25s ease;
             text-align: center;
@@ -410,20 +411,24 @@
     </style>
 </head>
 
-<body>
+<body class="legacy" data-net="dim">
 
-    <div id="particles-js"></div>
+    <a class="skip-link" href="#contenu">Aller au contenu</a>
 
-    <nav id="mainNav" class="glass-header fixed top-0 w-full z-[100]">
-        <div class="max-w-7xl mx-auto px-6 h-20 flex items-center justify-between">
-            <a href="index.html" class="flex items-center space-x-3" aria-label="Baptiste Duval, accueil">
-                <div class="w-8 h-8 border border-cyan-500 flex items-center justify-center rotate-45">
-                    <span class="rotate-[-45deg] font-bold text-cyan-400 text-xs">BD</span>
-                </div>
-                <span class="text-sm font-bold tracking-[0.2em] text-cyan-400 neon-shadow italic">BAPTISTE_DUVAL.SYS</span>
+    <nav id="mainNav" class="site-nav" aria-label="Navigation principale">
+        <div class="site-nav__inner">
+            <a class="brand" href="index.html" aria-label="Baptiste Duval, accueil">
+                <span class="brand__mark"><span>BD</span></span>
+                <span class="brand__name">Baptiste Duval<small>réseaux, systèmes, cybersécurité</small></span>
             </a>
-            <div class="flex space-x-8 text-xs uppercase font-bold tracking-widest">
-                <a href="index.html" class="hover:text-cyan-400 transition"><i class="fas fa-home mr-2" aria-hidden="true"></i><span class="hidden sm:inline">Retour à la page d'accueil</span><span class="sm:hidden">Accueil</span></a>
+            <button class="nav-toggle" type="button" aria-label="Ouvrir le menu" aria-expanded="false" aria-controls="nav-links"><span></span></button>
+            <div class="nav-links" id="nav-links">
+                <a href="projets.html" aria-current="page">Projets</a>
+                <a href="index.html#parcours">Parcours</a>
+                <a href="index.html#competences">Compétences</a>
+                <a href="futur.html">Mastère & infra</a>
+                <a href="index.html#cv">CV</a>
+                <a href="index.html#contact" class="nav-cta">Me contacter</a>
             </div>
         </div>
     </nav>
@@ -491,7 +496,7 @@
             </details>
         </aside>
 
-        <main class="main-content">
+        <main id="contenu" class="main-content">
             <div class="max-w-4xl mx-auto">
 
                 <section id="intro" class="mb-16">
@@ -1500,24 +1505,7 @@
             </button>
         </div>
     </div>
-
-    <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
     <script>
-        if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) particlesJS("particles-js", {
-            "particles": {
-                "number": { "value": 40 },
-                "color": { "value": "#00f2ff" },
-                "opacity": { "value": 0.2 },
-                "size": { "value": 1.5 },
-                "line_linked": {
-                    "enable": true,
-                    "distance": 150,
-                    "color": "#00f2ff",
-                    "opacity": 0.1
-                },
-                "move": { "enable": true, "speed": 0.5 }
-            }
-        });
 
         /* ---------- Visualiseur PDF ---------- */
         let lastFocus = null;
@@ -1689,5 +1677,42 @@
         }
         chips.forEach(chip => chip.addEventListener('click', () => applyFilter(chip.dataset.filter)));
     </script>
+
+    <footer class="site-footer">
+        <div class="site-footer__inner">
+            <div>
+                <a class="brand" href="index.html">
+                    <span class="brand__mark"><span>BD</span></span>
+                    <span class="brand__name">Baptiste Duval</span>
+                </a>
+                <p>Alternant en administration systèmes, réseaux et cybersécurité, en Mastère professionnel au CESI.</p>
+            </div>
+            <div>
+                <h2>Explorer</h2>
+                <ul>
+                    <li><a href="projets.html">Cursus & projets</a></li>
+                    <li><a href="index.html#parcours">Parcours</a></li>
+                    <li><a href="index.html#competences">Compétences</a></li>
+                    <li><a href="futur.html">Mastère & infra</a></li>
+                    <li><a href="index.html#cv">Curriculum vitae</a></li>
+                </ul>
+            </div>
+            <div>
+                <h2>Contact</h2>
+                <ul>
+                    <li><a href="mailto:baptisteduval.bd62@gmail.com"><i class="fas fa-envelope" aria-hidden="true"></i>baptisteduval.bd62@gmail.com</a></li>
+                    <li><a href="https://www.linkedin.com/in/baptiste-duval-6875aa302/" target="_blank" rel="noopener"><i class="fab fa-linkedin" aria-hidden="true"></i>LinkedIn</a></li>
+                    <li><a href="https://github.com/baptiste-duval" target="_blank" rel="noopener"><i class="fab fa-github" aria-hidden="true"></i>GitHub</a></li>
+                    <li><i class="fas fa-map-marker-alt" aria-hidden="true"></i>Frévent (62)</li>
+                </ul>
+            </div>
+        </div>
+        <div class="site-footer__bottom">
+            <span>&copy; <span id="year">2026</span> Baptiste Duval</span>
+            <span>Conçu et codé à la main</span>
+        </div>
+    </footer>
+
+    <script src="site.js"></script>
 </body>
 </html>
