@@ -414,6 +414,7 @@
                 </details>
                 <details open class="sub-menu">
                     <summary>Semestre 6</summary>
+                    <a href="#console-it2i" class="project-link">Alternance IT2i - Console de supervision</a>
                     <a href="#sae601" class="project-link">SAE 6.Cyber.01 - Projet SSI (Structuration/Sécurisation du SI)</a>
                     <a href="#veille601" class="project-link">Veille Technologique - L'IA dans les équipements réseaux</a>
                 </details>
@@ -427,7 +428,7 @@
                     <p class="route-cmd" aria-hidden="true"><span>$</span> traceroute cursus.but-rt</p>
                     <h1 class="route-title">Cursus & projets</h1>
                     <p class="route-lead">
-                        Six semestres de B.U.T. Réseaux et Télécommunications, 17 projets. Chaque étape ajoute une brique :
+                        Six semestres de B.U.T. Réseaux et Télécommunications, 18 projets. Chaque étape ajoute une brique :
                         le réseau d'abord, puis les télécoms, le développement et la cybersécurité, jusqu'aux missions en entreprise.
                     </p>
 
@@ -584,9 +585,15 @@
                                 <span class="hop-year">BUT 3</span>
                             </div>
                             <div class="hop-grid">
-                                <a href="#sae601" class="packet packet-cyber" data-cats="cyber reseau entreprise">
+                                <a href="#console-it2i" class="packet packet-entreprise" data-cats="entreprise dev reseau">
+                                    <span class="packet-code">Alternance IT2i</span>
+                                    <span class="packet-title">Console de supervision centralisée</span>
+                                    <span class="packet-desc">Un outil interne qui regroupe les accès aux équipements clients, détecte les pannes et contrôle les sauvegardes.</span>
+                                    <span class="packet-tags">JavaScript, Supabase, Microsoft Graph</span>
+                                </a>
+                                <a href="#sae601" class="packet packet-cyber" data-cats="cyber reseau">
                                     <span class="packet-code">SAE 6.Cyber.01</span>
-                                    <span class="packet-title">Projet SSI chez IT2i</span>
+                                    <span class="packet-title">Projet SSI</span>
                                     <span class="packet-desc">L&#x27;architecture réseau et sécurité d&#x27;une entreprise qui passe de 8 à 80 collaborateurs.</span>
                                     <span class="packet-tags">Redondance, pare-feu, Wi-Fi</span>
                                 </a>
@@ -1187,10 +1194,79 @@
                 <div id="s6-projets" class="project-section">
                     <h2 class="text-xl font-['Orbitron'] mb-10 text-cyan-400 uppercase tracking-widest border-b border-cyan-500/20 pb-2">Semestre 6 - Alternance & Cybersécurité</h2>
 
+                    <article id="console-it2i" class="project-card mb-8">
+                        <h3 class="text-2xl font-bold text-white mb-4 italic">Alternance IT2i : Console de supervision centralisée</h3>
+                        <p class="text-slate-300 text-sm mb-6 leading-relaxed">
+                            Projet mené en autonomie pendant mon alternance chez <strong>IT2i</strong>, société de services informatiques qui suit environ 300 clients professionnels.
+                            L'équipe technique n'avait ni point d'entrée unique vers les équipements de ses clients, ni outil pour savoir lesquels étaient en panne,
+                            et contrôlait chaque matin à la main une centaine de mails de sauvegarde. J'ai conçu et développé une <strong>console web interne</strong>
+                            qui regroupe ces trois besoins. Elle est aujourd'hui utilisée tous les jours par l'équipe.
+                        </p>
+
+                        <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mb-8">
+                            <div class="bg-black/30 p-5 rounded-lg border border-white/5">
+                                <h4 class="text-cyan-400 font-bold text-xs uppercase mb-3"><i class="fas fa-network-wired mr-2" aria-hidden="true"></i>Équipements centralisés</h4>
+                                <p class="text-xs text-slate-400 leading-relaxed">
+                                    Pare-feu, serveurs de téléphonie 3CX et NAS accessibles depuis une seule interface. Un test de connectivité signale les équipements
+                                    hors ligne et alimente un journal des incidents, pour intervenir avant l'appel du client.
+                                </p>
+                            </div>
+                            <div class="bg-black/30 p-5 rounded-lg border border-white/5">
+                                <h4 class="text-cyan-400 font-bold text-xs uppercase mb-3"><i class="fas fa-store mr-2" aria-hidden="true"></i>Lignes des boutiques</h4>
+                                <p class="text-xs text-slate-400 leading-relaxed">
+                                    Pour un client aux nombreuses boutiques reliées en xDSL, impossibles à tester directement : l'état de chaque ligne est récupéré
+                                    auprès de l'API de l'opérateur par une fonction serverless.
+                                </p>
+                            </div>
+                            <div class="bg-black/30 p-5 rounded-lg border border-white/5">
+                                <h4 class="text-cyan-400 font-bold text-xs uppercase mb-3"><i class="fas fa-database mr-2" aria-hidden="true"></i>Sauvegardes contrôlées</h4>
+                                <p class="text-xs text-slate-400 leading-relaxed">
+                                    La console se connecte à la boîte mail dédiée via Microsoft Graph, analyse les rapports de la nuit, affiche un tableau récapitulatif
+                                    et envoie un bilan par mail. Le contrôle passe de 20 à 30 minutes à quelques secondes.
+                                </p>
+                            </div>
+                        </div>
+
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
+                            <div class="space-y-4">
+                                <h4 class="text-cyan-400 font-bold text-xs uppercase">Architecture retenue</h4>
+                                <p class="text-xs text-slate-400 leading-relaxed">
+                                    Application en HTML, CSS et JavaScript, déployée en continu sur <strong>Netlify</strong> depuis un dépôt GitHub privé.
+                                    Les données, l'authentification des techniciens et les fonctions serverless reposent sur <strong>Supabase</strong>.
+                                    L'accès à la messagerie passe par <strong>OAuth 2.0</strong> avec Azure AD et la bibliothèque MSAL.js. Le tout sans aucun coût d'hébergement.
+                                </p>
+                                <div class="flex flex-wrap gap-2">
+                                    <span class="tech-badge">JavaScript</span>
+                                    <span class="tech-badge">Supabase</span>
+                                    <span class="tech-badge">Edge Functions</span>
+                                    <span class="tech-badge">Microsoft Graph</span>
+                                    <span class="tech-badge">OAuth 2.0</span>
+                                    <span class="tech-badge">Netlify</span>
+                                </div>
+                            </div>
+                            <div class="space-y-4">
+                                <h4 class="text-cyan-400 font-bold text-xs uppercase">Une contrainte, une solution</h4>
+                                <p class="text-xs text-slate-400 leading-relaxed">
+                                    Un navigateur ne peut pas envoyer de ping. Pour tester un équipement, la console tente donc de charger son favicon :
+                                    toute réponse, même une erreur, prouve qu'il est joignable, et l'absence de réponse après 8 secondes le classe hors ligne.
+                                </p>
+                            </div>
+                        </div>
+
+                        <div class="p-6 bg-cyan-500/5 border-l-4 border-cyan-400 rounded-r-lg">
+                            <h4 class="text-cyan-400 font-bold text-xs uppercase mb-3">Mes autres missions chez IT2i</h4>
+                            <ul class="text-xs text-slate-300 leading-relaxed space-y-2">
+                                <li><i class="fas fa-angle-right text-cyan-500 mr-2" aria-hidden="true"></i>Remplacement de switchs, de pare-feu et de postes chez des clients, avec reprise de la configuration DNS et Wi-Fi.</li>
+                                <li><i class="fas fa-angle-right text-cyan-500 mr-2" aria-hidden="true"></i>Configuration de pare-feu Zyxel : accès fibre en PPPoE, DHCP, filtrage de contenu et bascule sur un accès 4G/5G de secours.</li>
+                                <li><i class="fas fa-angle-right text-cyan-500 mr-2" aria-hidden="true"></i>Participation à la mise en service d'un serveur : RAID 5, Windows Server et machines virtuelles Hyper-V.</li>
+                            </ul>
+                        </div>
+                    </article>
+
                     <article id="sae601" class="project-card mb-8">
                         <h3 class="text-2xl font-bold text-white mb-4 italic">SAE 6.Cyber.01 : Projet SSI - Structuration/Sécurisation du Système d'Information</h3>
                         <p class="text-slate-300 text-sm mb-6 leading-relaxed">
-                            Réalisé dans le cadre de mon alternance chez <strong>IT2i</strong>, ce projet consiste à transformer une structure artisanale de 8 personnes en une infrastructure professionnelle pour <strong>80 collaborateurs</strong> répartis sur 6 étages, suite à une levée de fonds de l'entreprise. J'étais chargé de concevoir l'architecture réseau et sécurité complète, ainsi que d'organiser le futur service informatique.
+                            Ce projet consiste à transformer une structure artisanale de 8 personnes en une infrastructure professionnelle pour <strong>80 collaborateurs</strong> répartis sur 6 étages, suite à une levée de fonds de l'entreprise. J'étais chargé de concevoir l'architecture réseau et sécurité complète, ainsi que d'organiser le futur service informatique.
                         </p>
 
                         <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
@@ -1244,7 +1320,7 @@
                         <div class="p-6 bg-cyan-500/10 border border-cyan-500/30 rounded-lg flex flex-col md:flex-row justify-between items-center gap-4">
                             <div>
                                 <h4 class="text-cyan-400 font-bold">Rapport SSI - Structuration/Sécurisation du SI</h4>
-                                <p class="text-xs text-slate-400">Remis le 22/05/2026 - Rapport d'alternance IT2i.</p>
+                                <p class="text-xs text-slate-400">Remis le 22/05/2026.</p>
                             </div>
                             <div class="flex gap-3">
                                 <button onclick="openModal('static/image/R6.04_Cyber.pdf')" class="px-4 py-2 bg-cyan-500 hover:bg-cyan-600 text-white text-xs font-bold rounded transition">
@@ -1444,7 +1520,10 @@
 
         function markCurrent(projectId) {
             document.querySelectorAll('.project-link').forEach(link => {
-                link.classList.toggle('current', projectId !== null && link.getAttribute('href') === '#' + projectId);
+                const isCurrent = projectId !== null && link.getAttribute('href') === '#' + projectId;
+                link.classList.toggle('current', isCurrent);
+                // on déplie l'année et le semestre du projet affiché
+                if (isCurrent) for (let d = link.closest('details'); d; d = d.parentElement.closest('details')) d.open = true;
             });
             overviewLink.classList.toggle('current', projectId === null);
         }
