@@ -303,6 +303,63 @@
         }
         @media (prefers-reduced-motion: reduce) { .packet, .chip { transition: none; } .packet:hover { transform: none; } }
 
+
+        /* ============ MENU LATÉRAL ============ */
+        .sidebar { width: 320px; padding: 0 0 2rem; scrollbar-width: thin; scrollbar-color: rgba(0, 242, 255, 0.35) transparent; }
+        .sidebar::-webkit-scrollbar { width: 6px; }
+        .sidebar::-webkit-scrollbar-thumb { background: rgba(0, 242, 255, 0.3); border-radius: 3px; }
+        .sidebar::-webkit-scrollbar-track { background: transparent; }
+
+        .side-title { font-family: 'Orbitron', sans-serif; font-size: 0.7rem; font-weight: 700; letter-spacing: 0.22em; text-transform: uppercase; color: #64748b; padding: 1.4rem 1.25rem 0.9rem; }
+        .sidebar .overview-link {
+            display: flex; align-items: center; gap: 0.75rem; margin: 0 0.75rem 0.5rem; padding: 0.7rem 0.85rem;
+            font-size: 0.85rem; color: #e2e8f0; border: 1px solid rgba(255, 255, 255, 0.08); border-radius: 8px; background: rgba(2, 6, 23, 0.4);
+        }
+        .sidebar .overview-link i { color: #00f2ff; }
+        .sidebar .overview-link:hover { border-color: rgba(0, 242, 255, 0.4); background: rgba(0, 242, 255, 0.05); }
+        .sidebar .overview-link.current { color: #020617; background: #00f2ff; border-color: #00f2ff; font-weight: 700; }
+        .sidebar .overview-link.current i { color: #020617; }
+
+        .side-year { display: flex; align-items: center; gap: 0.75rem; padding: 1.25rem 1.25rem 0.5rem; font-size: 0.7rem; color: #64748b; letter-spacing: 0.08em; }
+        .side-year::after { content: ""; flex: 1; height: 1px; background: rgba(255, 255, 255, 0.08); }
+
+        .sidebar details.side-sem { border-bottom: none; padding: 0 0.75rem; }
+        .sidebar .side-sem > summary {
+            display: flex; align-items: center; gap: 0.7rem; padding: 0.55rem 0.5rem; border-radius: 8px;
+            font-family: 'Orbitron', sans-serif; font-size: 0.78rem; font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase; color: #e2e8f0;
+        }
+        .sidebar .side-sem > summary::-webkit-details-marker { display: none; }
+        .sidebar .side-sem > summary:hover { background: rgba(0, 242, 255, 0.06); }
+        .sem-num {
+            width: 24px; height: 24px; flex: none; border-radius: 50%; display: flex; align-items: center; justify-content: center;
+            font-size: 0.68rem; color: #00f2ff; border: 1.5px solid #00f2ff; background: #020617;
+        }
+        .sem-name { flex: 1; }
+        .sem-count { font-family: 'Fira Code', monospace; font-weight: 400; font-size: 0.68rem; color: #64748b; }
+        .sem-chevron { font-size: 0.6rem; color: #64748b; transition: transform 0.2s; }
+        .side-sem:not([open]) .sem-chevron { transform: rotate(-90deg); }
+
+        /* Les projets d'un semestre pendent sous son nœud, comme sur la vue d'ensemble */
+        .sem-links { margin: 0.15rem 0 0.6rem 1.2rem; padding-left: 0.9rem; border-left: 1px solid rgba(0, 242, 255, 0.2); }
+        .sidebar .project-link {
+            display: flex; align-items: flex-start; gap: 0.65rem; padding: 0.45rem 0.6rem; border-radius: 6px;
+            font-size: 0.8rem; line-height: 1.35; color: #cbd5e1; border-left: none;
+        }
+        .sidebar .project-link .dot { margin-top: 0.45rem; flex: none; width: 7px; height: 7px; }
+        .pl-text { display: flex; flex-direction: column; min-width: 0; }
+        .pl-text small { font-size: 0.66rem; color: #64748b; letter-spacing: 0.04em; }
+        .sidebar .project-link:hover { background: rgba(0, 242, 255, 0.06); color: #fff; }
+        .sidebar .project-link.current { background: rgba(0, 242, 255, 0.12); color: #fff; border-left: none; box-shadow: inset 2px 0 0 #00f2ff; }
+        .sidebar .project-link.current small { color: #00f2ff; }
+
+        @media (max-width: 1023px) {
+            .sidebar { width: 100%; padding-bottom: 1rem; }
+            .sidebar .project-link { padding: 0.6rem 0.6rem; font-size: 0.85rem; }
+            .side-title { display: none; }
+            .sidebar .overview-link { margin-top: 0.75rem; }
+        }
+        @media (prefers-reduced-motion: reduce) { .sem-chevron { transition: none; } }
+
         /* PDF Preview Button (remplace les iframes) */
         .pdf-preview-btn {
             display: flex;
@@ -376,57 +433,61 @@
             <span><i class="fas fa-folder-tree mr-3" aria-hidden="true"></i>Explorateur de cursus</span>
             <i class="fas fa-chevron-down" aria-hidden="true"></i>
         </button>
-        <aside id="sidebar" class="sidebar">
-            <h2 class="text-xs font-bold text-cyan-500 uppercase tracking-[0.3em] p-6 border-b border-white/5">Explorateur de Cursus</h2>
+        <aside id="sidebar" class="sidebar" aria-label="Explorateur de cursus">
+            <p class="side-title">Explorateur de cursus</p>
 
-            <a href="#" class="overview-link current"><i class="fas fa-route mr-3 text-cyan-400" aria-hidden="true"></i>Vue d'ensemble</a>
+            <a href="#" class="overview-link current"><i class="fas fa-route" aria-hidden="true"></i>Vue d'ensemble</a>
 
-            <details open>
-                <summary>BUT RT - ANNEE 1 <i class="fas fa-caret-down ml-2 opacity-50"></i></summary>
-                <details open class="sub-menu">
-                    <summary>Semestre 1</summary>
-                    <a href="#sae11" class="project-link">SAE 1.01 - Risque Numérique</a>
-                    <a href="#sae12" class="project-link">SAE 1.02 - Réseaux</a>
-                    <a href="#sae13" class="project-link">SAE 1.03 - Transmission</a>
-                    <a href="#sae14" class="project-link">SAE 1.04 - Portfolio Web</a>
-                </details>
-                <details open class="sub-menu">
-                    <summary>Semestre 2</summary>
-                    <a href="sae21-24.html" class="project-link">SAE 2.01 & 2.04 - Pépinière</a>
-                    <a href="#sae22" class="project-link">SAE 2.02 - Mesures Signaux</a>
-                    <a href="#sae23" class="project-link">SAE 2.03 - Portfolio Dynamique</a>
-                </details>
+            <p class="side-year">BUT 1</p>
+            <details open class="side-sem">
+                <summary><span class="sem-num" aria-hidden="true">1</span><span class="sem-name">Semestre 1</span><span class="sem-count">4</span><i class="fas fa-chevron-down sem-chevron" aria-hidden="true"></i></summary>
+                <div class="sem-links">
+                    <a href="#sae11" class="project-link"><i class="dot dot-cyber" aria-hidden="true"></i><span class="pl-text"><small>SAE 1.01</small>Risque numérique</span></a>
+                    <a href="#sae12" class="project-link"><i class="dot dot-reseau" aria-hidden="true"></i><span class="pl-text"><small>SAE 1.02</small>Réseaux informatiques</span></a>
+                    <a href="#sae13" class="project-link"><i class="dot dot-telecom" aria-hidden="true"></i><span class="pl-text"><small>SAE 1.03</small>Système de transmission</span></a>
+                    <a href="#sae14" class="project-link"><i class="dot dot-dev" aria-hidden="true"></i><span class="pl-text"><small>SAE 1.04</small>Portfolio web</span></a>
+                </div>
             </details>
-
-            <details open>
-                <summary>BUT RT - ANNEE 2 <i class="fas fa-caret-down ml-2 opacity-50"></i></summary>
-                <details open class="sub-menu">
-                    <summary>Semestre 3</summary>
-                    <a href="#sae301" class="project-link">SAE 3.01 - Transmission Radio</a>
-                    <a href="#sae302" class="project-link">SAE 3.02 - Développer des applications communicantes</a>
-                    <a href="#sae303" class="project-link">SAE 3.03 - Pépinière Multi-sites</a>
-                    <a href="#sae304" class="project-link">SAE 3.Cyber.04 - Découverte du Pentesting</a>
-                </details>
-                <details open class="sub-menu">
-                    <summary>Semestre 4</summary>
-                    <a href="#sae.cyber.401" class="project-link">SAE 4.CYBER.01 - Sécuriser un SI</a>
-                    <a href="#sae401" class="project-link">SAE 4.01 - Stage</a>
-                </details>
+            <details open class="side-sem">
+                <summary><span class="sem-num" aria-hidden="true">2</span><span class="sem-name">Semestre 2</span><span class="sem-count">3</span><i class="fas fa-chevron-down sem-chevron" aria-hidden="true"></i></summary>
+                <div class="sem-links">
+                    <a href="#sae21" class="project-link"><i class="dot dot-reseau" aria-hidden="true"></i><span class="pl-text"><small>SAE 2.01 &amp; 2.04</small>Projet Pépinière</span></a>
+                    <a href="#sae22" class="project-link"><i class="dot dot-telecom" aria-hidden="true"></i><span class="pl-text"><small>SAE 2.02</small>Mesure de signaux</span></a>
+                    <a href="#sae23" class="project-link"><i class="dot dot-dev" aria-hidden="true"></i><span class="pl-text"><small>SAE 2.03</small>Portfolio dynamique</span></a>
+                </div>
             </details>
-
-            <details>
-                <summary>BUT RT - ANNEE 3 <i class="fas fa-caret-down ml-2 opacity-50"></i></summary>
-                <details open class="sub-menu">
-                    <summary>Semestre 5</summary>
-                    <a href="#sae501" class="project-link">SAE 5.01 - Infrastructure de TP basée sur des conteneurs</a>
-                    <a href="#sae503" class="project-link">SAE 5.ROM.03 - Déployer et gérer les services ROM</a>
-                </details>
-                <details open class="sub-menu">
-                    <summary>Semestre 6</summary>
-                    <a href="#console-it2i" class="project-link">Alternance IT2i - Console de supervision</a>
-                    <a href="#sae601" class="project-link">SAE 6.Cyber.01 - Projet SSI (Structuration/Sécurisation du SI)</a>
-                    <a href="#veille601" class="project-link">Veille Technologique - L'IA dans les équipements réseaux</a>
-                </details>
+            <p class="side-year">BUT 2</p>
+            <details open class="side-sem">
+                <summary><span class="sem-num" aria-hidden="true">3</span><span class="sem-name">Semestre 3</span><span class="sem-count">4</span><i class="fas fa-chevron-down sem-chevron" aria-hidden="true"></i></summary>
+                <div class="sem-links">
+                    <a href="#sae301" class="project-link"><i class="dot dot-telecom" aria-hidden="true"></i><span class="pl-text"><small>SAE 3.01</small>Transmission radio</span></a>
+                    <a href="#sae302" class="project-link"><i class="dot dot-dev" aria-hidden="true"></i><span class="pl-text"><small>SAE 3.02</small>Applications communicantes</span></a>
+                    <a href="#sae303" class="project-link"><i class="dot dot-reseau" aria-hidden="true"></i><span class="pl-text"><small>SAE 3.03</small>Pépinière multi-sites</span></a>
+                    <a href="#sae304" class="project-link"><i class="dot dot-cyber" aria-hidden="true"></i><span class="pl-text"><small>SAE 3.Cyber.04</small>Découverte du pentesting</span></a>
+                </div>
+            </details>
+            <details open class="side-sem">
+                <summary><span class="sem-num" aria-hidden="true">4</span><span class="sem-name">Semestre 4</span><span class="sem-count">2</span><i class="fas fa-chevron-down sem-chevron" aria-hidden="true"></i></summary>
+                <div class="sem-links">
+                    <a href="#sae.cyber.401" class="project-link"><i class="dot dot-cyber" aria-hidden="true"></i><span class="pl-text"><small>SAE 4.Cyber.01</small>Sécuriser un SI</span></a>
+                    <a href="#sae401" class="project-link"><i class="dot dot-entreprise" aria-hidden="true"></i><span class="pl-text"><small>SAE 4.01</small>Stage au GHAT</span></a>
+                </div>
+            </details>
+            <p class="side-year">BUT 3</p>
+            <details open class="side-sem">
+                <summary><span class="sem-num" aria-hidden="true">5</span><span class="sem-name">Semestre 5</span><span class="sem-count">2</span><i class="fas fa-chevron-down sem-chevron" aria-hidden="true"></i></summary>
+                <div class="sem-links">
+                    <a href="#sae501" class="project-link"><i class="dot dot-reseau" aria-hidden="true"></i><span class="pl-text"><small>SAE 5.01</small>Salles de TP en conteneurs</span></a>
+                    <a href="#sae503" class="project-link"><i class="dot dot-telecom" aria-hidden="true"></i><span class="pl-text"><small>SAE 5.ROM.03</small>Communications unifiées</span></a>
+                </div>
+            </details>
+            <details open class="side-sem">
+                <summary><span class="sem-num" aria-hidden="true">6</span><span class="sem-name">Semestre 6</span><span class="sem-count">3</span><i class="fas fa-chevron-down sem-chevron" aria-hidden="true"></i></summary>
+                <div class="sem-links">
+                    <a href="#console-it2i" class="project-link"><i class="dot dot-entreprise" aria-hidden="true"></i><span class="pl-text"><small>Alternance IT2i</small>Console de supervision</span></a>
+                    <a href="#sae601" class="project-link"><i class="dot dot-cyber" aria-hidden="true"></i><span class="pl-text"><small>SAE 6.Cyber.01</small>Projet SSI</span></a>
+                    <a href="#veille601" class="project-link"><i class="dot dot-reseau" aria-hidden="true"></i><span class="pl-text"><small>Veille</small>IA et équipements réseaux</span></a>
+                </div>
             </details>
         </aside>
 
@@ -1214,19 +1275,19 @@
 
                         <div class="console-shots mb-8">
                             <figure class="shot shot-wide">
-                                <a href="static/image/console-tableau-de-bord.png" target="_blank" rel="noopener"><img src="static/image/console-tableau-de-bord.png" alt="Tableau de bord de la console : cinq accès (pare-feux, téléphonie, stockage NAS, boutiques, sauvegardes) et journal de surveillance" loading="lazy" width="1177" height="611"></a>
+                                <a href="console-tableau-de-bord.png" target="_blank" rel="noopener"><img src="console-tableau-de-bord.png" alt="Tableau de bord de la console : cinq accès (pare-feux, téléphonie, stockage NAS, boutiques, sauvegardes) et journal de surveillance" loading="lazy" width="1177" height="611"></a>
                                 <figcaption>Le tableau de bord : cinq modules et le journal de surveillance.</figcaption>
                             </figure>
                             <figure class="shot">
-                                <a href="static/image/console-boutiques.png" target="_blank" rel="noopener"><img src="static/image/console-boutiques.png" alt="Liste des boutiques avec un voyant d'état, le type de ligne et l'heure du dernier test" loading="lazy" width="1117" height="488"></a>
+                                <a href="console-boutiques.png" target="_blank" rel="noopener"><img src="console-boutiques.png" alt="Liste des boutiques avec un voyant d'état, le type de ligne et l'heure du dernier test" loading="lazy" width="1117" height="488"></a>
                                 <figcaption>L'état des lignes des boutiques, récupéré auprès de l'opérateur.</figcaption>
                             </figure>
                             <figure class="shot">
-                                <a href="static/image/console-sauvegardes.png" target="_blank" rel="noopener"><img src="static/image/console-sauvegardes.png" alt="Page d'analyse des sauvegardes : journal du traitement et en-têtes du tableau récapitulatif" loading="lazy" width="1131" height="318"></a>
+                                <a href="console-sauvegardes.png" target="_blank" rel="noopener"><img src="console-sauvegardes.png" alt="Page d'analyse des sauvegardes : journal du traitement et en-têtes du tableau récapitulatif" loading="lazy" width="1131" height="318"></a>
                                 <figcaption>L'analyse des sauvegardes, du relevé des mails à l'envoi du rapport.</figcaption>
                             </figure>
                             <figure class="shot shot-wide">
-                                <a href="static/image/console-pare-feux.png" target="_blank" rel="noopener"><img src="static/image/console-pare-feux.png" alt="Liste des pare-feux avec voyants verts et boutons d'accès fibre et 4G" loading="lazy" width="1088" height="242"></a>
+                                <a href="console-pare-feux.png" target="_blank" rel="noopener"><img src="console-pare-feux.png" alt="Liste des pare-feux avec voyants verts et boutons d'accès fibre et 4G" loading="lazy" width="1088" height="242"></a>
                                 <figcaption>La page des pare-feux : voyants de connectivité et accès fibre ou 4G.</figcaption>
                             </figure>
                         </div>
@@ -1295,7 +1356,7 @@
                                 <p class="text-xs text-slate-400">Année 2025/2026 chez IT2i : missions, conception de la console et code en annexe.</p>
                             </div>
                             <div class="flex gap-3">
-                                <button onclick="openModal('static/image/Rapport_Alternance_Duval_Baptiste.pdf')" class="px-4 py-2 bg-cyan-500 hover:bg-cyan-600 text-white text-xs font-bold rounded transition">
+                                <button onclick="openModal('Rapport_Alternance_Duval_Baptiste.pdf')" class="px-4 py-2 bg-cyan-500 hover:bg-cyan-600 text-white text-xs font-bold rounded transition">
                                     <i class="fas fa-file-pdf mr-2"></i> VOIR LE RAPPORT
                                 </button>
                             </div>
@@ -1563,6 +1624,8 @@
                 link.classList.toggle('current', isCurrent);
                 // on déplie l'année et le semestre du projet affiché
                 if (isCurrent) for (let d = link.closest('details'); d; d = d.parentElement.closest('details')) d.open = true;
+                // et on amène l'entrée dans la zone visible du menu (sans faire défiler la page)
+                if (isCurrent && window.matchMedia('(min-width: 1024px)').matches) sidebar.scrollTop = Math.max(0, link.offsetTop - sidebar.clientHeight / 2);
             });
             overviewLink.classList.toggle('current', projectId === null);
         }
