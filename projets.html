@@ -4,6 +4,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Cursus et projets de Baptiste Duval en B.U.T. Réseaux et Télécommunications : toutes les SAE, semestre par semestre, avec rapports et livrables.">
+    <meta name="theme-color" content="#020617">
+    <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='12' fill='%23020617'/%3E%3Crect x='14' y='14' width='36' height='36' fill='none' stroke='%2300f2ff' stroke-width='3' transform='rotate(45 32 32)'/%3E%3Ctext x='32' y='39' font-family='monospace' font-size='18' font-weight='700' fill='%2300f2ff' text-anchor='middle'%3EBD%3C/text%3E%3C/svg%3E">
     <title>Cursus & Projets | Baptiste Duval</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
@@ -11,7 +14,7 @@
 
     <style>
         body {
-            font-family: 'Fira+Code', monospace;
+            font-family: 'Fira Code', monospace;
             background-color: #020617;
             color: #e2e8f0;
             margin: 0;
@@ -91,8 +94,8 @@
         .project-link {
             display: block;
             padding: 8px 60px;
-            font-size: 0.7rem;
-            color: #64748b;
+            font-size: 0.75rem;
+            color: #94a3b8;
             transition: 0.2s;
             cursor: pointer;
         }
@@ -142,6 +145,44 @@
             color: #00f2ff;
             text-transform: uppercase;
             font-weight: bold;
+        }
+
+        .project-section article { scroll-margin-top: 100px; }
+        .project-link { text-decoration: none; }
+        .project-link.current { color: #00f2ff; background: rgba(0, 242, 255, 0.08); border-left: 2px solid #00f2ff; }
+        a:focus-visible, button:focus-visible, summary:focus-visible { outline: 2px solid #00f2ff; outline-offset: 2px; }
+
+        /* Bouton du menu : visible uniquement sur mobile / tablette */
+        .sidebar-toggle { display: none; }
+
+        @media (max-width: 1023px) {
+            .layout-container { flex-direction: column; }
+            .sidebar-toggle {
+                display: flex; align-items: center; justify-content: space-between;
+                position: sticky; top: 80px; z-index: 50; width: 100%;
+                padding: 14px 20px;
+                background: rgba(15, 23, 42, 0.97);
+                border-bottom: 1px solid rgba(0, 242, 255, 0.25);
+                color: #00f2ff; font-family: 'Orbitron', sans-serif;
+                font-size: 0.75rem; font-weight: 700; letter-spacing: 0.15em; text-transform: uppercase;
+            }
+            .sidebar-toggle[aria-expanded="true"] .fa-chevron-down { transform: rotate(180deg); }
+            .sidebar {
+                display: none; width: 100%; position: static; height: auto;
+                border-right: none; border-bottom: 1px solid rgba(0, 242, 255, 0.2);
+            }
+            .sidebar.open { display: block; }
+            .sidebar > h2 { display: none; }
+            .sub-menu summary { padding: 10px 28px; }
+            .project-link { padding: 11px 40px; font-size: 0.8rem; }
+            .main-content { padding: 24px 16px; }
+            .project-card { padding: 18px; }
+            .project-section article { scroll-margin-top: 140px; }
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            .project-section.active { animation: none; }
+            #particles-js { display: none; }
         }
 
         /* PDF Preview Button (remplace les iframes) */
@@ -200,36 +241,40 @@
 
     <nav id="mainNav" class="glass-header fixed top-0 w-full z-[100]">
         <div class="max-w-7xl mx-auto px-6 h-20 flex items-center justify-between">
-            <div class="flex items-center space-x-3">
+            <a href="index.html" class="flex items-center space-x-3" aria-label="Baptiste Duval, accueil">
                 <div class="w-8 h-8 border border-cyan-500 flex items-center justify-center rotate-45">
                     <span class="rotate-[-45deg] font-bold text-cyan-400 text-xs">BD</span>
                 </div>
                 <span class="text-sm font-bold tracking-[0.2em] text-cyan-400 neon-shadow italic">BAPTISTE_DUVAL.SYS</span>
-            </div>
-            <div class="hidden md:flex space-x-8 text-[10px] uppercase font-bold tracking-widest">
-                <a href="index.html" class="hover:text-cyan-400 transition">Retour à la page d'accueil</a>
+            </a>
+            <div class="flex space-x-8 text-xs uppercase font-bold tracking-widest">
+                <a href="index.html" class="hover:text-cyan-400 transition"><i class="fas fa-home mr-2" aria-hidden="true"></i><span class="hidden sm:inline">Retour à la page d'accueil</span><span class="sm:hidden">Accueil</span></a>
             </div>
         </div>
     </nav>
 
     <div class="layout-container">
-        <aside class="sidebar">
-            <h2 class="text-[10px] font-bold text-cyan-500 uppercase tracking-[0.3em] p-6 border-b border-white/5">Explorateur de Cursus</h2>
+        <button id="sidebarToggle" type="button" class="sidebar-toggle" aria-expanded="false" aria-controls="sidebar">
+            <span><i class="fas fa-folder-tree mr-3" aria-hidden="true"></i>Explorateur de cursus</span>
+            <i class="fas fa-chevron-down" aria-hidden="true"></i>
+        </button>
+        <aside id="sidebar" class="sidebar">
+            <h2 class="text-xs font-bold text-cyan-500 uppercase tracking-[0.3em] p-6 border-b border-white/5">Explorateur de Cursus</h2>
 
             <details open>
                 <summary>BUT RT - ANNEE 1 <i class="fas fa-caret-down ml-2 opacity-50"></i></summary>
                 <details open class="sub-menu">
                     <summary>Semestre 1</summary>
-                    <a onclick="goToProject('s1-projets', 'sae11')" class="project-link">SAE 1.01 - Risque Numérique</a>
-                    <a onclick="goToProject('s1-projets', 'sae12')" class="project-link">SAE 1.02 - Réseaux</a>
-                    <a onclick="goToProject('s1-projets', 'sae13')" class="project-link">SAE 1.03 - Transmission</a>
-                    <a onclick="goToProject('s1-projets', 'sae14')" class="project-link">SAE 1.04 - Portfolio Web</a>
+                    <a href="#sae11" class="project-link">SAE 1.01 - Risque Numérique</a>
+                    <a href="#sae12" class="project-link">SAE 1.02 - Réseaux</a>
+                    <a href="#sae13" class="project-link">SAE 1.03 - Transmission</a>
+                    <a href="#sae14" class="project-link">SAE 1.04 - Portfolio Web</a>
                 </details>
                 <details open class="sub-menu">
                     <summary>Semestre 2</summary>
                     <a href="sae21-24.html" class="project-link">SAE 2.01 & 2.04 - Pépinière</a>
-                    <a onclick="goToProject('s2-projets', 'sae22')" class="project-link">SAE 2.02 - Mesures Signaux</a>
-                    <a onclick="goToProject('s2-projets', 'sae23')" class="project-link">SAE 2.03 - Portfolio Dynamique</a>
+                    <a href="#sae22" class="project-link">SAE 2.02 - Mesures Signaux</a>
+                    <a href="#sae23" class="project-link">SAE 2.03 - Portfolio Dynamique</a>
                 </details>
             </details>
 
@@ -237,15 +282,15 @@
                 <summary>BUT RT - ANNEE 2 <i class="fas fa-caret-down ml-2 opacity-50"></i></summary>
                 <details open class="sub-menu">
                     <summary>Semestre 3</summary>
-                    <a onclick="goToProject('s3-projets', 'sae301')" class="project-link">SAE 3.01 - Transmission Radio</a>
-                    <a onclick="goToProject('s3-projets', 'sae302')" class="project-link">SAE 3.02 - Développer des applications communicantes</a>
-                    <a onclick="goToProject('s3-projets', 'sae303')" class="project-link">SAE 3.03 - Pépinière Multi-sites</a>
-                    <a onclick="goToProject('s3-projets', 'sae304')" class="project-link">SAE 3.Cyber.04 - Découverte du Pentesting</a>
+                    <a href="#sae301" class="project-link">SAE 3.01 - Transmission Radio</a>
+                    <a href="#sae302" class="project-link">SAE 3.02 - Développer des applications communicantes</a>
+                    <a href="#sae303" class="project-link">SAE 3.03 - Pépinière Multi-sites</a>
+                    <a href="#sae304" class="project-link">SAE 3.Cyber.04 - Découverte du Pentesting</a>
                 </details>
                 <details open class="sub-menu">
                     <summary>Semestre 4</summary>
-                    <a onclick="goToProject('s4-projets', 'sae.cyber.401')" class="project-link">SAE 4.CYBER.01 - Sécuriser un SI</a>
-                    <a onclick="goToProject('s4-projets', 'sae401')" class="project-link">SAE 4.01 - Stage</a>
+                    <a href="#sae.cyber.401" class="project-link">SAE 4.CYBER.01 - Sécuriser un SI</a>
+                    <a href="#sae401" class="project-link">SAE 4.01 - Stage</a>
                 </details>
             </details>
 
@@ -253,13 +298,13 @@
                 <summary>BUT RT - ANNEE 3 <i class="fas fa-caret-down ml-2 opacity-50"></i></summary>
                 <details open class="sub-menu">
                     <summary>Semestre 5</summary>
-                    <a onclick="goToProject('s5-projets', 'sae501')" class="project-link">SAE 5.01 - Infrastructure de TP basée sur des conteneurs</a>
-                    <a onclick="goToProject('s5-projets', 'sae503')" class="project-link">SAE 5.ROM.03 - Déployer et gérer les services ROM</a>
+                    <a href="#sae501" class="project-link">SAE 5.01 - Infrastructure de TP basée sur des conteneurs</a>
+                    <a href="#sae503" class="project-link">SAE 5.ROM.03 - Déployer et gérer les services ROM</a>
                 </details>
                 <details open class="sub-menu">
                     <summary>Semestre 6</summary>
-                    <a onclick="goToProject('s6-projets', 'sae601')" class="project-link">SAE 6.Cyber.01 - Projet SSI (Structuration/Sécurisation du SI)</a>
-                    <a onclick="goToProject('s6-projets', 'veille601')" class="project-link">Veille Technologique - L'IA dans les équipements réseaux</a>
+                    <a href="#sae601" class="project-link">SAE 6.Cyber.01 - Projet SSI (Structuration/Sécurisation du SI)</a>
+                    <a href="#veille601" class="project-link">Veille Technologique - L'IA dans les équipements réseaux</a>
                 </details>
             </details>
         </aside>
@@ -302,9 +347,9 @@
                         <div class="p-6 bg-cyan-500/10 border border-cyan-500/30 rounded-lg flex justify-between items-center">
                             <div>
                                 <h4 class="text-cyan-400 font-bold uppercase text-xs">Rapport d'Architecture Réseau</h4>
-                                <p class="text-[10px] text-slate-400">Consultez le compte rendu complet de configuration et de routage.</p>
+                                <p class="text-xs text-slate-400">Consultez le compte rendu complet de configuration et de routage.</p>
                             </div>
-                            <button onclick="openModal('static/image/Rapport_SAE12.pdf')" class="px-6 py-2 bg-cyan-500 hover:bg-cyan-600 text-white text-[10px] font-bold rounded transition-all cursor-pointer">
+                            <button onclick="openModal('static/image/Rapport_SAE12.pdf')" class="px-6 py-2 bg-cyan-500 hover:bg-cyan-600 text-white text-xs font-bold rounded transition-all cursor-pointer">
                                 <i class="fas fa-file-pdf mr-2"></i> OUVRIR LE RAPPORT
                             </button>
                         </div>
@@ -343,7 +388,7 @@
                                 <h4 class="text-cyan-400 font-bold">Dépôt GitHub & Fichiers sources</h4>
                                 <p class="text-xs text-slate-400">Accédez au code source et à la documentation du projet.</p>
                             </div>
-                            <a href="https://drive.google.com/drive/folders/1UHTykaae_LM6SGDBo1YG5gK9dVXAuSzh?usp=sharing" target="_blank" class="px-4 py-2 bg-cyan-500 hover:bg-cyan-600 text-white text-xs font-bold rounded transition">
+                            <a href="https://drive.google.com/drive/folders/1UHTykaae_LM6SGDBo1YG5gK9dVXAuSzh?usp=sharing" target="_blank" rel="noopener" class="px-4 py-2 bg-cyan-500 hover:bg-cyan-600 text-white text-xs font-bold rounded transition">
                                 <i class="fab fa-google-drive mr-2"></i> VOIR SUR DRIVE
                             </a>
                         </div>
@@ -360,7 +405,7 @@
                             Ce projet majeur consistait à déployer l'intégralité du système d'information d'une entreprise : architecture réseau Cisco (VLAN, Routage, NAT, ACL), téléphonie IP (Asterisk), services virtualisés sous Docker et administration Windows Server.
                         </p>
                         <div class="flex gap-4">
-                            <a href="sae21-24.html" class="px-6 py-2 bg-cyan-500 hover:bg-cyan-600 text-white text-[10px] font-bold rounded transition-all">
+                            <a href="sae21-24.html" class="px-6 py-2 bg-cyan-500 hover:bg-cyan-600 text-white text-xs font-bold rounded transition-all">
                                 <i class="fas fa-eye mr-2"></i> VOIR LA PRÉSENTATION DÉTAILLÉE
                             </a>
                         </div>
@@ -374,9 +419,9 @@
                         <div class="p-6 bg-cyan-500/10 border border-cyan-500/30 rounded-lg flex justify-between items-center">
                             <div>
                                 <h4 class="text-cyan-400 font-bold uppercase text-xs">Livrable de Présentation</h4>
-                                <p class="text-[10px] text-slate-400">Diaporama technique et analyse de mesures.</p>
+                                <p class="text-xs text-slate-400">Diaporama technique et analyse de mesures.</p>
                             </div>
-                            <a href="https://drive.google.com/drive/folders/1x7dzhzyyS2gLV5n0zeuRtVRtZNe9wNWV?usp=sharing" target="_blank" class="px-6 py-2 bg-transparent border border-cyan-500 text-cyan-400 hover:bg-cyan-500 hover:text-white text-[10px] font-bold rounded transition-all">
+                            <a href="https://drive.google.com/drive/folders/1x7dzhzyyS2gLV5n0zeuRtVRtZNe9wNWV?usp=sharing" target="_blank" rel="noopener" class="px-6 py-2 bg-transparent border border-cyan-500 text-cyan-400 hover:bg-cyan-500 hover:text-white text-xs font-bold rounded transition-all">
                                 <i class="fas fa-external-link-alt mr-2"></i> OUVRIR LE DOSSIER DRIVE
                             </a>
                         </div>
@@ -390,9 +435,9 @@
                         <div class="p-6 bg-cyan-500/10 border border-cyan-500/30 rounded-lg flex justify-between items-center">
                             <div>
                                 <h4 class="text-cyan-400 font-bold uppercase text-xs">Spécifications du Projet</h4>
-                                <p class="text-[10px] text-slate-400">Architecture Docker, Templates Jinja2 et gestion de base de données.</p>
+                                <p class="text-xs text-slate-400">Architecture Docker, Templates Jinja2 et gestion de base de données.</p>
                             </div>
-                            <a href="https://drive.google.com/drive/folders/1fRRUFnylDUvc75_NhG9-F7Rsn6NTHjM8?usp=sharing" target="_blank" class="px-6 py-2 bg-cyan-500 text-white text-[10px] font-bold rounded hover:bg-cyan-600 transition-all">
+                            <a href="https://drive.google.com/drive/folders/1fRRUFnylDUvc75_NhG9-F7Rsn6NTHjM8?usp=sharing" target="_blank" rel="noopener" class="px-6 py-2 bg-cyan-500 text-white text-xs font-bold rounded hover:bg-cyan-600 transition-all">
                                 <i class="fas fa-file-code mr-2"></i> VOIR LE SUJET SAE 2.3
                             </a>
                         </div>
@@ -411,9 +456,9 @@
                         <div class="p-6 bg-cyan-500/10 border border-cyan-500/30 rounded-lg flex justify-between items-center">
                             <div>
                                 <h4 class="text-cyan-400 font-bold uppercase text-xs">Rapport Radiofréquences</h4>
-                                <p class="text-[10px] text-slate-400">Consultez l'analyse de transmission GNU Radio.</p>
+                                <p class="text-xs text-slate-400">Consultez l'analyse de transmission GNU Radio.</p>
                             </div>
-                            <button onclick="openModal('static/image/Rapport final-SAE301-Duval-Nicolas.pdf')" class="px-6 py-2 bg-cyan-500 hover:bg-cyan-600 text-white text-[10px] font-bold rounded transition-all cursor-pointer">
+                            <button onclick="openModal('static/image/Rapport final-SAE301-Duval-Nicolas.pdf')" class="px-6 py-2 bg-cyan-500 hover:bg-cyan-600 text-white text-xs font-bold rounded transition-all cursor-pointer">
                                 <i class="fas fa-file-pdf mr-2"></i> VOIR LE RAPPORT
                             </button>
                         </div>
@@ -427,7 +472,7 @@
                         <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
                             <div class="space-y-4">
                                 <h4 class="text-cyan-400 font-bold text-xs uppercase">Architecture du projet</h4>
-                                <pre class="text-[9px] bg-black/30 p-3 rounded border border-white/5">
+                                <pre class="text-[11px] bg-black/30 p-3 rounded border border-white/5">
 /ton_projet/
 ├── serveur/
 │   ├── app.py (Flask)
@@ -440,7 +485,7 @@
                             </div>
                             <div>
                                 <h4 class="text-cyan-400 font-bold text-xs uppercase">Technologies Clés</h4>
-                                <ul class="text-[10px] space-y-2 mt-2">
+                                <ul class="text-xs space-y-2 mt-2">
                                     <li><i class="fas fa-check text-cyan-500 mr-2"></i> <strong>Backend :</strong> Flask, Pandas, BeautifulSoup</li>
                                     <li><i class="fas fa-check text-cyan-500 mr-2"></i> <strong>Frontend :</strong> Interface Graphique Tkinter</li>
                                     <li><i class="fas fa-check text-cyan-500 mr-2"></i> <strong>Parsing :</strong> pdfplumber & Regex engine</li>
@@ -455,9 +500,9 @@
                         <div class="p-6 bg-cyan-500/10 border border-cyan-500/30 rounded-lg flex justify-between items-center">
                             <div>
                                 <h4 class="text-cyan-400 font-bold uppercase text-xs">Code Source & Documentation</h4>
-                                <p class="text-[10px] text-slate-400">Accédez au projet via Drive.</p>
+                                <p class="text-xs text-slate-400">Accédez au projet via Drive.</p>
                             </div>
-                            <a href="https://drive.google.com/drive/folders/1UHTykaae_LM6SGDBo1YG5gK9dVXAuSzh?usp=sharing" target="_blank" class="px-6 py-2 bg-cyan-500 text-white text-[10px] font-bold rounded hover:bg-cyan-600 transition-all">
+                            <a href="https://drive.google.com/drive/folders/1UHTykaae_LM6SGDBo1YG5gK9dVXAuSzh?usp=sharing" target="_blank" rel="noopener" class="px-6 py-2 bg-cyan-500 text-white text-xs font-bold rounded hover:bg-cyan-600 transition-all">
                                 <i class="fab fa-google-drive mr-2"></i> VOIR LE PROJET COMPLET
                             </a>
                         </div>
@@ -470,15 +515,15 @@
                         </p>
                         <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-6">
                             <div class="space-y-2">
-                                <h4 class="text-cyan-400 font-bold text-[10px] uppercase">Réseau & Interconnexion</h4>
-                                <p class="text-[10px] text-slate-400">Routage inter-sites, configuration VLAN 800, et redondance au siège via Switchs L3.</p>
+                                <h4 class="text-cyan-400 font-bold text-xs uppercase">Réseau & Interconnexion</h4>
+                                <p class="text-xs text-slate-400">Routage inter-sites, configuration VLAN 800, et redondance au siège via Switchs L3.</p>
                                 <div class="flex flex-wrap gap-2">
                                     <span class="tech-badge">Cisco 800</span> <span class="tech-badge">Switch L3</span> <span class="tech-badge">NAT</span>
                                 </div>
                             </div>
                             <div class="space-y-2">
-                                <h4 class="text-cyan-400 font-bold text-[10px] uppercase">Services & Sécurité</h4>
-                                <p class="text-[10px] text-slate-400">Active Directory (Windows Server), DNS, Mail interne, et réplication de bases de données MySQL.</p>
+                                <h4 class="text-cyan-400 font-bold text-xs uppercase">Services & Sécurité</h4>
+                                <p class="text-xs text-slate-400">Active Directory (Windows Server), DNS, Mail interne, et réplication de bases de données MySQL.</p>
                                 <div class="flex flex-wrap gap-2">
                                     <span class="tech-badge">Active Directory</span> <span class="tech-badge">Syslog</span> <span class="tech-badge">Replication</span>
                                 </div>
@@ -487,9 +532,9 @@
                         <div class="p-6 bg-cyan-500/10 border border-cyan-500/30 rounded-lg flex justify-between items-center">
                             <div>
                                 <h4 class="text-cyan-400 font-bold uppercase text-xs">Dossier Technique SAE 3.03</h4>
-                                <p class="text-[10px] text-slate-400">Accédez aux schémas réseau et fichiers de configuration.</p>
+                                <p class="text-xs text-slate-400">Accédez aux schémas réseau et fichiers de configuration.</p>
                             </div>
-                            <a href="https://drive.google.com/drive/folders/1_W1aRgNGCUdDX7XzbECTuEN2ReQ5UJeP?usp=sharing" target="_blank" class="px-6 py-2 bg-cyan-500 text-white text-[10px] font-bold rounded hover:bg-cyan-600 transition-all">
+                            <a href="https://drive.google.com/drive/folders/1_W1aRgNGCUdDX7XzbECTuEN2ReQ5UJeP?usp=sharing" target="_blank" rel="noopener" class="px-6 py-2 bg-cyan-500 text-white text-xs font-bold rounded hover:bg-cyan-600 transition-all">
                                 <i class="fab fa-google-drive mr-2"></i> VOIR LE PROJET
                             </a>
                         </div>
@@ -503,7 +548,7 @@
                         <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
                             <div class="space-y-4">
                                 <h4 class="text-cyan-400 font-bold text-xs uppercase">Méthodologie & Analyse</h4>
-                                <p class="text-[10px] text-slate-400 leading-relaxed">
+                                <p class="text-xs text-slate-400 leading-relaxed">
                                     Utilisation du score <strong>CVSS</strong> pour prioriser les risques. Analyse de vulnérabilités critiques comme les accès FTP anonymes, les mauvaises configurations Apache ou les failles d'applications Web (OWASP).
                                 </p>
                                 <div class="flex flex-wrap gap-2">
@@ -516,7 +561,7 @@
                             </div>
                             <div class="space-y-4">
                                 <h4 class="text-cyan-400 font-bold text-xs uppercase">Compétences acquises</h4>
-                                <ul class="text-[10px] space-y-2">
+                                <ul class="text-xs space-y-2">
                                     <li><i class="fas fa-crosshairs text-cyan-500 mr-2"></i> Reconnaissance réseau (Netdiscover, Nmap -sS -A)</li>
                                     <li><i class="fas fa-biohazard text-cyan-500 mr-2"></i> Exploitation de failles (MS09-053, Reverse Shell)</li>
                                     <li><i class="fas fa-code text-cyan-500 mr-2"></i> Web Hacking (SQL Injection, XXE, JWT Manipulation)</li>
@@ -527,30 +572,30 @@
                         <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
                             <div class="p-4 bg-white/5 border border-white/10 rounded-lg flex flex-col justify-between">
                                 <div>
-                                    <h5 class="text-[10px] font-bold text-cyan-400 mb-2 uppercase text-center">TP1 : Reconnaissance</h5>
-                                    <p class="text-[9px] text-slate-500 mb-3">Scan de la cible 172.31.25.248, découverte des ports SSH (22) et HTTP (1337), et décodage de secrets en Base64.</p>
+                                    <h5 class="text-xs font-bold text-cyan-400 mb-2 uppercase text-center">TP1 : Reconnaissance</h5>
+                                    <p class="text-[11px] text-slate-500 mb-3">Scan de la cible 172.31.25.248, découverte des ports SSH (22) et HTTP (1337), et décodage de secrets en Base64.</p>
                                 </div>
-                                <button onclick="openModal('static/image/R3.CYBER.04-TP1.pdf')" class="w-full py-2 bg-cyan-500/10 border border-cyan-500/30 text-cyan-400 text-[8px] font-bold uppercase rounded hover:bg-cyan-500 hover:text-white transition-all">
+                                <button onclick="openModal('static/image/R3.CYBER.04-TP1.pdf')" class="w-full py-2 bg-cyan-500/10 border border-cyan-500/30 text-cyan-400 text-[11px] font-bold uppercase rounded hover:bg-cyan-500 hover:text-white transition-all">
                                     <i class="fas fa-file-pdf mr-1"></i> Voir le rapport
                                 </button>
                             </div>
 
                             <div class="p-4 bg-white/5 border border-white/10 rounded-lg flex flex-col justify-between">
                                 <div>
-                                    <h5 class="text-[10px] font-bold text-cyan-400 mb-2 uppercase text-center">TP2 : Exploitation</h5>
-                                    <p class="text-[9px] text-slate-500 mb-3">Analyse de la cible 172.31.25.222. Exploitation de vulnérabilités FTP et prise de contrôle via Meterpreter.</p>
+                                    <h5 class="text-xs font-bold text-cyan-400 mb-2 uppercase text-center">TP2 : Exploitation</h5>
+                                    <p class="text-[11px] text-slate-500 mb-3">Analyse de la cible 172.31.25.222. Exploitation de vulnérabilités FTP et prise de contrôle via Meterpreter.</p>
                                 </div>
-                                <button onclick="openModal('static/image/R3.CYBER.04-TP2.pdf')" class="w-full py-2 bg-cyan-500/10 border border-cyan-500/30 text-cyan-400 text-[8px] font-bold uppercase rounded hover:bg-cyan-500 hover:text-white transition-all">
+                                <button onclick="openModal('static/image/R3.CYBER.04-TP2.pdf')" class="w-full py-2 bg-cyan-500/10 border border-cyan-500/30 text-cyan-400 text-[11px] font-bold uppercase rounded hover:bg-cyan-500 hover:text-white transition-all">
                                     <i class="fas fa-file-pdf mr-1"></i> Voir le rapport
                                 </button>
                             </div>
 
                             <div class="p-4 bg-white/5 border border-white/10 rounded-lg flex flex-col justify-between">
                                 <div>
-                                    <h5 class="text-[10px] font-bold text-cyan-400 mb-2 uppercase text-center">TP3 : Sécurité Web</h5>
-                                    <p class="text-[9px] text-slate-500 mb-3">Audit de l'application OWASP Juice Shop. Challenges de hacking web : injection admin, exfiltration de DB et détournement de token.</p>
+                                    <h5 class="text-xs font-bold text-cyan-400 mb-2 uppercase text-center">TP3 : Sécurité Web</h5>
+                                    <p class="text-[11px] text-slate-500 mb-3">Audit de l'application OWASP Juice Shop. Challenges de hacking web : injection admin, exfiltration de DB et détournement de token.</p>
                                 </div>
-                                <button onclick="openModal('static/image/R3.CYBER.04-TP3.pdf')" class="w-full py-2 bg-cyan-500/10 border border-cyan-500/30 text-cyan-400 text-[8px] font-bold uppercase rounded hover:bg-cyan-500 hover:text-white transition-all">
+                                <button onclick="openModal('static/image/R3.CYBER.04-TP3.pdf')" class="w-full py-2 bg-cyan-500/10 border border-cyan-500/30 text-cyan-400 text-[11px] font-bold uppercase rounded hover:bg-cyan-500 hover:text-white transition-all">
                                     <i class="fas fa-file-pdf mr-1"></i> Voir le rapport
                                 </button>
                             </div>
@@ -569,7 +614,7 @@
                             <div class="h-px flex-1 bg-gradient-to-r from-transparent via-cyan-500/50 to-transparent"></div>
                             <div class="text-center">
                                 <h3 class="text-lg font-bold text-white tracking-tighter uppercase italic">SAE 4.CYBER.01 : Sécuriser un Système d'Information</h3>
-                                <p class="text-[9px] text-cyan-500/60 uppercase tracking-widest">Architecture Multi-sites & Hardening</p>
+                                <p class="text-[11px] text-cyan-500/60 uppercase tracking-widest">Architecture Multi-sites & Hardening</p>
                             </div>
                             <div class="h-px flex-1 bg-gradient-to-r from-transparent via-cyan-500/50 to-transparent"></div>
                         </div>
@@ -580,22 +625,22 @@
                                     <h4 class="text-xs font-bold text-white mb-3 uppercase tracking-wider flex items-center gap-2">
                                         <i class="fas fa-project-diagram text-cyan-400"></i> Challenge Technique
                                     </h4>
-                                    <p class="text-[11px] leading-relaxed text-slate-400 mb-4">
-                                        Conception et déploiement d'une infrastructure sécurisée simulant une entreprise avec un **Siège** et une **Succursale**. L'enjeu majeur était de garantir l'intégrité et la confidentialité des échanges inter-sites tout en segmentant strictement les flux métiers.
+                                    <p class="text-[13px] leading-relaxed text-slate-400 mb-4">
+                                        Conception et déploiement d'une infrastructure sécurisée simulant une entreprise avec un <strong>Siège</strong> et une <strong>Succursale</strong>. L'enjeu majeur était de garantir l'intégrité et la confidentialité des échanges inter-sites tout en segmentant strictement les flux métiers.
                                     </p>
 
                                     <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
                                         <div class="bg-black/20 p-3 rounded-lg border border-white/5">
-                                            <span class="text-[10px] text-cyan-400 font-bold uppercase block mb-1">Infrastructure Réseau</span>
-                                            <ul class="text-[9px] text-slate-300 space-y-1">
+                                            <span class="text-xs text-cyan-400 font-bold uppercase block mb-1">Infrastructure Réseau</span>
+                                            <ul class="text-[11px] text-slate-300 space-y-1">
                                                 <li>• Tunnel VPN IPSEC / GRE (Chiffrement AES-256)</li>
                                                 <li>• Routage OSPF pour l'interconnexion</li>
                                                 <li>• Segmentation VLAN (Admin, Prod, Service)</li>
                                             </ul>
                                         </div>
                                         <div class="bg-black/20 p-3 rounded-lg border border-white/5">
-                                            <span class="text-[10px] text-cyan-400 font-bold uppercase block mb-1">Sécurisation Services</span>
-                                            <ul class="text-[9px] text-slate-300 space-y-1">
+                                            <span class="text-xs text-cyan-400 font-bold uppercase block mb-1">Sécurisation Services</span>
+                                            <ul class="text-[11px] text-slate-300 space-y-1">
                                                 <li>• Firewalls Cisco ASA (ACLs & NAT dynamique)</li>
                                                 <li>• DNSSEC : Authentification des zones DNS</li>
                                                 <li>• HTTPS : Chiffrement des flux Web (TLS)</li>
@@ -608,7 +653,7 @@
                                     <h4 class="text-xs font-bold text-white mb-3 uppercase tracking-wider flex items-center gap-2">
                                         <i class="fas fa-user-shield text-cyan-400"></i> Audit & Pentesting
                                     </h4>
-                                    <p class="text-[11px] leading-relaxed text-slate-400">
+                                    <p class="text-[13px] leading-relaxed text-slate-400">
                                         Validation de la posture de sécurité via des tests d'intrusion. Utilisation de <strong>SQLMap</strong> pour tester la résistance des formulaires web et <strong>Nmap</strong> pour vérifier l'étanchéité des Firewalls. Application des recommandations de l'<strong>ANSSI</strong> pour le durcissement (Hardening).
                                     </p>
                                 </div>
@@ -619,20 +664,20 @@
                                     <i class="fas fa-file-invoice text-5xl text-cyan-500 mb-4 opacity-20"></i>
                                     <h4 class="text-white text-xs font-bold uppercase mb-4">Documentation Technique</h4>
 
-                                    <a href="https://drive.google.com/file/d/10tU6ml3NY3VzPKB47SdidFpNQ75g4cPo/view?usp=sharing" target="_blank" class="w-full px-4 py-3 bg-white/5 border border-white/10 text-white text-[10px] font-bold uppercase rounded-lg hover:bg-white/10 transition-all">
+                                    <a href="https://drive.google.com/file/d/10tU6ml3NY3VzPKB47SdidFpNQ75g4cPo/view?usp=sharing" target="_blank" rel="noopener" class="w-full px-4 py-3 bg-white/5 border border-white/10 text-white text-xs font-bold uppercase rounded-lg hover:bg-white/10 transition-all">
                                         <i class="fab fa-google-drive mr-2 text-cyan-400"></i> Rapport Final
                                     </a>
 
-                                    <a href="https://drive.google.com/drive/folders/1VpRGYRGEgfXWrLUL6RlL5hfm9AuzF1ie?usp=sharing" target="_blank" class="w-full px-4 py-3 bg-white/5 border border-white/10 text-white text-[10px] font-bold uppercase rounded-lg hover:bg-white/10 transition-all">
+                                    <a href="https://drive.google.com/drive/folders/1VpRGYRGEgfXWrLUL6RlL5hfm9AuzF1ie?usp=sharing" target="_blank" rel="noopener" class="w-full px-4 py-3 bg-white/5 border border-white/10 text-white text-xs font-bold uppercase rounded-lg hover:bg-white/10 transition-all">
                                         <i class="fab fa-google-drive mr-2 text-cyan-400"></i> Pack Complet (PKT)
                                     </a>
 
                                     <div class="mt-6 pt-6 border-t border-white/5 w-full">
-                                        <div class="flex justify-between text-[9px] uppercase font-bold">
+                                        <div class="flex justify-between text-[11px] uppercase font-bold">
                                             <span class="text-slate-500">Pages :</span>
                                             <span class="text-cyan-400">42</span>
                                         </div>
-                                        <div class="flex justify-between text-[9px] uppercase font-bold mt-2">
+                                        <div class="flex justify-between text-[11px] uppercase font-bold mt-2">
                                             <span class="text-slate-500">Format :</span>
                                             <span class="text-cyan-400">PDF / Packet Tracer</span>
                                         </div>
@@ -646,49 +691,49 @@
                         <div class="flex flex-col md:flex-row justify-between items-start mb-4 gap-2">
                             <div>
                                 <h3 class="text-xl font-bold text-white italic">SAE 4.01 : Stage - Admin Systèmes & Réseaux</h3>
-                                <p class="text-cyan-400 font-bold text-[10px] uppercase tracking-[0.2em]">Centre Hospitalier d'Arras (GHAT)</p>
+                                <p class="text-cyan-400 font-bold text-xs uppercase tracking-[0.2em]">Centre Hospitalier d'Arras (GHAT)</p>
                             </div>
-                            <span class="text-[9px] bg-cyan-500/20 text-cyan-400 px-2 py-1 rounded border border-cyan-500/30">AVRIL - MAI 2025</span>
+                            <span class="text-[11px] bg-cyan-500/20 text-cyan-400 px-2 py-1 rounded border border-cyan-500/30">AVRIL - MAI 2025</span>
                         </div>
 
-                        <p class="text-slate-400 text-[11px] mb-6 leading-relaxed">
+                        <p class="text-slate-400 text-[13px] mb-6 leading-relaxed">
                             Immersion au sein d'un SI hospitalier critique. Ma mission : garantir la continuité des soins via l'administration du parc et l'automatisation des processus métier.
                         </p>
 
                         <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
                             <a href="stage-ad.html" class="group relative bg-black/40 p-3 rounded border border-white/5 hover:border-cyan-500 hover:bg-cyan-500/5 transition-all duration-300">
-                                <h4 class="text-cyan-400 font-bold text-[9px] uppercase mb-2 flex items-center">
+                                <h4 class="text-cyan-400 font-bold text-[11px] uppercase mb-2 flex items-center">
                                     <i class="fas fa-terminal mr-2"></i> Automatisation AD
                                 </h4>
-                                <p class="text-[10px] text-slate-500 leading-tight">Développement de scripts <strong>PowerShell</strong> pour le cycle de vie des comptes (création/nettoyage) avec contrôle Regex.</p>
-                                <div class="absolute -top-8 left-1/2 -translate-x-1/2 bg-cyan-500 text-black text-[8px] font-bold px-2 py-1 rounded opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none whitespace-nowrap">
+                                <p class="text-xs text-slate-500 leading-tight">Développement de scripts <strong>PowerShell</strong> pour le cycle de vie des comptes (création/nettoyage) avec contrôle Regex.</p>
+                                <div class="absolute -top-8 left-1/2 -translate-x-1/2 bg-cyan-500 text-black text-[11px] font-bold px-2 py-1 rounded opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none whitespace-nowrap">
                                     CLIQUER POUR AVOIR PLUS DE DÉTAILS
                                 </div>
                             </a>
 
                             <a href="stage-graylog.html" class="group relative bg-black/40 p-3 rounded border border-white/5 hover:border-cyan-500 hover:bg-cyan-500/5 transition-all duration-300">
-                                <h4 class="text-cyan-400 font-bold text-[9px] uppercase mb-2 flex items-center">
+                                <h4 class="text-cyan-400 font-bold text-[11px] uppercase mb-2 flex items-center">
                                     <i class="fas fa-search mr-2"></i> Supervision Logs
                                 </h4>
-                                <p class="text-[10px] text-slate-500 leading-tight">Déploiement de <strong>Graylog</strong> sur Debian 12 pour centraliser et analyser les événements serveurs en temps réel.</p>
-                                <div class="absolute -top-8 left-1/2 -translate-x-1/2 bg-cyan-500 text-black text-[8px] font-bold px-2 py-1 rounded opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none whitespace-nowrap">
+                                <p class="text-xs text-slate-500 leading-tight">Déploiement de <strong>Graylog</strong> sur Debian 12 pour centraliser et analyser les événements serveurs en temps réel.</p>
+                                <div class="absolute -top-8 left-1/2 -translate-x-1/2 bg-cyan-500 text-black text-[11px] font-bold px-2 py-1 rounded opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none whitespace-nowrap">
                                     CLIQUER POUR AVOIR PLUS DE DÉTAILS
                                 </div>
                             </a>
 
                             <a href="stage-cdr.html" class="group relative bg-black/40 p-3 rounded border border-white/5 hover:border-cyan-500 hover:bg-cyan-500/5 transition-all duration-300">
-                                <h4 class="text-cyan-400 font-bold text-[9px] uppercase mb-2 flex items-center">
+                                <h4 class="text-cyan-400 font-bold text-[11px] uppercase mb-2 flex items-center">
                                     <i class="fas fa-phone-alt mr-2"></i> Gestion CDR
                                 </h4>
-                                <p class="text-[10px] text-slate-500 leading-tight">Création d'un outil de traitement des logs d'appels téléphoniques via <strong>Python</strong> et <strong>MySQL/MariaDB</strong>.</p>
-                                <div class="absolute -top-8 left-1/2 -translate-x-1/2 bg-cyan-500 text-black text-[8px] font-bold px-2 py-1 rounded opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none whitespace-nowrap">
+                                <p class="text-xs text-slate-500 leading-tight">Création d'un outil de traitement des logs d'appels téléphoniques via <strong>Python</strong> et <strong>MySQL/MariaDB</strong>.</p>
+                                <div class="absolute -top-8 left-1/2 -translate-x-1/2 bg-cyan-500 text-black text-[11px] font-bold px-2 py-1 rounded opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none whitespace-nowrap">
                                     CLIQUER POUR AVOIR PLUS DE DÉTAILS
                                 </div>
                             </a>
                         </div>
 
                         <div class="mt-6 pt-4 border-t border-white/5 flex justify-end">
-                            <button onclick="openModal('static/image/Rapport_Stage_Duval_Baptiste.pdf')" class="text-[9px] font-bold text-cyan-500 hover:text-cyan-300 transition-all uppercase tracking-widest flex items-center">
+                            <button onclick="openModal('static/image/Rapport_Stage_Duval_Baptiste.pdf')" class="text-[11px] font-bold text-cyan-500 hover:text-cyan-300 transition-all uppercase tracking-widest flex items-center">
                                 Consulter le rapport complet <i class="fas fa-arrow-right ml-2"></i>
                             </button>
                         </div>
@@ -708,7 +753,7 @@
                         <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
                             <div class="space-y-4">
                                 <h4 class="text-cyan-400 font-bold text-xs uppercase">Architecture & Orchestration</h4>
-                                <p class="text-[10px] text-slate-400 leading-relaxed">
+                                <p class="text-xs text-slate-400 leading-relaxed">
                                     Mise en place d'un cluster <strong>Docker Swarm</strong> pour la gestion du cycle de vie des conteneurs. Utilisation de <strong>noVNC</strong> et d'un serveur <strong>X11vnc</strong> pour déporter l'affichage graphique des OS conteneurisés vers le Web via WebSockets. L'infrastructure assure une haute disponibilité et une scalabilité horizontale des environnements de TP.
                                 </p>
                                 <div class="flex flex-wrap gap-2">
@@ -721,7 +766,7 @@
                             </div>
                             <div class="space-y-4">
                                 <h4 class="text-cyan-400 font-bold text-xs uppercase">Expertise DevOps & Systèmes</h4>
-                                <ul class="text-[10px] space-y-2">
+                                <ul class="text-xs space-y-2">
                                     <li><i class="fas fa-box text-cyan-500 mr-2"></i> Industrialisation via Dockerfiles optimisés (multi-stage)</li>
                                     <li><i class="fas fa-network-wired text-cyan-500 mr-2"></i> Segmentation réseau via Docker Overlay Networks</li>
                                     <li><i class="fas fa-server text-cyan-500 mr-2"></i> Gestion des ressources (Quotas CPU, RAM et I/O)</li>
@@ -733,32 +778,32 @@
                         <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mb-8">
                             <div class="p-4 bg-white/5 border border-white/10 rounded-lg flex flex-col justify-between">
                                 <div>
-                                    <h5 class="text-[10px] font-bold text-cyan-400 mb-2 uppercase text-center">Images "Laboratoire"</h5>
-                                    <p class="text-[9px] text-slate-500 mb-3">Conception d'images Docker sur-mesure intégrant des environnements de bureau légers (XFCE) et les outils de TP (VS Code, MySQL, outils de Pentest).</p>
+                                    <h5 class="text-xs font-bold text-cyan-400 mb-2 uppercase text-center">Images "Laboratoire"</h5>
+                                    <p class="text-[11px] text-slate-500 mb-3">Conception d'images Docker sur-mesure intégrant des environnements de bureau légers (XFCE) et les outils de TP (VS Code, MySQL, outils de Pentest).</p>
                                 </div>
                                 <div class="flex gap-2">
-                                    <span class="text-[8px] bg-cyan-500/20 text-cyan-300 px-2 py-1 rounded">DOCKERFILE</span>
-                                    <span class="text-[8px] bg-cyan-500/20 text-cyan-300 px-2 py-1 rounded">X11VNC</span>
+                                    <span class="text-[11px] bg-cyan-500/20 text-cyan-300 px-2 py-1 rounded">DOCKERFILE</span>
+                                    <span class="text-[11px] bg-cyan-500/20 text-cyan-300 px-2 py-1 rounded">X11VNC</span>
                                 </div>
                             </div>
                             <div class="p-4 bg-white/5 border border-white/10 rounded-lg flex flex-col justify-between">
                                 <div>
-                                    <h5 class="text-[10px] font-bold text-cyan-400 mb-2 uppercase text-center">Accès Clientless</h5>
-                                    <p class="text-[9px] text-slate-500 mb-3">Développement du portail utilisateur permettant de piloter ses instances. Accès sécurisé aux machines via le protocole noVNC intégré au navigateur.</p>
+                                    <h5 class="text-xs font-bold text-cyan-400 mb-2 uppercase text-center">Accès Clientless</h5>
+                                    <p class="text-[11px] text-slate-500 mb-3">Développement du portail utilisateur permettant de piloter ses instances. Accès sécurisé aux machines via le protocole noVNC intégré au navigateur.</p>
                                 </div>
                                 <div class="flex gap-2">
-                                    <span class="text-[8px] bg-cyan-500/20 text-cyan-300 px-2 py-1 rounded">HTML5/JS</span>
-                                    <span class="text-[8px] bg-cyan-500/20 text-cyan-300 px-2 py-1 rounded">WEBSOCKETS</span>
+                                    <span class="text-[11px] bg-cyan-500/20 text-cyan-300 px-2 py-1 rounded">HTML5/JS</span>
+                                    <span class="text-[11px] bg-cyan-500/20 text-cyan-300 px-2 py-1 rounded">WEBSOCKETS</span>
                                 </div>
                             </div>
                             <div class="p-4 bg-white/5 border border-white/10 rounded-lg flex flex-col justify-between">
                                 <div>
-                                    <h5 class="text-[10px] font-bold text-cyan-400 mb-2 uppercase text-center">Sécurité & Isolation</h5>
-                                    <p class="text-[9px] text-slate-500 mb-3">Isolation stricte des conteneurs via les Namespaces Linux et mise en place de politiques réseau pour éviter les communications non autorisées.</p>
+                                    <h5 class="text-xs font-bold text-cyan-400 mb-2 uppercase text-center">Sécurité & Isolation</h5>
+                                    <p class="text-[11px] text-slate-500 mb-3">Isolation stricte des conteneurs via les Namespaces Linux et mise en place de politiques réseau pour éviter les communications non autorisées.</p>
                                 </div>
                                 <div class="flex gap-2">
-                                    <span class="text-[8px] bg-cyan-500/20 text-cyan-300 px-2 py-1 rounded">C-GROUPS</span>
-                                    <span class="text-[8px] bg-cyan-500/20 text-cyan-300 px-2 py-1 rounded">ISOLEMENT</span>
+                                    <span class="text-[11px] bg-cyan-500/20 text-cyan-300 px-2 py-1 rounded">C-GROUPS</span>
+                                    <span class="text-[11px] bg-cyan-500/20 text-cyan-300 px-2 py-1 rounded">ISOLEMENT</span>
                                 </div>
                             </div>
                         </div>
@@ -787,7 +832,7 @@
                         <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
                             <div class="space-y-4">
                                 <h4 class="text-cyan-400 font-bold text-xs uppercase">Infrastructure Voix & Vidéo</h4>
-                                <p class="text-[10px] text-slate-400 leading-relaxed">
+                                <p class="text-xs text-slate-400 leading-relaxed">
                                     Déploiement d'un serveur <strong>Asterisk</strong> sous Alpine Linux pour la gestion des protocoles <strong>SIP</strong> et <strong>PJSIP</strong>. Configuration du <i>dialplan</i> (extensions.conf) pour l'acheminement des appels entre téléphones physiques Fanvil et clients web. Utilisation de <strong>SIP.js</strong> pour transformer le navigateur en softphone fonctionnel sans plugin additionnel.
                                 </p>
                                 <div class="flex flex-wrap gap-2">
@@ -800,7 +845,7 @@
                             </div>
                             <div class="space-y-4">
                                 <h4 class="text-cyan-400 font-bold text-xs uppercase">Expertise Réseaux & Services</h4>
-                                <ul class="text-[10px] space-y-2">
+                                <ul class="text-xs space-y-2">
                                     <li><i class="fas fa-phone-alt text-cyan-500 mr-2"></i> Configuration de terminaux SIP matériels et logiciels</li>
                                     <li><i class="fas fa-exchange-alt text-cyan-500 mr-2"></i> Flux média Temps Réel (RTP/SRTP) et signalisation</li>
                                     <li><i class="fas fa-shield-virus text-cyan-500 mr-2"></i> Sécurisation des flux (DTLS/SRTP) pour le WebRTC</li>
@@ -812,34 +857,34 @@
                         <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mb-8">
                             <div class="p-4 bg-white/5 border border-white/10 rounded-lg flex flex-col justify-between">
                                 <div>
-                                    <h5 class="text-[10px] font-bold text-cyan-400 mb-2 uppercase text-center">Serveur de Com'</h5>
-                                    <p class="text-[9px] text-slate-500 mb-3">Installation d'Asterisk sur VM légère. Configuration des comptes utilisateurs, des codecs audio/vidéo et gestion de l'interconnexion réseau.</p>
+                                    <h5 class="text-xs font-bold text-cyan-400 mb-2 uppercase text-center">Serveur de Com'</h5>
+                                    <p class="text-[11px] text-slate-500 mb-3">Installation d'Asterisk sur VM légère. Configuration des comptes utilisateurs, des codecs audio/vidéo et gestion de l'interconnexion réseau.</p>
                                 </div>
                                 <div class="flex gap-2">
-                                    <span class="text-[8px] bg-cyan-500/20 text-cyan-300 px-2 py-1 rounded">PJSIP.CONF</span>
-                                    <span class="text-[8px] bg-cyan-500/20 text-cyan-300 px-2 py-1 rounded">DIALPLAN</span>
+                                    <span class="text-[11px] bg-cyan-500/20 text-cyan-300 px-2 py-1 rounded">PJSIP.CONF</span>
+                                    <span class="text-[11px] bg-cyan-500/20 text-cyan-300 px-2 py-1 rounded">DIALPLAN</span>
                                 </div>
                             </div>
 
                             <div class="p-4 bg-white/5 border border-white/10 rounded-lg flex flex-col justify-between">
                                 <div>
-                                    <h5 class="text-[10px] font-bold text-cyan-400 mb-2 uppercase text-center">Interface WebRTC</h5>
-                                    <p class="text-[9px] text-slate-500 mb-3">Développement d'un portail web intégrant la librairie SIP.js pour passer des appels vidéo et envoyer des messages instantanés entre navigateurs.</p>
+                                    <h5 class="text-xs font-bold text-cyan-400 mb-2 uppercase text-center">Interface WebRTC</h5>
+                                    <p class="text-[11px] text-slate-500 mb-3">Développement d'un portail web intégrant la librairie SIP.js pour passer des appels vidéo et envoyer des messages instantanés entre navigateurs.</p>
                                 </div>
                                 <div class="flex gap-2">
-                                    <span class="text-[8px] bg-cyan-500/20 text-cyan-300 px-2 py-1 rounded">HTTPS/TLS</span>
-                                    <span class="text-[8px] bg-cyan-500/20 text-cyan-300 px-2 py-1 rounded">WEBSOCKETS</span>
+                                    <span class="text-[11px] bg-cyan-500/20 text-cyan-300 px-2 py-1 rounded">HTTPS/TLS</span>
+                                    <span class="text-[11px] bg-cyan-500/20 text-cyan-300 px-2 py-1 rounded">WEBSOCKETS</span>
                                 </div>
                             </div>
 
                             <div class="p-4 bg-white/5 border border-white/10 rounded-lg flex flex-col justify-between">
                                 <div>
-                                    <h5 class="text-[10px] font-bold text-cyan-400 mb-2 uppercase text-center">Audit & Sécurité</h5>
-                                    <p class="text-[9px] text-slate-500 mb-3">Analyse des vulnérabilités, mise en place de certificats SSL pour le contexte sécurisé et test d'interception de flux (MITM).</p>
+                                    <h5 class="text-xs font-bold text-cyan-400 mb-2 uppercase text-center">Audit & Sécurité</h5>
+                                    <p class="text-[11px] text-slate-500 mb-3">Analyse des vulnérabilités, mise en place de certificats SSL pour le contexte sécurisé et test d'interception de flux (MITM).</p>
                                 </div>
                                 <div class="flex gap-2">
-                                    <span class="text-[8px] bg-cyan-500/20 text-cyan-300 px-2 py-1 rounded">WIRESHARK</span>
-                                    <span class="text-[8px] bg-cyan-500/20 text-cyan-300 px-2 py-1 rounded">SSL/TLS</span>
+                                    <span class="text-[11px] bg-cyan-500/20 text-cyan-300 px-2 py-1 rounded">WIRESHARK</span>
+                                    <span class="text-[11px] bg-cyan-500/20 text-cyan-300 px-2 py-1 rounded">SSL/TLS</span>
                                 </div>
                             </div>
                         </div>
@@ -871,7 +916,7 @@
                         <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
                             <div class="space-y-4">
                                 <h4 class="text-cyan-400 font-bold text-xs uppercase">Infrastructure & Redondance</h4>
-                                <p class="text-[10px] text-slate-400 leading-relaxed">
+                                <p class="text-xs text-slate-400 leading-relaxed">
                                     Conception d'une architecture réseau entièrement redondée : deux pare-feu de marques différentes, deux routeurs et deux switchs par étage, une entrée FTTH doublée d'un accès 4G de secours. Déploiement Wi-Fi avec deux bornes PoE par étage pour la mobilité des 80 collaborateurs.
                                 </p>
                                 <div class="flex flex-wrap gap-2">
@@ -883,7 +928,7 @@
                             </div>
                             <div class="space-y-4">
                                 <h4 class="text-cyan-400 font-bold text-xs uppercase">Sécurité & Continuité d'activité</h4>
-                                <p class="text-[10px] text-slate-400 leading-relaxed">
+                                <p class="text-xs text-slate-400 leading-relaxed">
                                     Sécurisation physique de la salle serveur (badge, biométrie, extinction au gaz IEAG, climatisation, onduleur). Mise en place d'une stratégie de sauvegarde double avec <strong>Veeam</strong> (restauration rapide + bande LTO-9 hors-ligne), et centralisation des accès avec <strong>Active Directory</strong> et <strong>KeePass</strong>.
                                 </p>
                                 <div class="flex flex-wrap gap-2">
@@ -898,20 +943,20 @@
                         <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mb-8">
                             <div class="p-4 bg-white/5 border border-white/10 rounded-lg flex flex-col justify-between">
                                 <div>
-                                    <h5 class="text-[10px] font-bold text-cyan-400 mb-2 uppercase text-center">Audit du réseau existant</h5>
-                                    <p class="text-[9px] text-slate-500 mb-3">Identification des risques d'une infrastructure artisanale : outils personnels (Gmail, clés USB), parc hétérogène sous Windows 7/11, absence de sauvegarde centralisée.</p>
+                                    <h5 class="text-xs font-bold text-cyan-400 mb-2 uppercase text-center">Audit du réseau existant</h5>
+                                    <p class="text-[11px] text-slate-500 mb-3">Identification des risques d'une infrastructure artisanale : outils personnels (Gmail, clés USB), parc hétérogène sous Windows 7/11, absence de sauvegarde centralisée.</p>
                                 </div>
                             </div>
                             <div class="p-4 bg-white/5 border border-white/10 rounded-lg flex flex-col justify-between">
                                 <div>
-                                    <h5 class="text-[10px] font-bold text-cyan-400 mb-2 uppercase text-center">Organisation du service IT</h5>
-                                    <p class="text-[9px] text-slate-500 mb-3">Répartition des tâches en binôme, mise en place de procédures écrites, d'un journal de bord et d'une maintenance mensuelle planifiée.</p>
+                                    <h5 class="text-xs font-bold text-cyan-400 mb-2 uppercase text-center">Organisation du service IT</h5>
+                                    <p class="text-[11px] text-slate-500 mb-3">Répartition des tâches en binôme, mise en place de procédures écrites, d'un journal de bord et d'une maintenance mensuelle planifiée.</p>
                                 </div>
                             </div>
                             <div class="p-4 bg-white/5 border border-white/10 rounded-lg flex flex-col justify-between">
                                 <div>
-                                    <h5 class="text-[10px] font-bold text-cyan-400 mb-2 uppercase text-center">Budget & Aménagements</h5>
-                                    <p class="text-[9px] text-slate-500 mb-3">Chiffrage complet du parc informatique, de la sécurité et du réseau (~252 000 € d'investissement, ~13 300 €/an de licences).</p>
+                                    <h5 class="text-xs font-bold text-cyan-400 mb-2 uppercase text-center">Budget & Aménagements</h5>
+                                    <p class="text-[11px] text-slate-500 mb-3">Chiffrage complet du parc informatique, de la sécurité et du réseau (~252 000 € d'investissement, ~13 300 €/an de licences).</p>
                                 </div>
                             </div>
                         </div>
@@ -938,7 +983,7 @@
                         <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
                             <div class="space-y-4">
                                 <h4 class="text-cyan-400 font-bold text-xs uppercase">Acteurs industriels & IA On-Box</h4>
-                                <p class="text-[10px] text-slate-400 leading-relaxed">
+                                <p class="text-xs text-slate-400 leading-relaxed">
                                     Étude comparative des solutions propriétaires : Silicon One G300 et Nexus Hyperfabric de Cisco, l'assistant Marvis de Juniper (Mist AI), Spectrum-X de NVIDIA pour les clusters GPU, et l'agent autonome AVA d'Arista.
                                 </p>
                                 <div class="flex flex-wrap gap-2">
@@ -950,7 +995,7 @@
                             </div>
                             <div class="space-y-4">
                                 <h4 class="text-cyan-400 font-bold text-xs uppercase">Alternatives Open Source</h4>
-                                <p class="text-[10px] text-slate-400 leading-relaxed">
+                                <p class="text-xs text-slate-400 leading-relaxed">
                                     Analyse de l'architecture Off-Box (Prometheus, OpenTelemetry, Kafka, Isolation Forest, Ansible, NAPALM) et du projet SONiC, ainsi que des enjeux de souveraineté des données face à l'IA Act européen.
                                 </p>
                                 <div class="flex flex-wrap gap-2">
@@ -979,17 +1024,18 @@
         </main>
 
         <!-- Modal PDF -->
-        <div id="pdfModal" onclick="handleBackdropClick(event)" class="fixed inset-0 z-[999] hidden bg-black/90 flex items-center justify-center p-4">
+        <div id="pdfModal" role="dialog" aria-modal="true" aria-label="Visualiseur de document" onclick="handleBackdropClick(event)" class="fixed inset-0 z-[999] hidden bg-black/90 flex items-center justify-center p-4">
             <div class="relative w-full max-w-6xl h-[95vh] bg-slate-900 rounded-2xl border border-cyan-500/30 flex flex-col shadow-2xl">
                 <div class="p-4 border-b border-white/10 flex justify-between items-center bg-slate-900 rounded-t-2xl relative z-[2]">
                     <div class="flex items-center gap-3">
                         <i class="fas fa-file-pdf text-cyan-400"></i>
                         <span class="text-cyan-400 font-bold text-xs uppercase tracking-widest italic">Visualiseur de Document</span>
                     </div>
+                    <a id="pdfNewTab" href="#" target="_blank" rel="noopener" class="ml-auto mr-3 text-xs font-bold uppercase tracking-widest text-slate-300 hover:text-cyan-400 transition"><i class="fas fa-external-link-alt mr-2" aria-hidden="true"></i><span class="hidden sm:inline">Nouvel onglet</span></a>
                     <button onclick="closeModal()" aria-label="Fermer" class="flex items-center justify-center w-9 h-9 rounded-full bg-white/5 border border-white/10 text-slate-300 hover:text-white hover:bg-cyan-500/20 hover:border-cyan-500/50 text-2xl leading-none transition-colors cursor-pointer">&times;</button>
                 </div>
                 <div class="relative flex-1">
-                    <iframe id="pdfFrame" src="" class="absolute inset-0 w-full h-full rounded-b-2xl border-none bg-white"></iframe>
+                    <iframe id="pdfFrame" title="Document PDF" src="" class="absolute inset-0 w-full h-full rounded-b-2xl border-none bg-white"></iframe>
                 </div>
             </div>
 
@@ -1001,7 +1047,7 @@
 
     <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
     <script>
-        particlesJS("particles-js", {
+        if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) particlesJS("particles-js", {
             "particles": {
                 "number": { "value": 40 },
                 "color": { "value": "#00f2ff" },
@@ -1017,15 +1063,26 @@
             }
         });
 
+        /* ---------- Visualiseur PDF ---------- */
+        let lastFocus = null;
+
         function openModal(pdfPath) {
+            // Les navigateurs mobiles n'affichent pas les PDF dans une iframe : on ouvre directement le fichier.
+            if (window.matchMedia('(max-width: 767px)').matches) {
+                window.open(pdfPath, '_blank', 'noopener');
+                return;
+            }
             const modal = document.getElementById('pdfModal');
             const frame = document.getElementById('pdfFrame');
             const nav = document.getElementById('mainNav');
             if (modal && frame) {
+                lastFocus = document.activeElement;
                 frame.src = pdfPath;
+                document.getElementById('pdfNewTab').href = pdfPath;
                 modal.classList.remove('hidden');
                 document.body.style.overflow = 'hidden';
                 if (nav) nav.style.display = 'none'; // on masque la navbar pendant la lecture du PDF
+                modal.querySelector('button[aria-label="Fermer"]').focus();
             }
         }
 
@@ -1038,23 +1095,60 @@
                 modal.classList.add('hidden');
                 document.body.style.overflow = 'auto';
                 if (nav) nav.style.display = ''; // on réaffiche la navbar à la fermeture
+                if (lastFocus) lastFocus.focus();
             }
         }
 
+        // Clic sur le fond sombre (en dehors du document) = fermeture
+        function handleBackdropClick(event) {
+            if (event.target === event.currentTarget) closeModal();
+        }
+
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape' && !document.getElementById('pdfModal').classList.contains('hidden')) closeModal();
+        });
+
+        /* ---------- Menu du cursus (mobile) ---------- */
+        const sidebar = document.getElementById('sidebar');
+        const sidebarToggle = document.getElementById('sidebarToggle');
+
+        function setSidebar(open) {
+            sidebar.classList.toggle('open', open);
+            sidebarToggle.setAttribute('aria-expanded', String(open));
+        }
+        sidebarToggle.addEventListener('click', () => setSidebar(!sidebar.classList.contains('open')));
+
+        /* ---------- Navigation par ancre : projets.html#sae501 ouvre directement le projet ---------- */
         function goToProject(sectionId, projectId) {
-            document.getElementById('intro').style.display = 'none';
-
-            const sections = document.querySelectorAll('.project-section');
-            sections.forEach(section => section.classList.remove('active'));
-
             const targetSection = document.getElementById(sectionId);
-            if (targetSection) targetSection.classList.add('active');
+            if (!targetSection) return;
 
+            document.getElementById('intro').style.display = 'none';
+            document.querySelectorAll('.project-section').forEach(section => section.classList.remove('active'));
+            targetSection.classList.add('active');
+
+            document.querySelectorAll('.project-link').forEach(link => {
+                link.classList.toggle('current', link.getAttribute('href') === '#' + projectId);
+            });
+            setSidebar(false);
+
+            const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
             setTimeout(() => {
                 const targetProject = document.getElementById(projectId);
-                if (targetProject) targetProject.scrollIntoView({ behavior: 'smooth' });
+                if (targetProject) targetProject.scrollIntoView({ behavior: reduce ? 'auto' : 'smooth' });
             }, 100);
         }
+
+        function openFromHash() {
+            const id = decodeURIComponent(window.location.hash.slice(1));
+            if (!id) return;
+            const project = document.getElementById(id);
+            const section = project && project.closest('.project-section');
+            if (section) goToProject(section.id, id);
+        }
+
+        window.addEventListener('hashchange', openFromHash);
+        window.addEventListener('DOMContentLoaded', openFromHash);
     </script>
 </body>
 </html>

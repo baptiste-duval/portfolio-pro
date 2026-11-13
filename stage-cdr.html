@@ -3,12 +3,15 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Stage au GHAT : traçabilité des communications téléphoniques (CDR) et tableaux de bord dans Graylog.">
+    <meta name="theme-color" content="#020617">
+    <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='12' fill='%23020617'/%3E%3Crect x='14' y='14' width='36' height='36' fill='none' stroke='%2300f2ff' stroke-width='3' transform='rotate(45 32 32)'/%3E%3Ctext x='32' y='39' font-family='monospace' font-size='18' font-weight='700' fill='%2300f2ff' text-anchor='middle'%3EBD%3C/text%3E%3C/svg%3E">
     <title>Analyse CDR | Baptiste Duval</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&family=Fira+Code:wght@300;500&display=swap" rel="stylesheet">
     <style>
-        body { font-family: 'Fira+Code', monospace; background-color: #020617; color: #e2e8f0; margin: 0; line-height: 1.6; }
+        body { font-family: 'Fira Code', monospace; background-color: #020617; color: #e2e8f0; margin: 0; line-height: 1.6; }
         .neon-border { border: 1px solid rgba(0, 242, 255, 0.4); box-shadow: 0 0 25px rgba(0, 242, 255, 0.15); }
         .glass { background: rgba(15, 23, 42, 0.9); backdrop-filter: blur(12px); }
         .section-card { background: rgba(30, 41, 59, 0.2); border: 1px solid rgba(255, 255, 255, 0.05); border-radius: 16px; padding: 2.5rem; margin-bottom: 3rem; position: relative; }
@@ -26,7 +29,7 @@
             <a href="projets.html" class="text-cyan-400 hover:text-white transition flex items-center gap-2 text-xs uppercase font-bold tracking-widest">
                 <i class="fas fa-chevron-left"></i> Retour au Portfolio
             </a>
-            <div class="text-[10px] text-slate-500 uppercase tracking-widest">
+            <div class="text-xs text-slate-500 uppercase tracking-widest">
                 Service Télécom : <span class="text-cyan-500">Call Detail Records Management</span>
             </div>
         </div>
@@ -35,7 +38,7 @@
     <main class="max-w-6xl mx-auto p-6 py-16">
         
         <header class="mb-20 text-center">
-            <h1 class="text-6xl font-bold font-['Orbitron'] text-white mb-6 uppercase tracking-tighter">
+            <h1 class="text-3xl sm:text-4xl md:text-6xl font-bold font-['Orbitron'] text-white mb-6 uppercase tracking-tighter">
                 Supervision <span class="text-cyan-400 italic">CDR</span>
             </h1>
             <p class="text-slate-400 text-lg max-w-3xl mx-auto">
@@ -58,7 +61,7 @@
                 </div>
                 <div class="img-container neon-border">
                     <img src="static/image/recherche.png" alt="Plage de dates Graylog" onclick="window.open(this.src)">
-                    <p class="p-3 text-[10px] bg-black/40 text-center text-slate-400 border-t border-white/5 italic">Sélecteur de plage temporelle de recherche.</p>
+                    <p class="p-3 text-xs bg-black/40 text-center text-slate-400 border-t border-white/5 italic">Sélecteur de plage temporelle de recherche.</p>
                 </div>
             </div>
         </section>
@@ -72,7 +75,7 @@
             </p>
             <div class="img-container">
                 <img src="static/image/resultat.png" alt="Résultats des logs" onclick="window.open(this.src)">
-                <div class="p-4 glass text-[10px] text-slate-500 flex justify-between">
+                <div class="p-4 glass text-xs text-slate-500 flex justify-between">
                     <span>Vue tabulaire des communications capturées</span>
                     <span>Format: Syslog / GELF</span>
                 </div>
@@ -83,7 +86,7 @@
             <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
                 <div class="img-container neon-border">
                     <img src="static/image/numero.png" alt="Recherche numéro" onclick="window.open(this.src)">
-                    <p class="p-3 text-[10px] bg-black/40 text-center text-slate-400 border-t border-white/5 italic">Requête Lucene sur un champ spécifique : calling_number.</p>
+                    <p class="p-3 text-xs bg-black/40 text-center text-slate-400 border-t border-white/5 italic">Requête Lucene sur un champ spécifique : calling_number.</p>
                 </div>
                 <div>
                     <span class="badge-cyan">Phase 2 : Investigation</span>
@@ -92,8 +95,8 @@
                         L'investigation technique permet de filtrer les logs par <strong>numéro de téléphone (extension)</strong>. Cela est particulièrement utile pour vérifier si un poste interne a bien reçu un appel externe ou pour identifier la provenance d'un flux massif d'appels saturant les lignes.
                     </p>
                     <div class="p-4 bg-cyan-500/10 border-l-4 border-cyan-500 rounded">
-                        <p class="text-[11px] text-cyan-100 font-bold">EXEMPLE D'USAGE :</p>
-                        <p class="text-[11px] text-slate-400 italic">"Vérifier si le poste 4532 a bien tenté d'appeler l'extérieur entre 10h et 10h15."</p>
+                        <p class="text-[13px] text-cyan-100 font-bold">EXEMPLE D'USAGE :</p>
+                        <p class="text-[13px] text-slate-400 italic">"Vérifier si le poste 4532 a bien tenté d'appeler l'extérieur entre 10h et 10h15."</p>
                     </div>
                 </div>
             </div>
@@ -116,15 +119,15 @@
             <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mt-8">
                 <div class="p-4 bg-black/40 rounded border border-white/5 text-center">
                     <div class="text-cyan-400 text-xl font-bold">Volumes</div>
-                    <p class="text-[10px] text-slate-500 uppercase">Histogrammes de fréquence</p>
+                    <p class="text-xs text-slate-500 uppercase">Histogrammes de fréquence</p>
                 </div>
                 <div class="p-4 bg-black/40 rounded border border-white/5 text-center">
                     <div class="text-cyan-400 text-xl font-bold">Répartition</div>
-                    <p class="text-[10px] text-slate-500 uppercase">Répartition par destinations</p>
+                    <p class="text-xs text-slate-500 uppercase">Répartition par destinations</p>
                 </div>
                 <div class="p-4 bg-black/40 rounded border border-white/5 text-center">
                     <div class="text-cyan-400 text-xl font-bold">Proactivité</div>
-                    <p class="text-[10px] text-slate-500 uppercase">Détection des seuils critiques</p>
+                    <p class="text-xs text-slate-500 uppercase">Détection des seuils critiques</p>
                 </div>
             </div>
         </section>

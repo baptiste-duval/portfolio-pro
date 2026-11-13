@@ -3,12 +3,15 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Stage au GHAT : centralisation et analyse des logs avec Graylog pour la sécurité des identités et du réseau.">
+    <meta name="theme-color" content="#020617">
+    <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='12' fill='%23020617'/%3E%3Crect x='14' y='14' width='36' height='36' fill='none' stroke='%2300f2ff' stroke-width='3' transform='rotate(45 32 32)'/%3E%3Ctext x='32' y='39' font-family='monospace' font-size='18' font-weight='700' fill='%2300f2ff' text-anchor='middle'%3EBD%3C/text%3E%3C/svg%3E">
     <title>Expertise Graylog | Baptiste Duval</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&family=Fira+Code:wght@300;500&display=swap" rel="stylesheet">
     <style>
-        body { font-family: 'Fira+Code', monospace; background-color: #020617; color: #e2e8f0; margin: 0; line-height: 1.6; }
+        body { font-family: 'Fira Code', monospace; background-color: #020617; color: #e2e8f0; margin: 0; line-height: 1.6; }
         .neon-border { border: 1px solid rgba(0, 242, 255, 0.4); box-shadow: 0 0 25px rgba(0, 242, 255, 0.15); }
         .glass { background: rgba(15, 23, 42, 0.9); backdrop-filter: blur(12px); }
         .section-card { background: rgba(30, 41, 59, 0.2); border: 1px solid rgba(255, 255, 255, 0.05); border-radius: 16px; padding: 2.5rem; margin-bottom: 3rem; position: relative; }
@@ -32,7 +35,7 @@
                 <i class="fas fa-arrow-left"></i> Retour au Portfolio
             </a>
             <div class="flex items-center gap-4">
-                <span class="text-[10px] text-slate-500 uppercase tracking-[0.3em]">Status: Log Analysis Active</span>
+                <span class="text-xs text-slate-500 uppercase tracking-[0.3em]">Status: Log Analysis Active</span>
                 <div class="h-2 w-2 rounded-full bg-cyan-500 animate-pulse"></div>
             </div>
         </div>
@@ -41,7 +44,7 @@
     <main class="max-w-6xl mx-auto p-6 py-16">
         
         <header class="mb-20 text-center">
-            <h1 class="text-6xl font-bold text-white mb-6 uppercase tracking-tighter">
+            <h1 class="text-3xl sm:text-4xl md:text-6xl font-bold text-white mb-6 uppercase tracking-tighter">
                 Architecture <span class="text-cyan-400">Graylog</span>
             </h1>
             <p class="text-slate-400 text-lg max-w-3xl mx-auto leading-relaxed">
@@ -115,7 +118,7 @@
                     </p>
                     <div class="img-container neon-border">
                         <img src="static/image/input_switch.png" alt="Input Switch" onclick="window.open(this.src)">
-                        <p class="p-3 text-[10px] text-center italic text-slate-500">Configuration de l'input UDP sur Graylog.</p>
+                        <p class="p-3 text-xs text-center italic text-slate-500">Configuration de l'input UDP sur Graylog.</p>
                     </div>
                 </div>
                 <div class="bg-black/40 p-6 rounded-xl border border-white/5">
@@ -131,7 +134,7 @@
                             <img src="static/image/simu_ip.png" alt="Simulation Mapping" onclick="window.open(this.src)">
                         </div>
                     </div>
-                    <p class="text-[11px] text-slate-500 mt-4 italic">Simulation du pipeline pour vérifier le remplacement dynamique des adresses IP par les noms d'équipements.</p>
+                    <p class="text-[13px] text-slate-500 mt-4 italic">Simulation du pipeline pour vérifier le remplacement dynamique des adresses IP par les noms d'équipements.</p>
                 </div>
             </div>
         </section>
@@ -142,7 +145,7 @@
                     <span class="badge-cyan">Final Output</span>
                     <h3 class="text-2xl font-bold text-white mt-2 uppercase tracking-tighter">Consolidation Réseau</h3>
                 </div>
-                <p class="text-[10px] text-slate-500 font-bold uppercase tracking-widest">Real-time Visibility</p>
+                <p class="text-xs text-slate-500 font-bold uppercase tracking-widest">Real-time Visibility</p>
             </div>
             
             <p class="text-sm text-slate-400 mb-8 max-w-2xl">
@@ -153,9 +156,9 @@
                 <img src="static/image/log_reseau.png" alt="Logs Réseau" onclick="window.open(this.src)">
                 <div class="p-6 flex justify-center bg-black/60 border-t border-white/5">
                     <div class="flex gap-8">
-                        <div class="text-center"><span class="block text-white font-bold">Syslog</span><span class="text-[9px] text-cyan-500 uppercase">Protocol</span></div>
-                        <div class="text-center border-x border-white/10 px-8"><span class="block text-white font-bold">10+ Switchs</span><span class="text-[9px] text-cyan-500 uppercase">Supervisés</span></div>
-                        <div class="text-center"><span class="block text-white font-bold">24/7</span><span class="text-[9px] text-cyan-500 uppercase">Monitoring</span></div>
+                        <div class="text-center"><span class="block text-white font-bold">Syslog</span><span class="text-[11px] text-cyan-500 uppercase">Protocol</span></div>
+                        <div class="text-center border-x border-white/10 px-8"><span class="block text-white font-bold">10+ Switchs</span><span class="text-[11px] text-cyan-500 uppercase">Supervisés</span></div>
+                        <div class="text-center"><span class="block text-white font-bold">24/7</span><span class="text-[11px] text-cyan-500 uppercase">Monitoring</span></div>
                     </div>
                 </div>
             </div>
