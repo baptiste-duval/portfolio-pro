@@ -185,6 +185,115 @@
             #particles-js { display: none; }
         }
 
+
+        /* ============ VUE D'ENSEMBLE : le cursus comme un traceroute ============ */
+        :root { --c-reseau: #f97316; --c-cyber: #22c55e; --c-dev: #eab308; --c-telecom: #3b82f6; --c-entreprise: #e879f9; }
+
+        .route-cmd { font-size: 0.8rem; color: #64748b; margin-bottom: 0.75rem; }
+        .route-cmd span { color: #22c55e; }
+        .route-title {
+            font-family: 'Orbitron', sans-serif; font-weight: 700; text-transform: uppercase;
+            font-size: clamp(1.9rem, 5vw, 3rem); line-height: 1.05; letter-spacing: -0.01em;
+            color: #fff; text-shadow: 0 0 18px rgba(0, 242, 255, 0.45); margin-bottom: 1.25rem;
+        }
+        .route-lead { color: #cbd5e1; font-size: 0.95rem; line-height: 1.75; max-width: 62ch; margin-bottom: 2rem; }
+
+        .route-filters { display: flex; flex-wrap: wrap; gap: 0.5rem; margin-bottom: 0.75rem; }
+        .chip {
+            display: inline-flex; align-items: center; gap: 0.5rem;
+            padding: 0.45rem 0.85rem; font-size: 0.75rem; color: #94a3b8;
+            background: rgba(15, 23, 42, 0.7); border: 1px solid rgba(255, 255, 255, 0.12); border-radius: 999px;
+            cursor: pointer; transition: color .2s, border-color .2s, background .2s;
+        }
+        .chip:hover { color: #e2e8f0; border-color: rgba(0, 242, 255, 0.4); }
+        .chip.is-on { color: #020617; background: #00f2ff; border-color: #00f2ff; font-weight: 700; }
+        .dot { width: 8px; height: 8px; border-radius: 50%; display: inline-block; }
+        .dot-reseau { background: var(--c-reseau); } .dot-cyber { background: var(--c-cyber); } .dot-dev { background: var(--c-dev); }
+        .dot-telecom { background: var(--c-telecom); } .dot-entreprise { background: var(--c-entreprise); }
+        .route-count { font-size: 0.75rem; color: #64748b; min-height: 1.2em; margin-bottom: 2rem; }
+
+        /* La route : une ligne verticale, un nœud par semestre */
+        .route { list-style: none; margin: 0; padding: 0; position: relative; }
+        .route::before {
+            content: ""; position: absolute; left: 17px; top: 18px; bottom: 30px; width: 2px;
+            background: linear-gradient(to bottom, #00f2ff, rgba(0, 242, 255, 0.15));
+        }
+        .hop { position: relative; padding-left: 56px; padding-bottom: 2.75rem; }
+        .hop[hidden] { display: none; }
+        .hop-head { display: flex; align-items: baseline; gap: 0.9rem; margin-bottom: 1rem; flex-wrap: wrap; }
+        .hop-num {
+            position: absolute; left: 0; top: -4px; width: 36px; height: 36px; border-radius: 50%;
+            display: flex; align-items: center; justify-content: center;
+            font-family: 'Orbitron', sans-serif; font-weight: 700; font-size: 0.85rem; color: #00f2ff;
+            background: #020617; border: 2px solid #00f2ff; box-shadow: 0 0 14px rgba(0, 242, 255, 0.45);
+        }
+        .hop-name { font-family: 'Orbitron', sans-serif; font-size: 1.05rem; font-weight: 700; color: #fff; text-transform: uppercase; letter-spacing: 0.06em; }
+        .hop-name span { font-family: 'Fira Code', monospace; font-weight: 400; font-size: 0.8rem; color: #94a3b8; text-transform: none; letter-spacing: 0; margin-left: 0.4rem; }
+        .hop-year { margin-left: auto; font-size: 0.7rem; color: #64748b; border: 1px solid rgba(255, 255, 255, 0.1); padding: 2px 8px; border-radius: 4px; }
+        .hop-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 0.9rem; }
+
+        /* Un projet = un paquet, coloré selon son domaine */
+        .packet {
+            --c: var(--c-reseau);
+            display: flex; flex-direction: column; gap: 0.35rem; text-decoration: none;
+            padding: 1rem 1.1rem 1rem 1.25rem; position: relative; overflow: hidden;
+            background: rgba(15, 23, 42, 0.78); border: 1px solid rgba(255, 255, 255, 0.08); border-radius: 4px 12px 12px 4px;
+            transition: border-color .2s, background .2s, transform .2s;
+        }
+        .packet::before { content: ""; position: absolute; left: 0; top: 0; bottom: 0; width: 3px; background: var(--c); }
+        .packet:hover, .packet:focus-visible { border-color: var(--c); background: rgba(15, 23, 42, 0.98); transform: translateX(3px); }
+        .packet[hidden] { display: none; }
+        .packet-cyber { --c: var(--c-cyber); } .packet-dev { --c: var(--c-dev); }
+        .packet-telecom { --c: var(--c-telecom); } .packet-entreprise { --c: var(--c-entreprise); }
+        .packet-code { font-family: 'Orbitron', sans-serif; font-size: 0.68rem; font-weight: 700; letter-spacing: 0.12em; color: var(--c); text-transform: uppercase; }
+        .packet-title { font-size: 0.95rem; font-weight: 700; color: #fff; line-height: 1.35; }
+        .packet-desc { font-size: 0.78rem; color: #94a3b8; line-height: 1.55; }
+        .packet-tags { font-size: 0.7rem; color: #64748b; margin-top: 0.35rem; }
+
+        /* ============ VUE D'UN SEMESTRE ============ */
+        .section-top { display: flex; align-items: center; justify-content: space-between; gap: 1rem; margin-bottom: 1.5rem; }
+        .back-link { font-size: 0.78rem; color: #94a3b8; text-decoration: none; display: inline-flex; align-items: center; gap: 0.5rem; }
+        .back-link:hover { color: #00f2ff; }
+        .project-section > h2 {
+            font-size: clamp(1.25rem, 3.5vw, 1.75rem); font-weight: 700; color: #fff; letter-spacing: 0.04em;
+            border-bottom: none; padding-bottom: 0; margin-bottom: 2rem;
+            padding-left: 1rem; border-left: 3px solid #00f2ff; text-shadow: 0 0 14px rgba(0, 242, 255, 0.35);
+        }
+        .project-card {
+            background: linear-gradient(180deg, rgba(15, 23, 42, 0.9), rgba(15, 23, 42, 0.6));
+            border-radius: 14px; margin-bottom: 2rem; position: relative; overflow: hidden;
+        }
+        .project-card::before {
+            content: ""; position: absolute; left: 0; right: 0; top: 0; height: 2px;
+            background: linear-gradient(90deg, #00f2ff, rgba(0, 242, 255, 0) 70%);
+        }
+        .project-card > h3 { font-style: normal; font-size: 1.3rem; line-height: 1.3; }
+        .project-card > h3 .sae-code {
+            display: block; font-family: 'Orbitron', sans-serif; font-size: 0.7rem; font-weight: 700;
+            letter-spacing: 0.16em; color: #00f2ff; text-transform: uppercase; margin-bottom: 0.5rem;
+        }
+        .section-nav { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin: 3rem 0 2rem; }
+        .section-nav a {
+            display: block; padding: 1rem 1.25rem; text-decoration: none; border-radius: 10px;
+            background: rgba(15, 23, 42, 0.7); border: 1px solid rgba(255, 255, 255, 0.1); transition: border-color .2s;
+        }
+        .section-nav a:hover { border-color: #00f2ff; }
+        .section-nav a.next { text-align: right; grid-column: 2; }
+        .section-nav small { display: block; font-size: 0.7rem; color: #64748b; margin-bottom: 0.25rem; }
+        .section-nav strong { font-family: 'Orbitron', sans-serif; font-size: 0.85rem; color: #fff; text-transform: uppercase; letter-spacing: 0.06em; }
+
+        .overview-link { display: block; padding: 14px 20px; font-size: 0.8rem; color: #e2e8f0; text-decoration: none; border-bottom: 1px solid rgba(255, 255, 255, 0.05); }
+        .overview-link:hover, .overview-link.current { color: #00f2ff; background: rgba(0, 242, 255, 0.06); }
+
+        @media (max-width: 640px) {
+            .hop { padding-left: 46px; }
+            .route::before { left: 14px; }
+            .hop-num { width: 30px; height: 30px; font-size: 0.75rem; }
+            .section-nav { grid-template-columns: 1fr; }
+            .section-nav a.next { grid-column: 1; text-align: left; }
+        }
+        @media (prefers-reduced-motion: reduce) { .packet, .chip { transition: none; } .packet:hover { transform: none; } }
+
         /* PDF Preview Button (remplace les iframes) */
         .pdf-preview-btn {
             display: flex;
@@ -261,6 +370,8 @@
         <aside id="sidebar" class="sidebar">
             <h2 class="text-xs font-bold text-cyan-500 uppercase tracking-[0.3em] p-6 border-b border-white/5">Explorateur de Cursus</h2>
 
+            <a href="#" class="overview-link current"><i class="fas fa-route mr-3 text-cyan-400" aria-hidden="true"></i>Vue d'ensemble</a>
+
             <details open>
                 <summary>BUT RT - ANNEE 1 <i class="fas fa-caret-down ml-2 opacity-50"></i></summary>
                 <details open class="sub-menu">
@@ -313,12 +424,181 @@
             <div class="max-w-4xl mx-auto">
 
                 <section id="intro" class="mb-16">
-                    <h1 class="text-4xl font-bold font-['Orbitron'] mb-6 neon-shadow uppercase">Cursus Académique</h1>
-                    <div class="p-6 bg-cyan-500/5 border-l-4 border-cyan-400">
-                        <p class="text-slate-300 text-sm leading-relaxed">
-                            Retrouvez ici l'ensemble de mes travaux réalisés durant mon B.U.T. Réseaux et Télécommunications. Chaque projet (SAE) valide un bloc de compétences spécifique, allant de l'infrastructure réseau à la sécurité informatique, en passant par le développement d'outils professionnels.
-                        </p>
+                    <p class="route-cmd" aria-hidden="true"><span>$</span> traceroute cursus.but-rt</p>
+                    <h1 class="route-title">Cursus & projets</h1>
+                    <p class="route-lead">
+                        Six semestres de B.U.T. Réseaux et Télécommunications, 17 projets. Chaque étape ajoute une brique :
+                        le réseau d'abord, puis les télécoms, le développement et la cybersécurité, jusqu'aux missions en entreprise.
+                    </p>
+
+                    <div class="route-filters" role="group" aria-label="Filtrer les projets par domaine">
+                        <button type="button" class="chip is-on" data-filter="all" aria-pressed="true">Tous</button>
+                        <button type="button" class="chip" data-filter="reseau" aria-pressed="false"><i class="dot dot-reseau" aria-hidden="true"></i>Réseau &amp; systèmes</button>
+                        <button type="button" class="chip" data-filter="cyber" aria-pressed="false"><i class="dot dot-cyber" aria-hidden="true"></i>Cybersécurité</button>
+                        <button type="button" class="chip" data-filter="dev" aria-pressed="false"><i class="dot dot-dev" aria-hidden="true"></i>Développement</button>
+                        <button type="button" class="chip" data-filter="telecom" aria-pressed="false"><i class="dot dot-telecom" aria-hidden="true"></i>Télécoms</button>
+                        <button type="button" class="chip" data-filter="entreprise" aria-pressed="false"><i class="dot dot-entreprise" aria-hidden="true"></i>En entreprise</button>
                     </div>
+                    <p id="routeCount" class="route-count" aria-live="polite"></p>
+
+                    <ol class="route">
+                        <li class="hop">
+                            <div class="hop-head">
+                                <span class="hop-num" aria-hidden="true">1</span>
+                                <h2 class="hop-name">Semestre 1 <span>Fondamentaux</span></h2>
+                                <span class="hop-year">BUT 1</span>
+                            </div>
+                            <div class="hop-grid">
+                                <a href="#sae11" class="packet packet-cyber" data-cats="cyber">
+                                    <span class="packet-code">SAE 1.01</span>
+                                    <span class="packet-title">Sensibilisation au risque numérique</span>
+                                    <span class="packet-desc">Stratégie de sensibilisation aux cybermenaces, dans le rôle d&#x27;un RSSI.</span>
+                                    <span class="packet-tags">MOOC ANSSI, Cisco Netacad</span>
+                                </a>
+                                <a href="#sae12" class="packet packet-reseau" data-cats="reseau">
+                                    <span class="packet-code">SAE 1.02</span>
+                                    <span class="packet-title">S&#x27;initier aux réseaux informatiques</span>
+                                    <span class="packet-desc">Premier réseau complet sur équipements Cisco : VLAN, routage, NAT, DNS et DHCP.</span>
+                                    <span class="packet-tags">Cisco, VLAN, Wireshark</span>
+                                </a>
+                                <a href="#sae13" class="packet packet-telecom" data-cats="telecom">
+                                    <span class="packet-code">SAE 1.03</span>
+                                    <span class="packet-title">Découvrir un système de transmission</span>
+                                    <span class="packet-desc">Atténuation, impédance et réflexion sur lignes cuivre et coaxiales, par simulation.</span>
+                                    <span class="packet-tags">Matlab, Scilab</span>
+                                </a>
+                                <a href="#sae14" class="packet packet-dev" data-cats="dev">
+                                    <span class="packet-code">SAE 1.04</span>
+                                    <span class="packet-title">Se présenter sur Internet</span>
+                                    <span class="packet-desc">La première version de ce portfolio, en HTML/CSS responsive.</span>
+                                    <span class="packet-tags">HTML/CSS, Bootstrap</span>
+                                </a>
+                            </div>
+                        </li>
+                        <li class="hop">
+                            <div class="hop-head">
+                                <span class="hop-num" aria-hidden="true">2</span>
+                                <h2 class="hop-name">Semestre 2 <span>Approfondissement</span></h2>
+                                <span class="hop-year">BUT 1</span>
+                            </div>
+                            <div class="hop-grid">
+                                <a href="#sae21" class="packet packet-reseau" data-cats="reseau">
+                                    <span class="packet-code">SAE 2.01 &amp; 2.04</span>
+                                    <span class="packet-title">Projet Pépinière</span>
+                                    <span class="packet-desc">Le SI complet d&#x27;une entreprise : réseau Cisco, téléphonie IP, Docker et Windows Server.</span>
+                                    <span class="packet-tags">Cisco, Asterisk, Docker</span>
+                                </a>
+                                <a href="#sae22" class="packet packet-telecom" data-cats="telecom">
+                                    <span class="packet-code">SAE 2.02</span>
+                                    <span class="packet-title">Mesurer et caractériser un signal</span>
+                                    <span class="packet-desc">Mesures de spectre, de puissance et de gain pour attester la qualité d&#x27;une transmission.</span>
+                                    <span class="packet-tags">Métrologie, décibels</span>
+                                </a>
+                                <a href="#sae23" class="packet packet-dev" data-cats="dev">
+                                    <span class="packet-code">SAE 2.03</span>
+                                    <span class="packet-title">Portfolio dynamique avec Flask</span>
+                                    <span class="packet-desc">Le portfolio devient une application web avec base de données et authentification.</span>
+                                    <span class="packet-tags">Flask, MySQL</span>
+                                </a>
+                            </div>
+                        </li>
+                        <li class="hop">
+                            <div class="hop-head">
+                                <span class="hop-num" aria-hidden="true">3</span>
+                                <h2 class="hop-name">Semestre 3 <span>Spécialisation</span></h2>
+                                <span class="hop-year">BUT 2</span>
+                            </div>
+                            <div class="hop-grid">
+                                <a href="#sae301" class="packet packet-telecom" data-cats="telecom">
+                                    <span class="packet-code">SAE 3.01</span>
+                                    <span class="packet-title">Système de transmission radio</span>
+                                    <span class="packet-desc">Transmission sans fil avec un ADALM-Pluto piloté par GNU Radio.</span>
+                                    <span class="packet-tags">GNU Radio, radio logicielle</span>
+                                </a>
+                                <a href="#sae302" class="packet packet-dev" data-cats="dev">
+                                    <span class="packet-code">SAE 3.02</span>
+                                    <span class="packet-title">Applications communicantes</span>
+                                    <span class="packet-desc">Application client/serveur de recherche multi-formats par mots-clés et expressions régulières.</span>
+                                    <span class="packet-tags">Python 3, Regex</span>
+                                </a>
+                                <a href="#sae303" class="packet packet-reseau" data-cats="reseau">
+                                    <span class="packet-code">SAE 3.03</span>
+                                    <span class="packet-title">Pépinière multi-sites</span>
+                                    <span class="packet-desc">Extension de l&#x27;infrastructure vers une succursale distante, avec interconnexion sécurisée.</span>
+                                    <span class="packet-tags">Cisco 800, services distribués</span>
+                                </a>
+                                <a href="#sae304" class="packet packet-cyber" data-cats="cyber">
+                                    <span class="packet-code">SAE 3.Cyber.04</span>
+                                    <span class="packet-title">Découverte du pentesting</span>
+                                    <span class="packet-desc">Identifier, analyser et exploiter des vulnérabilités système et web en environnement contrôlé.</span>
+                                    <span class="packet-tags">Kali Linux</span>
+                                </a>
+                            </div>
+                        </li>
+                        <li class="hop">
+                            <div class="hop-head">
+                                <span class="hop-num" aria-hidden="true">4</span>
+                                <h2 class="hop-name">Semestre 4 <span>Expertise réseau &amp; sécurité</span></h2>
+                                <span class="hop-year">BUT 2</span>
+                            </div>
+                            <div class="hop-grid">
+                                <a href="#sae.cyber.401" class="packet packet-cyber" data-cats="cyber reseau">
+                                    <span class="packet-code">SAE 4.Cyber.01</span>
+                                    <span class="packet-title">Sécuriser un système d&#x27;information</span>
+                                    <span class="packet-desc">Un siège et une succursale reliés par VPN, protégés par pare-feu, puis mis à l&#x27;épreuve par des tests d&#x27;intrusion.</span>
+                                    <span class="packet-tags">IPsec, Cisco ASA, Nmap</span>
+                                </a>
+                                <a href="#sae401" class="packet packet-entreprise" data-cats="entreprise reseau">
+                                    <span class="packet-code">SAE 4.01</span>
+                                    <span class="packet-title">Stage au Centre Hospitalier d&#x27;Arras</span>
+                                    <span class="packet-desc">Deux mois dans un SI hospitalier : automatisation Active Directory, centralisation des logs, suivi des appels.</span>
+                                    <span class="packet-tags">PowerShell, Graylog</span>
+                                </a>
+                            </div>
+                        </li>
+                        <li class="hop">
+                            <div class="hop-head">
+                                <span class="hop-num" aria-hidden="true">5</span>
+                                <h2 class="hop-name">Semestre 5 <span>Infrastructures</span></h2>
+                                <span class="hop-year">BUT 3</span>
+                            </div>
+                            <div class="hop-grid">
+                                <a href="#sae501" class="packet packet-reseau" data-cats="reseau">
+                                    <span class="packet-code">SAE 5.01</span>
+                                    <span class="packet-title">Salles de TP en conteneurs</span>
+                                    <span class="packet-desc">Des environnements Ubuntu, Kali et Windows isolés, accessibles depuis un navigateur.</span>
+                                    <span class="packet-tags">Docker Swarm, noVNC</span>
+                                </a>
+                                <a href="#sae503" class="packet packet-telecom" data-cats="telecom reseau">
+                                    <span class="packet-code">SAE 5.ROM.03</span>
+                                    <span class="packet-title">Communications unifiées</span>
+                                    <span class="packet-desc">Un PABX Asterisk intégré à une interface web : téléphonie, visio et messagerie.</span>
+                                    <span class="packet-tags">Asterisk, WebRTC</span>
+                                </a>
+                            </div>
+                        </li>
+                        <li class="hop">
+                            <div class="hop-head">
+                                <span class="hop-num" aria-hidden="true">6</span>
+                                <h2 class="hop-name">Semestre 6 <span>Alternance &amp; cybersécurité</span></h2>
+                                <span class="hop-year">BUT 3</span>
+                            </div>
+                            <div class="hop-grid">
+                                <a href="#sae601" class="packet packet-cyber" data-cats="cyber reseau entreprise">
+                                    <span class="packet-code">SAE 6.Cyber.01</span>
+                                    <span class="packet-title">Projet SSI chez IT2i</span>
+                                    <span class="packet-desc">L&#x27;architecture réseau et sécurité d&#x27;une entreprise qui passe de 8 à 80 collaborateurs.</span>
+                                    <span class="packet-tags">Redondance, pare-feu, Wi-Fi</span>
+                                </a>
+                                <a href="#veille601" class="packet packet-reseau" data-cats="reseau">
+                                    <span class="packet-code">Veille</span>
+                                    <span class="packet-title">L&#x27;IA dans les équipements réseaux</span>
+                                    <span class="packet-desc">Des systèmes experts de 1988 aux réseaux auto-réparants : Cisco, Juniper, NVIDIA, Arista.</span>
+                                    <span class="packet-tags">AIOps, SONiC</span>
+                                </a>
+                            </div>
+                        </li>
+                    </ol>
                 </section>
 
                 <!-- ===== SEMESTRE 1 ===== -->
@@ -1118,37 +1398,115 @@
         }
         sidebarToggle.addEventListener('click', () => setSidebar(!sidebar.classList.contains('open')));
 
-        /* ---------- Navigation par ancre : projets.html#sae501 ouvre directement le projet ---------- */
+        /* ---------- Vue d'ensemble / vue d'un semestre ---------- */
+        const intro = document.getElementById('intro');
+        const sections = [...document.querySelectorAll('.project-section')];
+        const overviewLink = document.querySelector('.overview-link');
+        const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+        // Titre de chaque projet : le code (SAE 1.1) passe au-dessus du nom
+        document.querySelectorAll('.project-card > h3').forEach(h3 => {
+            const m = h3.textContent.trim().match(/^(.+?)\s:\s(.+)$/);
+            if (!m) return;
+            const code = document.createElement('span');
+            code.className = 'sae-code';
+            code.textContent = m[1];
+            h3.replaceChildren(code, m[2]);
+        });
+
+        // Chaque semestre reçoit un lien de retour et une navigation précédent / suivant
+        sections.forEach((section, i) => {
+            const top = document.createElement('div');
+            top.className = 'section-top';
+            const back = document.createElement('a');
+            back.href = '#'; back.className = 'back-link';
+            back.innerHTML = '<i class="fas fa-arrow-left" aria-hidden="true"></i>';
+            back.append("Vue d'ensemble");
+            top.append(back);
+            section.prepend(top);
+
+            const nav = document.createElement('nav');
+            nav.className = 'section-nav';
+            nav.setAttribute('aria-label', 'Semestres voisins');
+            [[i - 1, 'prev', 'Semestre précédent'], [i + 1, 'next', 'Semestre suivant']].forEach(([j, cls, label]) => {
+                const target = sections[j];
+                if (!target) return;
+                const a = document.createElement('a');
+                a.className = cls;
+                a.href = '#' + target.querySelector('article').id;
+                const small = document.createElement('small'); small.textContent = label;
+                const strong = document.createElement('strong'); strong.textContent = 'Semestre ' + (j + 1);
+                a.append(small, strong);
+                nav.append(a);
+            });
+            section.append(nav);
+        });
+
+        function markCurrent(projectId) {
+            document.querySelectorAll('.project-link').forEach(link => {
+                link.classList.toggle('current', projectId !== null && link.getAttribute('href') === '#' + projectId);
+            });
+            overviewLink.classList.toggle('current', projectId === null);
+        }
+
+        function showOverview() {
+            sections.forEach(section => section.classList.remove('active'));
+            intro.style.display = '';
+            markCurrent(null);
+            setSidebar(false);
+            window.scrollTo(0, 0);
+        }
+
         function goToProject(sectionId, projectId) {
             const targetSection = document.getElementById(sectionId);
             if (!targetSection) return;
 
-            document.getElementById('intro').style.display = 'none';
-            document.querySelectorAll('.project-section').forEach(section => section.classList.remove('active'));
-            targetSection.classList.add('active');
-
-            document.querySelectorAll('.project-link').forEach(link => {
-                link.classList.toggle('current', link.getAttribute('href') === '#' + projectId);
-            });
+            intro.style.display = 'none';
+            sections.forEach(section => section.classList.toggle('active', section === targetSection));
+            markCurrent(projectId);
             setSidebar(false);
 
-            const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
             setTimeout(() => {
                 const targetProject = document.getElementById(projectId);
-                if (targetProject) targetProject.scrollIntoView({ behavior: reduce ? 'auto' : 'smooth' });
+                if (targetProject) targetProject.scrollIntoView({ behavior: reduceMotion ? 'auto' : 'smooth' });
             }, 100);
         }
 
+        // projets.html#sae501 ouvre directement le projet ; sans ancre, on affiche la vue d'ensemble
         function openFromHash() {
             const id = decodeURIComponent(window.location.hash.slice(1));
-            if (!id) return;
-            const project = document.getElementById(id);
+            const project = id && document.getElementById(id);
             const section = project && project.closest('.project-section');
             if (section) goToProject(section.id, id);
+            else showOverview();
         }
 
         window.addEventListener('hashchange', openFromHash);
-        window.addEventListener('DOMContentLoaded', openFromHash);
+        openFromHash();
+
+        /* ---------- Filtres par domaine ---------- */
+        const chips = [...document.querySelectorAll('.chip')];
+        const packets = [...document.querySelectorAll('.packet')];
+        const routeCount = document.getElementById('routeCount');
+
+        function applyFilter(filter) {
+            chips.forEach(chip => {
+                const on = chip.dataset.filter === filter;
+                chip.classList.toggle('is-on', on);
+                chip.setAttribute('aria-pressed', String(on));
+            });
+            let shown = 0;
+            packets.forEach(packet => {
+                const match = filter === 'all' || packet.dataset.cats.split(' ').includes(filter);
+                packet.hidden = !match;
+                if (match) shown++;
+            });
+            document.querySelectorAll('.hop').forEach(hop => {
+                hop.hidden = !hop.querySelector('.packet:not([hidden])');
+            });
+            routeCount.textContent = filter === 'all' ? '' : shown + (shown > 1 ? ' projets sur ' : ' projet sur ') + packets.length;
+        }
+        chips.forEach(chip => chip.addEventListener('click', () => applyFilter(chip.dataset.filter)));
     </script>
 </body>
 </html>
