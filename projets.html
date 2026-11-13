@@ -272,6 +272,15 @@
             display: block; font-family: 'Orbitron', sans-serif; font-size: 0.7rem; font-weight: 700;
             letter-spacing: 0.16em; color: #00f2ff; text-transform: uppercase; margin-bottom: 0.5rem;
         }
+        /* Captures d'écran de la console */
+        .console-shots { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+        .shot { margin: 0; border: 1px solid rgba(0, 242, 255, 0.2); border-radius: 10px; overflow: hidden; background: #0f172a; }
+        .shot-wide { grid-column: 1 / -1; }
+        .shot a { display: block; cursor: zoom-in; }
+        .shot img { display: block; width: 100%; height: auto; }
+        .shot figcaption { padding: 0.6rem 0.9rem; font-size: 0.75rem; color: #94a3b8; border-top: 1px solid rgba(255, 255, 255, 0.06); }
+        @media (max-width: 640px) { .console-shots { grid-template-columns: 1fr; } }
+
         .section-nav { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin: 3rem 0 2rem; }
         .section-nav a {
             display: block; padding: 1rem 1.25rem; text-decoration: none; border-radius: 10px;
@@ -1203,6 +1212,25 @@
                             qui regroupe ces trois besoins. Elle est aujourd'hui utilisée tous les jours par l'équipe.
                         </p>
 
+                        <div class="console-shots mb-8">
+                            <figure class="shot shot-wide">
+                                <a href="static/image/console-tableau-de-bord.png" target="_blank" rel="noopener"><img src="static/image/console-tableau-de-bord.png" alt="Tableau de bord de la console : cinq accès (pare-feux, téléphonie, stockage NAS, boutiques, sauvegardes) et journal de surveillance" loading="lazy" width="1177" height="611"></a>
+                                <figcaption>Le tableau de bord : cinq modules et le journal de surveillance.</figcaption>
+                            </figure>
+                            <figure class="shot">
+                                <a href="static/image/console-boutiques.png" target="_blank" rel="noopener"><img src="static/image/console-boutiques.png" alt="Liste des boutiques avec un voyant d'état, le type de ligne et l'heure du dernier test" loading="lazy" width="1117" height="488"></a>
+                                <figcaption>L'état des lignes des boutiques, récupéré auprès de l'opérateur.</figcaption>
+                            </figure>
+                            <figure class="shot">
+                                <a href="static/image/console-sauvegardes.png" target="_blank" rel="noopener"><img src="static/image/console-sauvegardes.png" alt="Page d'analyse des sauvegardes : journal du traitement et en-têtes du tableau récapitulatif" loading="lazy" width="1131" height="318"></a>
+                                <figcaption>L'analyse des sauvegardes, du relevé des mails à l'envoi du rapport.</figcaption>
+                            </figure>
+                            <figure class="shot shot-wide">
+                                <a href="static/image/console-pare-feux.png" target="_blank" rel="noopener"><img src="static/image/console-pare-feux.png" alt="Liste des pare-feux avec voyants verts et boutons d'accès fibre et 4G" loading="lazy" width="1088" height="242"></a>
+                                <figcaption>La page des pare-feux : voyants de connectivité et accès fibre ou 4G.</figcaption>
+                            </figure>
+                        </div>
+
                         <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mb-8">
                             <div class="bg-black/30 p-5 rounded-lg border border-white/5">
                                 <h4 class="text-cyan-400 font-bold text-xs uppercase mb-3"><i class="fas fa-network-wired mr-2" aria-hidden="true"></i>Équipements centralisés</h4>
@@ -1261,12 +1289,23 @@
                                 <li><i class="fas fa-angle-right text-cyan-500 mr-2" aria-hidden="true"></i>Participation à la mise en service d'un serveur : RAID 5, Windows Server et machines virtuelles Hyper-V.</li>
                             </ul>
                         </div>
+                                            <div class="mt-6 p-6 bg-cyan-500/10 border border-cyan-500/30 rounded-lg flex flex-col md:flex-row justify-between items-center gap-4">
+                            <div>
+                                <h4 class="text-cyan-400 font-bold">Rapport d'alternance</h4>
+                                <p class="text-xs text-slate-400">Année 2025/2026 chez IT2i : missions, conception de la console et code en annexe.</p>
+                            </div>
+                            <div class="flex gap-3">
+                                <button onclick="openModal('static/image/Rapport_Alternance_Duval_Baptiste.pdf')" class="px-4 py-2 bg-cyan-500 hover:bg-cyan-600 text-white text-xs font-bold rounded transition">
+                                    <i class="fas fa-file-pdf mr-2"></i> VOIR LE RAPPORT
+                                </button>
+                            </div>
+                        </div>
                     </article>
 
                     <article id="sae601" class="project-card mb-8">
                         <h3 class="text-2xl font-bold text-white mb-4 italic">SAE 6.Cyber.01 : Projet SSI - Structuration/Sécurisation du Système d'Information</h3>
                         <p class="text-slate-300 text-sm mb-6 leading-relaxed">
-                            Ce projet consiste à transformer une structure artisanale de 8 personnes en une infrastructure professionnelle pour <strong>80 collaborateurs</strong> répartis sur 6 étages, suite à une levée de fonds de l'entreprise. J'étais chargé de concevoir l'architecture réseau et sécurité complète, ainsi que d'organiser le futur service informatique.
+                            Réalisé dans le cadre de la <strong>SAE 6.Cyber.01</strong>, ce projet consiste à transformer une structure artisanale de 8 personnes en une infrastructure professionnelle pour <strong>80 collaborateurs</strong> répartis sur 6 étages, suite à une levée de fonds de l'entreprise. J'étais chargé de concevoir l'architecture réseau et sécurité complète, ainsi que d'organiser le futur service informatique.
                         </p>
 
                         <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
