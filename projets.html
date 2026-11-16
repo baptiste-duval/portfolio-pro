@@ -361,6 +361,29 @@
         }
         @media (prefers-reduced-motion: reduce) { .sem-chevron { transition: none; } }
 
+        /* ============ ONGLETS IUT / CESI ============ */
+        .school-tabs { display: grid; grid-template-columns: 1fr 1fr; gap: 4px; margin: 0 0.75rem 0.9rem; padding: 4px; background: rgba(2, 6, 23, 0.6); border: 1px solid rgba(255, 255, 255, 0.1); border-radius: 12px; }
+        .school-tab { display: block; padding: 0.55rem 0.75rem; border-radius: 9px; text-decoration: none; text-align: center; color: #94a3b8; transition: background 0.2s, color 0.2s; }
+        .school-tab b { display: block; font-family: var(--display); font-size: 0.95rem; font-weight: 700; letter-spacing: 0.08em; }
+        .school-tab small { display: block; font-size: 0.66rem; margin-top: 1px; opacity: 0.8; }
+        .school-tab:hover { color: #fff; background: rgba(0, 242, 255, 0.07); }
+        .school-tab[aria-current="true"] { background: #00f2ff; color: #030712; box-shadow: 0 0 18px -4px rgba(0, 242, 255, 0.7); }
+        .school-tabs--main { margin: 0 0 2.25rem; max-width: 26rem; }
+        .school-tabs--main .school-tab { padding: 0.7rem 1rem; }
+        .school-tabs--main .school-tab b { font-size: 1.05rem; }
+        .school-tabs--main .school-tab small { font-size: 0.72rem; }
+        .school-panel[hidden], #cesi-intro[hidden] { display: none; }
+        .side-empty { margin: 0.5rem 1.25rem; font-size: 0.8rem; line-height: 1.5; color: #64748b; }
+
+        .empty-state { max-width: 34rem; padding: 2rem; border: 1px dashed rgba(0, 242, 255, 0.35); border-radius: 14px; background: rgba(15, 23, 42, 0.6); }
+        .empty-state > i { font-size: 1.4rem; color: #00f2ff; margin-bottom: 1rem; }
+        .empty-state h2 { font-size: 1.25rem; font-weight: 700; color: #fff; margin-bottom: 0.5rem; }
+        .empty-state p { font-size: 0.95rem; line-height: 1.6; color: #94a3b8; margin-bottom: 1.25rem; }
+        .empty-state__link { color: #00f2ff; font-weight: 600; font-size: 0.92rem; text-decoration: none; }
+        .empty-state__link:hover { text-decoration: underline; }
+        @media (max-width: 1023px) { .school-tabs { margin-top: 0.9rem; } .school-tabs--main { margin-top: 0; max-width: none; } }
+        @media (prefers-reduced-motion: reduce) { .school-tab { transition: none; } }
+
         /* PDF Preview Button (remplace les iframes) */
         .pdf-preview-btn {
             display: flex;
@@ -441,6 +464,12 @@
         <aside id="sidebar" class="sidebar" aria-label="Explorateur de cursus">
             <p class="side-title">Explorateur de cursus</p>
 
+            <nav class="school-tabs" aria-label="Établissement">
+                <a href="#" class="school-tab" data-school="iut" aria-current="true"><b>IUT</b><small>B.U.T. R&T, 18 projets</small></a>
+                <a href="#cesi" class="school-tab" data-school="cesi"><b>CESI</b><small>Mastère professionnel</small></a>
+            </nav>
+
+            <div class="school-panel" data-school="iut">
             <a href="#" class="overview-link current"><i class="fas fa-route" aria-hidden="true"></i>Vue d'ensemble</a>
 
             <p class="side-year">BUT 1</p>
@@ -494,10 +523,54 @@
                     <a href="#veille601" class="project-link"><i class="dot dot-reseau" aria-hidden="true"></i><span class="pl-text"><small>Veille</small>IA et équipements réseaux</span></a>
                 </div>
             </details>
+            </div>
+
+            <div class="school-panel" data-school="cesi" hidden>
+                <a href="#cesi" class="overview-link"><i class="fas fa-route" aria-hidden="true"></i>Vue d'ensemble</a>
+                <p class="side-year">Mastère professionnel</p>
+                <p class="side-empty">Les projets du Mastère seront listés ici, année par année.</p>
+            </div>
         </aside>
 
         <main id="contenu" class="main-content">
             <div class="max-w-4xl mx-auto">
+
+                <nav class="school-tabs school-tabs--main" aria-label="Établissement">
+                    <a href="#" class="school-tab" data-school="iut" aria-current="true"><b>IUT</b><small>B.U.T. R&T, 18 projets</small></a>
+                    <a href="#cesi" class="school-tab" data-school="cesi"><b>CESI</b><small>Mastère professionnel</small></a>
+                </nav>
+
+                <section id="cesi-intro" class="mb-16" hidden>
+                    <p class="route-cmd" aria-hidden="true"><span>$</span> ls cesi/mastere/</p>
+                    <h1 class="route-title">Projets CESI</h1>
+                    <p class="route-lead">
+                        Depuis 2026, je prépare au CESI le Mastère professionnel Manager en infrastructures et cybersécurité des SI, en alternance.
+                        Les projets menés pendant cette formation seront présentés ici.
+                    </p>
+
+                    <div class="empty-state">
+                        <i class="fas fa-hourglass-half" aria-hidden="true"></i>
+                        <h2>Premiers projets en cours</h2>
+                        <p>Cette page se remplira au fil de la formation. En attendant, le programme du Mastère est détaillé sur sa page.</p>
+                        <a href="futur.html" class="empty-state__link">Voir le programme du Mastère <i class="fas fa-arrow-right" aria-hidden="true"></i></a>
+                    </div>
+
+                    <!--
+                        POUR AJOUTER UN PROJET CESI
+                        1. Remplacer le bloc "empty-state" ci-dessus par une liste de cartes, comme dans l'onglet IUT :
+                           <div class="hop-grid">
+                               <a href="#cesi-projet1" class="packet packet-cyber" data-cats="cyber">
+                                   <span class="packet-code">Bloc 1</span>
+                                   <span class="packet-title">Titre du projet</span>
+                                   <span class="packet-desc">Une phrase de résumé.</span>
+                                   <span class="packet-tags">Outil, outil</span>
+                               </a>
+                           </div>
+                        2. Ajouter plus bas une section <div id="cesi-a1" class="project-section" data-school="cesi"> contenant
+                           un <article id="cesi-projet1" class="project-card mb-8"> avec le détail du projet.
+                        3. Ajouter le lien correspondant dans le panneau CESI du menu latéral.
+                    -->
+                </section>
 
                 <section id="intro" class="mb-16">
                     <p class="route-cmd" aria-hidden="true"><span>$</span> traceroute cursus.but-rt</p>
@@ -1565,7 +1638,16 @@
         /* ---------- Vue d'ensemble / vue d'un semestre ---------- */
         const intro = document.getElementById('intro');
         const sections = [...document.querySelectorAll('.project-section')];
-        const overviewLink = document.querySelector('.overview-link');
+        const cesiIntro = document.getElementById('cesi-intro');
+        const mainTabs = document.querySelector('.school-tabs--main');
+
+        // Onglet actif : 'iut' ou 'cesi'. Met à jour les onglets et le panneau du menu.
+        function setSchool(school) {
+            document.querySelectorAll('.school-tab').forEach(tab => {
+                if (tab.dataset.school === school) tab.setAttribute('aria-current', 'true'); else tab.removeAttribute('aria-current');
+            });
+            document.querySelectorAll('.school-panel').forEach(panel => { panel.hidden = panel.dataset.school !== school; });
+        }
         const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
         // Titre de chaque projet : le code (SAE 1.1) passe au-dessus du nom
@@ -1583,7 +1665,7 @@
             const top = document.createElement('div');
             top.className = 'section-top';
             const back = document.createElement('a');
-            back.href = '#'; back.className = 'back-link';
+            back.href = section.dataset.school === 'cesi' ? '#cesi' : '#'; back.className = 'back-link';
             back.innerHTML = '<i class="fas fa-arrow-left" aria-hidden="true"></i>';
             back.append("Vue d'ensemble");
             top.append(back);
@@ -1615,12 +1697,15 @@
                 // et on amène l'entrée dans la zone visible du menu (sans faire défiler la page)
                 if (isCurrent && window.matchMedia('(min-width: 1024px)').matches) sidebar.scrollTop = Math.max(0, link.offsetTop - sidebar.clientHeight / 2);
             });
-            overviewLink.classList.toggle('current', projectId === null);
+            document.querySelectorAll('.overview-link').forEach(link => link.classList.toggle('current', projectId === null));
         }
 
-        function showOverview() {
+        function showOverview(school) {
             sections.forEach(section => section.classList.remove('active'));
-            intro.style.display = '';
+            setSchool(school);
+            mainTabs.style.display = '';
+            intro.style.display = school === 'iut' ? '' : 'none';
+            cesiIntro.hidden = school !== 'cesi';
             markCurrent(null);
             setSidebar(false);
             window.scrollTo(0, 0);
@@ -1631,6 +1716,9 @@
             if (!targetSection) return;
 
             intro.style.display = 'none';
+            cesiIntro.hidden = true;
+            mainTabs.style.display = 'none';
+            setSchool(targetSection.dataset.school || 'iut');
             sections.forEach(section => section.classList.toggle('active', section === targetSection));
             markCurrent(projectId);
             setSidebar(false);
@@ -1647,7 +1735,7 @@
             const project = id && document.getElementById(id);
             const section = project && project.closest('.project-section');
             if (section) goToProject(section.id, id);
-            else showOverview();
+            else showOverview(id === 'cesi' ? 'cesi' : 'iut');
         }
 
         window.addEventListener('hashchange', openFromHash);
