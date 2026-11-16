@@ -375,6 +375,20 @@
         .school-panel[hidden], #cesi-intro[hidden] { display: none; }
         .side-empty { margin: 0.5rem 1.25rem; font-size: 0.8rem; line-height: 1.5; color: #64748b; }
 
+        .subject { --c: var(--c-reseau); display: flex; flex-direction: column; gap: 0.5rem; position: relative; overflow: hidden; text-decoration: none; padding: 1.6rem 1.75rem; background: rgba(15, 23, 42, 0.8); border: 1px solid rgba(255, 255, 255, 0.1); border-radius: 4px 14px 14px 4px; transition: border-color 0.2s, transform 0.2s; }
+        .subject::before { content: ""; position: absolute; left: 0; top: 0; bottom: 0; width: 3px; background: var(--c); }
+        .subject:hover { border-color: var(--c); transform: translateX(3px); }
+        .subject-code { font-family: var(--display); font-size: 0.72rem; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: var(--c); }
+        .subject-title { font-size: 1.35rem; font-weight: 700; color: #fff; line-height: 1.25; }
+        .subject-desc { font-size: 0.92rem; line-height: 1.65; color: #94a3b8; max-width: 60ch; }
+        .subject-tags { font-size: 0.75rem; color: #64748b; }
+        .subject-cta { margin-top: 0.5rem; font-size: 0.85rem; font-weight: 700; color: #00f2ff; }
+        .subject-steps { list-style: none; margin: 1.25rem 0 0; padding: 0; display: grid; grid-template-columns: repeat(auto-fill, minmax(230px, 1fr)); gap: 0.6rem; }
+        .subject-steps a { display: flex; align-items: center; gap: 0.7rem; padding: 0.6rem 0.8rem; font-size: 0.85rem; color: #cbd5e1; text-decoration: none; background: rgba(15, 23, 42, 0.6); border: 1px solid rgba(255, 255, 255, 0.08); border-radius: 10px; transition: border-color 0.2s, color 0.2s; }
+        .subject-steps a:hover { border-color: #00f2ff; color: #fff; }
+        .subject-steps b { width: 24px; height: 24px; flex: none; display: grid; place-items: center; border-radius: 50%; border: 1.5px solid #00f2ff; color: #00f2ff; font-family: var(--display); font-size: 0.72rem; }
+        @media (prefers-reduced-motion: reduce) { .subject { transition: none; } .subject:hover { transform: none; } }
+
         .empty-state { max-width: 34rem; padding: 2rem; border: 1px dashed rgba(0, 242, 255, 0.35); border-radius: 14px; background: rgba(15, 23, 42, 0.6); }
         .empty-state > i { font-size: 1.4rem; color: #00f2ff; margin-bottom: 1rem; }
         .empty-state h2 { font-size: 1.25rem; font-weight: 700; color: #fff; margin-bottom: 0.5rem; }
@@ -466,7 +480,7 @@
 
             <nav class="school-tabs" aria-label="Établissement">
                 <a href="#" class="school-tab" data-school="iut" aria-current="true"><b>IUT</b><small>B.U.T. R&T, 18 projets</small></a>
-                <a href="#cesi" class="school-tab" data-school="cesi"><b>CESI</b><small>Mastère professionnel</small></a>
+                <a href="#cesi" class="school-tab" data-school="cesi"><b>CESI</b><small>Mastère, 1 projet</small></a>
             </nav>
 
             <div class="school-panel" data-school="iut">
@@ -528,7 +542,20 @@
             <div class="school-panel" data-school="cesi" hidden>
                 <a href="#cesi" class="overview-link"><i class="fas fa-route" aria-hidden="true"></i>Vue d'ensemble</a>
                 <p class="side-year">Mastère professionnel</p>
-                <p class="side-empty">Les projets du Mastère seront listés ici, année par année.</p>
+                <details open class="side-sem">
+                    <summary><span class="sem-num" aria-hidden="true"><i class="fas fa-network-wired" style="font-size: 0.6rem"></i></span><span class="sem-name">INF246</span><span class="sem-count">8</span><i class="fas fa-chevron-down sem-chevron" aria-hidden="true"></i></summary>
+                    <div class="sem-links">
+                        <a href="inf246.html" class="project-link"><i class="dot dot-reseau" aria-hidden="true"></i><span class="pl-text"><small>Matière</small>Design des infrastructures réseaux</span></a>
+                        <a href="inf246.html#etape-1" class="project-link"><i class="dot dot-reseau" aria-hidden="true"></i><span class="pl-text"><small>Étape 1</small>VLAN et trunks</span></a>
+                        <a href="inf246.html#etape-2" class="project-link"><i class="dot dot-reseau" aria-hidden="true"></i><span class="pl-text"><small>Étape 2</small>EtherChannel, adressage et DHCP</span></a>
+                        <a href="inf246.html#etape-3" class="project-link"><i class="dot dot-reseau" aria-hidden="true"></i><span class="pl-text"><small>Étape 3</small>Spanning Tree</span></a>
+                        <a href="inf246.html#etape-4" class="project-link"><i class="dot dot-reseau" aria-hidden="true"></i><span class="pl-text"><small>Étape 4</small>HSRP</span></a>
+                        <a href="inf246.html#etape-5" class="project-link"><i class="dot dot-reseau" aria-hidden="true"></i><span class="pl-text"><small>Étape 5</small>Routage statique</span></a>
+                        <a href="inf246.html#etape-6" class="project-link"><i class="dot dot-reseau" aria-hidden="true"></i><span class="pl-text"><small>Étape 6</small>BGP</span></a>
+                        <a href="inf246.html#etape-7" class="project-link"><i class="dot dot-cyber" aria-hidden="true"></i><span class="pl-text"><small>Étape 7</small>NAT, web et messagerie</span></a>
+                        <a href="inf246.html#etape-8" class="project-link"><i class="dot dot-cyber" aria-hidden="true"></i><span class="pl-text"><small>Étape 8</small>ACL étendues et SSH</span></a>
+                    </div>
+                </details>
             </div>
         </aside>
 
@@ -545,31 +572,27 @@
                     <h1 class="route-title">Projets CESI</h1>
                     <p class="route-lead">
                         Depuis 2026, je prépare au CESI le Mastère professionnel Manager en infrastructures et cybersécurité des SI, en alternance.
-                        Les projets menés pendant cette formation seront présentés ici.
+                        Les projets menés pendant cette formation sont présentés ici, matière par matière.
                     </p>
 
-                    <div class="empty-state">
-                        <i class="fas fa-hourglass-half" aria-hidden="true"></i>
-                        <h2>Premiers projets en cours</h2>
-                        <p>Cette page se remplira au fil de la formation. En attendant, le programme du Mastère est détaillé sur sa page.</p>
-                        <a href="futur.html" class="empty-state__link">Voir le programme du Mastère <i class="fas fa-arrow-right" aria-hidden="true"></i></a>
-                    </div>
+                    <a href="inf246.html" class="subject">
+                        <span class="subject-code">INF246, octobre 2026</span>
+                        <span class="subject-title">Design des infrastructures réseaux</span>
+                        <span class="subject-desc">Le réseau complet d'une entreprise de six services, construit en huit étapes sur Cisco Packet Tracer : commutation, redondance, routage, BGP, NAT puis filtrage. La maquette est interactive et se complète d'étape en étape.</span>
+                        <span class="subject-tags">VLAN, LACP, Rapid PVST+, HSRP, BGP, NAT, ACL, SSH</span>
+                        <span class="subject-cta">Ouvrir le projet <i class="fas fa-arrow-right" aria-hidden="true"></i></span>
+                    </a>
 
-                    <!--
-                        POUR AJOUTER UN PROJET CESI
-                        1. Remplacer le bloc "empty-state" ci-dessus par une liste de cartes, comme dans l'onglet IUT :
-                           <div class="hop-grid">
-                               <a href="#cesi-projet1" class="packet packet-cyber" data-cats="cyber">
-                                   <span class="packet-code">Bloc 1</span>
-                                   <span class="packet-title">Titre du projet</span>
-                                   <span class="packet-desc">Une phrase de résumé.</span>
-                                   <span class="packet-tags">Outil, outil</span>
-                               </a>
-                           </div>
-                        2. Ajouter plus bas une section <div id="cesi-a1" class="project-section" data-school="cesi"> contenant
-                           un <article id="cesi-projet1" class="project-card mb-8"> avec le détail du projet.
-                        3. Ajouter le lien correspondant dans le panneau CESI du menu latéral.
-                    -->
+                    <ol class="subject-steps">
+                        <li><a href="inf246.html#etape-1"><b>1</b>VLAN et trunks</a></li>
+                        <li><a href="inf246.html#etape-2"><b>2</b>EtherChannel, adressage et DHCP</a></li>
+                        <li><a href="inf246.html#etape-3"><b>3</b>Spanning Tree</a></li>
+                        <li><a href="inf246.html#etape-4"><b>4</b>HSRP</a></li>
+                        <li><a href="inf246.html#etape-5"><b>5</b>Routage statique</a></li>
+                        <li><a href="inf246.html#etape-6"><b>6</b>BGP</a></li>
+                        <li><a href="inf246.html#etape-7"><b>7</b>NAT, web et messagerie</a></li>
+                        <li><a href="inf246.html#etape-8"><b>8</b>ACL étendues et SSH</a></li>
+                    </ol>
                 </section>
 
                 <section id="intro" class="mb-16">

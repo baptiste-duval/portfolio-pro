@@ -1,0 +1,580 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Design des infrastructures réseaux (INF246) | Baptiste Duval</title>
+    <meta name="description" content="Projet du Mastère CESI : la construction d'un réseau d'entreprise complet en huit étapes sur Cisco Packet Tracer, des VLAN au filtrage par ACL, avec la maquette interactive.">
+    <meta name="author" content="Baptiste Duval">
+    <meta name="theme-color" content="#030712">
+    <meta property="og:type" content="website">
+    <meta property="og:locale" content="fr_FR">
+    <meta property="og:title" content="Design des infrastructures réseaux (INF246) | Baptiste Duval">
+    <meta property="og:description" content="Projet du Mastère CESI : la construction d'un réseau d'entreprise complet en huit étapes sur Cisco Packet Tracer, des VLAN au filtrage par ACL, avec la maquette interactive.">
+    <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='12' fill='%23030712'/%3E%3Crect x='14' y='14' width='36' height='36' fill='none' stroke='%2300f2ff' stroke-width='3' transform='rotate(45 32 32)'/%3E%3Ctext x='32' y='39' font-family='monospace' font-size='18' font-weight='700' fill='%2300f2ff' text-anchor='middle'%3EBD%3C/text%3E%3C/svg%3E">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Chakra+Petch:wght@500;600;700&family=IBM+Plex+Sans:wght@400;500;600&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="site.css">
+    <style>
+        .crumbs { font: 500 0.85rem var(--mono); color: var(--muted); }
+        .crumbs a { text-decoration: none; color: var(--muted); }
+        .crumbs a:hover { color: var(--cyan); }
+        .lab { padding-top: 3rem; }
+
+        /* Fil des huit étapes */
+        .steps-nav { position: sticky; top: var(--nav-h); z-index: 50; margin: 0 -1.5rem; padding: 0.75rem 1.5rem; background: rgba(3, 7, 18, 0.9); -webkit-backdrop-filter: blur(12px); backdrop-filter: blur(12px); border-bottom: 1px solid var(--line); }
+        .steps-nav ol { display: flex; gap: 0.35rem; overflow-x: auto; scrollbar-width: none; }
+        .steps-nav ol::-webkit-scrollbar { display: none; }
+        .steps-nav a { display: flex; align-items: center; gap: 0.55rem; padding: 0.4rem 0.8rem 0.4rem 0.4rem; border-radius: 999px; text-decoration: none; white-space: nowrap; color: var(--muted); border: 1px solid transparent; transition: color 0.2s, background 0.2s, border-color 0.2s; }
+        .steps-nav a b { width: 26px; height: 26px; flex: none; display: grid; place-items: center; border-radius: 50%; font: 700 0.78rem var(--display); border: 1.5px solid var(--line-strong); color: var(--muted); }
+        .steps-nav a span { font-size: 0.82rem; font-weight: 500; }
+        .steps-nav a:hover { color: var(--text); background: rgba(148, 163, 184, 0.08); }
+        .steps-nav a.is-done b { border-color: var(--cyan); color: var(--cyan); }
+        .steps-nav a[aria-current="step"] { color: #02111a; background: var(--cyan); }
+        .steps-nav a[aria-current="step"] b { background: #02111a; border-color: #02111a; color: var(--cyan); }
+
+        .lab-grid { display: grid; grid-template-columns: minmax(0, 1.35fr) minmax(0, 1fr); gap: 2.5rem; align-items: start; margin-top: 2.5rem; }
+        .stage { position: sticky; top: calc(var(--nav-h) + 4.75rem); }
+        .canvas { border: 1px solid var(--line-strong); border-radius: var(--radius); background: radial-gradient(120% 100% at 50% 0%, rgba(0, 242, 255, 0.07), rgba(4, 9, 20, 0.92) 60%); }
+        .canvas svg { display: block; width: 100%; aspect-ratio: 16 / 12; }
+        .canvas-bar { display: flex; justify-content: space-between; align-items: center; gap: 1rem; padding: 0.6rem 1rem; border-bottom: 1px solid var(--line); font: 400 0.74rem var(--mono); color: var(--faint); }
+        .legend { display: flex; gap: 1rem; flex-wrap: wrap; }
+        .legend i { display: inline-block; width: 18px; height: 0; border-top: 2px solid #7dd3fc; vertical-align: middle; margin-right: 0.4rem; }
+        .legend i.f { border-top: 2px dashed var(--amber); }
+
+        /* Maquette */
+        .lk { stroke: #7dd3fc; stroke-width: 1.6; opacity: 0.55; transition: opacity 0.4s, stroke-width 0.3s; }
+        .lk-fiber { stroke: var(--amber); stroke-dasharray: 5 4; }
+        .lk.is-off, .dv.is-off, .nt.is-off { opacity: 0; pointer-events: none; }
+        .lk.is-dim { opacity: 0.28; }
+        .lk.is-hot { opacity: 1; stroke-width: 2.6; }
+        .dv { cursor: pointer; color: #cbd5e1; transition: opacity 0.4s; outline: none; }
+        .dv-l3 { color: var(--cyan); } .dv-sw { color: #60a5fa; } .dv-edge { color: var(--amber); } .dv-wan { color: #c084fc; } .dv-srv { color: var(--green); } .dv-pc { color: #cbd5e1; }
+        .dv.is-dim { opacity: 0.62; }
+        .dv-hit { fill: #060d1a; stroke: none; }
+        .dv-ring { fill: none; stroke: currentColor; stroke-width: 1.5; opacity: 0; }
+        .dv:hover .dv-ring, .dv:focus-visible .dv-ring, .dv.is-sel .dv-ring { opacity: 0.9; }
+        .dv.is-new .dv-ring { animation: ping 1.6s ease-out 2; }
+        @keyframes ping { 0% { opacity: 0.9; transform: scale(0.8); } 100% { opacity: 0; transform: scale(1.9); } }
+        .dv-name { font: 500 13px var(--mono); fill: #e2e8f0; text-anchor: middle; paint-order: stroke; stroke: #030712; stroke-width: 4px; }
+        .dv-sub, .nt { font: 400 11.5px var(--mono); fill: var(--faint); text-anchor: middle; transition: opacity 0.4s; }
+
+        .inspector { margin-top: 1rem; padding: 1.1rem 1.25rem; border: 1px solid var(--line); border-radius: var(--radius); background: rgba(10, 19, 34, 0.75); min-height: 7.5rem; }
+        .inspector .hint { color: var(--faint); font-size: 0.9rem; }
+        .inspector h3 { font: 600 1.05rem var(--display); color: #fff; }
+        .inspector h3 small { font: 400 0.78rem var(--mono); color: var(--faint); margin-left: 0.6rem; }
+        .inspector p { color: var(--muted); font-size: 0.9rem; margin-top: 0.2rem; }
+        .inspector ul { margin-top: 0.7rem; display: grid; gap: 0.25rem; font: 400 0.78rem var(--mono); color: #cbd5e1; }
+        .inspector li b { color: var(--cyan); font-weight: 500; }
+        .inspector li i { color: var(--faint); font-style: normal; }
+
+        /* Texte d'une étape */
+        .step-kicker { font: 500 0.8rem var(--mono); color: var(--cyan); margin-bottom: 0.7rem; }
+        .etape h2 { font: 700 clamp(1.6rem, 3vw, 2.2rem)/1.1 var(--display); color: #fff; }
+        .step-intro { margin-top: 1rem; color: var(--muted); font-size: 1.02rem; }
+        .etape h3 { margin: 2rem 0 0.9rem; font: 600 0.82rem var(--mono); color: var(--faint); }
+        .pts { display: grid; gap: 0.7rem; }
+        .pts li { position: relative; padding-left: 1.4rem; color: var(--text); font-size: 0.97rem; }
+        .pts li::before { content: ""; position: absolute; left: 0; top: 0.6em; width: 8px; height: 8px; border: 1.5px solid var(--cyan); transform: rotate(45deg); }
+        .tbl { margin-top: 1.5rem; overflow-x: auto; border: 1px solid var(--line); border-radius: 10px; }
+        .tbl table { width: 100%; border-collapse: collapse; font-size: 0.86rem; }
+        .tbl th { text-align: left; padding: 0.55rem 0.9rem; font: 500 0.74rem var(--mono); color: var(--faint); background: rgba(148, 163, 184, 0.06); }
+        .tbl td { padding: 0.5rem 0.9rem; border-top: 1px solid var(--line); color: var(--text); font-family: var(--mono); font-size: 0.8rem; }
+        .cfg { margin-top: 1.5rem; border: 1px solid var(--line); border-radius: 10px; overflow: hidden; background: #050b17; }
+        .cfg figcaption { padding: 0.5rem 0.9rem; font: 500 0.74rem var(--mono); color: var(--amber); border-bottom: 1px solid var(--line); }
+        .cfg pre { margin: 0; padding: 0.9rem; overflow-x: auto; font: 400 0.78rem/1.65 var(--mono); color: #cbd5e1; }
+        .check { margin-top: 1.5rem; padding: 0.9rem 1.1rem; border-left: 3px solid var(--green); background: rgba(52, 211, 153, 0.07); border-radius: 0 10px 10px 0; font-size: 0.93rem; color: var(--text); }
+        .check code { font: 400 0.82rem var(--mono); color: var(--cyan-soft); }
+        .etape { scroll-margin-top: calc(var(--nav-h) + 5.5rem); }
+        .etape[hidden] { display: none; }
+        .etape + .etape { margin-top: 4rem; }           /* sans JavaScript, les huit étapes se suivent */
+        .js .etape + .etape { margin-top: 0; }
+
+        .pager { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin-top: 2.5rem; }
+        .pager a { display: block; padding: 1rem 1.25rem; border: 1px solid var(--line-strong); border-radius: 12px; text-decoration: none; background: rgba(10, 19, 34, 0.75); transition: border-color 0.2s, background 0.2s, transform 0.2s; }
+        .pager a:hover { border-color: var(--cyan); }
+        .pager small { display: block; font: 400 0.74rem var(--mono); color: var(--faint); margin-bottom: 0.2rem; }
+        .pager strong { font: 600 1rem var(--display); color: #fff; }
+        .pager .next { grid-column: 2; text-align: right; background: var(--cyan); border-color: var(--cyan); }
+        .pager .next small { color: rgba(2, 17, 26, 0.7); }
+        .pager .next strong { color: #02111a; }
+        .pager .next:hover { transform: translateY(-2px); box-shadow: 0 10px 30px -10px rgba(0, 242, 255, 0.6); }
+        .pager [hidden] { display: none; }
+        .keys { margin-top: 1rem; font: 400 0.74rem var(--mono); color: var(--faint); }
+        .keys kbd { border: 1px solid var(--line-strong); border-radius: 4px; padding: 0 0.35rem; font: inherit; }
+
+        @media (max-width: 960px) {
+            .lab-grid { grid-template-columns: minmax(0, 1fr); gap: 2rem; }
+            .stage { position: static; }
+            .steps-nav { margin: 0 -1.15rem; padding: 0.6rem 1.15rem; }
+            .steps-nav a span { display: none; }
+            .steps-nav a[aria-current="step"] span { display: inline; }
+            .steps-nav a { padding-right: 0.4rem; }
+            .steps-nav a[aria-current="step"] { padding-right: 0.8rem; }
+            .keys { display: none; }
+            .canvas svg { aspect-ratio: 4 / 3.4; }
+        }
+        @media (max-width: 520px) { .pager { grid-template-columns: 1fr; } .pager .next { grid-column: 1; } }
+        @media (prefers-reduced-motion: reduce) { .lk, .dv, .nt, .pager a { transition: none; } .dv.is-new .dv-ring { animation: none; } }
+    </style>
+</head>
+<body class="v2" data-net="dim">
+
+    <a class="skip-link" href="#contenu">Aller au contenu</a>
+
+    <nav id="mainNav" class="site-nav" aria-label="Navigation principale">
+        <div class="site-nav__inner">
+            <a class="brand" href="index.html" aria-label="Baptiste Duval, accueil">
+                <span class="brand__mark"><span>BD</span></span>
+                <span class="brand__name">Baptiste Duval<small>réseaux, systèmes, cybersécurité</small></span>
+            </a>
+            <button class="nav-toggle" type="button" aria-label="Ouvrir le menu" aria-expanded="false" aria-controls="nav-links"><span></span></button>
+            <div class="nav-links" id="nav-links">
+                <a href="projets.html" aria-current="page">Projets</a>
+                <a href="index.html#parcours">Parcours</a>
+                <a href="index.html#competences">Compétences</a>
+                <a href="futur.html">Mastère & infra</a>
+                <a href="index.html#cv">CV</a>
+                <a href="index.html#contact" class="nav-cta">Me contacter</a>
+            </div>
+        </div>
+    </nav>
+
+    <main id="contenu">
+
+        <header class="page-hero">
+            <div class="wrap">
+                <p class="crumbs"><a href="projets.html#cesi"><i class="fas fa-arrow-left" aria-hidden="true"></i> Projets CESI</a></p>
+                <h1 class="page-title" style="margin-top: 1.2rem">Design des infrastructures réseaux</h1>
+                <p class="lead">
+                    Construire le réseau d'une entreprise de six services, de la première prise jusqu'à Internet.
+                    Huit étapes sur Cisco Packet Tracer, chacune ajoutant une brique : commutation, redondance, routage, BGP, NAT puis filtrage.
+                </p>
+                <div class="meta-row">
+                    <span>INF246</span>
+                    <span>Mastère CESI</span>
+                    <span>Octobre 2026</span>
+                    <span>Travail en groupe</span>
+                    <span>Cisco Packet Tracer 9</span>
+                </div>
+            </div>
+        </header>
+
+        <section class="lab" id="maquette" aria-label="Les huit étapes du projet">
+            <div class="wrap">
+                <nav class="steps-nav" aria-label="Étapes du projet"><ol><li><a href="#etape-1" data-step="1"><b>1</b><span>VLAN et trunks</span></a></li><li><a href="#etape-2" data-step="2"><b>2</b><span>EtherChannel, adressage et DHCP</span></a></li><li><a href="#etape-3" data-step="3"><b>3</b><span>Spanning Tree</span></a></li><li><a href="#etape-4" data-step="4"><b>4</b><span>HSRP</span></a></li><li><a href="#etape-5" data-step="5"><b>5</b><span>Routage statique</span></a></li><li><a href="#etape-6" data-step="6"><b>6</b><span>BGP</span></a></li><li><a href="#etape-7" data-step="7"><b>7</b><span>NAT, web et messagerie</span></a></li><li><a href="#etape-8" data-step="8"><b>8</b><span>ACL étendues et SSH</span></a></li></ol></nav>
+
+                <div class="lab-grid">
+                    <div class="stage">
+                        <div class="canvas hud">
+                            <div class="canvas-bar">
+                                <span id="canvas-title">maquette, étape 8</span>
+                                <span class="legend"><span><i></i>cuivre</span><span><i class="f"></i>fibre</span></span>
+                            </div>
+                            <svg id="topo" viewBox="10 440 966 752" preserveAspectRatio="xMidYMid meet" role="group" aria-label="Maquette du réseau. Chaque équipement est un bouton qui affiche son rôle et ses liaisons.">
+                                <defs>
+                                    <symbol id="ic-l3" viewBox="0 0 48 48"><rect x="5" y="9" width="38" height="30" rx="6" fill="#06101f" stroke="currentColor" stroke-width="2"/><circle cx="24" cy="24" r="7" fill="none" stroke="currentColor" stroke-width="2"/><path d="M24 12v5M24 31v5M11 24h6M31 24h6" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></symbol>
+                                    <symbol id="ic-sw" viewBox="0 0 48 48"><rect x="5" y="13" width="38" height="22" rx="5" fill="#06101f" stroke="currentColor" stroke-width="2"/><path d="M13 21h14m-4-4 4 4-4 4M35 28H21m4-4-4 4 4 4" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+                                    <symbol id="ic-edge" viewBox="0 0 48 48"><circle cx="24" cy="24" r="17" fill="#06101f" stroke="currentColor" stroke-width="2"/><path d="M24 12v9m-3.5-5.5L24 12l3.5 3.5M24 36v-9m-3.5 5.5L24 36l3.5-3.5M12 24h9m-5.5-3.5L12 24l3.5 3.5M36 24h-9m5.5-3.5L36 24l-3.5 3.5" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+                                    <symbol id="ic-wan" viewBox="0 0 48 48"><circle cx="24" cy="24" r="17" fill="#06101f" stroke="currentColor" stroke-width="2"/><path d="M24 12v9m-3.5-5.5L24 12l3.5 3.5M24 36v-9m-3.5 5.5L24 36l3.5-3.5M12 24h9m-5.5-3.5L12 24l3.5 3.5M36 24h-9m5.5-3.5L36 24l-3.5 3.5" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+                                    <symbol id="ic-srv" viewBox="0 0 48 48"><rect x="12" y="6" width="24" height="36" rx="4" fill="#06101f" stroke="currentColor" stroke-width="2"/><path d="M17 14h14M17 21h14M17 28h8" stroke="currentColor" stroke-width="2" stroke-linecap="round"/><circle cx="30" cy="35" r="1.8" fill="currentColor"/></symbol>
+                                    <symbol id="ic-pc" viewBox="0 0 48 48"><rect x="10" y="11" width="28" height="19" rx="3" fill="#06101f" stroke="currentColor" stroke-width="2"/><path d="M5 36h38l-3-5H8z" fill="#06101f" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/></symbol>
+                                </defs>
+                                <line class="lk lk-copper" data-a="SW-D1" data-b="SW-IT" data-step="1" x1="398.0" y1="829.0" x2="105.5" y2="1013.0"/>
+                                <line class="lk lk-copper" data-a="SW-D1" data-b="SW-MAINTENANCE" data-step="1" x1="398.0" y1="829.0" x2="257.5" y2="1013.0"/>
+                                <line class="lk lk-copper" data-a="SW-D1" data-b="SW-ATELIER" data-step="1" x1="398.0" y1="829.0" x2="419.5" y2="1013.0"/>
+                                <line class="lk lk-copper" data-a="SW-D1" data-b="SW-ADMINISTRATIF" data-step="1" x1="398.0" y1="829.0" x2="583.5" y2="1013.0"/>
+                                <line class="lk lk-copper" data-a="SW-D1" data-b="SW-LOGISTIQUE" data-step="1" x1="398.0" y1="829.0" x2="742.5" y2="1013.0"/>
+                                <line class="lk lk-copper" data-a="SW-D1" data-b="SW-DIRECTION" data-step="1" x1="398.0" y1="829.0" x2="895.5" y2="1010.0"/>
+                                <line class="lk lk-copper" data-a="SW-D2" data-b="SW-IT" data-step="1" x1="602.0" y1="829.0" x2="105.5" y2="1013.0"/>
+                                <line class="lk lk-copper" data-a="SW-D2" data-b="SW-MAINTENANCE" data-step="1" x1="602.0" y1="829.0" x2="257.5" y2="1013.0"/>
+                                <line class="lk lk-copper" data-a="SW-D2" data-b="SW-ATELIER" data-step="1" x1="602.0" y1="829.0" x2="419.5" y2="1013.0"/>
+                                <line class="lk lk-copper" data-a="SW-D2" data-b="SW-ADMINISTRATIF" data-step="1" x1="602.0" y1="829.0" x2="583.5" y2="1013.0"/>
+                                <line class="lk lk-copper" data-a="SW-D2" data-b="SW-LOGISTIQUE" data-step="1" x1="602.0" y1="829.0" x2="742.5" y2="1013.0"/>
+                                <line class="lk lk-copper" data-a="SW-D2" data-b="SW-DIRECTION" data-step="1" x1="602.0" y1="829.0" x2="895.5" y2="1010.0"/>
+                                <line class="lk lk-fiber" data-a="SW-D1" data-b="SW-D2" data-step="2" x1="398.0" y1="820.0" x2="602.0" y2="820.0"/>
+                                <line class="lk lk-fiber" data-a="SW-D1" data-b="SW-D2" data-step="2" x1="398.0" y1="826.0" x2="602.0" y2="826.0"/>
+                                <line class="lk lk-fiber" data-a="SW-D1" data-b="SW-D2" data-step="2" x1="398.0" y1="832.0" x2="602.0" y2="832.0"/>
+                                <line class="lk lk-fiber" data-a="SW-D1" data-b="SW-D2" data-step="2" x1="398.0" y1="838.0" x2="602.0" y2="838.0"/>
+                                <line class="lk lk-copper" data-a="SW-IT" data-b="PC-IT" data-step="2" x1="105.5" y1="1013.0" x2="90.0" y2="1106.0"/>
+                                <line class="lk lk-copper" data-a="SW-MAINTENANCE" data-b="PC-MAINTENANCE" data-step="2" x1="257.5" y1="1013.0" x2="245.0" y2="1111.0"/>
+                                <line class="lk lk-copper" data-a="SW-ATELIER" data-b="PC-ATELIER" data-step="2" x1="419.5" y1="1013.0" x2="404.0" y2="1105.0"/>
+                                <line class="lk lk-copper" data-a="SW-ADMINISTRATIF" data-b="PC-ADMINISTRATIF" data-step="2" x1="583.5" y1="1013.0" x2="566.0" y2="1110.0"/>
+                                <line class="lk lk-copper" data-a="SW-LOGISTIQUE" data-b="PC-LOGISTIQUE" data-step="2" x1="742.5" y1="1013.0" x2="734.0" y2="1114.0"/>
+                                <line class="lk lk-copper" data-a="SW-DIRECTION" data-b="PC-DIRECTION" data-step="2" x1="895.5" y1="1010.0" x2="887.0" y2="1113.0"/>
+                                <line class="lk lk-copper" data-a="OMEGA-1" data-b="SW-D1" data-step="5" x1="406.5" y1="713.0" x2="398.0" y2="829.0"/>
+                                <line class="lk lk-copper" data-a="OMEGA-2" data-b="SW-D2" data-step="5" x1="606.5" y1="713.0" x2="602.0" y2="829.0"/>
+                                <line class="lk lk-copper" data-a="OMEGA-1" data-b="SW-D2" data-step="5" x1="406.5" y1="713.0" x2="602.0" y2="829.0"/>
+                                <line class="lk lk-copper" data-a="OMEGA-2" data-b="SW-D1" data-step="5" x1="606.5" y1="713.0" x2="398.0" y2="829.0"/>
+                                <line class="lk lk-fiber" data-a="OMEGA-1" data-b="OMEGA-2" data-step="5" x1="406.5" y1="713.0" x2="606.5" y2="713.0"/>
+                                <line class="lk lk-fiber" data-a="OMEGA-1" data-b="WAN-1" data-step="6" x1="406.5" y1="713.0" x2="438.5" y2="603.0"/>
+                                <line class="lk lk-fiber" data-a="OMEGA-2" data-b="WAN-2" data-step="6" x1="606.5" y1="713.0" x2="582.5" y2="603.0"/>
+                                <line class="lk lk-copper" data-a="WAN-1" data-b="WAN-2" data-step="6" x1="438.5" y1="603.0" x2="582.5" y2="603.0"/>
+                                <line class="lk lk-fiber" data-a="WAN-1" data-b="WAN-4" data-step="6" x1="438.5" y1="603.0" x2="326.5" y2="533.0"/>
+                                <line class="lk lk-fiber" data-a="WAN-4" data-b="WAN-3" data-step="6" x1="326.5" y1="533.0" x2="513.5" y2="500.0"/>
+                                <line class="lk lk-copper" data-a="CLOUD" data-b="WAN-4" data-step="6" x1="163.5" y1="531.0" x2="326.5" y2="533.0"/>
+                                <line class="lk lk-fiber" data-a="WAN-2" data-b="WAN-3" data-step="6" x1="582.5" y1="603.0" x2="513.5" y2="500.0"/>
+                                <line class="lk lk-copper" data-a="WAN-1" data-b="WAN-3" data-step="6" x1="438.5" y1="603.0" x2="513.5" y2="500.0"/>
+                                <line class="lk lk-copper" data-a="CLOUD" data-b="S1" data-step="7" x1="163.5" y1="531.0" x2="162.5" y2="632.0"/>
+                                <line class="lk lk-copper" data-a="DNS" data-b="S1" data-step="7" x1="98.5" y1="728.0" x2="162.5" y2="632.0"/>
+                                <line class="lk lk-copper" data-a="S1" data-b="WEB" data-step="7" x1="162.5" y1="632.0" x2="201.5" y2="727.0"/>
+                                <line class="lk lk-copper" data-a="S1" data-b="MAIL" data-step="7" x1="162.5" y1="632.0" x2="291.5" y2="729.0"/>
+                                <g class="dv dv-sw" data-name="SW-IT" data-step="1" transform="translate(105.5 1013.0)" tabindex="0" role="button" aria-label="SW-IT, Switch d&#x27;accès du service It"><circle class="dv-ring" r="33"/><circle class="dv-hit" r="33"/><use href="#ic-sw" x="-28" y="-28" width="56" height="56"/><text class="dv-name" y="40">SW-IT</text></g>
+                                <g class="dv dv-sw" data-name="SW-MAINTENANCE" data-step="1" transform="translate(257.5 1013.0)" tabindex="0" role="button" aria-label="SW-MAINTENANCE, Switch d&#x27;accès du service Maintenance"><circle class="dv-ring" r="33"/><circle class="dv-hit" r="33"/><use href="#ic-sw" x="-28" y="-28" width="56" height="56"/><text class="dv-name" y="40">SW-MAINTENANCE</text></g>
+                                <g class="dv dv-sw" data-name="SW-ATELIER" data-step="1" transform="translate(419.5 1013.0)" tabindex="0" role="button" aria-label="SW-ATELIER, Switch d&#x27;accès du service Atelier"><circle class="dv-ring" r="33"/><circle class="dv-hit" r="33"/><use href="#ic-sw" x="-28" y="-28" width="56" height="56"/><text class="dv-name" y="40">SW-ATELIER</text></g>
+                                <g class="dv dv-sw" data-name="SW-ADMINISTRATIF" data-step="1" transform="translate(583.5 1013.0)" tabindex="0" role="button" aria-label="SW-ADMINISTRATIF, Switch d&#x27;accès du service Administratif"><circle class="dv-ring" r="33"/><circle class="dv-hit" r="33"/><use href="#ic-sw" x="-28" y="-28" width="56" height="56"/><text class="dv-name" y="40">SW-ADMINISTRATIF</text></g>
+                                <g class="dv dv-sw" data-name="SW-LOGISTIQUE" data-step="1" transform="translate(742.5 1013.0)" tabindex="0" role="button" aria-label="SW-LOGISTIQUE, Switch d&#x27;accès du service Logistique"><circle class="dv-ring" r="33"/><circle class="dv-hit" r="33"/><use href="#ic-sw" x="-28" y="-28" width="56" height="56"/><text class="dv-name" y="40">SW-LOGISTIQUE</text></g>
+                                <g class="dv dv-sw" data-name="SW-DIRECTION" data-step="1" transform="translate(895.5 1010.0)" tabindex="0" role="button" aria-label="SW-DIRECTION, Switch d&#x27;accès du service Direction"><circle class="dv-ring" r="33"/><circle class="dv-hit" r="33"/><use href="#ic-sw" x="-28" y="-28" width="56" height="56"/><text class="dv-name" y="40">SW-DIRECTION</text></g>
+                                <g class="dv dv-l3" data-name="SW-D1" data-step="1" transform="translate(398.0 829.0)" tabindex="0" role="button" aria-label="SW-D1, Switch de distribution, niveau 3"><circle class="dv-ring" r="33"/><circle class="dv-hit" r="33"/><use href="#ic-l3" x="-28" y="-28" width="56" height="56"/><text class="dv-name" y="40">SW-D1</text></g>
+                                <g class="dv dv-l3" data-name="SW-D2" data-step="1" transform="translate(602.0 829.0)" tabindex="0" role="button" aria-label="SW-D2, Switch de distribution, niveau 3"><circle class="dv-ring" r="33"/><circle class="dv-hit" r="33"/><use href="#ic-l3" x="-28" y="-28" width="56" height="56"/><text class="dv-name" y="40">SW-D2</text></g>
+                                <g class="dv dv-pc" data-name="PC-IT" data-step="2" transform="translate(90.0 1106.0)" tabindex="0" role="button" aria-label="PC-IT, Poste du service It"><circle class="dv-ring" r="33"/><circle class="dv-hit" r="33"/><use href="#ic-pc" x="-28" y="-28" width="56" height="56"/><text class="dv-name" y="40">PC-IT</text></g>
+                                <g class="dv dv-pc" data-name="PC-MAINTENANCE" data-step="2" transform="translate(245.0 1111.0)" tabindex="0" role="button" aria-label="PC-MAINTENANCE, Poste du service Maintenance"><circle class="dv-ring" r="33"/><circle class="dv-hit" r="33"/><use href="#ic-pc" x="-28" y="-28" width="56" height="56"/><text class="dv-name" y="40">PC-MAINTENANCE</text></g>
+                                <g class="dv dv-pc" data-name="PC-ATELIER" data-step="2" transform="translate(404.0 1105.0)" tabindex="0" role="button" aria-label="PC-ATELIER, Poste du service Atelier"><circle class="dv-ring" r="33"/><circle class="dv-hit" r="33"/><use href="#ic-pc" x="-28" y="-28" width="56" height="56"/><text class="dv-name" y="40">PC-ATELIER</text></g>
+                                <g class="dv dv-pc" data-name="PC-ADMINISTRATIF" data-step="2" transform="translate(566.0 1110.0)" tabindex="0" role="button" aria-label="PC-ADMINISTRATIF, Poste du service Administratif"><circle class="dv-ring" r="33"/><circle class="dv-hit" r="33"/><use href="#ic-pc" x="-28" y="-28" width="56" height="56"/><text class="dv-name" y="40">PC-ADMINISTRATIF</text></g>
+                                <g class="dv dv-pc" data-name="PC-LOGISTIQUE" data-step="2" transform="translate(734.0 1114.0)" tabindex="0" role="button" aria-label="PC-LOGISTIQUE, Poste du service Logistique"><circle class="dv-ring" r="33"/><circle class="dv-hit" r="33"/><use href="#ic-pc" x="-28" y="-28" width="56" height="56"/><text class="dv-name" y="40">PC-LOGISTIQUE</text></g>
+                                <g class="dv dv-pc" data-name="PC-DIRECTION" data-step="2" transform="translate(887.0 1113.0)" tabindex="0" role="button" aria-label="PC-DIRECTION, Poste du service Direction"><circle class="dv-ring" r="33"/><circle class="dv-hit" r="33"/><use href="#ic-pc" x="-28" y="-28" width="56" height="56"/><text class="dv-name" y="40">PC-DIRECTION</text></g>
+                                <g class="dv dv-edge" data-name="OMEGA-1" data-step="5" transform="translate(406.5 713.0)" tabindex="0" role="button" aria-label="OMEGA-1, Routeur de sortie de l&#x27;entreprise"><circle class="dv-ring" r="33"/><circle class="dv-hit" r="33"/><use href="#ic-edge" x="-28" y="-28" width="56" height="56"/><text class="dv-name" y="40">OMEGA-1</text></g>
+                                <g class="dv dv-edge" data-name="OMEGA-2" data-step="5" transform="translate(606.5 713.0)" tabindex="0" role="button" aria-label="OMEGA-2, Routeur de sortie de l&#x27;entreprise"><circle class="dv-ring" r="33"/><circle class="dv-hit" r="33"/><use href="#ic-edge" x="-28" y="-28" width="56" height="56"/><text class="dv-name" y="40">OMEGA-2</text></g>
+                                <g class="dv dv-wan" data-name="WAN-1" data-step="6" transform="translate(438.5 603.0)" tabindex="0" role="button" aria-label="WAN-1, Routeur opérateur"><circle class="dv-ring" r="33"/><circle class="dv-hit" r="33"/><use href="#ic-wan" x="-28" y="-28" width="56" height="56"/><text class="dv-name" y="40">WAN-1</text><text class="dv-sub" y="54">AS 56</text></g>
+                                <g class="dv dv-wan" data-name="WAN-2" data-step="6" transform="translate(582.5 603.0)" tabindex="0" role="button" aria-label="WAN-2, Routeur opérateur"><circle class="dv-ring" r="33"/><circle class="dv-hit" r="33"/><use href="#ic-wan" x="-28" y="-28" width="56" height="56"/><text class="dv-name" y="40">WAN-2</text><text class="dv-sub" y="54">AS 400</text></g>
+                                <g class="dv dv-wan" data-name="WAN-3" data-step="6" transform="translate(513.5 500.0)" tabindex="0" role="button" aria-label="WAN-3, Routeur opérateur"><circle class="dv-ring" r="33"/><circle class="dv-hit" r="33"/><use href="#ic-wan" x="-28" y="-28" width="56" height="56"/><text class="dv-name" y="40">WAN-3</text><text class="dv-sub" y="54">AS 22</text></g>
+                                <g class="dv dv-wan" data-name="WAN-4" data-step="6" transform="translate(326.5 533.0)" tabindex="0" role="button" aria-label="WAN-4, Routeur opérateur"><circle class="dv-ring" r="33"/><circle class="dv-hit" r="33"/><use href="#ic-wan" x="-28" y="-28" width="56" height="56"/><text class="dv-name" y="40">WAN-4</text><text class="dv-sub" y="54">AS 13</text></g>
+                                <g class="dv dv-edge" data-name="CLOUD" data-step="6" transform="translate(163.5 531.0)" tabindex="0" role="button" aria-label="CLOUD, Routeur de l&#x27;hébergement"><circle class="dv-ring" r="33"/><circle class="dv-hit" r="33"/><use href="#ic-edge" x="-28" y="-28" width="56" height="56"/><text class="dv-name" y="40">CLOUD</text></g>
+                                <g class="dv dv-sw" data-name="S1" data-step="7" transform="translate(162.5 632.0)" tabindex="0" role="button" aria-label="S1, Switch des serveurs"><circle class="dv-ring" r="33"/><circle class="dv-hit" r="33"/><use href="#ic-sw" x="-28" y="-28" width="56" height="56"/><text class="dv-name" y="40">S1</text></g>
+                                <g class="dv dv-srv" data-name="DNS" data-step="7" transform="translate(98.5 728.0)" tabindex="0" role="button" aria-label="DNS, Serveur DNS"><circle class="dv-ring" r="33"/><circle class="dv-hit" r="33"/><use href="#ic-srv" x="-28" y="-28" width="56" height="56"/><text class="dv-name" y="40">DNS</text><text class="dv-sub" y="54">.1</text></g>
+                                <g class="dv dv-srv" data-name="WEB" data-step="7" transform="translate(201.5 727.0)" tabindex="0" role="button" aria-label="WEB, Serveur web"><circle class="dv-ring" r="33"/><circle class="dv-hit" r="33"/><use href="#ic-srv" x="-28" y="-28" width="56" height="56"/><text class="dv-name" y="40">WEB</text><text class="dv-sub" y="54">.2</text></g>
+                                <g class="dv dv-srv" data-name="MAIL" data-step="7" transform="translate(291.5 729.0)" tabindex="0" role="button" aria-label="MAIL, Serveur de messagerie"><circle class="dv-ring" r="33"/><circle class="dv-hit" r="33"/><use href="#ic-srv" x="-28" y="-28" width="56" height="56"/><text class="dv-name" y="40">MAIL</text><text class="dv-sub" y="54">.3</text></g>
+                                <text class="nt" data-step="7" x="200" y="636" style="text-anchor: start">172.16.1.0/24</text>
+                            </svg>
+                        </div>
+                        <div class="inspector" id="inspector" aria-live="polite">
+                            <p class="hint">Survolez ou touchez un équipement pour voir son rôle et ses liaisons.</p>
+                        </div>
+                    </div>
+
+                    <div>
+                        <div id="steps">
+                    <article class="etape" id="etape-1" data-step="1">
+                        <p class="step-kicker">Étape 1 sur 8, VLAN et trunks</p>
+                        <h2>Segmenter le réseau par service</h2>
+                        <p class="step-intro">Le point de départ : six services, six switchs d&#x27;accès, et deux switchs de distribution auxquels chacun est relié deux fois. Chaque service reçoit son propre VLAN.</p>
+                        <h3>Ce qui est configuré</h3>
+                        <ul class="pts"><li>Création des six VLAN et du VLAN natif 578 sur SW-D1 et SW-D2.</li><li>Sur chaque switch de service, uniquement son VLAN et le VLAN natif.</li><li>Liens entre switchs en trunk 802.1Q, avec VLAN natif modifié et liste de VLAN autorisés réduite au strict nécessaire.</li></ul><div class="tbl"><table><thead><tr><th>VLAN</th><th>Service</th><th>Réseau</th></tr></thead><tbody><tr><td>10</td><td>It</td><td>192.168.10.0/24</td></tr><tr><td>20</td><td>Maintenance</td><td>192.168.20.0/24</td></tr><tr><td>30</td><td>Atelier</td><td>192.168.30.0/24</td></tr><tr><td>40</td><td>Administratif</td><td>192.168.40.0/24</td></tr><tr><td>50</td><td>Logistique</td><td>192.168.50.0/24</td></tr><tr><td>60</td><td>Direction</td><td>192.168.60.0/24</td></tr><tr><td>578</td><td>VLAN natif</td><td>aucun</td></tr></tbody></table></div><figure class="cfg"><figcaption>SW-D1, lien vers le switch du service IT</figcaption><pre><code>vlan 10
+ name IT
+vlan 578
+ name NATIF
+!
+interface GigabitEthernet1/0/1
+ switchport mode trunk
+ switchport trunk native vlan 578
+ switchport trunk allowed vlan 10,578</code></pre></figure>
+                    </article>
+                    <article class="etape" id="etape-2" data-step="2">
+                        <p class="step-kicker">Étape 2 sur 8, EtherChannel, adressage et DHCP</p>
+                        <h2>Relier les deux cœurs et distribuer les adresses</h2>
+                        <p class="step-intro">Les postes arrivent sur la maquette. Les deux switchs de distribution sont agrégés par quatre fibres, et chaque poste doit récupérer seul sa configuration IP.</p>
+                        <h3>Ce qui est configuré</h3>
+                        <ul class="pts"><li>Agrégation LACP des quatre liens fibre entre SW-D1 et SW-D2, puis passage du Port-channel en trunk.</li><li>Une adresse par interface VLAN : .252 sur SW-D1, .253 sur SW-D2.</li><li>Un pool DHCP par service sur les deux switchs, avec la passerelle en .254 et le DNS 100.35.1.1.</li><li>Ports des postes placés en mode accès dans le VLAN de leur service.</li></ul><figure class="cfg"><figcaption>SW-D1</figcaption><pre><code>interface range GigabitEthernet1/1/1-4
+ channel-protocol lacp
+ channel-group 1 mode active
+interface Port-channel1
+ switchport mode trunk
+ switchport trunk native vlan 578
+ switchport trunk allowed vlan 10,20,30,40,50,60,578
+!
+interface Vlan10
+ ip address 192.168.10.252 255.255.255.0
+!
+ip dhcp excluded-address 192.168.10.252
+ip dhcp excluded-address 192.168.10.253
+ip dhcp excluded-address 192.168.10.254
+ip dhcp pool IT
+ network 192.168.10.0 255.255.255.0
+ default-router 192.168.10.254
+ dns-server 100.35.1.1</code></pre></figure><p class="check"><b>Résultat attendu.</b> Chaque poste obtient une adresse dans le réseau de son service.</p>
+                    </article>
+                    <article class="etape" id="etape-3" data-step="3">
+                        <p class="step-kicker">Étape 3 sur 8, Spanning Tree</p>
+                        <h2>Maîtriser les boucles</h2>
+                        <p class="step-intro">Avec deux chemins vers chaque switch d&#x27;accès, la topologie contient des boucles. Rapid PVST+ les neutralise, à condition de décider soi-même qui est la racine.</p>
+                        <h3>Ce qui est configuré</h3>
+                        <ul class="pts"><li>Rapid PVST+ activé sur tous les switchs.</li><li>SW-D1 racine des VLAN 10, 20 et 30, et racine de secours des VLAN 40, 50 et 60. SW-D2 fait l'inverse.</li><li>Root guard sur les liens qui descendent vers les switchs de service.</li><li>PortFast et BPDU guard sur les ports des postes.</li></ul><figure class="cfg"><figcaption>SW-D1</figcaption><pre><code>spanning-tree mode rapid-pvst
+spanning-tree vlan 10,20,30 priority 0
+spanning-tree vlan 40,50,60 priority 4096
+!
+interface GigabitEthernet1/0/1
+ spanning-tree guard root</code></pre></figure><figure class="cfg"><figcaption>SW-IT, port du poste</figcaption><pre><code>interface FastEthernet0/1
+ spanning-tree portfast
+ spanning-tree bpduguard enable</code></pre></figure>
+                    </article>
+                    <article class="etape" id="etape-4" data-step="4">
+                        <p class="step-kicker">Étape 4 sur 8, HSRP</p>
+                        <h2>Une passerelle qui survit à une panne</h2>
+                        <p class="step-intro">Les postes utilisent une passerelle virtuelle en .254, portée par les deux switchs de distribution. Si l&#x27;un tombe, l&#x27;autre répond à sa place.</p>
+                        <h3>Ce qui est configuré</h3>
+                        <ul class="pts"><li>Routage activé sur les deux switchs de niveau 3.</li><li>SW-D1 actif pour les VLAN 10, 20 et 30, SW-D2 actif pour les VLAN 40, 50 et 60 : la charge est répartie, comme pour Spanning Tree.</li><li>Préemption activée pour que le switch prioritaire reprenne son rôle après une panne.</li></ul><figure class="cfg"><figcaption>SW-D1, VLAN dont il est actif</figcaption><pre><code>ip routing
+!
+interface Vlan10
+ ip address 192.168.10.252 255.255.255.0
+ standby version 2
+ standby 10 ip 192.168.10.254
+ standby 10 priority 255
+ standby 10 preempt</code></pre></figure><p class="check"><b>Vérification.</b> <code>show standby brief</code> : un switch actif et un en attente pour chaque groupe.</p>
+                    </article>
+                    <article class="etape" id="etape-5" data-step="5">
+                        <p class="step-kicker">Étape 5 sur 8, Routage statique</p>
+                        <h2>Sortir du réseau local</h2>
+                        <p class="step-intro">Deux routeurs, OMEGA-1 et OMEGA-2, relient l&#x27;entreprise à l&#x27;extérieur. Chaque switch de distribution est raccordé aux deux, par des liens routés en /30.</p>
+                        <h3>Ce qui est configuré</h3>
+                        <ul class="pts"><li>Ports des switchs passés en mode routé, switch en .1 et routeur en .2 sur chaque lien.</li><li>Sur SW-D1 et SW-D2, une route par défaut vers OMEGA-1 et une route de secours vers OMEGA-2.</li><li>Sur les routeurs, routes vers les VLAN 10 à 30 par SW-D1 et vers les VLAN 40 à 60 par SW-D2, chacune doublée d'une route de secours par l'autre switch.</li></ul><div class="tbl"><table><thead><tr><th>Liaison</th><th>Réseau</th></tr></thead><tbody><tr><td>SW-D1 et OMEGA-1</td><td>10.1.1.0/30</td></tr><tr><td>SW-D1 et OMEGA-2</td><td>10.2.2.0/30</td></tr><tr><td>SW-D2 et OMEGA-1</td><td>10.3.3.0/30</td></tr><tr><td>SW-D2 et OMEGA-2</td><td>10.4.4.0/30</td></tr><tr><td>OMEGA-1 et OMEGA-2</td><td>10.5.5.0/30</td></tr></tbody></table></div><figure class="cfg"><figcaption>SW-D1</figcaption><pre><code>interface GigabitEthernet1/0/7
+ no switchport
+ ip address 10.1.1.1 255.255.255.252
+!
+ip route 0.0.0.0 0.0.0.0 10.1.1.2
+ip route 0.0.0.0 0.0.0.0 10.2.2.2 10</code></pre></figure><figure class="cfg"><figcaption>OMEGA-1</figcaption><pre><code>ip route 192.168.10.0 255.255.255.0 10.1.1.1
+ip route 192.168.10.0 255.255.255.0 10.3.3.1 10</code></pre></figure>
+                    </article>
+                    <article class="etape" id="etape-6" data-step="6">
+                        <p class="step-kicker">Étape 6 sur 8, BGP</p>
+                        <h2>Rejoindre Internet</h2>
+                        <p class="step-intro">Quatre routeurs opérateurs, chacun dans son système autonome, simulent Internet. Au bout, le routeur CLOUD hébergera les serveurs de l&#x27;entreprise.</p>
+                        <h3>Ce qui est configuré</h3>
+                        <ul class="pts"><li>Adressage public des liaisons entre opérateurs.</li><li>BGP sur les quatre routeurs WAN : voisinages entre systèmes autonomes et annonce des réseaux.</li><li>Route par défaut d'OMEGA-1 vers WAN-1 et d'OMEGA-2 vers WAN-2, chacune secourue par l'autre routeur OMEGA.</li><li>Route par défaut de CLOUD vers WAN-4.</li></ul><div class="tbl"><table><thead><tr><th>Liaison</th><th>Réseau</th></tr></thead><tbody><tr><td>OMEGA-1 et WAN-1</td><td>13.102.4.0/30</td></tr><tr><td>OMEGA-2 et WAN-2</td><td>194.29.100.0/30</td></tr><tr><td>WAN-1 et WAN-2</td><td>3.200.4.0/30</td></tr><tr><td>WAN-1 et WAN-3</td><td>56.123.13.0/30</td></tr><tr><td>WAN-1 et WAN-4</td><td>77.91.58.0/30</td></tr><tr><td>WAN-2 et WAN-3</td><td>98.7.100.0/30</td></tr><tr><td>WAN-3 et WAN-4</td><td>45.100.32.0/30</td></tr><tr><td>WAN-4 et CLOUD</td><td>100.35.1.0/30</td></tr></tbody></table></div><figure class="cfg"><figcaption>WAN-1</figcaption><pre><code>router bgp 56
+ bgp router-id 1.1.1.1
+ neighbor 77.91.58.2 remote-as 13
+ neighbor 3.200.4.2 remote-as 400
+ neighbor 56.123.13.2 remote-as 22
+ network 13.102.4.0 mask 255.255.255.252</code></pre></figure><figure class="cfg"><figcaption>OMEGA-1</figcaption><pre><code>ip route 0.0.0.0 0.0.0.0 13.102.4.2
+ip route 0.0.0.0 0.0.0.0 10.5.5.2 10</code></pre></figure>
+                    </article>
+                    <article class="etape" id="etape-7" data-step="7">
+                        <p class="step-kicker">Étape 7 sur 8, NAT, web et messagerie</p>
+                        <h2>Cacher les adresses privées</h2>
+                        <p class="step-intro">Les postes et les serveurs ont des adresses privées qu&#x27;Internet ne sait pas joindre. Deux NAT travaillent ensemble : les routeurs OMEGA cachent les postes, CLOUD cache les serveurs.</p>
+                        <h3>Ce qui est configuré</h3>
+                        <ul class="pts"><li>NAT overload sur OMEGA-1 et OMEGA-2 : tous les postes sortent avec l'adresse publique du routeur.</li><li>Le lien entre les deux OMEGA est déclaré « inside » : sans cela, la route de secours de l'étape 6 ne fonctionne pas pour les postes.</li><li>NAT statique sur CLOUD : une seule adresse publique, et c'est le port qui désigne le serveur.</li><li>Messagerie configurée sur chaque poste, par exemple it@micsi.net.</li></ul><div class="tbl"><table><thead><tr><th>Service</th><th>Port</th><th>Serveur</th></tr></thead><tbody><tr><td>DNS</td><td>UDP 53</td><td>172.16.1.1</td></tr><tr><td>HTTP</td><td>TCP 80</td><td>172.16.1.2</td></tr><tr><td>HTTPS</td><td>TCP 443</td><td>172.16.1.2</td></tr><tr><td>SMTP</td><td>TCP 25</td><td>172.16.1.3</td></tr><tr><td>POP3</td><td>TCP 110</td><td>172.16.1.3</td></tr></tbody></table></div><figure class="cfg"><figcaption>OMEGA-1</figcaption><pre><code>interface GigabitEthernet0/0
+ ip nat inside
+interface GigabitEthernet0/1/0
+ ip nat inside
+interface GigabitEthernet0/0/0
+ ip nat outside
+!
+ip access-list standard NAT
+ permit 192.168.0.0 0.0.255.255
+ip nat inside source list NAT interface GigabitEthernet0/0/0 overload</code></pre></figure><figure class="cfg"><figcaption>CLOUD</figcaption><pre><code>ip nat inside source static udp 172.16.1.1 53 100.35.1.1 53
+ip nat inside source static tcp 172.16.1.2 443 100.35.1.1 443
+ip nat inside source static tcp 172.16.1.3 25 100.35.1.1 25</code></pre></figure><p class="check"><b>Résultat attendu.</b> Chaque poste ouvre web.micsi.net en HTTP et en HTTPS, et envoie et reçoit des mails.</p>
+                    </article>
+                    <article class="etape" id="etape-8" data-step="8">
+                        <p class="step-kicker">Étape 8 sur 8, ACL étendues et SSH</p>
+                        <h2>N&#x27;autoriser que le nécessaire</h2>
+                        <p class="step-intro">Dernière étape : filtrer. Chaque service ne garde que les flux dont il a besoin, et seul le poste de l&#x27;IT peut administrer les routeurs.</p>
+                        <h3>Ce qui est configuré</h3>
+                        <ul class="pts"><li>Une ACL par service, appliquée en entrée de son interface VLAN sur SW-D1 et SW-D2 : DNS, HTTPS, mail, DHCP et HSRP.</li><li>L'IT peut pinguer les autres services, qui peuvent seulement lui répondre.</li><li>SSH sur OMEGA-1 et OMEGA-2, accepté uniquement depuis 192.168.10.1.</li><li>Sur CLOUD, une ACL qui n'ouvre chaque serveur que sur les ports de son rôle.</li></ul><figure class="cfg"><figcaption>SW-D1 et SW-D2, service Maintenance</figcaption><pre><code>ip access-list extended MAINTENANCE
+ permit udp any eq 68 any eq 67
+ permit udp host 192.168.20.252 host 224.0.0.102 eq 1985
+ permit udp host 192.168.20.253 host 224.0.0.102 eq 1985
+ permit udp 192.168.20.0 0.0.0.255 host 100.35.1.1 eq 53
+ permit tcp 192.168.20.0 0.0.0.255 host 100.35.1.1 eq 443
+ permit tcp 192.168.20.0 0.0.0.255 host 100.35.1.1 eq 25
+ permit tcp 192.168.20.0 0.0.0.255 host 100.35.1.1 eq 110
+ permit icmp 192.168.20.0 0.0.0.255 192.168.10.0 0.0.0.255 echo-reply
+!
+interface Vlan20
+ ip access-group MAINTENANCE in</code></pre></figure><figure class="cfg"><figcaption>OMEGA-1, accès SSH</figcaption><pre><code>ip access-list standard SSH-IT
+ permit host 192.168.10.1
+line vty 0 4
+ transport input ssh
+ login local
+ access-class SSH-IT in</code></pre></figure><div class="tbl"><table><thead><tr><th>Test</th><th>Attendu</th></tr></thead><tbody><tr><td>PC-IT pingue PC-ATELIER</td><td>Réussit</td></tr><tr><td>PC-ATELIER pingue PC-IT</td><td>Bloqué</td></tr><tr><td>https://web.micsi.net depuis un poste</td><td>Réussit</td></tr><tr><td>http://web.micsi.net depuis un poste</td><td>Bloqué</td></tr><tr><td>SSH vers OMEGA-1 depuis PC-IT</td><td>Réussit</td></tr><tr><td>SSH vers OMEGA-1 depuis un autre poste</td><td>Bloqué</td></tr></tbody></table></div>
+                    </article>
+                        </div>
+
+                        <nav class="pager" aria-label="Étape précédente et suivante">
+                            <a class="prev" id="prev" href="#etape-1"><small>Étape précédente</small><strong></strong></a>
+                            <a class="next" id="next" href="#etape-2"><small>Étape suivante</small><strong></strong></a>
+                        </nav>
+                        <p class="keys">Navigation au clavier : <kbd>←</kbd> <kbd>→</kbd></p>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="site-footer">
+        <div class="site-footer__inner">
+            <div>
+                <a class="brand" href="index.html">
+                    <span class="brand__mark"><span>BD</span></span>
+                    <span class="brand__name">Baptiste Duval</span>
+                </a>
+                <p>Alternant en administration systèmes, réseaux et cybersécurité, en Mastère professionnel au CESI.</p>
+            </div>
+            <div>
+                <h2>Explorer</h2>
+                <ul>
+                    <li><a href="projets.html">Cursus & projets</a></li>
+                    <li><a href="index.html#parcours">Parcours</a></li>
+                    <li><a href="index.html#competences">Compétences</a></li>
+                    <li><a href="futur.html">Mastère & infra</a></li>
+                    <li><a href="index.html#cv">Curriculum vitae</a></li>
+                </ul>
+            </div>
+            <div>
+                <h2>Contact</h2>
+                <ul>
+                    <li><a href="mailto:baptisteduval.bd62@gmail.com"><i class="fas fa-envelope" aria-hidden="true"></i>baptisteduval.bd62@gmail.com</a></li>
+                    <li><a href="https://www.linkedin.com/in/baptiste-duval-6875aa302/" target="_blank" rel="noopener"><i class="fab fa-linkedin" aria-hidden="true"></i>LinkedIn</a></li>
+                    <li><a href="https://github.com/baptiste-duval" target="_blank" rel="noopener"><i class="fab fa-github" aria-hidden="true"></i>GitHub</a></li>
+                    <li><i class="fas fa-map-marker-alt" aria-hidden="true"></i>Frévent (62)</li>
+                </ul>
+            </div>
+        </div>
+        <div class="site-footer__bottom">
+            <span>&copy; <span id="year">2026</span> Baptiste Duval</span>
+            <span>Conçu et codé à la main</span>
+        </div>
+    </footer>
+
+    <script src="site.js"></script>
+
+    <script>
+    (function () {
+        var DATA = {"views":{"1":[26,769,950,322],"2":[10,769,966,423],"3":[10,769,966,423],"4":[10,769,966,423],"5":[10,653,966,539],"6":[10,440,966,752],"7":[10,440,966,752],"8":[10,440,966,752]},"focus":{"1":["SW-IT","SW-MAINTENANCE","SW-ATELIER","SW-ADMINISTRATIF","SW-LOGISTIQUE","SW-DIRECTION","SW-D1","SW-D2"],"2":["SW-D1","SW-D2","PC-IT","PC-MAINTENANCE","PC-ATELIER","PC-ADMINISTRATIF","PC-LOGISTIQUE","PC-DIRECTION"],"3":["SW-IT","SW-MAINTENANCE","SW-ATELIER","SW-ADMINISTRATIF","SW-LOGISTIQUE","SW-DIRECTION","SW-D1","SW-D2"],"4":["SW-D1","SW-D2"],"5":["SW-D1","SW-D2","OMEGA-1","OMEGA-2"],"6":["OMEGA-1","OMEGA-2","WAN-1","WAN-2","WAN-3","WAN-4","CLOUD"],"7":["OMEGA-1","OMEGA-2","CLOUD","S1","DNS","WEB","MAIL","PC-IT","PC-MAINTENANCE","PC-ATELIER","PC-ADMINISTRATIF","PC-LOGISTIQUE","PC-DIRECTION"],"8":["SW-D1","SW-D2","OMEGA-1","OMEGA-2","CLOUD"]},"devices":{"SW-IT":{"model":"Cisco Catalyst 2960-24TT","role":"Switch d'accès du service It","facts":["VLAN 10","Relié aux deux switchs de distribution"],"links":[{"p":"Gi0/1","to":"SW-D1","tp":"Gi1/0/1","net":"","s":1},{"p":"Gi0/2","to":"SW-D2","tp":"Gi1/0/1","net":"","s":1},{"p":"Fa0/1","to":"PC-IT","tp":"Fa0","net":"","s":2}]},"SW-MAINTENANCE":{"model":"Cisco Catalyst 2960-24TT","role":"Switch d'accès du service Maintenance","facts":["VLAN 20","Relié aux deux switchs de distribution"],"links":[{"p":"Gi0/1","to":"SW-D1","tp":"Gi1/0/2","net":"","s":1},{"p":"Gi0/2","to":"SW-D2","tp":"Gi1/0/2","net":"","s":1},{"p":"Fa0/1","to":"PC-MAINTENANCE","tp":"Fa0","net":"","s":2}]},"SW-ATELIER":{"model":"Cisco Catalyst 2960-24TT","role":"Switch d'accès du service Atelier","facts":["VLAN 30","Relié aux deux switchs de distribution"],"links":[{"p":"Gi0/1","to":"SW-D1","tp":"Gi1/0/3","net":"","s":1},{"p":"Gi0/2","to":"SW-D2","tp":"Gi1/0/3","net":"","s":1},{"p":"Fa0/1","to":"PC-ATELIER","tp":"Fa0","net":"","s":2}]},"SW-ADMINISTRATIF":{"model":"Cisco Catalyst 2960-24TT","role":"Switch d'accès du service Administratif","facts":["VLAN 40","Relié aux deux switchs de distribution"],"links":[{"p":"Gi0/1","to":"SW-D1","tp":"Gi1/0/4","net":"","s":1},{"p":"Gi0/2","to":"SW-D2","tp":"Gi1/0/4","net":"","s":1},{"p":"Fa0/1","to":"PC-ADMINISTRATIF","tp":"Fa0","net":"","s":2}]},"SW-LOGISTIQUE":{"model":"Cisco Catalyst 2960-24TT","role":"Switch d'accès du service Logistique","facts":["VLAN 50","Relié aux deux switchs de distribution"],"links":[{"p":"Gi0/1","to":"SW-D1","tp":"Gi1/0/5","net":"","s":1},{"p":"Gi0/2","to":"SW-D2","tp":"Gi1/0/5","net":"","s":1},{"p":"Fa0/1","to":"PC-LOGISTIQUE","tp":"Fa0","net":"","s":2}]},"SW-DIRECTION":{"model":"Cisco Catalyst 2960-24TT","role":"Switch d'accès du service Direction","facts":["VLAN 60","Relié aux deux switchs de distribution"],"links":[{"p":"Gi0/1","to":"SW-D1","tp":"Gi1/0/6","net":"","s":1},{"p":"Gi0/2","to":"SW-D2","tp":"Gi1/0/6","net":"","s":1},{"p":"Fa0/1","to":"PC-DIRECTION","tp":"Fa0","net":"","s":2}]},"SW-D1":{"model":"Cisco Catalyst 3650-24PS","role":"Switch de distribution, niveau 3","facts":["Interfaces VLAN en .252","Passerelle HSRP active des VLAN 10, 20 et 30","Root bridge des VLAN 10, 20 et 30"],"links":[{"p":"Gi1/0/1","to":"SW-IT","tp":"Gi0/1","net":"","s":1},{"p":"Gi1/0/2","to":"SW-MAINTENANCE","tp":"Gi0/1","net":"","s":1},{"p":"Gi1/0/3","to":"SW-ATELIER","tp":"Gi0/1","net":"","s":1},{"p":"Gi1/0/4","to":"SW-ADMINISTRATIF","tp":"Gi0/1","net":"","s":1},{"p":"Gi1/0/5","to":"SW-LOGISTIQUE","tp":"Gi0/1","net":"","s":1},{"p":"Gi1/0/6","to":"SW-DIRECTION","tp":"Gi0/1","net":"","s":1},{"p":"Gi1/1/1","to":"SW-D2","tp":"Gi1/1/1","net":"","s":2},{"p":"Gi1/1/2","to":"SW-D2","tp":"Gi1/1/2","net":"","s":2},{"p":"Gi1/1/3","to":"SW-D2","tp":"Gi1/1/3","net":"","s":2},{"p":"Gi1/1/4","to":"SW-D2","tp":"Gi1/1/4","net":"","s":2},{"p":"Gi1/0/7","to":"OMEGA-1","tp":"Gi0/0","net":"10.1.1.0/30","s":5},{"p":"Gi1/0/8","to":"OMEGA-2","tp":"Gi0/1","net":"10.2.2.0/30","s":5}]},"SW-D2":{"model":"Cisco Catalyst 3650-24PS","role":"Switch de distribution, niveau 3","facts":["Interfaces VLAN en .253","Passerelle HSRP active des VLAN 40, 50 et 60","Root bridge des VLAN 40, 50 et 60"],"links":[{"p":"Gi1/0/1","to":"SW-IT","tp":"Gi0/2","net":"","s":1},{"p":"Gi1/0/2","to":"SW-MAINTENANCE","tp":"Gi0/2","net":"","s":1},{"p":"Gi1/0/3","to":"SW-ATELIER","tp":"Gi0/2","net":"","s":1},{"p":"Gi1/0/4","to":"SW-ADMINISTRATIF","tp":"Gi0/2","net":"","s":1},{"p":"Gi1/0/5","to":"SW-LOGISTIQUE","tp":"Gi0/2","net":"","s":1},{"p":"Gi1/0/6","to":"SW-DIRECTION","tp":"Gi0/2","net":"","s":1},{"p":"Gi1/1/1","to":"SW-D1","tp":"Gi1/1/1","net":"","s":2},{"p":"Gi1/1/2","to":"SW-D1","tp":"Gi1/1/2","net":"","s":2},{"p":"Gi1/1/3","to":"SW-D1","tp":"Gi1/1/3","net":"","s":2},{"p":"Gi1/1/4","to":"SW-D1","tp":"Gi1/1/4","net":"","s":2},{"p":"Gi1/0/7","to":"OMEGA-2","tp":"Gi0/0","net":"10.4.4.0/30","s":5},{"p":"Gi1/0/8","to":"OMEGA-1","tp":"Gi0/1","net":"10.3.3.0/30","s":5}]},"PC-IT":{"model":"Poste portable","role":"Poste du service It","facts":["VLAN 10, réseau 192.168.10.0/24","Adresse obtenue par DHCP"],"links":[{"p":"Fa0","to":"SW-IT","tp":"Fa0/1","net":"","s":2}]},"PC-MAINTENANCE":{"model":"Poste portable","role":"Poste du service Maintenance","facts":["VLAN 20, réseau 192.168.20.0/24","Adresse obtenue par DHCP"],"links":[{"p":"Fa0","to":"SW-MAINTENANCE","tp":"Fa0/1","net":"","s":2}]},"PC-ATELIER":{"model":"Poste portable","role":"Poste du service Atelier","facts":["VLAN 30, réseau 192.168.30.0/24","Adresse obtenue par DHCP"],"links":[{"p":"Fa0","to":"SW-ATELIER","tp":"Fa0/1","net":"","s":2}]},"PC-ADMINISTRATIF":{"model":"Poste portable","role":"Poste du service Administratif","facts":["VLAN 40, réseau 192.168.40.0/24","Adresse obtenue par DHCP"],"links":[{"p":"Fa0","to":"SW-ADMINISTRATIF","tp":"Fa0/1","net":"","s":2}]},"PC-LOGISTIQUE":{"model":"Poste portable","role":"Poste du service Logistique","facts":["VLAN 50, réseau 192.168.50.0/24","Adresse obtenue par DHCP"],"links":[{"p":"Fa0","to":"SW-LOGISTIQUE","tp":"Fa0/1","net":"","s":2}]},"PC-DIRECTION":{"model":"Poste portable","role":"Poste du service Direction","facts":["VLAN 60, réseau 192.168.60.0/24","Adresse obtenue par DHCP"],"links":[{"p":"Fa0","to":"SW-DIRECTION","tp":"Fa0/1","net":"","s":2}]},"OMEGA-1":{"model":"Cisco 1941","role":"Routeur de sortie de l'entreprise","facts":["IP publique 13.102.4.1","NAT overload vers WAN-1"],"links":[{"p":"Gi0/0","to":"SW-D1","tp":"Gi1/0/7","net":"10.1.1.0/30","s":5},{"p":"Gi0/1","to":"SW-D2","tp":"Gi1/0/8","net":"10.3.3.0/30","s":5},{"p":"Gi0/1/0","to":"OMEGA-2","tp":"Gi0/1/0","net":"10.5.5.0/30","s":5},{"p":"Gi0/0/0","to":"WAN-1","tp":"Gi0/0/0","net":"13.102.4.0/30","s":6}]},"OMEGA-2":{"model":"Cisco 1941","role":"Routeur de sortie de l'entreprise","facts":["IP publique 194.29.100.1","NAT overload vers WAN-2"],"links":[{"p":"Gi0/0","to":"SW-D2","tp":"Gi1/0/7","net":"10.4.4.0/30","s":5},{"p":"Gi0/1","to":"SW-D1","tp":"Gi1/0/8","net":"10.2.2.0/30","s":5},{"p":"Gi0/1/0","to":"OMEGA-1","tp":"Gi0/1/0","net":"10.5.5.0/30","s":5},{"p":"Gi0/0/0","to":"WAN-2","tp":"Gi0/0/0","net":"194.29.100.0/30","s":6}]},"WAN-1":{"model":"Cisco 1941","role":"Routeur opérateur","facts":["Système autonome BGP 56"],"links":[{"p":"Gi0/0/0","to":"OMEGA-1","tp":"Gi0/0/0","net":"13.102.4.0/30","s":6},{"p":"Gi0/0","to":"WAN-2","tp":"Gi0/0","net":"3.200.4.0/30","s":6},{"p":"Gi0/1/0","to":"WAN-4","tp":"Gi0/1/0","net":"77.91.58.0/30","s":6},{"p":"Gi0/1","to":"WAN-3","tp":"Gi0/0","net":"56.123.13.0/30","s":6}]},"WAN-2":{"model":"Cisco 1941","role":"Routeur opérateur","facts":["Système autonome BGP 400"],"links":[{"p":"Gi0/0/0","to":"OMEGA-2","tp":"Gi0/0/0","net":"194.29.100.0/30","s":6},{"p":"Gi0/0","to":"WAN-1","tp":"Gi0/0","net":"3.200.4.0/30","s":6},{"p":"Gi0/1/0","to":"WAN-3","tp":"Gi0/1/0","net":"98.7.100.0/30","s":6}]},"WAN-3":{"model":"Cisco 1941","role":"Routeur opérateur","facts":["Système autonome BGP 22"],"links":[{"p":"Gi0/0/0","to":"WAN-4","tp":"Gi0/0/0","net":"45.100.32.0/30","s":6},{"p":"Gi0/1/0","to":"WAN-2","tp":"Gi0/1/0","net":"98.7.100.0/30","s":6},{"p":"Gi0/0","to":"WAN-1","tp":"Gi0/1","net":"56.123.13.0/30","s":6}]},"WAN-4":{"model":"Cisco 1941","role":"Routeur opérateur","facts":["Système autonome BGP 13"],"links":[{"p":"Gi0/1/0","to":"WAN-1","tp":"Gi0/1/0","net":"77.91.58.0/30","s":6},{"p":"Gi0/0/0","to":"WAN-3","tp":"Gi0/0/0","net":"45.100.32.0/30","s":6},{"p":"Gi0/0","to":"CLOUD","tp":"Gi0/0","net":"100.35.1.0/30","s":6}]},"CLOUD":{"model":"Cisco 1941","role":"Routeur de l'hébergement","facts":["IP publique 100.35.1.1","Passerelle des serveurs : 172.16.1.254","NAT statique vers DNS, WEB et MAIL"],"links":[{"p":"Gi0/0","to":"WAN-4","tp":"Gi0/0","net":"100.35.1.0/30","s":6},{"p":"Gi0/1","to":"S1","tp":"Fa0/1","net":"","s":7}]},"S1":{"model":"Cisco Catalyst 2960-24TT","role":"Switch des serveurs","facts":["Réseau 172.16.1.0/24"],"links":[{"p":"Fa0/1","to":"CLOUD","tp":"Gi0/1","net":"","s":7},{"p":"Fa0/2","to":"DNS","tp":"Fa0","net":"","s":7},{"p":"Fa0/3","to":"WEB","tp":"Fa0","net":"","s":7},{"p":"Fa0/4","to":"MAIL","tp":"Fa0","net":"","s":7}]},"DNS":{"model":"Serveur","role":"Serveur DNS","facts":["172.16.1.1","Résout web, pop et smtp.micsi.net"],"links":[{"p":"Fa0","to":"S1","tp":"Fa0/2","net":"","s":7}]},"WEB":{"model":"Serveur","role":"Serveur web","facts":["172.16.1.2","HTTP et HTTPS"],"links":[{"p":"Fa0","to":"S1","tp":"Fa0/3","net":"","s":7}]},"MAIL":{"model":"Serveur","role":"Serveur de messagerie","facts":["172.16.1.3","SMTP et POP3, domaine micsi.net"],"links":[{"p":"Fa0","to":"S1","tp":"Fa0/4","net":"","s":7}]}},"titles":["VLAN et trunks","EtherChannel, adressage et DHCP","Spanning Tree","HSRP","Routage statique","BGP","NAT, web et messagerie","ACL étendues et SSH"]};
+        var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+        var svg = document.getElementById('topo');
+        var inspector = document.getElementById('inspector');
+        var panels = [].slice.call(document.querySelectorAll('.etape'));
+        var tabs = [].slice.call(document.querySelectorAll('.steps-nav a'));
+        var prev = document.getElementById('prev'), next = document.getElementById('next');
+        var current = 0, selected = null, raf = null;
+        document.documentElement.classList.add('js');
+
+        function stepOf(el) { return +el.getAttribute('data-step'); }
+
+        /* Cadrage animé de la maquette */
+        function zoomTo(target) {
+            var from = svg.getAttribute('viewBox').split(' ').map(Number);
+            if (reduce) { svg.setAttribute('viewBox', target.join(' ')); return; }
+            var t0 = null;
+            cancelAnimationFrame(raf);
+            raf = requestAnimationFrame(function tick(now) {
+                if (t0 === null) t0 = now;
+                var k = Math.min(1, (now - t0) / 650); k = k < 0.5 ? 2 * k * k : 1 - Math.pow(-2 * k + 2, 2) / 2;
+                svg.setAttribute('viewBox', from.map(function (v, i) { return (v + (target[i] - v) * k).toFixed(1); }).join(' '));
+                if (k < 1) raf = requestAnimationFrame(tick);
+            });
+        }
+
+        function paint() {
+            var focus = DATA.focus[current];
+            svg.querySelectorAll('.dv').forEach(function (g) {
+                var name = g.getAttribute('data-name'), off = stepOf(g) > current;
+                g.classList.toggle('is-off', off);
+                g.classList.toggle('is-dim', !off && focus.indexOf(name) < 0 && name !== selected);
+                g.classList.toggle('is-sel', name === selected);
+                g.setAttribute('tabindex', off ? '-1' : '0');
+                if (off) g.setAttribute('aria-hidden', 'true'); else g.removeAttribute('aria-hidden');
+            });
+            svg.querySelectorAll('.lk').forEach(function (l) {
+                var a = l.getAttribute('data-a'), b = l.getAttribute('data-b'), off = stepOf(l) > current;
+                var hot = selected ? (a === selected || b === selected) : false;
+                l.classList.toggle('is-off', off);
+                l.classList.toggle('is-hot', !off && hot);
+                l.classList.toggle('is-dim', !off && !hot && (selected !== null || focus.indexOf(a) < 0 || focus.indexOf(b) < 0));
+            });
+            svg.querySelectorAll('.nt').forEach(function (t) { t.classList.toggle('is-off', stepOf(t) > current); });
+        }
+
+        function inspect(name) {
+            selected = name;
+            paint();
+            inspector.replaceChildren();
+            if (!name) {
+                var hint = document.createElement('p'); hint.className = 'hint';
+                hint.textContent = 'Survolez ou touchez un équipement pour voir son rôle et ses liaisons.';
+                inspector.append(hint); return;
+            }
+            var d = DATA.devices[name];
+            var h = document.createElement('h3'); h.textContent = name;
+            var small = document.createElement('small'); small.textContent = d.model; h.append(small);
+            var p = document.createElement('p'); p.textContent = d.role + '. ' + d.facts.join('. ') + '.';
+            var ul = document.createElement('ul');
+            d.links.filter(function (l) { return l.s <= current; }).forEach(function (l) {
+                var li = document.createElement('li');
+                var b = document.createElement('b'); b.textContent = l.p;
+                var i = document.createElement('i'); i.textContent = l.net ? '  ' + l.net : '';
+                li.append(b, ' vers ' + l.to + ' ' + l.tp, i);
+                ul.append(li);
+            });
+            inspector.append(h, p, ul);
+        }
+
+        function show(n, fromUser) {
+            n = Math.max(1, Math.min(8, n));
+            var previous = current; current = n;
+            panels.forEach(function (p) { p.hidden = stepOf(p) !== n; });
+            tabs.forEach(function (a) {
+                var s = stepOf(a);
+                if (s === n) a.setAttribute('aria-current', 'step'); else a.removeAttribute('aria-current');
+                a.classList.toggle('is-done', s < n);
+            });
+            var active = tabs[n - 1];
+            if (active.scrollIntoView && fromUser) active.parentNode.parentNode.scrollLeft = active.offsetLeft - 60;
+            prev.hidden = n === 1; next.hidden = n === 8;
+            if (n > 1) { prev.href = '#etape-' + (n - 1); prev.querySelector('strong').textContent = (n - 1) + '. ' + DATA.titles[n - 2]; }
+            if (n < 8) { next.href = '#etape-' + (n + 1); next.querySelector('strong').textContent = (n + 1) + '. ' + DATA.titles[n]; }
+            document.getElementById('canvas-title').textContent = 'maquette, étape ' + n;
+            if (selected && +svg.querySelector('.dv[data-name="' + selected + '"]').getAttribute('data-step') > n) selected = null;
+            svg.querySelectorAll('.dv').forEach(function (g) { g.classList.toggle('is-new', previous > 0 && stepOf(g) === n && n > previous); });
+            inspect(selected);
+            zoomTo(DATA.views[n]);
+        }
+
+        function fromHash(fromUser) {
+            var m = /^#etape-(\d)$/.exec(location.hash);
+            show(m ? +m[1] : 1, fromUser);
+            if (fromUser && m) {
+                var top = document.getElementById('maquette').getBoundingClientRect().top + window.scrollY - 72;
+                if (window.scrollY > top) window.scrollTo({ top: top, behavior: reduce ? 'auto' : 'smooth' });
+            }
+        }
+        window.addEventListener('hashchange', function () { fromHash(true); });
+        // Le défilement vers l'ancre est géré ici : on empêche le saut natif vers un panneau masqué
+        document.addEventListener('click', function (e) {
+            var a = e.target.closest('a[href^="#etape-"]');
+            if (!a) return;
+            e.preventDefault();
+            history.pushState(null, '', a.getAttribute('href'));
+            fromHash(true);
+        });
+        document.addEventListener('keydown', function (e) {
+            var t = e.target;
+            if ((t.closest && t.closest('input, textarea, [contenteditable]')) || e.altKey || e.ctrlKey || e.metaKey) return;
+            if (e.key === 'ArrowRight' && current < 8) { history.pushState(null, '', '#etape-' + (current + 1)); fromHash(true); }
+            if (e.key === 'ArrowLeft' && current > 1) { history.pushState(null, '', '#etape-' + (current - 1)); fromHash(true); }
+            if (e.key === 'Escape') inspect(null);
+        });
+
+        svg.addEventListener('click', function (e) {
+            var g = e.target.closest('.dv');
+            inspect(g && !g.classList.contains('is-off') ? g.getAttribute('data-name') : null);   // clic dans le vide : on désélectionne
+        });
+        svg.addEventListener('keydown', function (e) {
+            var g = e.target.closest('.dv');
+            if (g && (e.key === 'Enter' || e.key === ' ')) { e.preventDefault(); inspect(g.getAttribute('data-name')); }
+        });
+        if (window.matchMedia('(hover: hover)').matches) {
+            svg.addEventListener('mouseover', function (e) {
+                var g = e.target.closest('.dv');
+                if (g && !g.classList.contains('is-off') && g.getAttribute('data-name') !== selected) inspect(g.getAttribute('data-name'));
+            });
+        }
+
+        fromHash(false);
+    })();
+    </script>
+</body>
+</html>
